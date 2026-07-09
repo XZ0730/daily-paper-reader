@@ -25,3 +25,60 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: self-evolve
+      description: 模型自进化论文及其在信息抽取的应用
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: named entity recognition
+          keyword_cn: 命名实体识别
+          query: named entity recognition using self-improving models
+        - keyword: information extraction
+          keyword_cn: 信息抽取
+          query: information extraction using self-evolving models
+        - keyword: self-evolving
+          keyword_cn: 自进化
+          query: s
+        - keyword: model self-evolution
+          keyword_cn: 模型自进化
+          query: model self-evolution techniques for neural networks
+        - keyword: self-improving models
+          keyword_cn: 自我改进模型
+          query: self-improving models with automated architecture search
+        - keyword: relation extraction
+          keyword_cn: 关系抽取
+          query: relation extraction with adaptive self-evolving systems
+      intent_queries:
+        - query: model self evolution methods for natural language processing tasks
+          query_cn: 用于自然语言处理任务的模型自进化方法
+          enabled: true
+          source: manual
+          note: ''
+        - query: self evolving information extraction systems
+          query_cn: 自进化信息抽取系统
+          enabled: true
+          source: manual
+          note: ''
+        - query: continual learning approaches for named entity recognition
+          query_cn: 持续学习在命名实体识别中的应用
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-07-09T20:45:24.098Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
