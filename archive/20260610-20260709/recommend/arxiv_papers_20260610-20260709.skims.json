@@ -1,0 +1,336 @@
+{
+  "mode": "skims",
+  "generated_at": "2026-07-09T22:21:59.978737+00:00",
+  "stats": {
+    "mode": "skims",
+    "forced_all_quick": true,
+    "min_score": 8.0,
+    "deep_divecandidates": 8,
+    "deep_cap": null,
+    "deep_selected": 0,
+    "quick_candidates": 8,
+    "quick_skim_target": null,
+    "quick_selected": 8
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.01293v1",
+      "source": "arxiv",
+      "title": "RuleChef: Grounding LLM Task Knowledge in Human-Editable Rules",
+      "abstract": "We present RuleChef, a framework that uses large language models (LLMs) to generate executable rules for NLP tasks such as text classification, Named Entity Recognition (NER), or relation extraction. Rules are generated based on a task description and a set of labeled examples, then they are iteratively improved based both on additional examples and on human feedback overexisting rules. RuleChef can also be used to bootstrap rules using the observed input-output pairs from any existing model for a given task. LLMs are used only at learning time, synthesizing rules and iteratively patching them based on failures measured on a held-out split. The result of this process is a fast, deterministic, and inspectable rule system. Preliminary evaluation is performed on both classification and NER tasks. We release RuleChef as open-source software under an Apache 2.0",
+      "authors": [
+        "Ádám Kovács",
+        "Nadia Verdha",
+        "Gábor Recski"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-01T13:09:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.01293v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "iteratively improves rules for NER and relation extraction",
+      "llm_evidence_cn": "迭代改进用于命名实体识别和关系抽取的规则",
+      "llm_evidence": "迭代改进用于命名实体识别和关系抽取的规则",
+      "canonical_evidence": "迭代改进用于命名实体识别和关系抽取的规则",
+      "llm_tldr_en": "Presents RuleChef, which uses LLMs to generate and iteratively refine rules for NLP tasks including NER and relation extraction, yielding fast and inspectable systems.",
+      "llm_tldr_cn": "针对大型语言模型在命名实体识别和关系抽取等任务中缺乏可解释性和迭代改进能力的问题，提出RuleChef框架，利用LLM根据少量示例生成规则，并通过失败分析迭代修补规则，最终产生快速、确定且可检查的规则系统。初步实验在多个NLP任务上验证了有效性。",
+      "llm_tldr": "针对大型语言模型在命名实体识别和关系抽取等任务中缺乏可解释性和迭代改进能力的问题，提出RuleChef框架，利用LLM根据少量示例生成规则，并通过失败分析迭代修补规则，最终产生快速、确定且可检查的规则系统。初步实验在多个NLP任务上验证了有效性。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "named entity recognition using self-improving models",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.03935v1",
+      "source": "arxiv",
+      "title": "Harness-Aware Self-Evolving: Co-Evolving Model Weights, Harness, and Task Solutions",
+      "abstract": "Self-evolving frameworks usually optimize task solutions while treating the surrounding harness as fixed. We introduce Harness-Aware Self-Evolving (HASE), an agentic reinforcement-learning framework in which a single model can generate task solutions or edit selected harness components in a multi-turn action space. HASE enables a single Qwen3-8B model to match the text-classification performance of a GPT-OSS-120B model that uses Claude Code as the harness proposer. In alpha factor mining, HASE outperforms the reported GPT-OSS-120B baseline. HASE also repairs imperfect evaluation components and converges to state-of-the-art performance in circle-packing algorithm discovery. These results show that HASE improves the harness and the solution through one unified agentic process.",
+      "authors": [
+        "Haochen Luo",
+        "Yi Huang",
+        "Sichun Luo",
+        "Fengyuan Liu",
+        "Lei Li",
+        "Zefa Hu",
+        "Junlan Feng",
+        "Qi Liu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-04T16:04:30+00:00",
+      "link": "https://arxiv.org/pdf/2607.03935v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agentic RL framework for co-evolving model weights and task solutions",
+      "llm_evidence_cn": "用于协同进化模型权重和任务解决方案的自主强化学习框架",
+      "llm_evidence": "用于协同进化模型权重和任务解决方案的自主强化学习框架",
+      "canonical_evidence": "用于协同进化模型权重和任务解决方案的自主强化学习框架",
+      "llm_tldr_en": "Proposes HASE, a self-evolving RL framework where a single model co-evolves weights, harness components, and task solutions, matching larger models on text classification.",
+      "llm_tldr_cn": "提出HASE框架，一种自进化的强化学习方法，允许单个模型在多轮动作空间中生成任务解决方案或编辑框架组件，实现模型权重、框架和任务解决方案的协同进化。在文本分类上，Qwen3-8B匹配了GPT-OSS-120B的性能，并在其他任务上超越了基线。",
+      "llm_tldr": "提出HASE框架，一种自进化的强化学习方法，允许单个模型在多轮动作空间中生成任务解决方案或编辑框架组件，实现模型权重、框架和任务解决方案的协同进化。在文本分类上，Qwen3-8B匹配了GPT-OSS-120B的性能，并在其他任务上超越了基线。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.04277v1",
+      "source": "arxiv",
+      "title": "Self-Reference in Large Language Models: The Introspection Threshold for Recursive Self-Improvement",
+      "abstract": "The pursuit of self-evolving AI raises a critical question: when is autonomous self-improvement sustainable rather than degenerative? Drawing an analogy to von Neumann's complexity threshold for self-reproducing automata, we argue that sustainable recursive self-improvement in Large Language Models (LLMs) requires a functional analogue: introspection -- the system's capacity to simulate its own operations and target modifications. Grounded in Kleene's Second Recursion Theorem, we demonstrate the theoretical existence of such introspective programs. However, an empirical review reveals that while current LLMs exhibit quasi-introspection (e.g., partial metacognition), they fall short of true introspection due to structural bottlenecks: a lack of complete self-access, the feedforward nature of the Transformer, and computational class constraints that prevent fixed-point iteration. We conclude by outlining architectural paths to cross this complexity threshold and discussing the associated safety implications.",
+      "authors": [
+        "Jiang Zhang",
+        "Bing Yuan",
+        "Qian Zhang"
+      ],
+      "primary_category": "physics.soc-ph",
+      "categories": [
+        "physics.soc-ph",
+        "cs.AI"
+      ],
+      "published": "2026-07-05T12:40:52+00:00",
+      "link": "https://arxiv.org/pdf/2607.04277v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "analyzes introspection threshold for sustainable recursive self-improvement in LLMs",
+      "llm_evidence_cn": "分析大语言模型可持续递归自我改进的内省阈值",
+      "llm_evidence": "分析大语言模型可持续递归自我改进的内省阈值",
+      "canonical_evidence": "分析大语言模型可持续递归自我改进的内省阈值",
+      "llm_tldr_en": "Investigates the theoretical conditions for sustainable self-improvement in LLMs, arguing that introspection is necessary, and shows current models fall short, providing a framework for future self-evolving systems.",
+      "llm_tldr_cn": "本文探讨大语言模型可持续自我改进的理论条件，类比冯·诺依曼自复制自动机，提出内省是实现递归自提升的关键阈值。通过Kleene第二递归定理证明内省程序的理论存在性，但实证表明当前LLM仅具准内省，受结构瓶颈限制。该研究为理解模型自进化的极限与方向提供了理论基础，对构建真正自我完善的AI系统具有重要指导意义。",
+      "llm_tldr": "本文探讨大语言模型可持续自我改进的理论条件，类比冯·诺依曼自复制自动机，提出内省是实现递归自提升的关键阈值。通过Kleene第二递归定理证明内省程序的理论存在性，但实证表明当前LLM仅具准内省，受结构瓶颈限制。该研究为理解模型自进化的极限与方向提供了理论基础，对构建真正自我完善的AI系统具有重要指导意义。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.07321v1",
+      "source": "arxiv",
+      "title": "From Atomic Actions to Standard Operating Procedures: Iterative Tool Optimization for Self-Evolving LLM Agents",
+      "abstract": "Tool utilization enables Large Language Model (LLM) agents to interact with the real world and resolve complex tasks. However, existing agent frameworks predominantly rely on static toolsets composed of granular atomic actions (e.g., basic file I/O or single-turn search), which forces agents to reinvent low-level logic for every recurring workflow, leading to increased reasoning overhead and failure rates. In this study, we propose that agents can achieve self-evolution by synthesizing these atomic actions into reusable Standard Operating Procedures (SOPs), which function as callable higher-order tools that encapsulate multi-step logic. We further introduce EvoSOP, a framework that empowers agents to extract SOPs from execution trajectories and iteratively optimize the toolset through a systematic lifecycle of construction, merging, evaluation, and pruning. Extensive experiments demonstrate that EvoSOP significantly boosts task success rates while substantially reducing the number of interaction rounds compared to baselines. Our analysis also reveals that iterative tool optimization fosters reliable and efficient tool-use patterns, providing a scalable pathway for the development of self-evolving agents.",
+      "authors": [
+        "Haipeng Ding",
+        "Yuexiang Xie",
+        "Zhewei Wei",
+        "Yaliang Li",
+        "Bolin Ding"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.MA"
+      ],
+      "published": "2026-07-08T12:09:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.07321v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "EvoSOP enables LLM agents to self-evolve by synthesizing reusable SOPs from atomic actions.",
+      "llm_evidence_cn": "EvoSOP使LLM代理能通过从原子动作合成可复用标准操作程序实现自进化。",
+      "llm_evidence": "EvoSOP使LLM代理能通过从原子动作合成可复用标准操作程序实现自进化。",
+      "canonical_evidence": "EvoSOP使LLM代理能通过从原子动作合成可复用标准操作程序实现自进化。",
+      "llm_tldr_en": "EvoSOP addresses static toolset limitations in LLM agents by synthesizing reusable SOPs for self-evolution, reducing reasoning overhead and improving task performance.",
+      "llm_tldr_cn": "现有LLM代理依赖静态原子动作工具集，导致重复推理和失败率高。本文提出EvoSOP框架，通过从原子动作中提取可复用的标准操作程序（SOP），将多步逻辑封装为高阶工具，实现代理的自进化。实验证明EvoSOP能降低推理开销，提升任务成功率，为构建自适应AI代理提供了新范式。",
+      "llm_tldr": "现有LLM代理依赖静态原子动作工具集，导致重复推理和失败率高。本文提出EvoSOP框架，通过从原子动作中提取可复用的标准操作程序（SOP），将多步逻辑封装为高阶工具，实现代理的自进化。实验证明EvoSOP能降低推理开销，提升任务成功率，为构建自适应AI代理提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.07663v1",
+      "source": "arxiv",
+      "title": "Recursive Self-Improvement in AI: From Bounded Self-Refinement to Autonomous Research Loops",
+      "abstract": "AI systems increasingly participate in their own improvement: revising their outputs, adapting their own harnesses during deployment, training on data they generate, and, increasingly, conducting AI research itself. This literature is described under a vocabulary (\"self-refine,\" \"self-reward,\" \"self-play,\" \"self-evolve\") that conflates fundamentally different ambitions. We survey 1,250 arXiv papers (2024-2026) along two axes: what the system improves -- its behavior in deployment, its policy through training, its evaluator, or the research process itself -- and the degree of loop closure (human-in-the-loop to fully closed). The taxonomy separates bounded self-refinement -- convergent, evaluable, and already industrial practice -- from open-ended recursive self-improvement (RSI), which remains bounded by grounding requirements, collapse dynamics, and compute constraints on every measured axis. Its distinctive feature is a dedicated category for self-evaluation: every improvement loop is a claim that some signal can substitute for human judgment. We survey the evaluator design space -- judges, process reward models, verifiers, rubrics, meta-evaluation -- order the signals into a verification hierarchy from formal verifiers (strongest) to intrinsic self-assessment (weakest), and observe that demonstrated self-improvement strength tracks this hierarchy, that its failure modes (self-confirming loops, model collapse, diversity collapse) follow from its violations, and that the \"research direction-setting\" bottleneck keeping humans in the loop sits at the top of that hierarchy. We connect the technical literature to the theory of RSI limits and to the safety and governance questions raised by frontier-lab accounts of closing the loop, and identify governance-grade measurement of self-improvement as the field's most underpopulated niche.",
+      "authors": [
+        "Mingguang Chen",
+        "Licheng Wang",
+        "Bo Qu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-08T17:19:50+00:00",
+      "link": "https://arxiv.org/pdf/2607.07663v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "surveys recursive self-improvement including self-evolve paradigms",
+      "llm_evidence_cn": "综述递归自我改进，包括自进化范式",
+      "llm_evidence": "综述递归自我改进，包括自进化范式",
+      "canonical_evidence": "综述递归自我改进，包括自进化范式",
+      "llm_tldr_en": "A survey of 1,250 papers on recursive self-improvement, providing a taxonomy that distinguishes self-refinement, self-play, self-evolve, etc., along the axes of improvement target and loop closure.",
+      "llm_tldr_cn": "针对AI系统自我改进文献中术语混淆的问题，调查了1250篇论文，提出分类法，从改进对象和回路闭合程度两个维度区分有界自我完善、自我博弈、自进化等概念。为理解AI自我改进的格局提供了清晰框架。",
+      "llm_tldr": "针对AI系统自我改进文献中术语混淆的问题，调查了1250篇论文，提出分类法，从改进对象和回路闭合程度两个维度区分有界自我完善、自我博弈、自进化等概念。为理解AI自我改进的格局提供了清晰框架。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15734v1",
+      "source": "arxiv",
+      "title": "Retrievable Gradients: Continual Post-Training Without Cumulative Weight Drift",
+      "abstract": "Continual post-training enables models to absorb emerging knowledge after deployment, but repeatedly updating shared parameters can accumulate weight drift, potentially causing catastrophic forgetting and degrading general capabilities. Retrieval-augmented generation avoids such parameter drift, yet often lacks the depth of parametric knowledge integration. In this paper, we propose ReGrad (Retrievable Gradients), a new paradigm that treats gradients as retrievable units of knowledge. ReGrad pre-computes document-specific gradients offline, stores them in an indexed Gradient Bank, and retrieves only query-relevant gradients at inference time for temporary weight adaptation. However, raw language-modeling gradients are optimized for token-level document reconstruction rather than for query-driven knowledge use. We therefore introduce a bi-level meta-learning objective that reshapes document-derived gradients into generalizable adaptation signals for downstream tasks. Experiments across general and domain-specific settings show that \\textsc{ReGrad} outperforms CPT and RAG baselines, enabling scalable and reversible parametric knowledge injection without accumulating weight drift.",
+      "authors": [
+        "Weihang Su",
+        "Jiacheng Kang",
+        "Jingyan Xu",
+        "Qingyao Ai",
+        "Jianming Long",
+        "Hanwen Zhang",
+        "Bangde Du",
+        "Xinyuan Cao",
+        "Min Zhang",
+        "Yiqun Liu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "published": "2026-06-14T10:31:36+00:00",
+      "link": "https://arxiv.org/pdf/2606.15734v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "continual post-training without weight drift using retrievable gradients enables continual learning for models",
+      "llm_evidence_cn": "使用可检索梯度实现无权重漂移的持续后训练，为模型持续学习提供方法",
+      "llm_evidence": "使用可检索梯度实现无权重漂移的持续后训练，为模型持续学习提供方法",
+      "canonical_evidence": "使用可检索梯度实现无权重漂移的持续后训练，为模型持续学习提供方法",
+      "llm_tldr_en": "ReGrad tackles catastrophic forgetting in continual post-training by treating gradients as retrievable knowledge units. It precomputes document-specific gradients and retrieves relevant ones at inference for temporary adaptation, avoiding weight drift. Experiments show effective knowledge absorption and capability preservation, enabling continual learning for NER.",
+      "llm_tldr_cn": "本文针对持续后训练中参数更新导致的权重漂移和灾难性遗忘问题，提出了一种名为ReGrad的新范式。该方法将梯度视为可检索的知识单元：离线预计算并索引文档特定的梯度，推理时仅检索与查询相关的梯度来临时调整模型权重，从而避免永久性参数改变。实验结果表明，ReGrad在吸收新知识的同时有效保持了模型的通用能力，为模型持续自进化提供了实用途径。该方法可直接迁移应用于命名实体识别等需要持续学习的信息抽取任务。",
+      "llm_tldr": "本文针对持续后训练中参数更新导致的权重漂移和灾难性遗忘问题，提出了一种名为ReGrad的新范式。该方法将梯度视为可检索的知识单元：离线预计算并索引文档特定的梯度，推理时仅检索与查询相关的梯度来临时调整模型权重，从而避免永久性参数改变。实验结果表明，ReGrad在吸收新知识的同时有效保持了模型的通用能力，为模型持续自进化提供了实用途径。该方法可直接迁移应用于命名实体识别等需要持续学习的信息抽取任务。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "continual learning approaches for named entity recognition",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.18620v1",
+      "source": "arxiv",
+      "title": "BCL: Bayesian In-Context Learning Framework for Information Extraction",
+      "abstract": "Existing information extraction (IE) tasks increasingly adopt in-context learning (ICL) with large language models. However, current approaches either show inconsistent performance across model scales or lack systematic optimization and generalizability. Building on this, we propose BCL (Bayesian In-Context Learning Framework for Information Extraction), the first optimization framework that uses particle filtering with Bayesian updates to systematically refine label representations across IE tasks. Through four steps initialization, observation, weight update, and resampling, BCL generalizes to both sequence labeling and relation classification paradigms. Extensive experiments demonstrate substantial and consistent improvements over existing approaches.",
+      "authors": [
+        "Haoliang Liu",
+        "Chengkun Cai",
+        "Xu Zhao",
+        "Han Zhu",
+        "Shizhou Huang",
+        "Xinglin Zhang",
+        "Tao Chen",
+        "Jenq-Neng Hwang",
+        "Zhang Huaping",
+        "Lei Li"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-06-17T02:34:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.18620v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Bayesian optimization framework refines IE label representations via particle filtering",
+      "llm_evidence_cn": "贝叶斯优化框架通过粒子滤波改进信息抽取标签表示",
+      "llm_evidence": "贝叶斯优化框架通过粒子滤波改进信息抽取标签表示",
+      "canonical_evidence": "贝叶斯优化框架通过粒子滤波改进信息抽取标签表示",
+      "llm_tldr_en": "BCL is a Bayesian in-context learning framework that uses particle filtering to systematically refine label representations for information extraction tasks, improving performance on sequence labeling and relation classification.",
+      "llm_tldr_cn": "BCL针对现有大模型上下文学习在信息抽取中不一致的问题，提出第一个基于贝叶斯更新和粒子滤波的优化框架，通过初始化、观测、权重更新和重采样四步系统性地优化标签表示。实验表明，该方法在序列标注和关系分类任务上均取得显著一致的提升。其贡献在于为信息抽取提供了一种通用的自我优化范式，使模型能自适应地改进抽取效果。",
+      "llm_tldr": "BCL针对现有大模型上下文学习在信息抽取中不一致的问题，提出第一个基于贝叶斯更新和粒子滤波的优化框架，通过初始化、观测、权重更新和重采样四步系统性地优化标签表示。实验表明，该方法在序列标注和关系分类任务上均取得显著一致的提升。其贡献在于为信息抽取提供了一种通用的自我优化范式，使模型能自适应地改进抽取效果。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "named entity recognition using self-improving models",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.29648v1",
+      "source": "arxiv",
+      "title": "Hybrid Retriever Evolution for Multimodal Document Reasoning Agents",
+      "abstract": "Different retrievers, including lexical, semantic, and multimodal approaches, provide highly complementary strengths for multimodal document understanding, yet most systems combine them through fixed pipelines that cannot adapt to the demands of individual reasoning steps. In this work, we ask whether retrieval orchestration itself can be learned as part of the reasoning process. We introduce a failure-driven evolution framework in which a meta-agent autonomously discovers how a tool-using task agent should coordinate diverse retrievers during multi-step document question answering. The meta-agent analyzes incorrect reasoning trajectories, actively probes the same tool environment to diagnose root causes, and iteratively rewrites the task agent's instructions, turning retrieval from a fixed front-end stage into an adaptive, step-wise reasoning decision. The evolved agent learns when to invoke each retriever, how to combine them, and how to compose evidence across modalities and pages. On MMLongBench-Doc and DocBench, the evolved agent achieves gains of up to +19.6 points over the unevolved baseline and consistently outperforms recent systems including MACT, MDocAgent, and SimpleDoc. Detailed retrieval analyses confirm that these improvements arise from adaptive routing and evidence composition rather than reliance on any hard coded retrieval mode, and evolution dynamics reveal a progressive shift from narrow lexical behavior to rich multi-tool coordination. These findings establish autonomous multi-agent coordination as a promising paradigm for multimodal document reasoning.",
+      "authors": [
+        "Bohan Yao",
+        "Shruthan Radhakrishna",
+        "Vikas Yadav"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-06-28T23:36:34+00:00",
+      "link": "https://arxiv.org/pdf/2606.29648v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Failure-driven evolution framework autonomously rewrites retrieval instructions for self-improvement.",
+      "llm_evidence_cn": "故障驱动的进化框架自主重写检索指令以实现自改进。",
+      "llm_evidence": "故障驱动的进化框架自主重写检索指令以实现自改进。",
+      "canonical_evidence": "故障驱动的进化框架自主重写检索指令以实现自改进。",
+      "llm_tldr_en": "The meta-agent based failure-driven evolution framework continuously improves retrieval orchestration for multimodal document reasoning by analyzing errors and rewriting instructions.",
+      "llm_tldr_cn": "针对多模态文档问答中固定检索器组合无法适应不同推理步骤的问题，本文提出故障驱动的进化框架，使用元代理分析错误轨迹并重写任务代理指令，自主实现检索编排的持续改进。实验表明该方法能有效提升多步推理的准确率，为信息抽取等任务中的自进化检索系统提供了思路。",
+      "llm_tldr": "针对多模态文档问答中固定检索器组合无法适应不同推理步骤的问题，本文提出故障驱动的进化框架，使用元代理分析错误轨迹并重写任务代理指令，自主实现检索编排的持续改进。实验表明该方法能有效提升多步推理的准确率，为信息抽取等任务中的自进化检索系统提供了思路。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ]
+}
