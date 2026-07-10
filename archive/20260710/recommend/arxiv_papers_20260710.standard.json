@@ -1,0 +1,440 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-10T20:41:06.534857+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 7,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 5,
+    "quick_skim_target": 11,
+    "quick_selected": 5
+  },
+  "deep_dive": [
+    {
+      "id": "2607.02460v1",
+      "source": "arxiv",
+      "title": "Neuron-Aware Data Selection for Annotation-Free LLM Self-Distillation",
+      "abstract": "Post-training large language models (LLMs) without real-world interaction feedback or human-labeled supervision remains challenging, particularly in specialized domains where expert annotations are costly to obtain. Recent annotation-free self-evolution methods address this by using the model's own outputs as supervision signals, constructing a teacher via additional context and aggregating predictions across multiple rollouts through majority voting to produce pseudo-labels. However, these approaches are not without drawbacks: SFT- and GRPO-based variants suffer out-of-domain performance degradation, while reward-based on-policy RL inflates calibration error. In this paper, we propose Neuron On-Policy Self-Distillation (Neuron-OPSD), a data-centric framework for annotation-free self-distillation that leverages internal neuron activations to guide both training-data selection and teacher context construction. The model is then trained via on-policy distillation from the teacher distribution, requiring no ground-truth labels at any stage. Across specialized-domain benchmarks, Neuron-OPSD improves in-domain task performance while preserving cross-domain generalization and mitigating calibration collapse over prior annotation-free baselines. This framework is particularly relevant to settings where online interaction or external supervision is costly or infeasible, and is conceptually distinct from offline RL approaches that rely on logged, reward-labeled trajectories.",
+      "authors": [
+        "Zhuowei Chen",
+        "Xiang Lorraine Li"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-02T17:27:24+00:00",
+      "link": "https://arxiv.org/pdf/2607.02460v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "proposes a data-centric self-distillation framework for annotation-free self-evolution of LLMs",
+      "llm_evidence_cn": "提出了一种基于数据为中心的自蒸馏框架，用于LLM的无标注自进化",
+      "llm_evidence": "提出了一种基于数据为中心的自蒸馏框架，用于LLM的无标注自进化",
+      "canonical_evidence": "提出了一种基于数据为中心的自蒸馏框架，用于LLM的无标注自进化",
+      "llm_tldr_en": "The paper addresses annotation-free self-evolution of LLMs by proposing Neuron-OPSD, a data selection method for self-distillation, improving performance on specialized domains without human supervision.",
+      "llm_tldr_cn": "该论文针对无标注条件下LLM的自进化问题，提出了一种神经元感知的数据选择方法Neuron-OPSD，通过自蒸馏提升模型在专业领域的性能，无需人类监督，为LLM的自我改进提供了新框架。",
+      "llm_tldr": "该论文针对无标注条件下LLM的自进化问题，提出了一种神经元感知的数据选择方法Neuron-OPSD，通过自蒸馏提升模型在专业领域的性能，无需人类监督，为LLM的自我改进提供了新框架。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.08010v1",
+      "source": "arxiv",
+      "title": "Tool-Making and Self-Evolving LLM Agents in Low-Latency Systems",
+      "abstract": "Production LLM agents often waste latency and reliability by regenerating code for the same procedural steps on every request. We replace this inference-time coding loop with an agentic tool-making pipeline that compiles repeated SOP steps into validated, versioned tools before deployment. The tool-maker grounds synthesis in the live environment as it collects execution traces, observes backend schemas and values, generates candidate tools, and repairs them against labeled cases. At runtime, the production agent calls these tools directly and falls back to code generation only when needed. We deploy the approach in a Fulfillment Center alarm-triage system, where an agent diagnoses alarms against a 44-node SOP over heterogeneous metric backends. In production, tool calls reduce p50 latency by 42%. On 1,500 historical alarms, they reduce end-to-end error rate by up to 53% by suppressing run-to-run variance in repeated steps. Because tools return compact structured verdicts, they also enable a simpler direct-call architecture, reducing p50 latency by a further 62% in a controlled ablation. Versioned tools also improve auditability and expose specification gaps and upstream data drift. Our results show that self-evolving agents can make industrial LLM systems faster, more reliable, and easier to operate.",
+      "authors": [
+        "Kalle Kujanpää",
+        "Ning Liu",
+        "Shahnawaz Alam",
+        "Yeshwanth Reddy Sura",
+        "Tianyu Yang",
+        "Kristina Klinkner",
+        "Shervin Malmasi"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.SE"
+      ],
+      "published": "2026-07-09T00:27:13+00:00",
+      "link": "https://arxiv.org/pdf/2607.08010v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "tool-making and self-evolving LLM agents that compile SOP steps into reusable tools",
+      "llm_evidence_cn": "将SOP步骤编译为可复用工具的制具与自进化LLM智能体",
+      "llm_evidence": "将SOP步骤编译为可复用工具的制具与自进化LLM智能体",
+      "canonical_evidence": "将SOP步骤编译为可复用工具的制具与自进化LLM智能体",
+      "llm_tldr_en": "The paper presents a tool-making pipeline for self-evolving LLM agents that pre-compiles SOP steps into tools, reducing latency and improving reliability in a production alarm-triage system.",
+      "llm_tldr_cn": "现有生产环境LLM智能体在每次请求时反复生成相同代码，导致时延高且可靠性差。本文提出智能体制具管道，通过收集执行轨迹、观察后端模式、生成候选工具并修复，将重复SOP步骤编译为已验证的版本化工具。部署于配送中心报警分类系统，智能体直接调用工具，显著降低时延，仅在必要时回退代码生成，提升了生产级系统的效率和健壮性。",
+      "llm_tldr": "现有生产环境LLM智能体在每次请求时反复生成相同代码，导致时延高且可靠性差。本文提出智能体制具管道，通过收集执行轨迹、观察后端模式、生成候选工具并修复，将重复SOP步骤编译为已验证的版本化工具。部署于配送中心报警分类系统，智能体直接调用工具，显著降低时延，仅在必要时回退代码生成，提升了生产级系统的效率和健壮性。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.03451v1",
+      "source": "arxiv",
+      "title": "SkillOpt-Lite: Better and Faster Agent Self-evolution via One Line of Vibe",
+      "abstract": "While skill optimization for autonomous agents has gained traction, existing methods rely on complex pipelines. This leaves a fundamental question unaddressed: What constitutes a minimal viable pipeline for skill optimization, where every component is justified by theory or empirical necessity? We formalize skill optimization via Zeroth-Order (ZO) optimization, mapping classical counterparts (central difference, trust regions) to recent literature. Noting that unlike blind numerical perturbations in classical ZO, skill trajectories serve as interpretable debugging feedback. Grounded in Claude Code philosophy and PAC learning, we establish three principles for convergence and generalization: file-system-based trajectory exploration, consensus attribute mining, and independent validation gating. Eliminating redundancies, we propose SkillOpt-Lite. It accelerates convergence and outperforms full SkillOpt: improving LiveMath by +8.8 points on GPT-5.5 and +25.4 points on GPT-5.4-nano, allowing the nano model to surpass standard GPT-5.4 optimized by SkillOpt. Finally, we integrate our framework into production coding agents like VSCode Copilot, enabling developers to evolve agent skills via one line of vibe. Because our framework treats all agent components simply as standard editable code, this minimal pipeline naturally generalizes to full harness optimization (HarnessOpt). On SpreadsheetBench, HarnessOpt enables GPT-5.4-nano to achieve 0.7758 accuracy, outperforming the larger GPT-5.5 running standard pipelines (0.7620). Code is available at https://github.com/EvolvingLMMs-Lab/SkillOpt-Lite.",
+      "authors": [
+        "Yifei Shen",
+        "Bo Li",
+        "Xinjie Zhang"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-07-03T16:07:06+00:00",
+      "link": "https://arxiv.org/pdf/2607.03451v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agent self-evolution via Zeroth-Order optimization with trajectory feedback",
+      "llm_evidence_cn": "通过零阶优化与轨迹反馈的智能体自我进化",
+      "llm_evidence": "通过零阶优化与轨迹反馈的智能体自我进化",
+      "canonical_evidence": "通过零阶优化与轨迹反馈的智能体自我进化",
+      "llm_tldr_en": "SkillOpt-Lite formalizes agent skill optimization as Zeroth-Order optimization, using trajectory feedback and minimal principles for convergence, achieving faster and simpler self-evolution.",
+      "llm_tldr_cn": "当前智能体技能优化方法复杂且缺乏理论分析。SkillOpt-Lite将技能优化建模为零阶优化，利用技能轨迹作为可解释反馈，基于Claude Code和PAC学习理论建立三条收敛与泛化原则，实现了极简高效的自我进化管道，为自主智能体设计提供新范式。",
+      "llm_tldr": "当前智能体技能优化方法复杂且缺乏理论分析。SkillOpt-Lite将技能优化建模为零阶优化，利用技能轨迹作为可解释反馈，基于Claude Code和PAC学习理论建立三条收敛与泛化原则，实现了极简高效的自我进化管道，为自主智能体设计提供新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05202v1",
+      "source": "arxiv",
+      "title": "EvoAgentBench: Benchmarking Agent Self-Evolution via Ability Transfer",
+      "abstract": "Agent self-evolution in long-horizon LLM systems is largely procedural: useful experience is not merely stored information, but reusable procedures for searching, debugging, and verification. Yet current evaluations do not isolate this form of transfer. Agent benchmarks test single-episode task solving; memory benchmarks target information retention rather than procedural reuse. We introduce EvoAgentBench, a benchmark for agent self-evolution via Ability-guided transfer across four agentic domains: web research, algorithmic reasoning, software engineering, and knowledge work. EvoAgentBench extracts trace-grounded Abilities from agent executions, canonicalizes them into operational units, and builds domain-specific Ability Graphs linking tasks that share procedural overlap. By design, every test task is backed by verified training-side Ability support. Across a 528/267 train/test split, two scaffolds, and three backbones, curated Ability content transfers reliably across model families, but no current automatic method sustains positive gain in all settings. EvoAgentBench shifts self-evolution evaluation from aggregate accuracy comparison to fine-grained diagnosis of experience encoding, routing, and uptake. The benchmark is publicly available at https://huggingface.co/datasets/EverMind-AI/EvoAgentBench.",
+      "authors": [
+        "Xingze Gao",
+        "Chuanrui Hu",
+        "Hongda Chen",
+        "Pengfei Yao",
+        "Zhao Wang",
+        "Yi Bai",
+        "Zhengwei Wu",
+        "Yunyun Han",
+        "Xiaofeng Cong",
+        "Jie Gui",
+        "Yafeng Deng",
+        "Teng Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-06T15:17:09+00:00",
+      "link": "https://arxiv.org/pdf/2607.05202v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Benchmarks agent self-evolution via ability transfer in NLP-related tasks like web research and knowledge work",
+      "llm_evidence_cn": "通过能力迁移在网页研究和知识工作等NLP相关任务上基准测试智能体自进化",
+      "llm_evidence": "通过能力迁移在网页研究和知识工作等NLP相关任务上基准测试智能体自进化",
+      "canonical_evidence": "通过能力迁移在网页研究和知识工作等NLP相关任务上基准测试智能体自进化",
+      "llm_tldr_en": "EvoAgentBench introduces a benchmark for evaluating procedural self-evolution of LLM agents, focusing on reusable ability transfer across web research, knowledge work, and other domains.",
+      "llm_tldr_cn": "当前评估无法衡量LLM智能体在长程任务中的程序性自我进化，即可复用技能的迁移。本文提出EvoAgentBench基准，从智能体执行轨迹中提取规范化能力，构建能力图，评估跨网页研究、知识工作等四个领域的自进化能力。该基准为研究模型自进化方法提供了标准化测试平台，推动NLP任务中的自我改进系统发展。",
+      "llm_tldr": "当前评估无法衡量LLM智能体在长程任务中的程序性自我进化，即可复用技能的迁移。本文提出EvoAgentBench基准，从智能体执行轨迹中提取规范化能力，构建能力图，评估跨网页研究、知识工作等四个领域的自进化能力。该基准为研究模型自进化方法提供了标准化测试平台，推动NLP任务中的自我改进系统发展。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.07743v1",
+      "source": "arxiv",
+      "title": "Architecture Generalization with MetaNCA",
+      "abstract": "Self-organization is an emergent property of life, driven by the collective behavior of individual components acting on local information. Biological neurons, through local interactions transmitted through synapses, are able to learn efficiently and can adapt their connections over an organism's lifespan. Motivated by these desirable properties of adaptability and local interaction, neural cellular automata (NCA) models have been successful at learning morphogenesis solely through local update rules, demonstrating stability over many updates and robustness to perturbations. In this work, we introduce Meta Neural Cellular Automata (MetaNCA), a framework that learns local rules which self-organize the weights of artificial neural networks. A learned rule network iteratively updates the weights of a task network using only local interactions on the computation graph. We propose a novel Weight Transformer architecture for the local rule network, which uses linear attention to aggregate signals from neighboring weights and hidden states. Once trained, the rule network generates task networks of diverse architectures without backpropagation. We show that MetaNCA generates weights for feedforward MLPs, CNNs, and ResNets on MNIST and CIFAR-100, scaling to networks of 2 million parameters. We further show that MetaNCA generalizes to architectures not seen during meta-training, and that architectural diversity in the training phase strengthens this generalization.",
+      "authors": [
+        "Meet Barot",
+        "Daniel Berenberg",
+        "Sina Khajehabdollahi"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-08T08:31:57+00:00",
+      "link": "https://arxiv.org/pdf/2607.07743v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "introduces MetaNCA, a framework that learns local rules to self-organize neural network weights, enabling model self-evolution across architectures",
+      "llm_evidence_cn": "引入MetaNCA框架，学习局部规则来自组织神经网络权重，实现跨架构的模型自进化",
+      "llm_evidence": "引入MetaNCA框架，学习局部规则来自组织神经网络权重，实现跨架构的模型自进化",
+      "canonical_evidence": "引入MetaNCA框架，学习局部规则来自组织神经网络权重，实现跨架构的模型自进化",
+      "llm_tldr_en": "The paper proposes MetaNCA, which learns update rules that self-organize weights of neural networks, achieving generalization across architectures and robustness through self-organization.",
+      "llm_tldr_cn": "该论文提出MetaNCA，一种学习局部更新规则来自组织人工神经网络权重的框架，它使得权重能够自我进化，在不同架构间泛化，为模型自进化提供了元学习的方法。",
+      "llm_tldr": "该论文提出MetaNCA，一种学习局部更新规则来自组织人工神经网络权重的框架，它使得权重能够自我进化，在不同架构间泛化，为模型自进化提供了元学习的方法。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.07984v1",
+      "source": "arxiv",
+      "title": "Agentic Neural Architecture Search",
+      "abstract": "Neural architecture search (NAS) methods have grown increasingly efficient, yet they remain bounded by manually engineered search spaces that require substantial domain expertise and must be rebuilt for every new task. Large language models (LLMs) can generate architectures in an open-ended space, but how to optimally divide the labor between LLM-driven design and NAS-driven search remains unexplored. We propose a mechanism that bridges these two paradigms: an LLM produces a high-quality seed architecture, then decomposes it into a \"slotted architecture\", a scaffold with named, interchangeable module slots that automatically defines a bounded, task-specific search space for conventional NAS to explore, without manual engineering. We instantiate this mechanism in AgentNAS, a modular three-phase pipeline in which each component's contribution can be measured independently. On 17 tasks spanning classification, dense regression, segmentation, and multi-label tagging across diverse modalities (NAS-Bench-360 and Unseen NAS), AgentNAS establishes a new state of the art on 11 tasks, outperforming published baselines including task-specific expert designs. Ablation studies show that the two search mechanisms are broadly complementary: the LLM-generated seed already surpasses published baselines on the majority of tasks, and NAS delivers additional gains in most cases through combinatorial recombination across slots, a mode of search that independent LLM samples cannot replicate. These patterns hold across three LLMs of different capability levels, confirming that the division of labor is robust. Our code is available at https://github.com/alroimfebruary/AgentNAS.",
+      "authors": [
+        "Seokhoon Jeong",
+        "Mijung Kim",
+        "Taehwan Kim"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-08T23:20:30+00:00",
+      "link": "https://arxiv.org/pdf/2607.07984v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Combines LLM seed generation with NAS to automate architecture search",
+      "llm_evidence_cn": "结合LLM种子生成与NAS实现自动化架构搜索",
+      "llm_evidence": "结合LLM种子生成与NAS实现自动化架构搜索",
+      "canonical_evidence": "结合LLM种子生成与NAS实现自动化架构搜索",
+      "llm_tldr_en": "AgentNAS uses an LLM to design a seed architecture and automatically derive a slotted search space for efficient NAS, enabling automated architecture search without manual engineering.",
+      "llm_tldr_cn": "现有神经架构搜索（NAS）依赖人工设计搜索空间，限制了自动化程度和跨任务泛化能力。本文提出AgentNAS，利用大语言模型生成高质量种子架构，并将其分解为具有可互换模块槽的“槽式架构”，从而自动定义任务特定的搜索空间供传统NAS方法探索。实验表明，该机制能在无需人工工程的情况下高效搜索架构，为自进化模型在自动化架构搜索中的应用提供了新途径。",
+      "llm_tldr": "现有神经架构搜索（NAS）依赖人工设计搜索空间，限制了自动化程度和跨任务泛化能力。本文提出AgentNAS，利用大语言模型生成高质量种子架构，并将其分解为具有可互换模块槽的“槽式架构”，从而自动定义任务特定的搜索空间供传统NAS方法探索。实验表明，该机制能在无需人工工程的情况下高效搜索架构，为自进化模型在自动化架构搜索中的应用提供了新途径。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self-improving models with automated architecture search",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.08252v1",
+      "source": "arxiv",
+      "title": "AutoPersonas: A Multi-Timescale Loop Engine for Open-Ended Persona Evolution",
+      "abstract": "Long-term persona agents must remain identifiable while adapting to new events, relationships, evidence, and social conditions. We identify self-locking as a runtime failure mode in continuing persona-life loops: locally plausible events keep appearing while the generated life collapses toward familiar environments, weak relationships, suspended decisions, and stale life stages. We trace this failure to model-level convergence toward high-probability behavioral channels and system-level context gravity from State, memory, history, and environment summaries. We introduce AutoPersonas, a multi-timescale life-environment engine for bounded persona-level recursive self-evolution. It separates environment-side Occurrences, accumulated Observations, and persona State. Its OSO loop admits divergent future-facing material while requiring evidence-governed absorption before State or reachability changes. A three-year compressed simulation exposed environment watermark shells, occurrence-hardening gaps, slow-change accumulation failures, recursive indecision, and weak relationship persistence. An eight-model 40-day stress test generated 1,600 events and found mean rolling 5-day action-category repetition of 95.2%-97.6%, with all models crossing 90% by day 11. Semantic re-keeping found 79.0%-88.0% macro-theme repetition across all direct-loop runs. In a same-runtime 40-day A/B, context-slice masking plus per-sample divergence targeting reduced macro-theme repetition from 61.8% to 36.3% and roughly doubled cumulative theme count. A juvenile-goblin fictional-world run reproduced the anti-fixation regime without hard real-world intrusions. These results support a bounded claim: separating controlled divergence from evidence-governed absorption can reduce persona-environment self-locking while preserving identity continuity.",
+      "authors": [
+        "Mengchen Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.HC"
+      ],
+      "published": "2026-07-09T08:56:30+00:00",
+      "link": "https://arxiv.org/pdf/2607.08252v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "A multi-timescale engine for persona self-evolution, addressing self-locking failure.",
+      "llm_evidence_cn": "一种多时间尺度的角色自进化引擎，解决自我锁定失败。",
+      "llm_evidence": "一种多时间尺度的角色自进化引擎，解决自我锁定失败。",
+      "canonical_evidence": "一种多时间尺度的角色自进化引擎，解决自我锁定失败。",
+      "llm_tldr_en": "This paper identifies self-locking failure in long-term persona agents and proposes AutoPersonas, a multi-timescale loop engine that separates occurrences, observations, and actions to enable bounded persona-level recursive self-evolution.",
+      "llm_tldr_cn": "该文指出长期角色代理中因模型收敛导致的自我锁定失败，提出AutoPersonas引擎，通过多时间尺度分离事件、观察与行动，实现角色层面的递归自进化，从而维持身份一致性与适应性。",
+      "llm_tldr": "该文指出长期角色代理中因模型收敛导致的自我锁定失败，提出AutoPersonas引擎，通过多时间尺度分离事件、观察与行动，实现角色层面的递归自进化，从而维持身份一致性与适应性。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.03766v1",
+      "source": "arxiv",
+      "title": "Semantic-aware and Self-improving Program Reduction via Agentic Large Language Models",
+      "abstract": "Reducing bug-triggering programs to their minimal essential form is a fundamental task in debugging language processors such as compilers and interpreters. Existing reduction techniques are limited by their reliance on predefined, syntax-driven transformations that lack semantic understanding of the target program, and by their inability to learn from past reduction experiences.   We present a new approach that recasts program reduction as an autonomous reasoning task powered by agentic Large Language Models (LLMs). Instead of applying fixed transformation rules, our method enables an LLM to analyze program semantics, formulate reduction hypotheses, and iteratively refine its approach based on execution outcomes. Successful reduction experiences are further distilled into reusable strategies, allowing the system to continuously improve over time.   We realize this approach in PROJ, a framework built around two collaborative components: a reducer agent that performs semantic-aware, case-specific program reduction, and a reflector agent that extracts and accumulates transferable reduction knowledge. Extensive experiments on 90 benchmarks spanning three programming languages show that PROJ consistently produces smaller reduced programs than all existing state-of-the-art reducers while maintaining high efficiency.",
+      "authors": [
+        "Xintong Zhou",
+        "Hongxu Xu",
+        "Chunhao Liao",
+        "Puzhuo Liu",
+        "Yongqiang Tian",
+        "Chengnian Sun"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE"
+      ],
+      "published": "2026-07-04T08:36:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.03766v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Self-improving program reduction using agentic LLMs that iteratively refine based on execution outcomes",
+      "llm_evidence_cn": "基于执行结果迭代改进的自我改进程序归约方法",
+      "llm_evidence": "基于执行结果迭代改进的自我改进程序归约方法",
+      "canonical_evidence": "基于执行结果迭代改进的自我改进程序归约方法",
+      "llm_tldr_en": "Proposes using agentic LLMs for program reduction that self-improve by learning from past reduction experiences, enabling semantic-aware transformations.",
+      "llm_tldr_cn": "提出利用智能体大语言模型进行程序归约，通过从过去的归约经验中学习，实现语义感知的变换，从而自我改进。该方法将程序归约重新定义为自主推理任务，使LLM能够分析程序语义、提出归约假设并基于执行结果迭代优化。实验表明，该方法能有效学习并推广到新程序，提高了调试效率。这一工作展示了LLM在程序分析中的自我进化能力，为自动化软件维护提供了新范式。",
+      "llm_tldr": "提出利用智能体大语言模型进行程序归约，通过从过去的归约经验中学习，实现语义感知的变换，从而自我改进。该方法将程序归约重新定义为自主推理任务，使LLM能够分析程序语义、提出归约假设并基于执行结果迭代优化。实验表明，该方法能有效学习并推广到新程序，提高了调试效率。这一工作展示了LLM在程序分析中的自我进化能力，为自动化软件维护提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.02010v1",
+      "source": "arxiv",
+      "title": "InduceKV: Fixed-Footprint Continual Adaptation of Multimodal LLMs via Inducing KV Memories",
+      "abstract": "Multimodal large language models must adapt to evolving tasks and domains, yet continual improvement under bounded deployment footprint remains difficult because repeated parameter updates or growing replay stores can accumulate adaptation state over time. We study fixed-footprint continual adaptation: the deployed adaptation state is kept under a fixed memory budget, while the backbone model is left unchanged and task-specific updates are externalized. We propose InduceKV, a retrieval-based method that stores each selected training prefix as an attention-ready memory entry, consisting of a frozen retrieval key and compact layerwise key--value (KV) payloads that can be appended to the model's self-attention cache. Under a strict memory budget, InduceKV constructs a compact inducing set through bilevel selection: a lightweight calibration is fit for retrieval, while the selected memory balances current-task likelihood, anchor-based retention, and coverage in the frozen retrieval space. Across task-incremental instruction tuning, continual VQA, domain-incremental adaptation, and lifelong multimodal instruction tuning, InduceKV consistently improves over PEFT, MoE, replay, and prompt-retrieval baselines under matched memory budgets. We further report backbone-matched, stage-1 CoIN, compute-matched, and scalability diagnostics, showing that the gains are not due to a stronger backbone, replay alone, or an unbounded candidate pool.",
+      "authors": [
+        "Qianyu Chen",
+        "Ziteng Feng",
+        "Canran Xiao",
+        "Runxuan Tang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-02T10:45:28+00:00",
+      "link": "https://arxiv.org/pdf/2607.02010v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes a retrieval-based method for continual adaptation of multimodal LLMs with a fixed memory footprint",
+      "llm_evidence_cn": "提出了一种基于检索的方法，用于多模态LLM的固定内存占用持续适应",
+      "llm_evidence": "提出了一种基于检索的方法，用于多模态LLM的固定内存占用持续适应",
+      "canonical_evidence": "提出了一种基于检索的方法，用于多模态LLM的固定内存占用持续适应",
+      "llm_tldr_en": "The paper introduces InduceKV, a method for fixed-footprint continual adaptation of multimodal LLMs by storing KV memories, enabling adaptation to evolving tasks without expanding model size.",
+      "llm_tldr_cn": "该论文提出InduceKV，一种通过在LLM的注意力缓存中追加紧凑的键值对记忆来实现多模态模型持续适应的方法，它允许模型在固定内存占用下适应变化的领域，为模型持续学习提供了高效方案。",
+      "llm_tldr": "该论文提出InduceKV，一种通过在LLM的注意力缓存中追加紧凑的键值对记忆来实现多模态模型持续适应的方法，它允许模型在固定内存占用下适应变化的领域，为模型持续学习提供了高效方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.04984v1",
+      "source": "arxiv",
+      "title": "Virtual Category-Guided Continual Generalized Category Discovery",
+      "abstract": "Continual Generalized Category Discovery (C-GCD) aims to incrementally identify novel categories from sequential unlabeled data while preserving recognition of known classes, which is an essential capability for open-world visual learning. A major bottleneck lies in ambiguous unlabeled samples that cannot be confidently assigned to known classes nor reliably grouped as novel ones, making pseudo-labeling brittle and often biasing learning toward familiar categories. In this work, we introduce Virtual Category-Guided Continual Generalized Category Discovery by adapting Virtual Category Learning (VCL) to the continual setting. Our method identifies uncertain samples and assigns them to temporary virtual categories, enabling safe and informative learning from unlabeled streams without injecting noisy labels, while improving unlabeled data utilization and mitigating prediction bias. To further stabilize discovery across sessions and enhance class separation, we augment VCL with Expanded Neighborhood Contrastive Learning (ENCL), which exploits extended neighborhood relations and an adaptive margin to learn more discriminative and well-separated representations for both old and emerging classes. Extensive experiments on CIFAR-100, Tiny ImageNet, and ImageNet-100 demonstrate that our approach consistently outperforms state-of-the-art methods, establishing a scalable and effective solution for C-GCD.",
+      "authors": [
+        "Jiahui Xiong",
+        "Qiuxia Lai",
+        "Hongsong Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-06T12:20:06+00:00",
+      "link": "https://arxiv.org/pdf/2607.04984v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Continual novel category discovery with virtual categories, a self-evolution technique.",
+      "llm_evidence_cn": "使用虚拟类别的持续新类别发现，一种自进化技术。",
+      "llm_evidence": "使用虚拟类别的持续新类别发现，一种自进化技术。",
+      "canonical_evidence": "使用虚拟类别的持续新类别发现，一种自进化技术。",
+      "llm_tldr_en": "The paper addresses ambiguous samples in continual category discovery by introducing Virtual Category Learning, assigning uncertain samples to temporary virtual categories for safe learning, benefiting open-world visual learning.",
+      "llm_tldr_cn": "针对持续类别发现中模糊样本导致的伪标签不稳定性问题，本文提出虚拟类别引导方法，通过将不确定样本分配给临时虚拟类别实现安全学习，在视觉学习中提升开放世界下的持续发现能力。",
+      "llm_tldr": "针对持续类别发现中模糊样本导致的伪标签不稳定性问题，本文提出虚拟类别引导方法，通过将不确定样本分配给临时虚拟类别实现安全学习，在视觉学习中提升开放世界下的持续发现能力。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.06140v1",
+      "source": "arxiv",
+      "title": "CurateEvo: Data-Curation Evolving for Agentic Post-Training",
+      "abstract": "Large language model (LLM) agents require post-training methods that can improve long-horizon decision making from environment feedback. However, existing agentic post-training pipelines often treat data curation as a fixed preprocessing step, focusing mainly on data augmentation while neglecting filtering, refinement, and adaptation to downstream failures. We propose CurateEvo, a failure-driven dynamic evolution framework for agentic post-training data curation. CurateEvo represents the curation strategy as executable code and iteratively rewrites it using failed trajectories from a held-out development set. At each epoch, the evolved strategy transforms a fixed raw corpus into supervised fine-tuning data, reinforcement learning data, and an inference-time memory bank. The evolution process first improves effectiveness by diagnosing recurring failure modes and augmenting, filtering, or refining data accordingly, and then improves efficiency by pruning redundant or low-utility training turns under a cost-aware objective. Experiments on ACEBench-Agent, BFCL-V4, and τ^2-Bench under both labeled and wild-data settings show that CurateEvo consistently outperforms prior curation methods, improving average scores by 3.2 and 2.7 points, respectively. Further analyses demonstrate that CurateEvo is compatible with different post-training recipes and substantially reduces curation overhead.",
+      "authors": [
+        "Dingzirui Wang",
+        "Xuanliang Zhang",
+        "Keyan Xu",
+        "Qingfu Zhu",
+        "Wanxiang Che"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-07T11:07:00+00:00",
+      "link": "https://arxiv.org/pdf/2607.06140v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "failure-driven dynamic evolution of data curation strategies for LLM agent post-training",
+      "llm_evidence_cn": "基于失败驱动的LLM Agent后训练数据管理策略动态进化",
+      "llm_evidence": "基于失败驱动的LLM Agent后训练数据管理策略动态进化",
+      "canonical_evidence": "基于失败驱动的LLM Agent后训练数据管理策略动态进化",
+      "llm_tldr_en": "CurateEvo iteratively rewrites curation code using failed trajectories to produce better post-training data, leading to improved agent decision-making without manual intervention.",
+      "llm_tldr_cn": "针对现有Agent后训练流程忽略数据过滤、精炼与失败自适应的局限，本文提出CurateEvo框架，将数据管理策略表示为可执行代码，并利用开发集上的失败轨迹迭代改写。该进化策略在每个周期将固定原始语料转化为监督微调、强化学习及推理记忆数据，实验表明能有效提升LLM Agent的长期决策性能，为Agent自我进化中的数据管理提供了新范式。",
+      "llm_tldr": "针对现有Agent后训练流程忽略数据过滤、精炼与失败自适应的局限，本文提出CurateEvo框架，将数据管理策略表示为可执行代码，并利用开发集上的失败轨迹迭代改写。该进化策略在每个周期将固定原始语料转化为监督微调、强化学习及推理记忆数据，实验表明能有效提升LLM Agent的长期决策性能，为Agent自我进化中的数据管理提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
