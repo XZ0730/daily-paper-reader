@@ -1,0 +1,250 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-11T20:39:39.562680+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2607.04636v1",
+      "source": "arxiv",
+      "title": "Enhancing Large Multimodal Models in Key Information Extraction via Scene-Aware Document Synthesis",
+      "abstract": "Key Information Extraction (KIE) converts visually rich documents into structured data, but practical deployment remains challenging: strong performance often relies on costly on-server Large Multimodal Models (LMMs), while compact locally deployable models lack sufficient KIE supervision. We present SAYRE, a scene-aware document synthesis framework for generating scalable KIE training data without hand-crafted template design. Given a few exemplar documents, SAYRE captures category-specific content patterns and layout conventions to synthesize document-schema-annotation triples. It further introduces error-driven generation, which expands real-world failure cases into hard training examples while preserving their structural patterns. Experiments on constrained- and open-category KIE show that SAYRE consistently improves Qwen3-VL backbones and achieves the strongest overall performance among on-device LMMs. Data scaling experiments show an overall upward trend as more synthesized data is introduced, especially for smaller models and open-category extraction. Error analysis further shows that synthesized training reduces field-level errors by improving schema-aware extraction over dense tables, business identifiers, and contract clauses. These results establish scene-aware synthesis as an effective data-centric approach for improving practical multimodal KIE.",
+      "authors": [
+        "Zhipeng Xu",
+        "Zulong Chen",
+        "Qing Liu",
+        "Junhao Ji",
+        "Jinxin Hu",
+        "Yipeng Yu",
+        "Jianqiang Wan",
+        "Jun Tang",
+        "Zhao Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-06T03:39:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.04636v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "error-driven generation synthesizes hard examples from failures, enabling self-improving information extraction",
+      "llm_evidence_cn": "通过错误驱动生成从失败案例合成难负样本，实现信息抽取的自我改进",
+      "llm_evidence": "通过错误驱动生成从失败案例合成难负样本，实现信息抽取的自我改进",
+      "canonical_evidence": "通过错误驱动生成从失败案例合成难负样本，实现信息抽取的自我改进",
+      "llm_tldr_en": "SAYRE generates scalable KIE training data via scene-aware synthesis and error-driven generation from failure cases, enabling compact models to self-improve for information extraction.",
+      "llm_tldr_cn": "关键信息抽取（KIE）部署面临挑战：高性能依赖昂贵的大型多模态模型，而紧凑模型缺乏足够监督。SAYRE提出场景感知文档合成框架，从少量示例中捕获内容模式与布局惯例，生成文档-模式-标注三元组；并引入错误驱动生成，将真实失败案例扩展为难训练样本。这种方法在不依赖人工模板的情况下，实现了KIE模型的自改进训练数据生成，显著提升了紧凑模型的信息抽取性能。",
+      "llm_tldr": "关键信息抽取（KIE）部署面临挑战：高性能依赖昂贵的大型多模态模型，而紧凑模型缺乏足够监督。SAYRE提出场景感知文档合成框架，从少量示例中捕获内容模式与布局惯例，生成文档-模式-标注三元组；并引入错误驱动生成，将真实失败案例扩展为难训练样本。这种方法在不依赖人工模板的情况下，实现了KIE模型的自改进训练数据生成，显著提升了紧凑模型的信息抽取性能。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "information extraction using self-evolving models",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05297v1",
+      "source": "arxiv",
+      "title": "MetaSkill-Evolve: Recursive Self-Improvement of LLM Agents via Two-Timescale Meta-Skill Evolution",
+      "abstract": "Recent LLM agents tackle increasingly long-horizon, open-ended tasks, and external skills, reusable procedural knowledge supplied to the agent, further extend this capability. However, a fixed, hand-authored skill is rarely optimal, and cannot adapt to the diversity of tasks an agent encounters. Self-improving agents address this by rewriting their own skill files from execution traces, yielding meaningful gains on challenging benchmarks. Yet such self-evolution remains non-recursive: it improves only the task skill (what the agent does) while the improvement procedure (how it improves) is authored once and held fixed. We introduce MetaSkill-Evolve, a two-timescale framework that makes agentic skill improvement recursive: every branch carries both a task skill $s$ and a branch-local meta-skill $m=(ψ,σ,α,π,\\varepsilon)$ whose five components parameterise the Analyzer, Retriever, Allocator, Proposer, and Evolver agents of the improvement pipeline. Task skills evolve on a fast loop while the meta-skill evolves on a slower one under the same pipeline applied to itself, with no additional model or objective. With all five pipeline agents sharing a single frozen backbone, MetaSkill-Evolve outperforms no-skill, static-skill, and single-level evolution baselines on three agentic benchmarks (OfficeQA, SealQA, ALFWorld), improving held-out test accuracy over the raw backbone by +23.54, +16.09, and +1.92 points respectively.",
+      "authors": [
+        "Zefeng Wang",
+        "Minxi Yan",
+        "Jinhe Bi",
+        "Sikuan Yan",
+        "Volker Tresp",
+        "Yunpu Ma"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-06T16:40:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.05297v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "recursive self-improvement of LLM agents via two-timescale meta-skill evolution",
+      "llm_evidence_cn": "通过双时间尺度元技能演化实现LLM智能体的递归自我改进",
+      "llm_evidence": "通过双时间尺度元技能演化实现LLM智能体的递归自我改进",
+      "canonical_evidence": "通过双时间尺度元技能演化实现LLM智能体的递归自我改进",
+      "llm_tldr_en": "Existing LLM agents self-improve by rewriting task skills but keep the improvement procedure fixed; MetaSkill-Evolve introduces recursive meta-skill evolution, optimizing both task and meta levels, yielding significant benchmark gains and enabling genuine recursive self-improvement.",
+      "llm_tldr_cn": "现有LLM智能体通过重写任务技能实现自我改进，但改进策略本身固定不变。MetaSkill-Evolve提出双时间尺度框架，使任务技能和元级改进策略同步递归演化。实验表明，该方法在挑战性基准上取得显著增益，首次实现了真正的递归自我改进，为智能体持续进化提供了新范式。",
+      "llm_tldr": "现有LLM智能体通过重写任务技能实现自我改进，但改进策略本身固定不变。MetaSkill-Evolve提出双时间尺度框架，使任务技能和元级改进策略同步递归演化。实验表明，该方法在挑战性基准上取得显著增益，首次实现了真正的递归自我改进，为智能体持续进化提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.07820v1",
+      "source": "arxiv",
+      "title": "DeepSearch-World: Self-Distillation for Deep Search Agents in a Verifiable Environment",
+      "abstract": "Training tool-use agents to improve from their own experience remains challenging, as supervised fine-tuning relies on fixed teacher-distilled trajectories, while sparse-reward reinforcement learning provides weak supervision for long-horizon interactions. We present DeepSearch-Evolve, a self-distillation framework for web agents built on DeepSearch-World, a deterministic and verifiable environment with reproducible search and page-reading tools. DeepSearch-World contains 420K multi-hop QA tasks constructed from entity-level random walks and supports key agentic cognitive behaviors useful for self-evolving, including progress verification, grounded reflection, and failure recovery. DeepSearch-Evolve iteratively performs trajectory generation, filtering, data mixing, and fine-tuning to train stronger agents. Without distillation from more capable models, DeepSearch-World-9B achieves competitive performance compared with open-source agents, reaching 31.2% on BrowseComp, 61.5% on GAIA, and 93.4% on HotpotQA, showing that verifiable environments enable scalable self-evolution for long-horizon web agents. We will release the environment, 420K training pool, validation set, model, and code to facilitate future research on self-improving deep search agents.",
+      "authors": [
+        "Xinyu Geng",
+        "Xuanhua He",
+        "Sixiang Chen",
+        "Yanjing Xiao",
+        "Fan Zhang",
+        "Shijue Huang",
+        "Haitao Mi",
+        "Zhenwen Liang",
+        "Tianqing Fang",
+        "Yi R. Fung"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-08T18:03:41+00:00",
+      "link": "https://arxiv.org/pdf/2607.07820v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "presents DeepSearch-Evolve, a self-distillation framework enabling agents to iteratively improve from their own experience",
+      "llm_evidence_cn": "提出DeepSearch-Evolve，一种通过自蒸馏使智能体从自身经验迭代改进的框架",
+      "llm_evidence": "提出DeepSearch-Evolve，一种通过自蒸馏使智能体从自身经验迭代改进的框架",
+      "canonical_evidence": "提出DeepSearch-Evolve，一种通过自蒸馏使智能体从自身经验迭代改进的框架",
+      "llm_tldr_en": "Proposes DeepSearch-Evolve, a self-distillation system that lets web agents learn from their own trajectories in a verifiable environment, supporting self-evolution through progress verification and reflection.",
+      "llm_tldr_cn": "针对工具使用智能体从自身经验改进的难度，提出DeepSearch-Evolve自蒸馏框架，在可验证环境中通过轨迹生成与自蒸馏实现迭代提升。该框架支持进度验证与反思等自进化关键行为，为构建持续自我改进的智能体提供了方法。",
+      "llm_tldr": "针对工具使用智能体从自身经验改进的难度，提出DeepSearch-Evolve自蒸馏框架，在可验证环境中通过轨迹生成与自蒸馏实现迭代提升。该框架支持进度验证与反思等自进化关键行为，为构建持续自我改进的智能体提供了方法。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.08490v1",
+      "source": "arxiv",
+      "title": "Drift-Aware Temporal Graph Rewiring (DATGR) for Adaptive Semantic Modeling in Biomedical Text",
+      "abstract": "Biomedical language evolves rapidly as new discoveries emerge, causing traditional text models to lose semantic fidelity over time. Static embeddings and co-occurrence graphs cannot capture such evolution, leading to performance degradation in retrieval and knowledge discovery tasks. This paper introduces a Drift-Aware Temporal Graph Rewiring (DATGR) framework that models concept evolution by dynamically updating co-occurrence edges based on estimated semantic drift. Instead of retraining embeddings for each time slice, DATGR performs lightweight, feedback-driven rewiring using a logistic update rule applied to edge weights. Evaluated on the Biomedical Multi-Relation Corpus (BIOMRC), the method achieved a mean Area Under the Receiver Operating Characteristic (AUROC) improvement of approximately 0.066 absolute difference (0.699 vs. 0.633) over a static baseline. Area Under the Precision-Recall Curve (AUPRC) remained comparable (0.738 vs. 0.744), showing that drift-aware adaptation enhances link-prediction recall without a loss in precision. These results demonstrate that edge-level adaptation effectively captures temporal semantic change in evolving biomedical text while remaining computationally efficient and interpretable.",
+      "authors": [
+        "Bharathwaj Vijayakumar",
+        "Sahana K. Varadaraju"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-09T13:49:34+00:00",
+      "link": "https://arxiv.org/pdf/2607.08490v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "adaptive semantic modeling via drift-aware temporal graph rewiring, a feedback-driven self-evolution approach",
+      "llm_evidence_cn": "基于反馈驱动重连的自适应语义建模，一种自进化方法",
+      "llm_evidence": "基于反馈驱动重连的自适应语义建模，一种自进化方法",
+      "canonical_evidence": "基于反馈驱动重连的自适应语义建模，一种自进化方法",
+      "llm_tldr_en": "DATGR addresses semantic drift in biomedical text by dynamically rewiring a co-occurrence graph using a logistic update rule, enabling continual adaptation without retraining, and improving retrieval and knowledge discovery.",
+      "llm_tldr_cn": "该论文针对生物医学文本语义漂移导致传统静态模型退化的问题，提出漂移感知时序图重连框架DATGR。该方法通过估计语义漂移动态更新共现边权重，采用反馈驱动的逻辑更新规则进行轻量级重连，无需逐时间片重训嵌入。在BIOMRC数据集上，AUC显著提升，表明该方法可有效维持语义保真度，支持持续知识发现。",
+      "llm_tldr": "该论文针对生物医学文本语义漂移导致传统静态模型退化的问题，提出漂移感知时序图重连框架DATGR。该方法通过估计语义漂移动态更新共现边权重，采用反馈驱动的逻辑更新规则进行轻量级重连，无需逐时间片重训嵌入。在BIOMRC数据集上，AUC显著提升，表明该方法可有效维持语义保真度，支持持续知识发现。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.03834v1",
+      "source": "arxiv",
+      "title": "Enactive Drift Regulation and the Emergence Machine: A Framework for Coherent Adaptation Through Regulated Interaction",
+      "abstract": "Adaptive systems increasingly operate in environments characterized by persistent non-stationarity, where patterns reorganize rather than merely vary. While existing approaches such as online learning, continual learning, and adaptive filtering address performance degradation under changing data distributions, they typically treat drift as noise, error, or distribution shift to be corrected. This paper argues that such framings miss a more fundamental challenge: the loss of organizational coherence over time. We introduce Enactive Drift Regulation (EDR) as a general adaptive principle that treats drift as a regulatory signal indicating breakdowns in coherence between a system's internal organization and its environment. Rather than treating prediction optimization or retraining as sufficient, EDR reframes adaptation as the regulation of structure-maintaining, reorganizing, or transitioning internal dynamics to sustain viable operation under change. We present the Emergence Machine as an architectural instantiation of EDR, organized around regimes, attractors, coherence measures, reorganization dynamics, and memory across regimes. By shifting the focus from error minimization to coherence regulation, this work provides a principled framework for long-duration adaptation under non-stationarity and offers a bridge between adaptive control and enactive accounts of cognition.",
+      "authors": [
+        "Nicholas Davis"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-07-04T11:49:24+00:00",
+      "link": "https://arxiv.org/pdf/2607.03834v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes a general adaptive principle treating drift as regulatory signal for coherent adaptation in non-stationary environments",
+      "llm_evidence_cn": "提出一种通用自适应原则，将漂移视为调节信号，用于非平稳环境中的连贯自适应",
+      "llm_evidence": "提出一种通用自适应原则，将漂移视为调节信号，用于非平稳环境中的连贯自适应",
+      "canonical_evidence": "提出一种通用自适应原则，将漂移视为调节信号，用于非平稳环境中的连贯自适应",
+      "llm_tldr_en": "Introduces Enactive Drift Regulation, a framework for adaptive systems to maintain coherence under persistent non-stationarity, treating drift as a regulatory signal rather than noise. It offers a general principle that could underpin self-evolving models.",
+      "llm_tldr_cn": "针对持续非平稳环境中自适应系统失去组织连贯性的问题，提出能动漂移调节（EDR）框架，将漂移视为调节信号而非噪声，以维持系统内部组织与环境的连贯性。该框架为构建自进化模型提供了通用自适应原理。",
+      "llm_tldr": "针对持续非平稳环境中自适应系统失去组织连贯性的问题，提出能动漂移调节（EDR）框架，将漂移视为调节信号而非噪声，以维持系统内部组织与环境的连贯性。该框架为构建自进化模型提供了通用自适应原理。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.06079v1",
+      "source": "arxiv",
+      "title": "Scalable Perturbation Learning for Online Self-Supervised Echo State Networks",
+      "abstract": "Intelligent systems should not only solve tasks but also adapt under real-world constraints. Autonomous adaptation via self-supervised learning, sequential adaptation via online learning, and memory-efficient implementation via perturbation-based learning are important requirements for such systems. However, these requirements are generally in tension for high-dimensional systems, because perturbation-based learning suffers from variance that grows with the dimension of the perturbed variables.   In this study, we focus on echo state networks (ESNs), where this tension naturally arises in large reservoirs. We propose a perturbation-based learning rule for online self-supervised learning in ESNs. The proposed rule is derived from an orthogonal decomposition of the self-supervised learning cost, which separates an input-dependent component from a redundant component determined by the fixed ESN parameters. By perturbing only the input-dependent component, the effective perturbation dimension is reduced from the reservoir dimension to the input dimension.   Thus, the proposed method preserves self-supervised adaptation, online learning, and scalar-feedback perturbation learning, while avoiding reservoir-size-dependent variance growth. This suggests a design principle for scalable and hardware-compatible learning: online learning should be restricted to the dynamically necessary low-dimensional component of the objective.",
+      "authors": [
+        "Taiki Yamada",
+        "Kantaro Fujiwara"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.NE"
+      ],
+      "published": "2026-07-07T09:47:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.06079v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Online self-supervised learning for continuous model adaptation in echo state networks",
+      "llm_evidence_cn": "在线自监督学习实现回声状态网络的持续模型适应",
+      "llm_evidence": "在线自监督学习实现回声状态网络的持续模型适应",
+      "canonical_evidence": "在线自监督学习实现回声状态网络的持续模型适应",
+      "llm_tldr_en": "Proposes a scalable perturbation-based learning rule for online self-supervised learning in echo state networks, enabling continuous adaptation under real-world constraints.",
+      "llm_tldr_cn": "本文针对高维系统中在线自监督学习与低内存扰动的矛盾，为回声状态网络提出了一种基于正交分解的扰动学习规则。该方法实现了可扩展的在线自适应，在保持内存效率的同时实现序列学习。这对于在资源受限环境下部署具备持续自改进能力的智能系统具有重要意义。",
+      "llm_tldr": "本文针对高维系统中在线自监督学习与低内存扰动的矛盾，为回声状态网络提出了一种基于正交分解的扰动学习规则。该方法实现了可扩展的在线自适应，在保持内存效率的同时实现序列学习。这对于在资源受限环境下部署具备持续自改进能力的智能系统具有重要意义。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

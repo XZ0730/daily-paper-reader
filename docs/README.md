@@ -6,55 +6,40 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-10
-- 运行时间：2026-07-10 20:49:54 UTC
+- 最新运行日期：2026-07-11
+- 运行时间：2026-07-11 20:44:49 UTC
 - 运行状态：成功
-- 本次总论文数：11
-- 精读区：6
-- 速读区：5
+- 本次总论文数：6
+- 精读区：3
+- 速读区：3
 
 ### 今日简报（AI）
-今日聚焦大模型自我进化：从无需人工标注的神经元感知知识蒸馏，到能在低延迟系统中造工具、自我演化的智能体，探索无监督能力边界的延伸。  
-最值得关注“神经元感知数据选择”实现零标注自我蒸馏（9.0分）与“工具制造+自进化代理”结合低时延环境的范式（9.0分），两者共同展示了模型自主创造训练信号与交互工具的可能。  
-建议读者从速读的开放人格演化引擎入手，思考如何将自蒸馏的“神经元感知”机制迁移到长期、多时间尺度的角色行为生成中。
-- 详情：[/202607/10/README](/202607/10/README)
+今日精读聚焦于文档关键信息提取的场景感知合成与LLM智能体的元技能递归进化，两项研究均获9分高分。  
+最值得关注的是多模态大模型如何通过合成复杂排版文档提升表单/票据信息抽取精度，以及智能体如何像人类一样通过元认知迭代自我进化。  
+建议读者优先阅读这两篇高分论文，它们分别从数据增强和自主进化角度，为落地应用提供了新颖思路。
+- 详情：[/202607/11/README](/202607/11/README)
 
 ### 精读区论文标签
-1. [Neuron-Aware Data Selection for Annotation-Free LLM Self-Distillation](/202607/10/2607.02460v1-neuron-aware-data-selection-for-annotation-free-llm-self-distillation)  
+1. [Enhancing Large Multimodal Models in Key Information Extraction via Scene-Aware Document Synthesis](/202607/11/2607.04636v1-enhancing-large-multimodal-models-in-key-information-extraction-via-scene-aware-document-synthesis)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：提出了一种基于数据为中心的自蒸馏框架，用于LLM的无标注自进化
-2. [Tool-Making and Self-Evolving LLM Agents in Low-Latency Systems](/202607/10/2607.08010v1-tool-making-and-self-evolving-llm-agents-in-low-latency-systems)  
+   evidence：通过错误驱动生成从失败案例合成难负样本，实现信息抽取的自我改进
+2. [MetaSkill-Evolve: Recursive Self-Improvement of LLM Agents via Two-Timescale Meta-Skill Evolution](/202607/11/2607.05297v1-metaskill-evolve-recursive-self-improvement-of-llm-agents-via-two-timescale-meta-skill-evolution)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：将SOP步骤编译为可复用工具的制具与自进化LLM智能体
-3. [SkillOpt-Lite: Better and Faster Agent Self-evolution via One Line of Vibe](/202607/10/2607.03451v1-skillopt-lite-better-and-faster-agent-self-evolution-via-one-line-of-vibe)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：通过零阶优化与轨迹反馈的智能体自我进化
-4. [EvoAgentBench: Benchmarking Agent Self-Evolution via Ability Transfer](/202607/10/2607.05202v1-evoagentbench-benchmarking-agent-self-evolution-via-ability-transfer)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：通过能力迁移在网页研究和知识工作等NLP相关任务上基准测试智能体自进化
-5. [Architecture Generalization with MetaNCA](/202607/10/2607.07743v1-architecture-generalization-with-metanca)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：引入MetaNCA框架，学习局部规则来自组织神经网络权重，实现跨架构的模型自进化
-6. [Agentic Neural Architecture Search](/202607/10/2607.07984v1-agentic-neural-architecture-search)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：结合LLM种子生成与NAS实现自动化架构搜索
+   evidence：通过双时间尺度元技能演化实现LLM智能体的递归自我改进
+3. [DeepSearch-World: Self-Distillation for Deep Search Agents in a Verifiable Environment](/202607/11/2607.07820v1-deepsearch-world-self-distillation-for-deep-search-agents-in-a-verifiable-environment)  
+   标签：评分：9.0/10、query:self-evolve
+   evidence：提出DeepSearch-Evolve，一种通过自蒸馏使智能体从自身经验迭代改进的框架
 
 ### 速读区论文标签
-1. [AutoPersonas: A Multi-Timescale Loop Engine for Open-Ended Persona Evolution](/202607/10/2607.08252v1-autopersonas-a-multi-timescale-loop-engine-for-open-ended-persona-evolution)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：一种多时间尺度的角色自进化引擎，解决自我锁定失败。
-2. [Semantic-aware and Self-improving Program Reduction via Agentic Large Language Models](/202607/10/2607.03766v1-semantic-aware-and-self-improving-program-reduction-via-agentic-large-language-models)  
+1. [Drift-Aware Temporal Graph Rewiring (DATGR) for Adaptive Semantic Modeling in Biomedical Text](/202607/11/2607.08490v1-drift-aware-temporal-graph-rewiring-datgr-for-adaptive-semantic-modeling-in-biomedical-text)  
    标签：评分：7.0/10、query:self-evolve
-   evidence：基于执行结果迭代改进的自我改进程序归约方法
-3. [Virtual Category-Guided Continual Generalized Category Discovery](/202607/10/2607.04984v1-virtual-category-guided-continual-generalized-category-discovery)  
-   标签：评分：7.0/10、query:self-evolve
-   evidence：使用虚拟类别的持续新类别发现，一种自进化技术。
-4. [CurateEvo: Data-Curation Evolving for Agentic Post-Training](/202607/10/2607.06140v1-curateevo-data-curation-evolving-for-agentic-post-training)  
-   标签：评分：7.0/10、query:self-evolve
-   evidence：基于失败驱动的LLM Agent后训练数据管理策略动态进化
-5. [InduceKV: Fixed-Footprint Continual Adaptation of Multimodal LLMs via Inducing KV Memories](/202607/10/2607.02010v1-inducekv-fixed-footprint-continual-adaptation-of-multimodal-llms-via-inducing-kv-memories)  
+   evidence：基于反馈驱动重连的自适应语义建模，一种自进化方法
+2. [Enactive Drift Regulation and the Emergence Machine: A Framework for Coherent Adaptation Through Regulated Interaction](/202607/11/2607.03834v1-enactive-drift-regulation-and-the-emergence-machine-a-framework-for-coherent-adaptation-through-regulated-interaction)  
    标签：评分：6.0/10、query:self-evolve
-   evidence：提出了一种基于检索的方法，用于多模态LLM的固定内存占用持续适应
+   evidence：提出一种通用自适应原则，将漂移视为调节信号，用于非平稳环境中的连贯自适应
+3. [Scalable Perturbation Learning for Online Self-Supervised Echo State Networks](/202607/11/2607.06079v1-scalable-perturbation-learning-for-online-self-supervised-echo-state-networks)  
+   标签：评分：6.0/10、query:self-evolve
+   evidence：在线自监督学习实现回声状态网络的持续模型适应
 
 
 <div class="dpr-home-promo-card">
