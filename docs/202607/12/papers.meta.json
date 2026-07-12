@@ -1,0 +1,54 @@
+{
+  "label": "2026-07-12",
+  "date": "2026-07-12",
+  "generated_at": "2026-07-12T20:52:53",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202607/12/2607.04711v1-learning-probabilistic-prompt-for-continual-learning",
+      "section": "quick",
+      "title_en": "Learning Probabilistic Prompt for Continual Learning",
+      "authors": "Hyekang Park, Sanghoon Lee, Geon Lee, Jongyoun Noh, Bumsub Ham",
+      "date": "2026-07-06",
+      "pdf": "https://arxiv.org/pdf/2607.04711v1",
+      "score": "7.0",
+      "evidence": "用概率提示解决持续学习中的遗忘问题，可作为NER的自进化技术",
+      "tldr": "在持续学习场景中，现有基于提示的方法常因提示崩溃而失效，即多个提示趋于相似，无法表示不同任务的多样化数据分布。针对该问题，本文创新性地提出概率提示学习框架，不再学习固定的提示向量，而是将每个提示视为一个概率分布，并通过混合这些分布来采样出多样的提示，从而全面捕捉图像模式的多样性；同时，额外设计了分布正则化损失，约束提示分布在序列任务上的平滑演变，防止突变。在ImageNet-R、CIFAR-100和CUB-200等公认基准上的大量实验证明，该方法能显著提升持续学习性能，有效减轻灾难性遗忘。该工作为提示方法的持续学习开辟了概率建模新方向，具有重要参考价值。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Continual learning aims to progressively learn from a sequence of tasks, each containing a disjoint subset of classes, while preserving previously learned knowledge. Prompt-based continual learning methods propose to learn a small set of parameters, i.e., prompts, by associating them with a query feature of an input image. These methods optimize the prompts, attempting to represent diverse patterns of images. However, we have observed that existing prompt-based methods suffer from a prompt collapse problem, that is, the prompts tend to be highly similar to each other, thereby failing to capture the diverse data distributions in continual learning scenarios. To address this issue, we propose in this paper a novel prompt-based continual learning framework that captures diverse patterns of images across a sequence of tasks. To this end, we model each prompt as a probabilistic distribution and construct a mixture of these distributions, from which we sample diverse prompts. This enables our model to effectively capture highly diverse image distributions in the continual learning process. We also present a distribution regularization loss to prevent abrupt changes in the prompt distributions throughout the training process. We show extensive experimental results for continual learning on standard benchmarks, including ImageNet-R, CIFAR-100, and CUB-200, demonstrating the effectiveness of our framework.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/12/2607.05721v1-spanuq-span-level-uncertainty-quantification-for-large-language-model-generation",
+      "section": "quick",
+      "title_en": "SpanUQ: Span-Level Uncertainty Quantification for Large Language Model Generation",
+      "authors": "Yimeng Zhang, Yingying Zhuang, Ziyi Wang, Yuxuan Lu, Pei Chen, Aman Gupta, Zhe Su, Ming Tan, Zhilin Zhang, Qun Liu, Manikandarajan Ramanathan, Rajashekar Maragoud, Edward Vul, Jing Huang, Dakuo Wang",
+      "date": "2026-07-07",
+      "pdf": "https://arxiv.org/pdf/2607.05721v1",
+      "score": "7.0",
+      "evidence": "跨度级不确定性估计作为LLM生成中自我精炼的基础",
+      "tldr": "现有LLM不确定性估计方法因粒度问题缺乏语义连贯或无法定位错误。本文提出跨度级不确定性估计任务，并设计SPANUQ方法，通过DETR风格解码器与Beta混合分布，将多样本推理的不确定性知识蒸馏到单次前向传播，同时检测跨度并量化不确定性。在首个跨度级不确定性基准SPANUQ-BENCH上，SPANUQ在五个LLM上取得最优不确定性质量，检测F1达0.910，速度比采样方法快10-20倍。该方法实现了精确错误定位，为LLM可信生成提供新范式。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Uncertainty estimation is essential not only for the trustworthy deployment of large language models (LLMs) but also as a foundation for self-refinement in LLM generation. However, existing approaches operate at suboptimal granularities: token-level scores lack semantic coherence, while sequence-level scores fail to localize errors. We formalize Span-Level Uncertainty Estimation (SLUE), a new task that targets the natural granularity for uncertainty: semantically coherent text spans, each conveying a single assessable unit of meaning. To address this task, we introduce SPANUQ, a lightweight probe that distills the uncertainty knowledge from expensive multi-sample inference into a single forward pass over LLM hidden states. SPANUQ employs a DETR-style span decoder to simultaneously detect spans and estimate their uncertainty via a Mixture of Beta distribution, trained with a principled combination of Beta NLL regression and contrastive ranking objectives. We construct SPANUQ-BENCH, the first span-level uncertainty benchmark comprising 20K prompts, 293K annotated spans, and continuous soft labels derived from multi-sample claim verification. Experiments on five LLM backbones show that SPANUQ consistently achieves the best span-level uncertainty quality, outperforming the strongest probe baseline and all sampling-based methods while being 10-20x faster. Its DETR-based span detector attains 0.910 F1, surpassing the best heuristic by 39.4%, enabling precise error localization that sequence-level methods cannot provide. The framework generalizes across five LLMs spanning two model families.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/12/2607.07836v1-infinity-parser2-technical-report",
+      "section": "quick",
+      "title_en": "Infinity-Parser2 Technical Report",
+      "authors": "Zuming Huang, Jun Huang, Kexuan Ren, Baode Wang, Weizhen Li, Jianming Feng, Yu Wang, Yichen Yao, Shijun Lin, Yige Tang, Cheng Peng, Weidi Xu, Wei Chu, Yinghui Xu, Yuan Qi",
+      "date": "2026-07-08",
+      "pdf": "https://arxiv.org/pdf/2607.07836v1",
+      "score": "6.0",
+      "evidence": "Infinity-Parser2通过迭代精炼循环和多任务强化学习实现自我改进的文档解析。",
+      "tldr": "文档解析任务长期受限于高质量标注数据的匮乏。本研究提出Infinity-Parser2，通过可控数据合成引擎与多任务强化学习实现端到端解析。合成引擎生成500万双语样本，覆盖多元文档类型及细粒度标注；多任务奖励系统联合优化8项目标，统一感知、结构与推理。Pro版本在olmOCR-Bench和ParseBench上分别取得87.6%和74.3%的最优结果，Flash版本推理吞吐提升3.68倍，为文档理解提供了高效且精准的统一框架。",
+      "tags": "query:self-evolve",
+      "abstract_en": "We present Infinity-Parser2, a large multimodal model that couples a controllable data-synthesis pipeline with multi-task reinforcement learning for end-to-end document parsing, addressing the persistent scarcity of faithfully annotated parsing corpora. Our contributions are threefold. First, we build a scalable synthesis engine, pairing a controllable rendering framework with an iterative refinement loop, and use it to construct and open-source Infinity-Doc2-5M: a 5-million-sample bilingual (Chinese/English) corpus spanning diverse document types, annotated with element bounding boxes, canonical content forms (Markdown, HTML, LaTeX, SMILES, structured charts), and full-page reading order. Second, we introduce a verifiable, multi-task reward system that enables Joint Reinforcement Learning across eight co-trained objectives (document parsing, layout analysis, table parsing, math formula parsing, chart parsing, chemical formula parsing, document VQA, and general multimodal understanding), unifying perception, structure, and reasoning in a single optimization signal. Third, we release two variants under a shared architecture: Infinity-Parser2-Flash, optimized for low-latency inference with a $3.68\\times$ throughput gain over Infinity-Parser-7B, and Infinity-Parser2-Pro, engineered for precision-critical settings. Infinity-Parser2-Pro reaches state-of-the-art 87.6% on olmOCR-Bench and 74.3% on ParseBench, surpassing DeepSeek-OCR-2, PaddleOCR-VL-1.5, and MinerU2.5, with strong generalization to charts, chemical formulas, and document VQA.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

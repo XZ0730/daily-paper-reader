@@ -6,40 +6,32 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-11
-- 运行时间：2026-07-11 20:44:49 UTC
+- 最新运行日期：2026-07-12
+- 运行时间：2026-07-12 20:52:40 UTC
 - 运行状态：成功
-- 本次总论文数：6
-- 精读区：3
+- 本次总论文数：3
+- 精读区：0
 - 速读区：3
 
 ### 今日简报（AI）
-今日精读聚焦于文档关键信息提取的场景感知合成与LLM智能体的元技能递归进化，两项研究均获9分高分。  
-最值得关注的是多模态大模型如何通过合成复杂排版文档提升表单/票据信息抽取精度，以及智能体如何像人类一样通过元认知迭代自我进化。  
-建议读者优先阅读这两篇高分论文，它们分别从数据增强和自主进化角度，为落地应用提供了新颖思路。
-- 详情：[/202607/11/README](/202607/11/README)
+今日速读三篇前沿论文，聚焦于持续学习的概率提示、大模型生成的不确定性量化，以及解析器技术报告。  
+值得关注概率化提示在持续学习中的抗遗忘潜力，以及片段级不确定性量化如何让大模型输出更可信。  
+若想跟进，建议优先阅读这两篇7分论文，理解其方法如何提升模型长期可靠性与安全部署。
+- 详情：[/202607/12/README](/202607/12/README)
 
 ### 精读区论文标签
-1. [Enhancing Large Multimodal Models in Key Information Extraction via Scene-Aware Document Synthesis](/202607/11/2607.04636v1-enhancing-large-multimodal-models-in-key-information-extraction-via-scene-aware-document-synthesis)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：通过错误驱动生成从失败案例合成难负样本，实现信息抽取的自我改进
-2. [MetaSkill-Evolve: Recursive Self-Improvement of LLM Agents via Two-Timescale Meta-Skill Evolution](/202607/11/2607.05297v1-metaskill-evolve-recursive-self-improvement-of-llm-agents-via-two-timescale-meta-skill-evolution)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：通过双时间尺度元技能演化实现LLM智能体的递归自我改进
-3. [DeepSearch-World: Self-Distillation for Deep Search Agents in a Verifiable Environment](/202607/11/2607.07820v1-deepsearch-world-self-distillation-for-deep-search-agents-in-a-verifiable-environment)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：提出DeepSearch-Evolve，一种通过自蒸馏使智能体从自身经验迭代改进的框架
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Drift-Aware Temporal Graph Rewiring (DATGR) for Adaptive Semantic Modeling in Biomedical Text](/202607/11/2607.08490v1-drift-aware-temporal-graph-rewiring-datgr-for-adaptive-semantic-modeling-in-biomedical-text)  
+1. [Learning Probabilistic Prompt for Continual Learning](/202607/12/2607.04711v1-learning-probabilistic-prompt-for-continual-learning)  
    标签：评分：7.0/10、query:self-evolve
-   evidence：基于反馈驱动重连的自适应语义建模，一种自进化方法
-2. [Enactive Drift Regulation and the Emergence Machine: A Framework for Coherent Adaptation Through Regulated Interaction](/202607/11/2607.03834v1-enactive-drift-regulation-and-the-emergence-machine-a-framework-for-coherent-adaptation-through-regulated-interaction)  
+   evidence：用概率提示解决持续学习中的遗忘问题，可作为NER的自进化技术
+2. [SpanUQ: Span-Level Uncertainty Quantification for Large Language Model Generation](/202607/12/2607.05721v1-spanuq-span-level-uncertainty-quantification-for-large-language-model-generation)  
+   标签：评分：7.0/10、query:self-evolve
+   evidence：跨度级不确定性估计作为LLM生成中自我精炼的基础
+3. [Infinity-Parser2 Technical Report](/202607/12/2607.07836v1-infinity-parser2-technical-report)  
    标签：评分：6.0/10、query:self-evolve
-   evidence：提出一种通用自适应原则，将漂移视为调节信号，用于非平稳环境中的连贯自适应
-3. [Scalable Perturbation Learning for Online Self-Supervised Echo State Networks](/202607/11/2607.06079v1-scalable-perturbation-learning-for-online-self-supervised-echo-state-networks)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：在线自监督学习实现回声状态网络的持续模型适应
+   evidence：Infinity-Parser2通过迭代精炼循环和多任务强化学习实现自我改进的文档解析。
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,153 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-12T20:49:04.129412+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.04711v1",
+      "source": "arxiv",
+      "title": "Learning Probabilistic Prompt for Continual Learning",
+      "abstract": "Continual learning aims to progressively learn from a sequence of tasks, each containing a disjoint subset of classes, while preserving previously learned knowledge. Prompt-based continual learning methods propose to learn a small set of parameters, i.e., prompts, by associating them with a query feature of an input image. These methods optimize the prompts, attempting to represent diverse patterns of images. However, we have observed that existing prompt-based methods suffer from a prompt collapse problem, that is, the prompts tend to be highly similar to each other, thereby failing to capture the diverse data distributions in continual learning scenarios. To address this issue, we propose in this paper a novel prompt-based continual learning framework that captures diverse patterns of images across a sequence of tasks. To this end, we model each prompt as a probabilistic distribution and construct a mixture of these distributions, from which we sample diverse prompts. This enables our model to effectively capture highly diverse image distributions in the continual learning process. We also present a distribution regularization loss to prevent abrupt changes in the prompt distributions throughout the training process. We show extensive experimental results for continual learning on standard benchmarks, including ImageNet-R, CIFAR-100, and CUB-200, demonstrating the effectiveness of our framework.",
+      "authors": [
+        "Hyekang Park",
+        "Sanghoon Lee",
+        "Geon Lee",
+        "Jongyoun Noh",
+        "Bumsub Ham"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-06T06:29:21+00:00",
+      "link": "https://arxiv.org/pdf/2607.04711v1",
+      "tags": [
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Addresses continual learning with probabilistic prompts, a self-improving technique applicable to NER",
+      "llm_evidence_cn": "用概率提示解决持续学习中的遗忘问题，可作为NER的自进化技术",
+      "llm_evidence": "用概率提示解决持续学习中的遗忘问题，可作为NER的自进化技术",
+      "canonical_evidence": "用概率提示解决持续学习中的遗忘问题，可作为NER的自进化技术",
+      "llm_tldr_en": "Proposes a probabilistic prompt framework to mitigate prompt collapse in continual learning, enabling diverse task representations and reducing catastrophic forgetting.",
+      "llm_tldr_cn": "现有基于提示的持续学习方法存在提示坍塌问题，导致提示高度相似，无法捕获多样的数据分布。本文提出一种新颖的概率提示框架，通过变分推理学习提示的分布，从而更好地表示任务数据差异。实验表明该方法有效缓解了灾难性遗忘，在多个基准上提升了性能。该工作为持续学习中的自进化模型提供了一种可迁移的技术方案。",
+      "llm_tldr": "现有基于提示的持续学习方法存在提示坍塌问题，导致提示高度相似，无法捕获多样的数据分布。本文提出一种新颖的概率提示框架，通过变分推理学习提示的分布，从而更好地表示任务数据差异。实验表明该方法有效缓解了灾难性遗忘，在多个基准上提升了性能。该工作为持续学习中的自进化模型提供了一种可迁移的技术方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "continual learning approaches for named entity recognition",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.07836v1",
+      "source": "arxiv",
+      "title": "Infinity-Parser2 Technical Report",
+      "abstract": "We present Infinity-Parser2, a large multimodal model that couples a controllable data-synthesis pipeline with multi-task reinforcement learning for end-to-end document parsing, addressing the persistent scarcity of faithfully annotated parsing corpora. Our contributions are threefold. First, we build a scalable synthesis engine, pairing a controllable rendering framework with an iterative refinement loop, and use it to construct and open-source Infinity-Doc2-5M: a 5-million-sample bilingual (Chinese/English) corpus spanning diverse document types, annotated with element bounding boxes, canonical content forms (Markdown, HTML, LaTeX, SMILES, structured charts), and full-page reading order. Second, we introduce a verifiable, multi-task reward system that enables Joint Reinforcement Learning across eight co-trained objectives (document parsing, layout analysis, table parsing, math formula parsing, chart parsing, chemical formula parsing, document VQA, and general multimodal understanding), unifying perception, structure, and reasoning in a single optimization signal. Third, we release two variants under a shared architecture: Infinity-Parser2-Flash, optimized for low-latency inference with a $3.68\\times$ throughput gain over Infinity-Parser-7B, and Infinity-Parser2-Pro, engineered for precision-critical settings. Infinity-Parser2-Pro reaches state-of-the-art 87.6% on olmOCR-Bench and 74.3% on ParseBench, surpassing DeepSeek-OCR-2, PaddleOCR-VL-1.5, and MinerU2.5, with strong generalization to charts, chemical formulas, and document VQA.",
+      "authors": [
+        "Zuming Huang",
+        "Jun Huang",
+        "Kexuan Ren",
+        "Baode Wang",
+        "Weizhen Li",
+        "Jianming Feng",
+        "Yu Wang",
+        "Yichen Yao",
+        "Shijun Lin",
+        "Yige Tang",
+        "Cheng Peng",
+        "Weidi Xu",
+        "Wei Chu",
+        "Yinghui Xu",
+        "Yuan Qi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-08T18:17:21+00:00",
+      "link": "https://arxiv.org/pdf/2607.07836v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Infinity-Parser2 uses an iterative refinement loop and multi-task RL for self-improving document parsing.",
+      "llm_evidence_cn": "Infinity-Parser2通过迭代精炼循环和多任务强化学习实现自我改进的文档解析。",
+      "llm_evidence": "Infinity-Parser2通过迭代精炼循环和多任务强化学习实现自我改进的文档解析。",
+      "canonical_evidence": "Infinity-Parser2通过迭代精炼循环和多任务强化学习实现自我改进的文档解析。",
+      "llm_tldr_en": "Infinity-Parser2 tackles scarcity of annotated parsing data by synthesizing a 5M-sample corpus and training with multi-task RL, achieving self-improvement via iterative refinement.",
+      "llm_tldr_cn": "为了解决文档解析中忠实标注数据稀缺的问题，Infinity-Parser2构建了一个可扩展的合成引擎，通过可控渲染和迭代精炼循环生成了包含5百万样本的中英双语语料库，并引入可验证的多任务强化学习奖励系统进行端到端训练。该模型在多种文档类型上实现了结构化内容解析，验证了合成数据和强化学习结合的自我改进能力，推动了信息抽取系统的自动化与自进化进程。",
+      "llm_tldr": "为了解决文档解析中忠实标注数据稀缺的问题，Infinity-Parser2构建了一个可扩展的合成引擎，通过可控渲染和迭代精炼循环生成了包含5百万样本的中英双语语料库，并引入可验证的多任务强化学习奖励系统进行端到端训练。该模型在多种文档类型上实现了结构化内容解析，验证了合成数据和强化学习结合的自我改进能力，推动了信息抽取系统的自动化与自进化进程。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "information extraction using self-evolving models",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.05721v1",
+      "source": "arxiv",
+      "title": "SpanUQ: Span-Level Uncertainty Quantification for Large Language Model Generation",
+      "abstract": "Uncertainty estimation is essential not only for the trustworthy deployment of large language models (LLMs) but also as a foundation for self-refinement in LLM generation. However, existing approaches operate at suboptimal granularities: token-level scores lack semantic coherence, while sequence-level scores fail to localize errors. We formalize Span-Level Uncertainty Estimation (SLUE), a new task that targets the natural granularity for uncertainty: semantically coherent text spans, each conveying a single assessable unit of meaning. To address this task, we introduce SPANUQ, a lightweight probe that distills the uncertainty knowledge from expensive multi-sample inference into a single forward pass over LLM hidden states. SPANUQ employs a DETR-style span decoder to simultaneously detect spans and estimate their uncertainty via a Mixture of Beta distribution, trained with a principled combination of Beta NLL regression and contrastive ranking objectives. We construct SPANUQ-BENCH, the first span-level uncertainty benchmark comprising 20K prompts, 293K annotated spans, and continuous soft labels derived from multi-sample claim verification. Experiments on five LLM backbones show that SPANUQ consistently achieves the best span-level uncertainty quality, outperforming the strongest probe baseline and all sampling-based methods while being 10-20x faster. Its DETR-based span detector attains 0.910 F1, surpassing the best heuristic by 39.4%, enabling precise error localization that sequence-level methods cannot provide. The framework generalizes across five LLMs spanning two model families.",
+      "authors": [
+        "Yimeng Zhang",
+        "Yingying Zhuang",
+        "Ziyi Wang",
+        "Yuxuan Lu",
+        "Pei Chen",
+        "Aman Gupta",
+        "Zhe Su",
+        "Ming Tan",
+        "Zhilin Zhang",
+        "Qun Liu",
+        "Manikandarajan Ramanathan",
+        "Rajashekar Maragoud",
+        "Edward Vul",
+        "Jing Huang",
+        "Dakuo Wang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-07T01:09:46+00:00",
+      "link": "https://arxiv.org/pdf/2607.05721v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "span-level uncertainty estimation as foundation for self-refinement in LLM generation",
+      "llm_evidence_cn": "跨度级不确定性估计作为LLM生成中自我精炼的基础",
+      "llm_evidence": "跨度级不确定性估计作为LLM生成中自我精炼的基础",
+      "canonical_evidence": "跨度级不确定性估计作为LLM生成中自我精炼的基础",
+      "llm_tldr_en": "SpanUQ is a lightweight probe that estimates span-level uncertainty in LLM generations, enabling targeted self-refinement by localizing unreliable spans in a single forward pass.",
+      "llm_tldr_cn": "现有不确定性估计粒度不当，阻碍LLM的自我精炼。SpanUQ提出跨度级不确定性估计任务，通过轻量探针从单次前向传播中蒸馏多采样推理的不确定性知识，定位语义连贯的不可靠文本片段。这种方法为自我精炼提供了更精确的错误定位，可广泛用于NLP任务中的模型自我改进。",
+      "llm_tldr": "现有不确定性估计粒度不当，阻碍LLM的自我精炼。SpanUQ提出跨度级不确定性估计任务，通过轻量探针从单次前向传播中蒸馏多采样推理的不确定性知识，定位语义连贯的不可靠文本片段。这种方法为自我精炼提供了更精确的错误定位，可广泛用于NLP任务中的模型自我改进。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
