@@ -6,32 +6,27 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-12
-- 运行时间：2026-07-12 20:52:40 UTC
+- 最新运行日期：2026-07-13
+- 运行时间：2026-07-13 21:13:34 UTC
 - 运行状态：成功
-- 本次总论文数：3
-- 精读区：0
-- 速读区：3
+- 本次总论文数：2
+- 精读区：2
+- 速读区：0
 
 ### 今日简报（AI）
-今日速读三篇前沿论文，聚焦于持续学习的概率提示、大模型生成的不确定性量化，以及解析器技术报告。  
-值得关注概率化提示在持续学习中的抗遗忘潜力，以及片段级不确定性量化如何让大模型输出更可信。  
-若想跟进，建议优先阅读这两篇7分论文，理解其方法如何提升模型长期可靠性与安全部署。
-- 详情：[/202607/12/README](/202607/12/README)
+今日聚焦AI架构内生进化与低成本智能体：从模拟层走向原生的异构AI进化，以及用自动化框架让小型模型构建便宜90%的智能体。最值得关注的方向是结构张力驱动AI自主演化，以及通过框架适应大幅降低Agent成本。推荐读者追踪端侧小型模型结合自动适配框架的落地路径。
+- 详情：[/202607/13/README](/202607/13/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [From Application-Layer Simulation to Native Meta-Architecture: Structural Tension as an Endogenous Driver for Heterogeneous AI Evolution](/202607/13/2607.06269v1-from-application-layer-simulation-to-native-meta-architecture-structural-tension-as-an-endogenous-driver-for-heterogeneous-ai-evolution)  
+   标签：评分：8.0/10、query:self-evolve
+   evidence：提出利用结构张力作为内生驱动力的模型自演化理论框架。
+2. [Better Harnesses, Smaller Models: Building 90% Cheaper Agents via Automated Harness Adaptation](/202607/13/2607.08938v1-better-harnesses-smaller-models-building-90-cheaper-agents-via-automated-harness-adaptation)  
+   标签：评分：8.0/10、query:self-evolve
+   evidence：通过自动化工具链适配使小语言模型自我改进，用于NLP智能体
 
 ### 速读区论文标签
-1. [Learning Probabilistic Prompt for Continual Learning](/202607/12/2607.04711v1-learning-probabilistic-prompt-for-continual-learning)  
-   标签：评分：7.0/10、query:self-evolve
-   evidence：用概率提示解决持续学习中的遗忘问题，可作为NER的自进化技术
-2. [SpanUQ: Span-Level Uncertainty Quantification for Large Language Model Generation](/202607/12/2607.05721v1-spanuq-span-level-uncertainty-quantification-for-large-language-model-generation)  
-   标签：评分：7.0/10、query:self-evolve
-   evidence：跨度级不确定性估计作为LLM生成中自我精炼的基础
-3. [Infinity-Parser2 Technical Report](/202607/12/2607.07836v1-infinity-parser2-technical-report)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：Infinity-Parser2通过迭代精炼循环和多任务强化学习实现自我改进的文档解析。
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">

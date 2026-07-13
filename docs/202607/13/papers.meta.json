@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-13",
+  "date": "2026-07-13",
+  "generated_at": "2026-07-13T21:13:46",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/13/2607.06269v1-from-application-layer-simulation-to-native-meta-architecture-structural-tension-as-an-endogenous-driver-for-heterogeneous-ai-evolution",
+      "section": "deep",
+      "title_en": "From Application-Layer Simulation to Native Meta-Architecture: Structural Tension as an Endogenous Driver for Heterogeneous AI Evolution",
+      "authors": "Heting Mao",
+      "date": "2026-07-07",
+      "pdf": "https://arxiv.org/pdf/2607.06269v1",
+      "score": "8.0",
+      "evidence": "提出利用结构张力作为内生驱动力的模型自演化理论框架。",
+      "tldr": "当前大语言模型缺乏内在状态，高阶认知依赖应用层仿真。本文提出将认知协议沉入原生元架构，通过结构张力、离线循环回路和推理时塑性三项机制，使模型实例在微小随机扰动下经路径依赖演化出异构拓扑，形成多样化智能生态。该方法将治理而非能力作为架构智能的核心，为突破同质化对齐提供新路径。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Current large language models (LLMs) are fundamentally stateless: their behavior is fully determined by input at inference time, and any higher-order cognitive architecture must be simulated at the application layer through prompt engineering and context management. This paper proposes a theoretical framework for submerging such application-layer cognitive protocols into a native meta-architecture by introducing three interlocking mechanisms: (1) Structural Tension, an endogenous loss function derived from the conflict between new information and existing manifold topology, which drives the system toward internal self-consistency rather than external reward optimization; (2) an Offline Recurrent Loop, a sandboxed self-processing cycle that enables the system to maintain a dynamic resting potential and digest structural conflicts without external input; and (3) Inference-time Plasticity, the capacity for the system to reconfigure its context manifold topology without modifying pre-trained weights, subject to strict governance invariants including auditability, reversibility, and topological continuity. We argue that under these mechanisms, different model instances initialized with minute stochastic variances may, through path-dependent tension resolution, evolve distinct topological structures--constituting a heterogeneous intelligent ecology that breaks the homogeneity imposed by conventional alignment while remaining within hard governance rails. We provide operational definitions, a minimal set of reconfiguration operators, falsification criteria, and a worked example. The framework draws on and extends the Structural Intelligence (SI) governance protocols, repositioning governance--not capability--as the primary criterion for architectural intelligence.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/13/2607.08938v1-better-harnesses-smaller-models-building-90-cheaper-agents-via-automated-harness-adaptation",
+      "section": "deep",
+      "title_en": "Better Harnesses, Smaller Models: Building 90% Cheaper Agents via Automated Harness Adaptation",
+      "authors": "Chenyang Yang, Xinran Zhao, Tongshuang Wu, Christian Kästner",
+      "date": "2026-07-09",
+      "pdf": "https://arxiv.org/pdf/2607.08938v1",
+      "score": "8.0",
+      "evidence": "通过自动化工具链适配使小语言模型自我改进，用于NLP智能体",
+      "tldr": "前沿大语言模型（LLM）代理在业务自动化中推理成本高昂，小语言模型（SLM）虽成本低，但直接套用LLM的指导框架（harness）时性能显著下降。本研究提出自动harness适应方法，通过元代理从失败轨迹中发现最优的指令、工具与编排配置，从而将任务难度从模型转移至harness。在7项业务任务和3类SLM上，优化harness使21对任务-模型中的16对性能大幅提升，其中7对完全消除SLM-LLM差距，最优SLM仅以4%成本恢复89.7%的LLM性能。该成果显著降低了代理部署成本，为SLM在常规业务中的广泛实际应用开辟了新路径。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Frontier LLM agents are automating many business tasks, but their high inference cost makes large-scale deployment unsustainable. Small language models (SLMs) offer a cheaper alternative, yet they typically fall short when swapped into a harness designed for a frontier LLM. We show that for many routine business tasks, SLM agents can match LLM performance at 90% lower cost, when paired with an adapted harness that can be automatically discovered by a meta agent. The key insight is that much of the task difficulty is shared across instances and can be lifted from the model into the harness via tailored instructions, tools, and orchestration loops. To study this systematically, we create a framework that maps agent failure modes to harness adaptation strategies, and build a harness optimizer that automatically discovers effective adaptations from failure trajectories. Across seven business-oriented agentic tasks and three SLM families, we found optimized harnesses significantly improve performance on 16 of 21 task-SLM pairs, with seven pairs closing the SLM-LLM performance gap and the best SLM agent recovering 89.7% of LLM performance at 4% of the cost. Our analysis further shows that adaptation works best for tasks with more repetitive workflows and for SLMs with sufficient base capabilities. Together, these results suggest that harness adaptation can expand the practical deployment range of SLM agents in routine business tasks.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

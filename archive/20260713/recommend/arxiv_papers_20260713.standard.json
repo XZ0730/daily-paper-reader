@@ -1,0 +1,89 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-13T21:11:29.747923+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.06269v1",
+      "source": "arxiv",
+      "title": "From Application-Layer Simulation to Native Meta-Architecture: Structural Tension as an Endogenous Driver for Heterogeneous AI Evolution",
+      "abstract": "Current large language models (LLMs) are fundamentally stateless: their behavior is fully determined by input at inference time, and any higher-order cognitive architecture must be simulated at the application layer through prompt engineering and context management. This paper proposes a theoretical framework for submerging such application-layer cognitive protocols into a native meta-architecture by introducing three interlocking mechanisms: (1) Structural Tension, an endogenous loss function derived from the conflict between new information and existing manifold topology, which drives the system toward internal self-consistency rather than external reward optimization; (2) an Offline Recurrent Loop, a sandboxed self-processing cycle that enables the system to maintain a dynamic resting potential and digest structural conflicts without external input; and (3) Inference-time Plasticity, the capacity for the system to reconfigure its context manifold topology without modifying pre-trained weights, subject to strict governance invariants including auditability, reversibility, and topological continuity. We argue that under these mechanisms, different model instances initialized with minute stochastic variances may, through path-dependent tension resolution, evolve distinct topological structures--constituting a heterogeneous intelligent ecology that breaks the homogeneity imposed by conventional alignment while remaining within hard governance rails. We provide operational definitions, a minimal set of reconfiguration operators, falsification criteria, and a worked example. The framework draws on and extends the Structural Intelligence (SI) governance protocols, repositioning governance--not capability--as the primary criterion for architectural intelligence.",
+      "authors": [
+        "Heting Mao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-07-07T13:34:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.06269v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Proposes a theoretical framework for model self-evolution using structural tension as an endogenous driver.",
+      "llm_evidence_cn": "提出利用结构张力作为内生驱动力的模型自演化理论框架。",
+      "llm_evidence": "提出利用结构张力作为内生驱动力的模型自演化理论框架。",
+      "canonical_evidence": "提出利用结构张力作为内生驱动力的模型自演化理论框架。",
+      "llm_tldr_en": "Introduces a meta-architecture with structural tension loss to drive AI self-evolution toward internal consistency, submerging application-layer protocols into native model dynamics.",
+      "llm_tldr_cn": "针对当前大语言模型在推理时状态固定的局限，提出一种原生元架构框架，通过结构张力内生损失函数驱动模型向内部自洽演化，而非外部奖励优化。该框架将应用层认知协议下沉为模型底层机制，实现了更高级的自我改进能力。",
+      "llm_tldr": "针对当前大语言模型在推理时状态固定的局限，提出一种原生元架构框架，通过结构张力内生损失函数驱动模型向内部自洽演化，而非外部奖励优化。该框架将应用层认知协议下沉为模型底层机制，实现了更高级的自我改进能力。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.08938v1",
+      "source": "arxiv",
+      "title": "Better Harnesses, Smaller Models: Building 90% Cheaper Agents via Automated Harness Adaptation",
+      "abstract": "Frontier LLM agents are automating many business tasks, but their high inference cost makes large-scale deployment unsustainable. Small language models (SLMs) offer a cheaper alternative, yet they typically fall short when swapped into a harness designed for a frontier LLM. We show that for many routine business tasks, SLM agents can match LLM performance at 90% lower cost, when paired with an adapted harness that can be automatically discovered by a meta agent. The key insight is that much of the task difficulty is shared across instances and can be lifted from the model into the harness via tailored instructions, tools, and orchestration loops. To study this systematically, we create a framework that maps agent failure modes to harness adaptation strategies, and build a harness optimizer that automatically discovers effective adaptations from failure trajectories. Across seven business-oriented agentic tasks and three SLM families, we found optimized harnesses significantly improve performance on 16 of 21 task-SLM pairs, with seven pairs closing the SLM-LLM performance gap and the best SLM agent recovering 89.7% of LLM performance at 4% of the cost. Our analysis further shows that adaptation works best for tasks with more repetitive workflows and for SLMs with sufficient base capabilities. Together, these results suggest that harness adaptation can expand the practical deployment range of SLM agents in routine business tasks.",
+      "authors": [
+        "Chenyang Yang",
+        "Xinran Zhao",
+        "Tongshuang Wu",
+        "Christian Kästner"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE"
+      ],
+      "published": "2026-07-09T21:08:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.08938v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "automated harness adaptation for small language models enables self-improvement for NLP agents",
+      "llm_evidence_cn": "通过自动化工具链适配使小语言模型自我改进，用于NLP智能体",
+      "llm_evidence": "通过自动化工具链适配使小语言模型自我改进，用于NLP智能体",
+      "canonical_evidence": "通过自动化工具链适配使小语言模型自我改进，用于NLP智能体",
+      "llm_tldr_en": "For high-cost LLM agents, this paper shows that small language models with automatically adapted harnesses can match frontier LLM performance at 90% lower cost, by shifting task difficulty from the model into the harness.",
+      "llm_tldr_cn": "为解决大语言模型智能体高推理成本问题，该论文展示小语言模型通过自动化适配的工具链可在大幅降低成本的同时匹配前沿模型性能。其关键思路是利用元智能体自动发现任务共享的难度，将其从模型转移到工具链中。实验表明，在常规业务任务上，适配后的小模型智能体能以90%的成本节省达到同等性能。该工作为低成本部署智能体提供了实用方案。",
+      "llm_tldr": "为解决大语言模型智能体高推理成本问题，该论文展示小语言模型通过自动化适配的工具链可在大幅降低成本的同时匹配前沿模型性能。其关键思路是利用元智能体自动发现任务共享的难度，将其从模型转移到工具链中。实验表明，在常规业务任务上，适配后的小模型智能体能以90%的成本节省达到同等性能。该工作为低成本部署智能体提供了实用方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}
