@@ -1,0 +1,183 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-14T21:25:18.400770+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2607.09063v1",
+      "source": "arxiv",
+      "title": "EvoLP: Self-Evolving Latency Predictor for Model Compression in Real-Time Edge Systems",
+      "abstract": "Edge devices are increasingly utilized for deploying deep learning applications on embedded systems. The real-time nature of many applications and the limited resources of edge devices necessitate latency-targeted neural network compression. However, measuring latency on real devices is challenging and expensive. Therefore, this letter presents a novel and efficient framework, named EvoLP, to accurately predict the inference latency of models on edge devices. This predictor can evolve to achieve higher latency prediction precision during the network compression process. Experimental results demonstrate that EvoLP outperforms previous state-of-the-art approaches by being evaluated on three edge devices and four model variants. Moreover, when incorporated into a model compression framework, it effectively guides the compression process for higher model accuracy while satisfying strict latency constraints. We open source EvoLP at https://github.com/ntuliuteam/EvoLP.",
+      "authors": [
+        "Shuo Huai",
+        "Hao Kong",
+        "Shiqing Li",
+        "Xiangzhong Luo",
+        "Ravi Subramaniam",
+        "Christian Makaya",
+        "Qian Lin",
+        "Weichen Liu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-10T03:16:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.09063v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Self-evolving latency predictor for model compression",
+      "llm_evidence_cn": "模型压缩中的自我进化延迟预测器",
+      "llm_evidence": "模型压缩中的自我进化延迟预测器",
+      "canonical_evidence": "模型压缩中的自我进化延迟预测器",
+      "llm_tldr_en": "Presents a self-evolving latency predictor (EvoLP) that adapts during network compression to provide accurate latency estimates for real-time edge systems, demonstrating superior performance across multiple devices and model variants.",
+      "llm_tldr_cn": "随着深度学习在边缘设备上的部署日益增加，准确预测模型推理延迟对于满足实时性要求至关重要。然而，传统预测器在模型压缩过程中精度往往下降。本文设计了一种自我进化的延迟预测器EvoLP，它能在模型压缩的不同阶段自适应地调整其预测参数，持续优化预测性能。在三个代表性边缘平台和四种模型架构上的综合评估显示，EvoLP在延迟预测精度上超越了当前最先进的方法，并展现出优越的进化能力。该方法为边缘AI系统的自动化压缩和部署提供了关键技术支持。",
+      "llm_tldr": "随着深度学习在边缘设备上的部署日益增加，准确预测模型推理延迟对于满足实时性要求至关重要。然而，传统预测器在模型压缩过程中精度往往下降。本文设计了一种自我进化的延迟预测器EvoLP，它能在模型压缩的不同阶段自适应地调整其预测参数，持续优化预测性能。在三个代表性边缘平台和四种模型架构上的综合评估显示，EvoLP在延迟预测精度上超越了当前最先进的方法，并展现出优越的进化能力。该方法为边缘AI系统的自动化压缩和部署提供了关键技术支持。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.09521v1",
+      "source": "arxiv",
+      "title": "SAGEAgent: A Self-Evolving Agent for Cost-Aware Modality Acquisition in Multimodal Survival Prediction",
+      "abstract": "Does every cancer patient truly need a complete diagnostic workup for accurate survival prediction? In multimodal clinical oncology, diagnostic modalities follow a clinically mandated order of escalating burden -- from demographics collected at intake to genomic profiling requiring specialized tissue analysis. Current multimodal survival methods either assume all modalities are available or passively handle missing data, but none actively reason about whether acquiring the next modality is justified for a given patient along this ordered workflow. We formulate this as a sequential decision problem and propose SAGEAgent (Sequential Acquisition Guided by Experience), a self-evolving LLM-based clinical agent that decides which diagnostic modalities to acquire for each patient, balancing predictive accuracy against clinical invasiveness. SAGEAgent reasons about each patient's evolving diagnostic state through clinical tools that translate numerical predictions into text, an episodic memory that retrieves similar past cases, and a semantic memory that accumulates reusable decision patterns from experience. Experiments on a glioma cohort combining TCGA-LGG, TCGA-GBM, and BraTS with four diagnostic modalities demonstrate that SAGEAgent achieves competitive survival prediction accuracy while reducing average acquisition burden by 55%.",
+      "authors": [
+        "Chongyu Qu",
+        "Can Cui",
+        "Zhengyi Lu",
+        "Junchao Zhu",
+        "Tianyuan Yao",
+        "Junlin Guo",
+        "Juming Xiong",
+        "Yanfan Zhu",
+        "Yuechen Yang",
+        "Bennett A. Landman",
+        "Yuankai Huo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-10T15:32:11+00:00",
+      "link": "https://arxiv.org/pdf/2607.09521v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "proposes a self-evolving LLM-based clinical agent",
+      "llm_evidence_cn": "提出一种自进化的LLM临床代理",
+      "llm_evidence": "提出一种自进化的LLM临床代理",
+      "canonical_evidence": "提出一种自进化的LLM临床代理",
+      "llm_tldr_en": "Proposes SAGEAgent, a self-evolving agent that sequentially decides on modality acquisition for multimodal survival prediction, optimizing cost and accuracy.",
+      "llm_tldr_cn": "针对多模态生存预测中模态获取成本问题，提出自进化代理SAGEAgent，顺序决策是否获取下一诊断模态，以平衡成本与准确性。实验表明该代理有效减少不必要的检查。方法具有通用性，可启发其他领域的自适应决策系统。",
+      "llm_tldr": "针对多模态生存预测中模态获取成本问题，提出自进化代理SAGEAgent，顺序决策是否获取下一诊断模态，以平衡成本与准确性。实验表明该代理有效减少不必要的检查。方法具有通用性，可启发其他领域的自适应决策系统。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.10159v1",
+      "source": "arxiv",
+      "title": "UNIT: Unleash Large Language Models Potential for Graph Continual Learning",
+      "abstract": "In real-world multimodal web scenarios, graph-structured data often arrives in a streaming manner, making graph continual learning a crucial paradigm for continuously modeling such evolving structures. However, existing graph continual learning methods still face two fundamental challenges. 1) semantic-structural separation, where the graph-based methods excel at modeling topological relationships but neglect deep semantics. 2) imbalanced knowledge transfer, where existing models fail to effectively leverage general knowledge gained from early tasks to benefit subsequent new tasks. To address above issues, we propose a novel framework, \\textbf{UN}leash Large Language Models PotentIal for Graph ConTinual Learning (UNIT). By fine-tuning large language model only on the first task, we bridge the distributional gap between the pre-trained LLM corpus and the target task dataset to enhance the adaptability of LLMs for graph-structured tasks. Meanwhile, we propose an uncertain-aware anchor generation mechanism to effectively preserve representative knowledge across tasks, avoiding the neglect of universal knowledge learned from previous tasks. Additionally, we introduce structural confluence modeling to explicitly integrates graph topology information into semantic information, enhancing the collaborative capabilities between semantic understanding and structural modeling. Extensive experiments demonstrate that our proposed method achieves state-of-the-art performance in the graph continual learning task.",
+      "authors": [
+        "Tairan Huang",
+        "Yili Wang",
+        "Beibei Hu",
+        "Yiting Shi",
+        "Qiutong Li",
+        "Changlong He",
+        "Jianliang Gao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-11T06:47:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.10159v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Continual learning on graphs via LLM fine-tuning",
+      "llm_evidence_cn": "通过LLM微调实现图持续学习",
+      "llm_evidence": "通过LLM微调实现图持续学习",
+      "canonical_evidence": "通过LLM微调实现图持续学习",
+      "llm_tldr_en": "UNIT leverages LLMs to address semantic-structural separation and imbalanced knowledge transfer in graph continual learning.",
+      "llm_tldr_cn": "图持续学习方法面临语义-结构分离和不平衡知识迁移的挑战。UNIT框架通过微调大语言模型，为图结构数据注入深层语义理解，并利用通用知识缓解任务间迁移遗忘，有效提升了图流数据上的持续学习性能。实验表明该方法在多个图持续学习基准上优于现有方法，为图神经网络的自进化提供了新思路。",
+      "llm_tldr": "图持续学习方法面临语义-结构分离和不平衡知识迁移的挑战。UNIT框架通过微调大语言模型，为图结构数据注入深层语义理解，并利用通用知识缓解任务间迁移遗忘，有效提升了图流数据上的持续学习性能。实验表明该方法在多个图持续学习基准上优于现有方法，为图神经网络的自进化提供了新思路。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.11267v1",
+      "source": "arxiv",
+      "title": "Enhancing LLMs through human feedback: a journey towards self-improvement",
+      "abstract": "In the rapidly evolving landscape of information retrieval systems, the ability to adapt and improve through user feedback is paramount. This study introduces a novel methodology for refining the performance of a primary Retrieval Augmented Generation (RAG) system by strategically integrating an auxiliary feedback RAG system. By systematically harnessing human-generated feedback, the approach aims to enhance the accuracy, relevance, and overall quality of responses, driving the system towards self-improvement. Central to this methodology is a human-in-the-loop implementation, where user feedback is continuously collected, classified, and integrated into the inference workflow, enabling the system to learn and evolve iteratively. To validate the effectiveness of this approach, the study employs rigorous testing against three diverse benchmark datasets focused on general and custom domain knowledge, utilizing a LLM-as-a-Judge evaluation strategy. This comprehensive framework not only underscores the transformative potential of feedback-driven enhancements in RAG systems but also sets a precedent for future research in adaptive information retrieval technologies, marking a significant step in the journey towards autonomous refinement and optimization through user engagement.",
+      "authors": [
+        "Tatiana Pelc",
+        "Gila Kamhi",
+        "Asaf Avrahamy",
+        "Adi Fledel-Alon"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-07-13T08:51:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.11267v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Self-improvement of LLMs through human feedback loop",
+      "llm_evidence_cn": "通过人类反馈实现LLM的自我改进",
+      "llm_evidence": "通过人类反馈实现LLM的自我改进",
+      "canonical_evidence": "通过人类反馈实现LLM的自我改进",
+      "llm_tldr_en": "Proposes a human-in-the-loop framework where an auxiliary RAG system collects user feedback to iteratively improve a primary RAG system's responses, enabling self-improvement without retraining.",
+      "llm_tldr_cn": "在信息检索领域，检索增强生成（RAG）系统需要持续适应用户反馈和动态环境以维持高性能。本文针对这一挑战，提出了一种利用人类反馈实现自我改进的方法。核心思想是部署一个辅助反馈RAG系统，持续收集用户对主系统响应的评价，并将反馈分类整合到推理流程中，驱动系统行为迭代优化。实验在多个基准测试上进行，结果表明该方法能有效提升响应的准确性和相关性，并展现出稳定的自我进化能力。这项工作为未来构建能够从用户交互中持续学习的智能信息系统提供了重要参考。",
+      "llm_tldr": "在信息检索领域，检索增强生成（RAG）系统需要持续适应用户反馈和动态环境以维持高性能。本文针对这一挑战，提出了一种利用人类反馈实现自我改进的方法。核心思想是部署一个辅助反馈RAG系统，持续收集用户对主系统响应的评价，并将反馈分类整合到推理流程中，驱动系统行为迭代优化。实验在多个基准测试上进行，结果表明该方法能有效提升响应的准确性和相关性，并展现出稳定的自我进化能力。这项工作为未来构建能够从用户交互中持续学习的智能信息系统提供了重要参考。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

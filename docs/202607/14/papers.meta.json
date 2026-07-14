@@ -1,0 +1,69 @@
+{
+  "label": "2026-07-14",
+  "date": "2026-07-14",
+  "generated_at": "2026-07-14T21:28:46",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202607/14/2607.09063v1-evolp-self-evolving-latency-predictor-for-model-compression-in-real-time-edge-systems",
+      "section": "deep",
+      "title_en": "EvoLP: Self-Evolving Latency Predictor for Model Compression in Real-Time Edge Systems",
+      "authors": "Shuo Huai, Hao Kong, Shiqing Li, Xiangzhong Luo, Ravi Subramaniam, Christian Makaya, Qian Lin, Weichen Liu",
+      "date": "2026-07-10",
+      "pdf": "https://arxiv.org/pdf/2607.09063v1",
+      "score": "9.0",
+      "evidence": "模型压缩中的自我进化延迟预测器",
+      "tldr": "在资源受限的实时边缘系统中部署深度学习应用时，为满足严格延迟要求，通常需要模型压缩，但测量真实设备上的推理延迟昂贵且不切实际。本文提出一种名为EvoLP的高效框架，它能够自进化地准确预测模型在边缘设备上的推理延迟，并且在压缩过程中不断提高预测精度，从而无需反复实际测量。在三种边缘设备、四种模型变体上的实验表明，EvoLP预测准确度全面超越先前最佳方法，将其融入压缩流程可在严格延迟约束下获得更高模型精度，代码已开源。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Edge devices are increasingly utilized for deploying deep learning applications on embedded systems. The real-time nature of many applications and the limited resources of edge devices necessitate latency-targeted neural network compression. However, measuring latency on real devices is challenging and expensive. Therefore, this letter presents a novel and efficient framework, named EvoLP, to accurately predict the inference latency of models on edge devices. This predictor can evolve to achieve higher latency prediction precision during the network compression process. Experimental results demonstrate that EvoLP outperforms previous state-of-the-art approaches by being evaluated on three edge devices and four model variants. Moreover, when incorporated into a model compression framework, it effectively guides the compression process for higher model accuracy while satisfying strict latency constraints. We open source EvoLP at https://github.com/ntuliuteam/EvoLP.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/14/2607.09521v1-sageagent-a-self-evolving-agent-for-cost-aware-modality-acquisition-in-multimodal-survival-prediction",
+      "section": "quick",
+      "title_en": "SAGEAgent: A Self-Evolving Agent for Cost-Aware Modality Acquisition in Multimodal Survival Prediction",
+      "authors": "Chongyu Qu, Can Cui, Zhengyi Lu, Junchao Zhu, Tianyuan Yao, Junlin Guo, Juming Xiong, Yanfan Zhu, Yuechen Yang, Bennett A. Landman, Yuankai Huo",
+      "date": "2026-07-10",
+      "pdf": "https://arxiv.org/pdf/2607.09521v1",
+      "score": "7.0",
+      "evidence": "提出一种自进化的LLM临床代理",
+      "tldr": "多模态临床生存预测中，并非所有患者都需要完整诊断检查，但现有方法被动处理缺失数据，无法主动评估获取下一模态的侵入成本与增益。SAGEAgent 是一个自我进化的 LLM 智能体，通过临床工具转化数值预测、情景记忆检索相似案例、语义记忆积累决策模式，逐步推理患者诊断状态。在胶质瘤队列（TCGA-LGG, TCGA-GBM, BraTS）上，该方法以竞争性预测性能将平均模态获取负担削减 55%。这一方法实现了主动权衡，为节省临床资源、减少不必要检查提供了数据驱动的智能决策框架。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Does every cancer patient truly need a complete diagnostic workup for accurate survival prediction? In multimodal clinical oncology, diagnostic modalities follow a clinically mandated order of escalating burden -- from demographics collected at intake to genomic profiling requiring specialized tissue analysis. Current multimodal survival methods either assume all modalities are available or passively handle missing data, but none actively reason about whether acquiring the next modality is justified for a given patient along this ordered workflow. We formulate this as a sequential decision problem and propose SAGEAgent (Sequential Acquisition Guided by Experience), a self-evolving LLM-based clinical agent that decides which diagnostic modalities to acquire for each patient, balancing predictive accuracy against clinical invasiveness. SAGEAgent reasons about each patient's evolving diagnostic state through clinical tools that translate numerical predictions into text, an episodic memory that retrieves similar past cases, and a semantic memory that accumulates reusable decision patterns from experience. Experiments on a glioma cohort combining TCGA-LGG, TCGA-GBM, and BraTS with four diagnostic modalities demonstrate that SAGEAgent achieves competitive survival prediction accuracy while reducing average acquisition burden by 55%.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/14/2607.10159v1-unit-unleash-large-language-models-potential-for-graph-continual-learning",
+      "section": "quick",
+      "title_en": "UNIT: Unleash Large Language Models Potential for Graph Continual Learning",
+      "authors": "Tairan Huang, Yili Wang, Beibei Hu, Yiting Shi, Qiutong Li, Changlong He, Jianliang Gao",
+      "date": "2026-07-11",
+      "pdf": "https://arxiv.org/pdf/2607.10159v1",
+      "score": "7.0",
+      "evidence": "通过LLM微调实现图持续学习",
+      "tldr": "在流式多模态网络场景中，图数据不断到达，图持续学习至关重要。现有方法存在语义与结构建模分离、跨任务知识迁移不平衡问题。UNIT框架通过仅在第一任务微调大语言模型，结合不确定性感知锚生成和结构汇合建模，充分利用语义和拓扑信息。实验在多个数据集上达到最先进性能，证实了方法的有效性，为图持续学习研究提供了新视角。",
+      "tags": "query:self-evolve",
+      "abstract_en": "In real-world multimodal web scenarios, graph-structured data often arrives in a streaming manner, making graph continual learning a crucial paradigm for continuously modeling such evolving structures. However, existing graph continual learning methods still face two fundamental challenges. 1) semantic-structural separation, where the graph-based methods excel at modeling topological relationships but neglect deep semantics. 2) imbalanced knowledge transfer, where existing models fail to effectively leverage general knowledge gained from early tasks to benefit subsequent new tasks. To address above issues, we propose a novel framework, \\textbf{UN}leash Large Language Models PotentIal for Graph ConTinual Learning (UNIT). By fine-tuning large language model only on the first task, we bridge the distributional gap between the pre-trained LLM corpus and the target task dataset to enhance the adaptability of LLMs for graph-structured tasks. Meanwhile, we propose an uncertain-aware anchor generation mechanism to effectively preserve representative knowledge across tasks, avoiding the neglect of universal knowledge learned from previous tasks. Additionally, we introduce structural confluence modeling to explicitly integrates graph topology information into semantic information, enhancing the collaborative capabilities between semantic understanding and structural modeling. Extensive experiments demonstrate that our proposed method achieves state-of-the-art performance in the graph continual learning task.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/14/2607.11267v1-enhancing-llms-through-human-feedback-a-journey-towards-self-improvement",
+      "section": "quick",
+      "title_en": "Enhancing LLMs through human feedback: a journey towards self-improvement",
+      "authors": "Tatiana Pelc, Gila Kamhi, Asaf Avrahamy, Adi Fledel-Alon",
+      "date": "2026-07-13",
+      "pdf": "https://arxiv.org/pdf/2607.11267v1",
+      "score": "7.0",
+      "evidence": "通过人类反馈实现LLM的自我改进",
+      "tldr": "信息检索系统需快速适应变化，但传统RAG系统难以有效利用用户反馈实现自我改进。为此，本研究引入辅助反馈RAG系统，采用人在环中方式持续收集、分类和集成人类反馈，使主RAG系统迭代学习和进化。在三个涵盖通用与领域知识的基准数据集上，LLM-as-a-Judge评估证实了准确性、相关性和整体质量的显著提升。该框架不仅彰显了反馈驱动增强的变革潜力，也为自适应信息检索研究树立了先例，推动LLM走向自主优化。",
+      "tags": "query:self-evolve",
+      "abstract_en": "In the rapidly evolving landscape of information retrieval systems, the ability to adapt and improve through user feedback is paramount. This study introduces a novel methodology for refining the performance of a primary Retrieval Augmented Generation (RAG) system by strategically integrating an auxiliary feedback RAG system. By systematically harnessing human-generated feedback, the approach aims to enhance the accuracy, relevance, and overall quality of responses, driving the system towards self-improvement. Central to this methodology is a human-in-the-loop implementation, where user feedback is continuously collected, classified, and integrated into the inference workflow, enabling the system to learn and evolve iteratively. To validate the effectiveness of this approach, the study employs rigorous testing against three diverse benchmark datasets focused on general and custom domain knowledge, utilizing a LLM-as-a-Judge evaluation strategy. This comprehensive framework not only underscores the transformative potential of feedback-driven enhancements in RAG systems but also sets a precedent for future research in adaptive information retrieval technologies, marking a significant step in the journey towards autonomous refinement and optimization through user engagement.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
