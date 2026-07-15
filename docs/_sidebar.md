@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-15 <!--dpr-date:20260715-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/15/2607.10096v1-scaling-and-stabilizing-large-scale-embedding-based-retrieval" data-sidebar-item="{&quot;title&quot;: &quot;Scaling and Stabilizing Large-Scale Embedding-Based Retrieval&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.10096v1-scaling-and-stabilizing-large-scale-embedding-based-retrieval&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;self-evolve&quot;}], &quot;evidence&quot;: &quot;流水线处理向高容量骨干网络过渡时的模型演化&quot;}">Scaling and Stabilizing Large-Scale Embedding-Based Retrieval</a>
   * 2026-07-14 <!--dpr-date:20260714-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/14/2607.09063v1-evolp-self-evolving-latency-predictor-for-model-compression-in-real-time-edge-systems" data-sidebar-item="{&quot;title&quot;: &quot;EvoLP: Self-Evolving Latency Predictor for Model Compression in Real-Time Edge Systems&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.09063v1-evolp-self-evolving-latency-predictor-for-model-compression-in-real-time-edge-systems&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;self-evolve&quot;}], &quot;evidence&quot;: &quot;模型压缩中的自我进化延迟预测器&quot;}">EvoLP: Self-Evolving Latency Predictor for Model Compression in Real-Time Edge Systems</a>
