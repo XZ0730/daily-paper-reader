@@ -1,0 +1,1868 @@
+Title: Taxonomy Maintenance In The Wild Over Evolving Scholarly Data: Reliability, Efficiency, and Cost-Effectiveness
+
+URL Source: https://arxiv.org/pdf/2607.09149v1
+
+Published Time: Mon, 13 Jul 2026 00:38:15 GMT
+
+Number of Pages: 19
+
+Markdown Content:
+# Taxonomy Maintenance In The Wild Over Evolving Scholarly Data: Reliability, Efficiency, and Cost-Effectiveness 
+
+# Daomin Ji *
+
+RMIT University & The University of Queensland daomin.ji@student.rmit.edu.au 
+
+# Hui Luo 
+
+University of Wollongong huil@uow.edu.au 
+
+# Zhifeng Bao †
+
+The University of Queensland baozhifeng.cs@gmail.com 
+
+# Junhao Gan 
+
+The University of Melbourne junhao.gan@unimelb.edu.au 
+
+# Zi Huang 
+
+The University of Queensland huang@itee.uq.edu.au 
+
+## ABSTRACT 
+
+The rapid growth of scientific publications makes scholarly tax-onomies quickly obsolete. We study taxonomy maintenance in the wild , a new problem that moves beyond static construction by con-tinuously adapting taxonomies to evolving scholarly repositories, such as arXiv, for a given research topic. We propose GIST, a robust framework for maintaining evolving taxonomies. Unlike purely LLM-centric approaches, GIST grounds structure induc-tion in expert-curated evidence by extracting partial hierarchies from the “Related Work” sections of papers. It integrates these partial taxonomies into a unified global taxonomy in a geometric box-embedding space , where box containment encodes the inductive bias of is-a relations. To connect semantics with geometric structure, GIST learns a bidirectional mapping between word embeddings and box embeddings. For efficient incremental updates, GIST uses novelty-aware coreset selection to update the model with repre-sentative historical signals and new evidence, avoiding costly full retraining. To handle high-velocity paper streams under user-specific token budgets, GIST further combines a hypothesized concept gen-erator with a cost-effective evidence retrieval module. Experiments on real-world arXiv datasets show that GIST outperforms state-of-the-art baselines, improving Node F1 and Edge F1 by 11.0% and 13.1% over the strongest baseline while requiring only 9.6% of its runtime and 12.7% of its monetary cost. 
+
+ACM Reference Format: 
+
+Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang. 2018. Tax-onomy Maintenance In The Wild Over Evolving Scholarly Data: Relia-bility, Efficiency, and Cost-Effectiveness. In Proceedings of Make sure to enter the correct conference title from your rights confirmation email 
+
+> *
+
+This work was done when Daomin Ji was a visiting student at The University of Queensland. 
+
+> †
+
+Zhifeng Bao is the corresponding author. Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than the author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from permissions@acm.org. 
+
+Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+© 2018 Copyright held by the owner/author(s). Publication rights licensed to ACM. ACM ISBN 978-1-4503-XXXX-X/2018/06. . . $15.00 https://doi.org/XXXXXXX.XXXXXXX ...       
+
+> 𝑡 !
+> 𝑡 "
+> 𝑡 #
+> Taxonomy Of GraphRAG
+> L1: Indexing Phase L1: Retrieval Phase L1: Generation Phase
+> L2: External
+> Linking
+> L2: Text -to -
+> Graph
+> L3: Open
+> Extraction
+> L3: LLM
+> Extraction
+> L3: Traversal
+> L2: Global
+> Retrieval
+> L2: Local
+> Retrieval
+> L3: Path
+> Finding
+> L3:Graph
+> Clustering
+> L3: Multi -Level
+> Aggregation
+> L2: Hard
+> Promptin g
+> L2: Soft
+> Promptin g
+> L3: Flatten L3: Latent
+> Fusion
+> L3:Natural
+> Language
+> L3: Entity
+> Mapping
+> 𝑡 !: Expansion 𝑡 ": Abstraction
+> L2: Hybrid
+> Retrieval
+> L3: Vector
+> Fusio n
+> 𝑡 #: Specialization
+
+Figure 1: The rapid development of research topic GraphRAG 
+
+(Conference acronym ’XX). ACM, New York, NY, USA, 19 pages. https: //doi.org/XXXXXXX.XXXXXXX 
+
+## 1 INTRODUCTION 
+
+Taxonomies provide a structured abstraction of domain knowledge by organizing concepts into hierarchical “is-a” relations, and have long served as foundational infrastructure in data management for tasks such as knowledge base construction and logical inference [ 7,61 ], semantic indexing and query reformulation [ 18 , 21 ], Text-to-SQL translation [ 55 , 56 ], and product catalog management [ 28 , 48 ]. In this work, we focus on topic-centric taxonomies over schol-arly data—fine-grained hierarchies tailored to a specific research topic—that organize knowledge from high-level problems and method-ological families down to concrete design choices. A critical char-acteristic of scholarly taxonomies is their volatility : Unlike tax-onomies in general-purpose knowledge bases, whose conceptual hierarchies evolve relatively gradually, the scientific landscape for certain research topics evolves rapidly, as illustrated in Example 1. Consequently, existing taxonomies can quickly become obsolete, potentially impairing the key scholarly data management workflows: (1) Reviewer Assignment : Outdated classification schemes fail to capture emerging sub-fields, leading to misclassified papers and mis-matched reviewer assignments [ 3]; (2) Information Retrieval : Digital libraries relying on static indices, such as ACM Digital Library [ 1]and IEEE Xplore [ 2], cannot effectively support semantic navigation for newly coined terminology, creating gaps between user queries and relevant literature; (3) Conference Organization [12 , 63 ]: confer-ence programs fail to structurally reflect the shifting distribution of research interests structurally, resulting in coarse-grained sessions. EXAMPLE 1. Consider Graph Retrieval-Augmented Generation (GraphRAG), a rapidly evolving domain where researchers cus-tomize LLMs by organizing external knowledge as graphs, retrieving graph-structured evidence, and integrating it into generation. Since Microsoft introduced the initial GraphRAG method in 2024 [ 20 ], the arXiv:2607.09149v1 [cs.DB] 10 Jul 2026 Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang 
+
+field has expanded rapidly. As of January 2026, over 730 papers on arXiv leverage or discuss this paradigm. As the literature evolves, the taxonomy may undergo the following structural refinements at different timestamps: (1) expansion (at 𝑡 1), which introduces a new node under an existing non-leaf category (e.g., adding External Linking as a sub-category under Indexing Phase, parallel to Text-to-Graph); (2) specialization (at 𝑡 2), which splits a coarse concept into finer-grained variants (e.g., dividing Global Retrieval into Graph Clustering and Multi-level Aggregation); and (3) abstraction (at 
+
+𝑡 3), which adds an intermediate high-level parent to unify multiple existing paradigms (e.g., adding Hard Prompting under the original parent Generation Phase to unify Flattening and Natural Language). 
+
+This motivates the problem of maintaining topic-centric tax-onomies over large, evolving scholarly repository (e.g., arXiv). Given a target research topic and an evolving scholarly repository that re-flects the shifting research landscape, the goal is to automatically construct and incrementally adapt a taxonomy, ensuring it evolves alongside the underlying literature. Most existing scholarly taxonomy construction methods [ 29 , 33 ]are designed for small, static corpora and cannot scale to large, dy-namic settings due to three key limitations: (1) They heavily rely on LLMs not only to extract salient signals but also reason about hierar-chical structure. Consequently, they are vulnerable to hallucination: without reliable textual cues, LLM-inferred hierarchies often contain plausible yet unsupported concepts or relations. Our experiments (Sec. 7.1) confirm this, with Soft F1 scores below 65% for nodes and 45% for edges. (2) They lack native support for continual up-dates. With new arrivals, one must either re-infer the taxonomy from scratch over all accumulated documents, or build a delta taxonomy from the new batch and merge it via entity resolution [ 64 ], which may fix naming inconsistencies but often fails to resolve relational conflicts, causing drift (e.g., cycles or duplicated branches). As evi-denced in Sec. 7.1, reconstruction from scratch increases monetary and time costs by up to 3.9 ×, while naive incremental update de-grades performance by 14%–18%. In Example 1, a single research topic typically can involve hundreds or thousands of relevant papers, making full-corpus processing over all relevant papers infeasible. To guide our method design, we identify three key desiderata. D1: Reliable structure induction. It should infer taxonomic concepts and relations from reliable signals (rather than unconstrained LLM reasoning) to reduce hallucination. D2: Efficient incremental up-dates. Given the continuous arrival of new papers, it should support efficient incremental updates that incorporate emerging knowledge without expensive recomputation. D3: Cost-effective evidence ac-quisition. Under a fixed budget (e.g., token or monetary budget), it should selectively process the most informative documents to max-imize evidence utility per unit cost. To meet the above desiderata, we develop GIST, a Geometric-I nferred, Self-refining Taxonomy maintenance framework (Fig. 2). Our Contributions include: 
+
+• To satisfy D1 , GIST derives taxonomic concepts and relations from expert-curated textual cues by using LLMs primarily as 
+
+structure extractors : it distills topic-relevant partial taxonomies from the Related Work (or equivalent) sections of retrieved papers where authors explicitly organize and categorize prior work, and integrates these high-precision yet partial structures into a unified global taxonomy, mitigating hallucinated nodes and edges. This 
+
+taxonomy integration is formulated in a geometric box-embedding Hypothesized Concepts  
+
+> Global
+> Retrieval
+> Retrieval
+> Phas e
+> Soft
+> Retrieva lExternal
+> Linking
+> Indexing
+> Phas e
+> Text -to -
+> Grap h
+> Indexing
+> Phras e
+> Graph
+> RA G
+> Retrieval
+> Phrase
+> Generation
+> Phrase
+> Global Taxonomy
+> at last iteration
+> External
+> Linking
+> Text -to -
+> Grap h
+> Indexing
+> Phras e
+> Graph
+> RA G
+> Retrieval
+> Phrase
+> Generation
+> Phrase
+> Hard
+> Prompting
+> Soft
+> Promptin g
+
+⇔           
+
+> Cost -effective
+> Evidence Retrieval
+> (Sec. 5)
+> Geometric -inferred
+> Taxonomy Integration
+> (Sec. 3)
+> Probabilistic
+> Hypothesized Concept
+> Generation ( Sec. 4 )
+> Extracted Partial Taxonomies
+> Global Taxonomy at current iteration
+> “Graph RAG” 𝑡 =0
+> Evolving Scholarly
+> Repository
+> Research Topic
+> 𝑡 >0
+> Incremental Semantic Index
+> for downstream tasks (Sec.6)
+> DAG Structure Geometric Box Embedding
+> External
+> Linkin g
+> Text -to -Graph
+> Indexing
+> Phrase Generation Phrase
+> GraphRAG
+> Soft
+> Prompting Hard
+> Prompting
+> Retrieval
+> Phrase
+
+Figure 2: The workflow of the proposed GIST 
+
+space, where box containment encodes inductive bias for “is-a” relations. To bridge semantic and geometric spaces, GIST learns a self-supervised bidirectional word–box mapping model from the extracted partial taxonomies and applies reliability-aware filtering to retain high-confidence signals. (Sec. 3.1-3.2) 
+
+• With this mapping model, GIST avoids redundant reprocessing of historical content by transforming only novel concepts from newly extracted partial taxonomies into geometric boxes. To sup-port D2 and continually adapt the mapping model, we introduce a novelty-aware coreset selection strategy. This strategy updates the bidirectional mapping model using only a representative subset of historical signals alongside new evidence, enabling efficient as-similation of emerging concepts without full retraining. (Sec. 3.3) 
+
+• To support D3 , GIST introduces two tightly coupled modules: (1) Instead of using only the input topic keywords or existing taxonomy concepts as search signals—which can be overly broad and often retrieve redundant evidence—we propose a hypothesized concept generation module that predicts likely emerging concepts for the next iteration (Sec. 4). (2) Given a user-specified token budget, we develop a cost-effective evidence retrieval module that, under a user-specified token budget, aims to select an optimal query set of hypothesized concepts and retrieve (and process) only the most informative newly arrived papers into partial taxonomies. 
+
+• We build an incremental semantic index atop GIST to enhance downstream paper search accuracy. This index is also maintained incrementally—mapping only newly arrived papers to the evolv-ing taxonomy—thereby avoiding costly full repository rescanning to rebuild the index. (Sec. 6) 
+
+• Experiments on the real-world arXiv scholarly corpus across di-verse topics show that GIST consistently constructs taxonomies with higher coverage and structural quality than the baselines. In particular, GIST achieves average relative improvements of 11.0% and 13.1% in Node Soft F1 and Edge Soft F1 over the strongest baseline, while requiring only 9.6% of its runtime and 12.7% of its monetary cost; the incremental update further delivers a 3.1 ×
+
+speedup over full retraining. 
+
+## 2 PROBLEM AND SOLUTION OVERVIEW 2.1 Problem Formulation 
+
+Concept and Taxonomy. A scholarly taxonomy is a rooted directed acyclic graph (DAG) T = (V , E) , where each node 𝑣 ∈ V is a con-cept —a named semantic category used to classify documents within the target topic, represented by a textual label. Each directed edge Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+(𝑝, 𝑞 ) ∈ E encodes a hypernym–hyponym (parent–child) relation, meaning that 𝑞 is a sub-category of 𝑝 . The taxonomy is rooted at a single concept 𝑟 representing the overarching research topic. 
+
+Scholarly Data Repository. The scholarly data repository is an evolving set of documents, e.g., research papers, denoted at time 
+
+𝑡 as P𝑡 = {𝑑 1, 𝑑 2, . . . , 𝑑 | P 𝑡 | }. Each document 𝑑 𝑖 comprises textual content (e.g., title, abstract, and full text). Crucially, we adopt an 
+
+open-world setting (e.g., arXiv), where uncurated and continuously incoming documents yield a repository that mixes topic-relevant documents with off-topic or otherwise irrelevant documents. The continuous evolution of the repository necessitates dynamic structural refinement of the taxonomy: 
+
+Structural Refinement. We classify structural refinement into three types based on how a new concept relates to the current hierarchy: 
+
+• Expansion Refinement occurs when a novel paradigm emerges at the same hierarchical level as existing categories under a common parent. It is realized by adding a new sibling node to form a parallel (sub)-branch. 
+
+• Abstraction Refinement occurs when a set of sibling nodes nat-urally suggests a higher-level shared category. It is realized by inserting an intermediate node to group these siblings. 
+
+• Specialization Refinement occurs when an existing leaf node becomes too coarse as the literature grows. It is realized by intro-ducing finer-grained child nodes to increase granularity. Based on the preliminaries, we define our problem as follows: DEFINITION 1 ( TAXONOMY MAINTENANCE IN THE WILD ). 
+
+Given an input research topic 𝑟 and an evolving repository P𝑡 , the problem of taxonomy maintenance in the wild is twofold: 
+
+• Initial Construction ( 𝑡 = 0): Construct an initial taxonomy T0
+
+rooted at 𝑟 using the initial corpus snapshot P0, establishing the baseline semantic structure of the domain. 
+
+• Continuous Evolution ( 𝑡 > 0): For each subsequent timestamp, refine T𝑡 in light of newly arriving scientific documents ΔP𝑡 +1 =
+
+P𝑡 +1 \ P 𝑡 by applying structural refinements (e.g., abstraction, specialization, and expansion), yielding an updated taxonomy 
+
+T𝑡 +1 that remains consistent with the evolving P𝑡 .
+
+## 2.2 Solution Overview 
+
+To address this challenge, we propose GIST, a G eometric- Inferred and Self-improving Taxonomy Maintenance framework (Fig. 2) that operates in a continuous three-module cycle: 
+
+• Cost-effective Evidence Retrieval. Guided by the input research topic for initialization ( 𝑡 = 0) and, for subsequent iterations ( 𝑡 >
+
+0), by the hypothesized concepts generated by the Probabilistic Hypothesized Concept Generation module, it employs a novel 
+
+utility-driven, budget-constrained planner to maximize evidence utility under a user-specified token budget (and corresponding monetary cost): it selects (i) which hypotheses to instantiate as retrieval queries and (ii) which retrieved papers to parse, and then applies an LLM-guided extractor to distill partial taxonomies from their Related Work (or equivalent) sections. (Sec. 5). 
+
+• Geometric-inferred Taxonomy Integration. This module in-tegrates newly extracted partial taxonomies with the global tax-onomy from iteration 𝑡 − 1, yielding the updated taxonomy at iteration 𝑡 . We propose a bidirectional word–box mapping model that embeds concepts in a geometric box space and leverages con-tainment relationships to guide robust taxonomy integration. The model is further designed for reliable and efficient self-supervised training via a dual-objective data selection strategy. (Sec. 3) 
+
+• Probabilistic Hypothesized Concept Generation. This module forecasts likely structural refinement directions (e.g., specializa-tion, abstraction, and expansion) in the current taxonomy T𝑡 and generates corresponding hypothesized concepts as query candi-dates for the next iteration. We instantiate this step with a geomet-ric concept emergence model that leverages the inductive bias of box embeddings: unoccupied regions (geometric “gaps”) within a parent concept’s embedding box indicate latent space where emerging concepts are likely to reside. (Sec. 4) 
+
+Remark: While we instantiate GIST for evolving scholarly data, the framework is broadly applicable to other evolving hierarchical knowledge structures whose schema itself drifts over time, includ-ing product catalogs, biomedical concept hierarchies, and domain-specific knowledge bases. Adapting to a new domain requires changes only at the evidence-extraction stage: the regex section detector and Related-Work prompt would be replaced by a domain-specific extrac-tor (e.g., a category-attribute parser for e-commerce catalogs, or an ontology-aligned span extractor for biomedical texts). The geomet-ric integration, hypothesized concept generation, and budget-aware retrieval modules are domain-agnostic and require no modification. 
+
+## 3 GEOMETRIC-INFERRED TAXONOMY INTEGRATION 
+
+Merging partial taxonomies with the global taxonomy presents chal-lenges beyond simple name resolution. Entity Resolution meth-ods [ 22 , 26 ] alone cannot resolve structural conflicts—such as gran-ularity mismatches or cycles—often resulting in structural incoher-ence. Consequently, we formulate this integration problem within a geometric box-embedding space , utilizing geometric containment as a strict inductive bias for hierarchy construction (Sec.3.1). To bridge the semantic and geometric spaces, we propose a bidirectional word– box mapping model (Sec.3.2). Crucially, to address the challenges of continual learning and noisy training signals, we employ a self-supervised dual-objective training scheme that selectively filters high-quality signals for robustness while retaining a representative historical set for efficient incremental updates (Sec. 3.3). 
+
+## 3.1 Box Representations for Taxonomy Structures 
+
+In the geometric box-embedding space [ 38 , 72 ], each concept 𝑣 ∈ V 
+
+is encoded as an axis-aligned hyper-rectangle (hereafter referred to as a box ) in a 𝑑 -dimensional Euclidean space, as illustrated in the right panel of Fig. 3. Formally, we adopt a center-offset parameterization: 
+
+𝐵 𝑣 = 𝐵 (c𝑣 , b𝑣 ) =
+
+n
+
+x ∈ R𝑑 𝑥 (𝑘 ) − 𝑐 (𝑘 ) 
+
+> 𝑣
+
+≤ 𝑏 (𝑘 ) 
+
+> 𝑣
+
+, ∀𝑘 ∈ { 1, . . . , 𝑑 }
+
+o
+
+.
+
+Here, c𝑣 ∈ R𝑑 denotes the center of the box, and b𝑣 ∈ R𝑑  
+
+> ≥0
+
+is the non-negative offset vector determining its spatial extent along each dimension. 𝑑 is the dimensionality of the box-embedding space, and 
+
+𝑘 indexes each coordinate axis from 1 to 𝑑 .In the geometric space, hypernym-hyponym relations are en-coded via containment constraints. Specifically, for any directed edge (𝑝, 𝑞 ) ∈ 𝐸 , the parent concept 𝑝 must spatially contain its child Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang Concept          
+
+> Phrase 𝑣
+> BERT
+> Encode r
+> Word
+> Embedding 𝒘 !MLP
+> (Word →Box, Φ"#$ )
+> Box
+> Parameters
+> (𝒄 ,𝒃 )
+> MLP
+> (Box →Word, Φ"#$ )
+> Reconstructed
+> Word Embedding *𝒘 𝒗
+> Semantic Space
+> (Concept & Word Embeddings)
+> Transformation Layers
+> (MLPs)
+> Geometric Space
+> (Box Embeddings)
+> 𝒄
+> 𝒃
+> Box 𝐵 !(𝒄 ,𝒃 )
+> Circle -consistency Loss ℒ&'&
+
+Figure 3: Bidirectional Word–Box Mapping Model. 
+
+concept 𝑞 (i.e., 𝐵 𝑝 ⊇ 𝐵 𝑞 ). For example, in Fig. 2, the box correspond-ing to Generation Phrase must enclose those of its child concepts, including Hard Prompting and Soft Prompting .
+
+## 3.2 Bidirectional Word–Box Mapping Model 
+
+3.2.1 Model Architecture. In order to bridge the semantic space and geometric (box embedding) space, we propose a bidirectional word–box mapping model that jointly learns two complementary transformations, as illustrated in Fig. 3: 
+
+• Word →Box ( ΦW2B ): Given a concept 𝑣 , a frozen pretrained en-coder (e.g., BERT [ 17 ]) first converts it into a word embedding 
+
+w. To capture the non-linear transformation from the semantic space to the geometric space, we employ a multilayer perceptron (MLP) that maps w to a joint latent representation of dimension 
+
+2𝑑 . We split this output to obtain the center c and a offset vector b:
+
+[c; b] = MLP enc (w) where [· ; ·] denotes vector concatenation. 
+
+• Box →Word( ΦB2W ): Similarly, a second MLP implements the reverse transformation by projecting a box embedding 𝐵 (c, b)
+
+back into a continuous query embedding in the semantic space. We concatenate the center and offset vectors to form a unified geometric feature, which is then mapped to a semantic vector 𝑤 
+
+via a decoder MLP: w = MLP dec ([ c; b]) .
+
+3.2.2 Training Objectives. The model is trained using self-supervised signals derived from the extracted parent-child relations. We opti-mize a joint objective consisting of three loss functions: 
+
+• Geometric Containment Loss Lcont . To enforce hierarchy, we require that the parent box 𝐵 𝑝 spatially encapsulates its child 𝐵 𝑞 .We quantify this by measuring the volume of the child covered by the parent: cov (𝐵 𝑝 , 𝐵 𝑞 ) = Vol (𝐵 𝑝 ∩𝐵 𝑞 )  
+
+> Vol (𝐵 𝑞 )
+
+∈ [ 0, 1], where Vol (𝐵 ) =
+
+Î𝑑 𝑘 =1 2𝑏 (𝑘 ) . The loss is minimized when containment is complete: 
+
+Lcont (𝑝, 𝑞 ) = 1 − cov (𝐵 𝑝 , 𝐵 𝑞 ).
+
+• Cycle-Consistency Loss Lcycle . Since we lack ground-truth geo-metric coordinates to supervise the inverse ΦB2W mapping directly, we adopt a self-supervised cycle-consistency approach [ 77 ]. We penalize the reconstruction error between the original word em-bedding 𝑤 and its round-trip projection through the box space: 
+
+Lcycle (𝑣 ) = 12
+
+
+
+1 − cos  ΦB2W (ΦW2B (𝑤 )) , 𝑤 
+
+. This ensures that the learned geometric representations retain high semantic fidelity to the input space. 
+
+• Volume Regularization Loss Lvol . To avoid degenerate solutions where box volumes collapse to zero (leading to trivial contain-ment), we enforce a minimum-volume constraint by penalizing boxes whose log-volume falls below a threshold 𝑉 min : Lvol =
+
+> 1
+> | V |
+
+Í𝑣 ∈ V max 
+
+
+
+0, 𝑉 min − Vol (𝐵 𝑣 )
+
+
+
+.
+
+Overall Objective. The total loss is a weighted sum: L = Lcont +Lcycle + 𝜆 vol Lvol , where 𝜆 vol balances the regularization strength against the primary structural and semantic objectives. 
+
+## 3.3 Robust and Efficient Incremental Training 
+
+To optimize these objectives without manual annotation, we derive self-supervised signals from parent–child relations in the extracted partial taxonomies. However, the continuous influx of papers in-troduces a learning dilemma : Updating the model is necessary to capture structural changes, but doing so without historical data can cause catastrophic forgetting [ 31 ]; in contrast, retraining on the en-tire dataset is computationally infeasible. This process is further complicated by inherent noise in the self-supervision signals, stem-ming from three sources: (1) Subjectivity , arising from divergent author perspectives and terminology; (2) Temporal Drift , where the ground-truth structure itself evolves (e.g., the emergence of Tra-ditional Methods in Example 1); (3) Extraction Errors , caused by inevitable inaccuracies in LLM processing. To address these issues, GIST introduces a dual-objective data selection strategy designed for efficient and robust incremental train-ing. This strategy selects two types of data: 1) New data (Dnew ). A Reliability-Aware Graph Selection retains only the most reliable relation pairs, thereby reducing noises in the supervision signal. 2) 
+
+Historical data (Dold ). A novelty-aware coreset selection mecha-nism selects a compact yet representative subset of historical training instances, preserving accumulated knowledge without incurring the cost of retraining from scratch. 
+
+3.3.1 Reliability-Aware Graph Selection ( Dnew ). To distill high-quality signals from Dnew , we construct a weighted candidate graph from extracted partial taxonomies and then select a subset of high-support relations that ensures broad concept participation. 
+
+Graph construction from partial taxonomies. To mitigate termi-nological heterogeneity, we employ Entity Resolution (ER) [ 13 ] to normalize diverse concept names into canonical identifiers. This process consolidates synonyms, such as Cardinality Estimation and 
+
+Selectivity Estimation , via a blocking-and-matching pipeline, in-stantiated using either deep learning models [ 36 , 64 ] or lightweight LLMs [ 19 ]. We then aggregate the normalized parent–child relations into a weighted candidate concept graph Gcand = (V cand , Ecand ),where Vcand denotes the set of unique candidate concepts. For each directed edge (𝑢, 𝑣 ) ∈ E cand , we assign a support weight 𝑤 𝑢𝑣 equal to the number of unique source papers that contain this relation. Larger 
+
+𝑤 𝑢𝑣 indicates stronger corroboration across independent evidence sources and is used as a proxy for relation reliability. 
+
+Coverage-Reliability Selection via Submodular Maximization. 
+
+Given the set of candidate relations Ecand , we aim to select a subset 
+
+Drel ⊆ E cand to serve as reliable supervision signals. This selec-tion is constrained by a cardinality budget and must balance two objectives: (i) Coverage , ensuring broad semantic representation by maximizing the number of unique participating concepts; and (ii) Reliability , prioritizing relations with strong support weights. We formulate this trade-off as a constrained maximization prob-lem. Let Cov (D rel ) denote the set of unique concepts covered by the selected relations. We define the normalized coverage score as 𝑓 cov (D rel ) = |Cov (D rel )|/|V cand |. Then, we quantify reliability using log-normalized edge weights to mitigate the effect of heavy-tailed distributions. Defining the normalized weight ˜𝑤 𝑢𝑣 = log (1 +
+
+𝑤 𝑢𝑣 )/ log (1 + 𝑤 max ), the reliability score is given by 𝑓 rel (D rel ) =Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+> 1
+> 𝐾
+
+Í(𝑢,𝑣 ) ∈ D rel ˜𝑤 𝑢𝑣 . The overall optimization problem is: 
+
+max  
+
+> Drel ⊆ E cand
+
+𝐹 (D rel ) = 𝑓 cov (D rel ) + 𝜆 rel 𝑓 rel (D rel )
+
+s.t. |D rel | ≤ 𝐾 . (1) where 𝐾 = ⌊𝜂 rel |D new |⌋ is the budget determined by the retention fraction 𝜂 rel , and 𝜆 rel is a hyperparameter balancing the two terms. 
+
+Greedy Optimization and Guarantee. The objective function 𝐹 
+
+is non-negative, monotone, and submodular, as it combines a cov-erage term exhibiting diminishing marginal returns with a strictly modular (linear) reliability term. (We provide a formal proof in the Appendix A.1.) Leveraging these properties, we employ a standard greedy algorithm that iteratively selects the edge 𝑒 ∗ maximizing the marginal gain Δ𝐹 (𝑒 | D rel ), which is computationally efficient and theoretically grounded, providing a (1 − 1/𝑒 )-approximation guarantee to the optimal solution [47]. 
+
+Remark. Reliability-aware filtering grounds GIST’s robustness in 
+
+cross-paper consensus rather than any single extraction signal, oper-ating along two complementary axes. Synchronically , key concepts and relations within a domain are typically attested by multiple pa-pers, so missing detections (e.g., papers without an explicit Related Work section) and noisy extractions are absorbed by corroborating evidence: uncorroborated relations are downweighted through the support weights 𝑤 𝑢𝑣 , while well-supported structures are preserved. 
+
+Diachronically , the same principle yields a self-correcting mecha-nism for niche subfields, where low-support branches may reflect either idiosyncratic framing by a single author or the genuine emer-gence of a novel domain. The continuous update mechanism resolves this ambiguity a posteriori : branches the community adopts accu-mulate cross-paper support and their 𝑤 𝑢𝑣 grows over time, ensuring survival under selection, while unreinforced branches remain low-weight and are gradually displaced. The filter therefore neither com-mits prematurely to any single author’s framing nor over-penalizes emerging structure, adapting instead to the empirical distribution of cross-paper agreement as the repository grows. 
+
+3.3.2 Incremental Model Update via Novelty-Aware Coreset Selection ( D𝑜𝑙𝑑 ). To enable continual refinement of the dual map-ping model without full retraining, we draw inspiration from prior research on coreset selection [ 9, 16 , 67 ]. At each iteration, the full historical dataset Dold is approximated by a compact, weighted core-set Dcore , defined as a subset of size |D core | = 𝜂 core |D old |, where 
+
+𝜂 core ∈ ( 0, 1] is a hyperparameter controlling the compression ratio. This coreset is then utilized for subsequent training. 
+
+Primary Goal: Loss Preservation. The primary goal of the coreset adheres to the principles of Empirical Risk (Loss) Minimization (ERM) [ 46 ], which aims to select Dcore with weights {𝑤 ′ 
+
+> 𝑒
+
+}𝑒 ∈ D core 
+
+such that its weighted empirical risk ˜Lold (𝜃 ) = Í𝑒 ∈ D core 𝑤 ′ 
+
+> 𝑒
+
+closely approximates the full historical risk Lold (𝜃 ):
+
+min    
+
+> Dcore ⊂ D old ,{𝑤 ′
+> 𝑒 }
+
+Lold (𝜃 ) − ∑︁  
+
+> 𝑒 ∈ D core
+
+𝑤 ′ 
+
+> 𝑒
+
+ℓ (𝑒 ; 𝜃 ) (2) where 𝑤 ′ 
+
+> 𝑒
+
+≥ 0 (with Í 𝑤 ′ 
+
+> 𝑒
+
+= 1) denotes the importance weight assigned to each selected instance to mirror the full-data objective. The key issue is thus to choose an optimal sampling distribution over 
+
+Dold from which to construct Dcore and assign the weights {𝑤 ′ 
+
+> 𝑒
+
+}.
+
+Complementary Goal: Novelty for Dynamic Data. Traditional coreset selection assumes a static dataset, ignoring potential re-dundancy between the historical coreset and incoming data Dnew .We address this by enforcing a novelty constraint: retained histor-ical instances must be complementary to the new batch . To quan-tify this, we define a novelty score 𝑛 (𝑒 ) for each historical edge 
+
+𝑒 = (𝑝, 𝑞 ) ∈ D old . First, we represent each edge as the concatenation of its parent and child word embeddings ( w𝑝 , w𝑞 ): r(𝑒 ) = [w𝑝 ; w𝑞 ].
+
+We then measure the maximum similarity of 𝑒 to the incoming batch 
+
+Dnew : 𝑠 (𝑒 ) = max 𝑒 ′ ∈ D new cos (r(𝑒 ), r(𝑒 ′)) . The final novelty score is 𝑛 (𝑒 ) = 1 − 𝑠 (𝑒 ), which prioritizes historical instances that are semantically distinct from the new data. 
+
+Novelty-Aware Coreset Selection. Based on the above idea, we formulate coreset selection as an optimization problem to find a sampling distribution that balances fidelity to the historical risk (ΠERM ) with novelty relative to the new data. 
+
+max    
+
+> Πcore ∈Δ( D old )
+
+−KL (Πcore ∥ ΠERM ) + 𝜆 nov E𝑒 ∼Πcore [𝑛 (𝑒 )] , (3) where Δ(D old ) = {Πcore : Dold → [ 0, 1] | Í𝑒 Πcore (𝑒 ) = 1} de-notes the set of all valid probability distributions over the Dold . Here, 
+
+ΠERM represents the loss distribution at the previous timestamp, de-rived directly from the preceding training stage. KL (· ∥ ·) denotes the Kullback–Leibler divergence, and 𝜆 nov is a hyperparameter con-trolling the trade-off between loss preservation and novelty. To derive the optimal sampling distribution Πcore and the corre-sponding importance weights 𝑤 ′ 
+
+> 𝑒
+
+, we establish Propositions 1 and 2. Detailed proofs are provided in Appendix A.2 and A.3. PROPOSITION 1 (O PTIMAL SAMPLING DISTRIBUTION ). The unique sampling distribution Π∗ 
+
+> core
+
+that maximizes the novelty-aware objective in Eq. 3 is given by Π∗ 
+
+> core
+
+(𝑒 ) = ΠERM (𝑒 ) exp {𝜆 nov 𝑛 (𝑒 ) } Í𝑒 ′ ΠERM (𝑒 ′ ) exp {𝜆 nov 𝑛 (𝑒 ′ ) } .
+
+PROPOSITION 2 (O PTIMAL CORESET WEIGHTING ). To en-sure that the coreset risk ˜Lold (𝜃 ) is a consistent estimator of the full historical risk Lold (𝜃 ), each instance 𝑒 ∈ D core is assigned a normalized inverse-probability weight 𝑤 ′ 
+
+> 𝑒
+
+= 1/Π∗       
+
+> core (𝑒 )
+> Í𝑒 𝑗 ∈D core 1/Π∗
+> core (𝑒 𝑗 )
+
+.
+
+## 3.4 Taxonomy Integration 
+
+As presented in Alg. 1, we construct the unified global taxonomy 
+
+T𝑡 by merging concepts from the previous state T𝑡 −1 with novel concepts from the partial taxonomies at timestamp 𝑡 . Specifically, we form a unified concept set V𝑡 = V (T 𝑡 −1) ∪ Ð𝑛 𝑖 =1 V (T 𝑝𝑎𝑟,𝑖 ) and project each concept 𝑣 ∈ V 𝑡 into the box-embedding space via 
+
+𝐵 𝑣 = ΦW2B (w𝑣 ) (Lines 1–2). We then infer candidate hypernym– hyponym relations by evaluating geometric containment for each ordered pair of concepts (Lines 4–9). Concretely, we compute the containment score 𝑠 𝑢 →𝑣 = cov (𝐵 𝑢 , 𝐵 𝑣 ) and introduce a candidate edge 𝑢 → 𝑣 only if 𝑠 𝑢 →𝑣 ≥ 𝜏 (Lines 5–7), where 𝜏 is a predefined threshold (set to 0.9 by default). To ensure that the candidate relation set is acyclic under approximate containment scores, we retain only edges directed from larger to smaller boxes, i.e., Vol (𝐵 𝑢 ) > Vol (𝐵 𝑣 )
+
+(Line 6). Finally, since containment is transitive (e.g., 𝐵 𝑐 ⊂ 𝐵 𝑏 ⊂ 𝐵 𝑎 ), we apply transitive reduction to remove redundant indirect relations and obtain a minimal, consistent hierarchy T𝑡 (Line 10). 
+
+## 4 PROBABILISTIC HYPOTHESIZED CONCEPT GENERATION 
+
+Based on the global taxonomy T𝑡 , we propose a Probabilistic Hypoth-esized Concept Generation module that produces a set of hypothe-sized concepts for iteration 𝑡 + 1. These hypotheses serve as query candidates for the subsequent evidence retrieval phase: by targeting likely emerging topics, they provide more informative search signals Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang 
+
+Algorithm 1 Taxonomy Integration                                                                               
+
+> Require: Previous global taxonomy T𝑡 −1;partial taxonomies
+> { T 𝑝𝑎𝑟, 1, . . . , T𝑝𝑎𝑟,𝑛 };ΦW2B ; containment threshold 𝜏 .
+> Ensure: Updated global taxonomy T𝑡 .
+> 1: Construct the unified concept set V𝑡 ← V ( T 𝑡 −1) ∪ Ð𝑘 𝑖 =1V ( T 𝑖 ).
+> 2: For each 𝑣 ∈ V 𝑡 , compute its box embedding 𝐵 𝑣 ←ΦW2B (w𝑣 ).
+> 3: Initialize the candidate edge set Ecand ← ∅ .
+> 4: for each ordered pair (𝑢, 𝑣 ) ∈ V 𝑡 × V 𝑡 ,𝑢 ≠𝑣 do
+> 5: Compute the geometric containment score 𝑠 𝑢 →𝑣 ←cov (𝐵 𝑢 , 𝐵 𝑣 ).
+> 6: if 𝑠 𝑢 →𝑣 ≥𝜏 and Vol (𝐵 𝑢 )>Vol (𝐵 𝑣 )then
+> 7: Add (𝑢, 𝑣 )to Ecand .
+> 8: end if
+> 9: end for
+> 10: Apply transitive reduction to obtain a minimal edge set Efinal ←
+> TransitiveReduction ( V 𝑡 ,Ecand ).
+> 11: return T𝑡 ← ( V 𝑡 ,Efinal ).
+
+than reusing existing taxonomy concepts, enabling cost-effective retrieval . To this end, we introduce a Geometric Concept Emergence Model grounded in the geometric box embedding space, where con-tainment constraints act as an intrinsic inductive bias for concept emergence under different structural refinements (Sec. 4.1). Finally, we enable efficient online updates via a self-supervised, lightweight Method-of-Moments estimator that infers parameters directly from the taxonomy structure (Sec. 4.2). 
+
+## 4.1 Geometric Concept Emergence Model 
+
+Given the taxonomy at iteration 𝑡 , our goal is to estimate 𝑃 (𝑣 | T 𝑡 )—the probability that a new concept 𝑣 ∈ ΔV𝑡 +1 = V𝑡 +1 \ V 𝑡 emerges at 𝑡 +1. We model emergence as two coupled decisions: 
+
+• Structural Refinement Context Selection. We first select a struc-tural refinement context 𝐶 ∈ C(T 𝑡 ), which specifies (i) an anchor (parent) node 𝑝 together with (when applicable) the subset of its children involved, and (ii) the refinement operator to apply. For example, at 𝑡 3 in Example 1, the structural refinement context corresponds to applying the refinement operator abstraction to the anchor parent node Generation Phrase and its existing children 
+
+Flattening and Natural Language .
+
+• Context-aware Generation. Conditioned on the selected context 
+
+𝐶 , we then generate the specific emerging concept 𝑣 that is com-patible with the geometric constraints implied by 𝐶 .Thus, we introduce a latent random variable C ranging over the refinement-context set C(T 𝑡 ), and factorize the concept emergence 
+
+probability by marginalizing over all possible contexts: 𝑃 (𝑣 | T 𝑡 ) =
+
+Í𝐶 ∈C( T 𝑡 ) 𝑃 (𝑣 | C = 𝐶 ) 𝑃 (C = 𝐶 | T 𝑡 ) . Moreover, for any candidate concept 𝑣 , there is at most one compatible context 𝐶 such that 𝑃 (𝑣 |C = 𝐶 ) > 0. For instance, Local Retrieval can arise under the 
+
+Retrieval Phase but is incompatible with the Indexing Phase . Hence, the summation collapses to the single valid term: 
+
+𝑃 (𝑣 | T 𝑡 ) = 𝑃 (𝑣 | C = 𝐶 ) 𝑃 (C = 𝐶 | T 𝑡 ) , (4) where 𝐶 denotes the (unique, if it exists) context compatible with 𝑣 .We instantiate this factorization in a geometric box-embedding space by representing each concept 𝑣 with a box embedding 𝐵 and encoding structural relations via containment constraints. This yields two modeling objectives: (1) context-aware generation 𝑃 (𝐵 | C =
+
+𝐶 ), which characterizes how an emerging concept can be geomet-rically realized under the constraints induced by 𝐶 ; and (2) context selection prior 𝑃 (C = 𝐶 | T 𝑡 ), which prioritizes the most likely refinement contexts under the current taxonomy. 
+
+4.1.1 Context-aware Generation. The key advantage of mod-eling emergence in the geometric box space is that geometric rela-tions impose strong inductive biases, enabling us to infer plausible emerging nodes under different structural refinement contexts. As illustrated in Fig. 4: (1) Specialization inserts a new child under an existing node, requiring the child box to be contained within the parent box; (2) Abstraction inserts an intermediate node to group a set of siblings, requiring the new box to enclose the grouped chil-dren while remaining contained within the original parent; and (3) 
+
+Expansion inserts a new child under a parent with existing chil-dren, requiring the new box to be contained within the parent while remaining geometrically separated from existing sibling boxes. Leveraging these geometric inductive biases, we cast context-aware generation as sampling a valid box 𝐵 from the feasible region induced by the refinement context 𝐶 , which reduces 𝑃 (𝐵 | C = 𝐶 )
+
+to learning distributions over unit intervals [0, 1].
+
+Parent-normalized Reparameterization . We apply a scale-invariant, parent-normalized reparameterization to make the distribution tractable. We re-parameterize the problem into a parent-normalized coordinate system anchored at the context anchor (parent) node 𝑝 . For any box 
+
+𝐵 𝑞 = (𝒄 𝑞 , 𝒃 𝑞 ) such that 𝐵 𝑞 ⊆ 𝐵 𝑝 , we define: 
+
+𝝆 𝑞 = 𝒃 𝑞 ⊘ 𝒃 𝑝 ∈ ( 0, 1]𝑑 , 𝜹 𝑞 = (𝒄 𝑞 − 𝒄 𝑝 ) ⊘ 𝒃 𝑝 ∈ [− 1, 1]𝑑 , (5) where ⊘ denotes element-wise division. Here, 𝝆 𝑞 and 𝜹 𝑞 denote the parent-normalized offset (relative box size) and the parent-normalized center (relative placement) of 𝐵 𝑞 , respectively. 
+
+Geometric Coupling and Sequential Factorization . Directly mod-eling the joint distribution 𝑃 (𝝆 𝑣 , 𝜹 𝑣 | C = 𝐶 ) is still problematic, since treating size and center independently ignores their strict geo-metric coupling, often yielding invalid boxes that violate contain-ment boundaries. To enforce these constraints, we decompose the generative objective via the chain rule: 
+
+𝑃 (𝐵 | C = 𝐶 ) = 𝑃 (𝜹 𝑣 | 𝝆 𝑣 , C = 𝐶 ) · 𝑃 (𝝆 𝑣 | C = 𝐶 ). (6) This factorization corresponds to a sequential process: we first sam-ple the relative offset (𝝆 𝑣 ), and then sample the relative center (𝜹 𝑣 )conditioned on that size to ensure geometric validity. 
+
+Feasible-Interval Modeling . Given a context 𝐶 , the feasible set 
+
+F ( 𝐶 ) admits a per-dimension interval characterization: for each di-mension 𝑘 , (𝝆 𝑣 , 𝜹 𝑣 ) ∈ F ( 𝐶 ) implies 𝜌 𝑘 𝑣 ∈ 𝜌 𝑘 , 𝜌 𝑘 , 𝛿 𝑘 𝑣 ∈ 𝛿 𝑘 , 𝛿 𝑘 ,
+
+where the bounds are induced by 𝐶 . Notably, the feasible interval of 
+
+𝛿 𝑘 𝑣 depends on the chosen 𝜌 𝑘 𝑣 : larger boxes admit a smaller range of valid centers under containment/enclosure constraints. 
+
+This interval motivates an auxiliary-variable reparameterization. For each dimension 𝑘 , we introduce unit random variables 𝑢 𝑘 𝜌 , 𝑢 𝑘 𝛿 ∈[0, 1] and map them affinely to the context-induced feasible intervals. Specifically, we parameterize 𝜌 𝑘 𝑣 as 𝜌 𝑘 𝑣 = 𝜌 𝑘 + 𝑢 𝑘 𝜌 
+
+ 𝜌 𝑘 − 𝜌 𝑘 , 𝑢 𝑘 𝜌 ∈[0, 1], and, conditioned on the sampled 𝜌 𝑘 𝑣 , we parameterize the placement coordinate as 𝛿 𝑘 𝑣 = 𝛿 𝑘 + 𝑢 𝑘 𝛿 
+
+ 𝛿 𝑘 − 𝛿 𝑘 , 𝑢 𝑘 𝛿 ∈ [ 0, 1]. We model these unit variables with the Beta distribution Beta (𝛼, 𝛽 ) for two reasons: its native support on [0, 1] guarantees geometric valid-ity without clipping, and its shape flexibility captures diverse density profiles, from uniform uncertainty to peaked confidence, within a single probabilistic framework. We apply this formulation to all con-text types CTX ∈ { SPEC , EXP , ABS }, with distinct Beta parameters Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Child 𝑐ℎ !           
+
+> Child 𝑐ℎ "
+> Minimal
+> Bounded
+> Box 𝐵 #$
+> Hypothesized
+> Intermediate
+> Parent Box 𝐵 %Parent Box 𝐵 %
+> Hypothesized Child
+> Parent Box 𝐵 %
+> Child 𝑐ℎ !
+> Child 𝑐ℎ "
+> Child 𝑐ℎ &Hypothesized
+> Sibling
+> Overlap
+> Penalty
+> (b ) Abstractio n(a) Specialization (c ) Expansion
+
+Figure 4: Context-aware Generation. 
+
+for 𝑢 𝑘 𝜌, CTX and 𝑢 𝑘 𝛿, CTX . The problem thus reduces to specifying the boundary constraints [𝜌, 𝜌 ] and [𝛿, 𝛿 ] per context: 
+
+• Specialization. The new box 𝐵 must be contained by the par-ent box 𝐵 𝑝 , imposing 𝐵 ⊆ 𝐵 𝑝 . Accordingly, the relative size is bounded by the parent’s unit extent, [𝜌 𝑘 , 𝜌 𝑘 ] = [0, 1], and the center is constrained to remain within the residual room, yielding 
+
+[𝛿 𝑘 , 𝛿 𝑘 ] = [−( 1 − 𝜌 𝑘 𝑣 ), , 1 − 𝜌 𝑘 𝑣 ].
+
+• Abstraction Context. Let 𝐵 MB = (𝜹 MB , 𝝆 MB ) denote the minimal bounding (MB) box of the grouped children. The new box must satisfy 𝐵 MB ⊆ 𝐵 ⊆ 𝐵 𝑝 , which yields: (1) Size Bound: [𝜌 𝑘 , 𝜌 𝑘 ] =
+
+[𝜌 𝑘 
+
+> MB
+
+, 1]; and (2) Center Bound: conditioned on 𝜌 𝑘 𝑣 , [𝛿 𝑘 , 𝛿 𝑘 ] =
+
+h
+
+max  −1+ 𝜌 𝑘 𝑣 , 𝛿 𝑘  
+
+> MB
+
++ 𝜌 𝑘  
+
+> MB
+
+− 𝜌 𝑘 𝑣 , min 1− 𝜌 𝑘 𝑣 , 𝛿 𝑘  
+
+> MB
+
+− 𝜌 𝑘  
+
+> MB
+
++ 𝜌 𝑘 𝑣 
+
+i
+
+.
+
+• Expansion. This context imposes two constraints: (1) Parent-child containment. The new node must lie inside the parent box, 
+
+𝐵 ⊆ 𝐵 𝑝 . In this case, the feasible intervals coincide with the specialization case. Accordingly, we define a base proposal dis-tribution 𝑃 base (𝐵 | C = 𝐶 ) that adopts the same parametric form as specialization but uses distinct Beta parameters; (2) Sibling overlap penalty. Unlike specialization, 𝑣 should avoid regions al-ready explained by existing siblings, since taxonomic principles encourage siblings to be semantically distinct rather than redun-dant [ 50 ]. Let BCh (𝑝 ) = {𝐵 𝑠 }𝑠 ∈Ch (𝑝 ) denote the existing child boxes under 𝑝 . We quantify overlap using the IoU between 𝐵 
+
+and the union of siblings, denoted as O( 𝐵, BCh (𝑝 ) ), and define 
+
+𝑃 (𝐵 | C = 𝐶 ) ∝ 𝑃 base (𝐵 | C = 𝐶 ) exp  −O( 𝐵, BCh (𝑝 ) )/ 𝜏  , where 
+
+𝜏 > 0 controls the penalty strength. 
+
+4.1.2 Context Selection Prior. The context Selection Prior 𝑃 (C =
+
+𝐶 | T 𝑡 ) quantifies the likelihood that a candidate context 𝐶 will be refined at iteration 𝑡 + 1. We premise this on the geometric intuition that insertion likelihood is proportional to the void volume avail-able within that context. We define Vol void (𝐶 ) for each structural pattern: 1) Specialization void. For a leaf node 𝑝 becoming a parent: 
+
+Vol void (𝐶 ) = Vol (𝐵 𝑝 ). 2) Abstraction void. For grouping children under 𝑝 : Vol void (𝐶 ) = Vol (𝐵 𝑝 ) − Vol (𝐵 MB ). 3) Expansion void. For adding a sibling under 𝑝 : Vol void (𝐶 ) = Vol (𝐵 𝑝 ) − Vol 
+
+Ð𝑠 ∈𝑆 (𝑝 ) 𝐵 𝑠 
+
+
+
+.
+
+Finally, we normalize over all candidate contexts 𝐶 𝑖 ∈ C(T 𝑡 ) to obtain a valid distribution: 𝑃 (C = 𝐶 𝑖 | T 𝑡 ) = Vol void (𝐶 𝑖 )Í𝐶 𝑗 ∈C(T 𝑡 ) Vol void (𝐶 𝑗 ) .
+
+## 4.2 Self-supervised Parameter Estimation 
+
+To instantiate the Beta parameters in 𝑃 (𝑣 | T 𝑡 ), we propose a self-supervised estimation strategy on the current taxonomy T𝑡 . Specifi-cally, we generate pseudo-observations by masking existing nodes to emulate structural refinement events (Sec. 4.2.1), and fit the cor-responding Beta distributions via a weighted Method-of-Moments (MoM) estimator [70], enabling efficient and incremental updates. 
+
+Algorithm 2 Unit-Sample Recovery from Pseudo-Observations 
+
+Require: Pseudo-observation 𝑥 𝑖 ; parent-normalized geometry (𝝆 𝑖 , 𝜹 𝑖 );
+
+Ensure: Unit samples (𝒖 𝜌,𝑖 , 𝒖 𝛿,𝑖 ) ∈ [ 0, 1]𝑑 and weight 𝑤 𝑖 . 
+
+> 1:
+
+if CTX 𝑖 = ABS then  
+
+> 2:
+
+Compute the minimal bounding box: (𝜹 MB , 𝝆 MB ) ← MB (·) . 
+
+> 3:
+
+end if  
+
+> 4:
+
+for each dimension 𝑘 = 1, . . . , 𝑑 do  
+
+> 5:
+
+Bounds: derive the per-dimension feasible intervals [𝜌 𝑘 , 𝜌 𝑘 ] and 
+
+[𝛿 𝑘 , 𝛿 𝑘 ] implied by CTX 𝑖 and the local context geometry.  
+
+> 6:
+
+Invert to unit samples: 𝑢 𝑘 𝜌,𝑖 ← 𝜌 𝑘 𝑖 −𝜌 𝑘   
+
+> 𝜌 𝑘 −𝜌 𝑘
+
+, 𝑢 𝑘 𝛿,𝑖 ← 𝛿 𝑘 𝑖 −𝛿 𝑘   
+
+> 𝛿 𝑘 −𝛿 𝑘
+
+. 
+
+> 7:
+
+end for  
+
+> 8:
+
+Set 𝑤 𝑖 ← 1. 
+
+> 9:
+
+if CTX 𝑖 = EXP then  
+
+> 10:
+
+𝑤 𝑖 ← exp ( O ( 𝐵 𝑖 )/ 𝜏 ). 
+
+> 11:
+
+end if  
+
+> 12:
+
+return (𝒖 𝜌,𝑖 , 𝒖 𝛿,𝑖 , 𝑤 𝑖 ).
+
+4.2.1 Pseudo-Observation Generation. Since novel nodes in 
+
+T𝑡 +1 are unobserved at time 𝑡 , we estimate these parameters via self-supervision on the current taxonomy T𝑡 . We construct pseudo-observations {𝑧 𝑖 } by selecting a context from T𝑡 and temporarily 
+
+removing a node that naturally fits the corresponding refinement pattern; the remaining structure induces a feasible region for that node. We consider three masking strategies: 1) Specialization. For each parent 𝑝 and child 𝑣 ∈ Ch (𝑝 ), we take the child context at 𝑝 
+
+and remove 𝑣 . 2) Expansion. For each parent 𝑝 with children Ch (𝑝 ),we take the sibling context under 𝑝 and perform leave-one-out by removing 𝑣 ∈ Ch (𝑝 ). 3) Abstraction. For each chain 𝑣 1 → 𝑣 2 →
+
+Ch (𝑣 2), we take the intermediate context between 𝑣 1 and Ch (𝑣 2) and remove the intermediate node 𝑣 2. This process yields a collection of pseudo-observations {𝑧 𝑖 = (C 𝑖 , 𝑣 𝑖 )} , where C𝑖 denotes the induced context and 𝑣 𝑖 denotes the masked target node. 
+
+4.2.2 Parameter Estimation via Weighted Method of Mo-ments. We estimate parameters of the unit variables via a weighted 
+
+Method-of-Moments (MoM), which matches the weighted empirical mean and variance of unit samples to the corresponding theoretical moments. The estimation proceeds in two stages (Alg. 2 and Alg. 3). 
+
+Stage I (Alg. 2): unit-sample recovery and debiasing. For each pseudo-observation 𝑥 𝑖 , this stage first computes the context-induced size and center bounds per dimension including the auxiliary infor-mation required for the ABS context (Alg. 2, Line 1–5), and then inverts the affined mapping to obtain unit samples in [0, 1] (Line 6). For the EXP context, since the overlap penalty biases observations, the inverse-probability weighting 𝑤 𝑖 = exp (−O( 𝐵 𝑖 )/ 𝜏 ) is applied to recover moments of the underlying base proposal (Lines 9–12). 
+
+Stage II (Alg. 3): online weighted moment updates. We stream the weighted unit samples and maintain running statistics— 𝑊 (weight sum), 𝑊 sq (sum of squared weights), 𝜇 𝑤 (weighted mean), and 𝑀 2,𝑤 
+
+(weighted second central moment)—via a weighted Welford up-date [ 70 ] (Alg. 3, Lines 1–7), and then compute ( ˆ𝛼, ˆ𝛽 ) in closed form (Lines 9–10). This yields incremental, up-to-date priors for each context and dimension without revisiting past data. 
+
+## 5 COST-EFFECTIVE EVIDENCE RETRIEVAL 
+
+When a new iteration 𝑡 begins and new research papers arrive, we leverage the hypothesized concepts derived in the previous iteration Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang 
+
+Algorithm 3 Online Weighted MoM for Beta (𝛼, 𝛽 )
+
+Require: Stream of weighted unit samples { ( 𝑧 𝑗 , 𝑤 𝑗 ) } with 𝑧 𝑗 ∈ [ 0, 1].
+
+Ensure: MoM estimates ( ˆ𝛼, ˆ𝛽 ). 
+
+> 1:
+
+Maintain running statistics: 𝑊 = Í𝑗 𝑤 𝑗 , 𝑊 sq = Í𝑗 𝑤 2 
+
+> 𝑗
+
+, 𝜇 𝑤 , and 𝑀 2,𝑤 . 
+
+> 2:
+
+Initialize 𝑊 ,𝑊 sq , 𝜇 𝑤 , 𝑀 2,𝑤 ← 0. 
+
+> 3:
+
+for each (𝑧 𝑗 , 𝑤 𝑗 ) do  
+
+> 4:
+
+𝑊 new ← 𝑊 + 𝑤 𝑗 ; Δ ← 𝑧 𝑗 − 𝜇 𝑤 . 
+
+> 5:
+
+𝜇 new  
+
+> 𝑤
+
+← 𝜇 𝑤 + 𝑤 𝑗   
+
+> 𝑊 new
+
+Δ. 
+
+> 6:
+
+𝑀 2,𝑤 ← 𝑀 2,𝑤 + 𝑤 𝑗 Δ (𝑧 𝑗 − 𝜇 new  
+
+> 𝑤
+
+). 
+
+> 7:
+
+𝑊 sq ← 𝑊 sq + 𝑤 2 
+
+> 𝑗
+
+; 𝑊 ← 𝑊 new ; 𝜇 𝑤 ← 𝜇 new  
+
+> 𝑤
+
+. 
+
+> 8:
+
+end for  
+
+> 9:
+
+ˆ𝑣 𝑤 ← 𝑊 𝑀 2,𝑤    
+
+> 𝑊 2−𝑊 sq
+
+; 𝜅 ← 𝜇 𝑤 (1−𝜇 𝑤 ) 
+
+> ˆ𝑣 𝑤
+
+− 1. 
+
+> 10:
+
+ˆ𝛼 ← 𝜇 𝑤 𝜅 ; ˆ𝛽 ← ( 1 − 𝜇 𝑤 )𝜅 . 
+
+> 11:
+
+return ( ˆ𝛼, ˆ𝛽 ).
+
+as query candidates for evidence retrieval. The key challenge is to derive an optimal query plan : decide which candidate structural refinement contexts 𝐶 ℎ to explore and how much budget to allocate to each under a strict token budget. A naive Monte Carlo strategy will repeatedly sample candidate concepts from each hypothesis distribution 𝑃 (𝐵 | T 𝑡 −1), which leads to two key limitations. First, since hypotheses are inferred solely from T𝑡 −1, some may not be supported by the repository, wasting budget on irrelevant retrievals. Moreover, the strategy is both costly and high-variance: it requires many samples for stable behavior, and retrieval quality can be domi-nated by sampling noise. To address these issues, we propose a novel budget-aware utility-driven planner that anchors each candidate con-text to the repository and estimates its expected relevance utility and expected parsing cost, yielding an optimal budget-feasible query plan (Sec. 5.1). Then, we materialize this plan to retrieve a final set of papers and extract partial taxonomies from them. (Sec. 5.2). 
+
+## 5.1 Budget-aware Utility-driven Planner 
+
+5.1.1 Query Planning as an Optimization Problem. At iter-ation 𝑡 , we consider the candidate structural refinement contexts extracted from the taxonomy at the previous timestamp C(T 𝑡 −1) =
+
+{C ℎ }𝐻 𝑡 −1 
+
+> ℎ=1
+
+, together with the newly arrived papers ΔD𝑡 . The planner aims to derive a query-allocation policy Π𝑡 over these contexts that jointly accounts for the following objectives and constraints: 
+
+Primary Objective: Utility Anchoring. The planner anchors each candidate context Cℎ by estimating its empirical evidence utility 
+
+𝑈 ℎ , which captures how strongly the available papers can support the corresponding hypothesis. Under an allocation policy Π𝑡 , the expected relevance gain is Í𝐻 𝑡 −1 
+
+> ℎ=1
+
+Π𝑡,ℎ 𝑈 ℎ, which favors allocating more budget to contexts whose hypotheses are better supported by the available papers. We detail the formal derivation of the utility function 𝑈 later in Sec. 5.1.2. 
+
+Secondary Objective: Context Selection Prior. Beyond utility max-imization, we impose the context realization prior that biases explo-ration toward contexts that are more likely to admit valid emerging concepts under the current taxonomy T𝑡 −1. Let 𝐴 ℎ ∈ { 0, 1} indicate whether context Cℎ is selected under T𝑡 −1. We instantiate this prefer-ence via the prior allocation Πprior   
+
+> 𝑡 −1,ℎ
+
+= 𝑃 (𝐴 ℎ =1 | T 𝑡 −1) , and regularize the planning policy Π𝑡 toward Πprior   
+
+> 𝑡 −1
+
+through KL  Π𝑡 ∥ Πprior  
+
+> 𝑡 −1
+
+.
+
+Budget Constraint: Token-Feasible Planning. The per-iteration token budget 𝐾 𝑡 limits the total parsing cost incurred when reading related-work sections in iteration 𝑡 . Since different contexts may re-trieve papers of different lengths, we summarize the context-induced parsing burden by an expected per-paper cost ¯ℓℎ . Under allocation 
+
+Π𝑡 , the expected cost per parsed paper is the mixture Í𝐻 𝑡 −1 
+
+> ℎ=1
+
+Π𝑡,ℎ ¯ℓℎ .
+
+We first estimate a token-feasible parsing batch size by convert-ing the budget into a maximum number of parsable new papers: 
+
+ℓ (ΔD𝑡 ) = 1 
+
+> |ΔD𝑡 |
+
+Í𝑑 ∈ΔD𝑡 ℓ (𝑑 ), 𝑀 𝑡 = min 
+
+n
+
+|ΔD𝑡 |,
+
+j 𝐾 𝑡   
+
+> ℓ(ΔD𝑡 )
+
+k o 
+
+. If we plan to parse 𝑀 𝑡 papers in this iteration, then the expected total token consumption becomes 𝑀 𝑡 
+
+Í𝐻 𝑡 −1 
+
+> ℎ=1
+
+Π𝑡,ℎ ¯ℓℎ, and budget feasibility requires 𝑀 𝑡 
+
+Í𝐻 𝑡 −1 
+
+> ℎ=1
+
+Π𝑡,ℎ ¯ℓℎ ≤ 𝐾 𝑡 .
+
+Optimization Formulation. Combining these components, we have the following constrained maximization problem: 
+
+max  
+
+> Π𝑡
+> 𝐻 𝑡 −1
+
+∑︁ 
+
+> ℎ=1
+
+Π𝑡,ℎ 𝑈 ℎ − 𝜆 plan KL  Π𝑡 ∥ Πprior  
+
+> 𝑡 −1
+
+ s.t. 𝑀 𝑡 𝐻 𝑡 −1∑︁ 
+
+> ℎ=1
+
+Π𝑡,ℎ ¯ℓℎ ≤ 𝐾 𝑡 ,
+
+(7) where 𝜆 plan > 0 controls the trade-off between maximizing empirical evidence gain and adhering to the context-realization prior. 
+
+5.1.2 Gaussian Proxy Utility and Cost Estimation. The key challenge in Eq. 7 is to instantiate, for each candidate context Cℎ , (i) an evidence utility 𝑈 ℎ and (ii) an expected per-paper parsing cost ¯ℓℎ ,in a way that is both principled and computationally tractable. 
+
+Gaussian-Proxy Utility. Recall that each context 𝐶 ℎ induces a hy-pothesis distribution over candidate boxes in the learned geometric space, 𝜋 ℎ (𝐵 ) ≜ 𝑃 (𝐵 | C ℎ, T𝑡 −1). Drawing 𝐵 ∼ 𝜋 ℎ and mapping it through the learned box-to-word function x = ΦB2W (𝐵 ) induces a (generally intractable) distribution over query embeddings. We score a context by its expected relevance to the newly arrived papers: 
+
+𝑈 ℎ ≜ E 𝑑 ∼ ˆ𝑝 𝑡 
+
+𝑟 ℎ (𝑑 ), 𝑟 ℎ (𝑑 ) ≜ E 𝐵 ∼𝜋 ℎ
+
+h
+
+𝑘  ΦB2W (𝐵 ), s(𝑑 )i
+
+, (8) where ˆ𝑝 𝑡 is uniform over ΔD𝑡 , s(𝑑 ) denotes the embedding of paper 
+
+𝑑 , and 𝑘 (· , ·) is a similarity kernel in the word embedding space. We adopt three design choices to make Eq. 8 tractable and scal-able. (i) Gaussian proxy. We approximate the induced query distri-bution by a Gaussian, xℎ ≈ N ( 𝜇 ℎ, Σℎ ), with (𝜇 ℎ, Σℎ ) estimated via a first-order Delta approximation (i.e., moment propagation through 
+
+ΦB2W (·) ) [ 51 ]. This yields a compact, low-variance representation of the context-induced uncertainty and enables closed-form scoring with common kernels. (ii) RBF kernel. We use an RBF kernel 𝑘 (· , ·) 
+
+as a smooth, bounded, distance-based relevance measure; under a Gaussian proxy, its expectation admits a closed form [ 8], avoiding ex-pensive per-context Monte Carlo over 𝐵 . (iii) Sampling. Computing 
+
+𝑈 ℎ exactly requires scanning all |ΔD𝑡 | papers. We instead estimate the outer expectation using 𝑚 i.i.d. samples, achieving sublinear runtime with a tunable accuracy–efficiency trade-off. 
+
+Query-specific Cost Estimation. To incorporate token costs, we treat 𝑟 ℎ (𝑑 ) as a soft relevance weight and define a query-induced distribution over papers 𝑝 (𝑑 | ℎ) ∝ ˆ𝑝 𝑡 (𝑑 ) 𝑟 ℎ (𝑑 ). Let ℓ (𝑑 ) de-note the token length of the related-work section of paper 𝑑 . We define the expected per-paper parsing cost induced by context 𝐶 ℎ
+
+as ¯ℓℎ = E𝑑 ∼𝑝 (𝑑 |ℎ) [ℓ (𝑑 )] = E𝑑 ∼ ˆ𝑝 𝑡 
+
+𝑟 ℎ (𝑑 ) ℓ (𝑑 ) .
+
+E𝑑 ∼ ˆ𝑝 𝑡 
+
+𝑟 ℎ (𝑑 ) . Using the same sampled papers {𝑑 𝑗 }𝑚 𝑗 =1, we estimate ¯ℓℎ efficiently by 
+
+b¯ℓℎ = Í𝑚 𝑗 =1 𝑟 ℎ (𝑑 𝑗 ) ℓ (𝑑 𝑗 )
+
+. Í𝑚 𝑗 =1 𝑟 ℎ (𝑑 𝑗 ).
+
+Based on the above, Eq. 7 admits a unique closed-form solution, summarized below, with a full proof provided in Appendix A.4. Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+PROPOSITION 3 (O PTIMAL BUDGET -A WARE KL-R EGULAR - 
+
+> IZED
+
+POLICY ). For Eq. 7, there exists 𝜆 ∗ ≥ 0 such that the unique maximizer satisfies Π∗ 
+
+> 𝑡,ℎ
+
+= Πprior   
+
+> 𝑡 −1,ℎ exp
+
+ (𝑈 ℎ −𝜆 ∗ ¯ℓℎ )/ 𝜆 plan 
+
+   
+
+> 𝑍 (𝜆 ∗)
+
+, where 𝑍 (𝜆 ) =
+
+Í𝐻 𝑡 −1 
+
+> ℎ′=1
+
+Πprior   
+
+> 𝑡 −1,ℎ ′
+
+exp  (𝑈 ℎ′ − 𝜆 ¯ℓℎ′ )/ 𝜆 plan 
+
+. The optimal 𝜆 ∗ can be found by one-dimensional bisection to satisfy the budget constraint (with equality when active): 𝑀 𝑡 
+
+Í𝐻 𝑡 −1 
+
+> ℎ=1
+
+Π∗ 
+
+> 𝑡,ℎ
+
+¯ℓℎ ≤ 𝐾 𝑡 .
+
+## 5.2 Plan Materialization and Paper Selection 
+
+With the optimal exploration plan Π𝑡 established, we proceed to materialize and execute it. This involves determining the number of hypothetical boxes to sample per direction, transforming them into query embeddings to initialize the search, and selecting the papers that most effectively refine the taxonomy. 
+
+Exploration Strategy Materialization. We convert the fractional plan Π∗ 
+
+> 𝑡
+
+into integer per-context counts by allocating ˜𝑛 ℎ = Π∗
+
+> 𝑡,ℎ
+
+𝑀 𝑡 
+
+and choosing integers 𝑛 ℎ ∈ Z≥0 with Í𝐻 𝑡 −1 
+
+> ℎ=1
+
+𝑛 ℎ = 𝑀 𝑡 , obtained via unbiased rounding with a largest-remainder tie-break. 
+
+Query Sampling and Retrieval. For each context Cℎ , draw 𝑛 ℎ
+
+box samples 𝐵 and map each to a query embedding x = ΦB2W (𝐵 ),forming the query set X𝑡 . For each x ∈ X 𝑡 , retrieve its top-𝐿 nearest papers from the unparsed index R𝑡 , and let Dcand  
+
+> 𝑡
+
+⊆ R 𝑡 be the deduplicated union of these candidates. Let 𝑘 (· , ·) ∈ [ 0, 1] be the similarity and define 𝑎 (𝑑, x) = 𝑘 (s(𝑑 ), x) for 𝑑 ∈ D cand  
+
+> 𝑡
+
+, x ∈ X 𝑡 .
+
+Submodular objective. We select a subset 𝑆 ⊆ D cand  
+
+> 𝑡
+
+by solving the knapsack-constrained facility-location problem: 
+
+max  
+
+> 𝑆 ⊆ D cand
+> 𝑡
+
+𝐹 (𝑆 ) =∑︁ 
+
+> x∈ X 𝑡
+
+max   
+
+> 𝑑 ∈𝑆
+
+𝑎 (𝑑, x) s.t. ∑︁  
+
+> 𝑑 ∈𝑆
+
+ℓ (𝑑 ) ≤ 𝐾 𝑡 , (9) Eq. 9 is a monotone submodular maximization under a single knap-sack constraint, for which the proof is provided in Appendix A.5. Similarly, we solve it using a standard cost-aware lazy-greedy proce-dure with partial enumeration. 
+
+LLM-guided Partial Taxonomy Extraction. The extraction pro-cess first employs regular-expression–based matching to isolate the 
+
+Related Work sections. Subsequently, GIST prompts an LLM to extract partial taxonomies. Detailed regex matching process and prompt specifications are provided in Appendix B. 
+
+## 6 INCREMENTAL SEMANTIC INDEXING 
+
+At iteration 𝑡 , we maintain a taxonomy-induced inverted index I𝑡 to support efficient downstream retrieval. Newly arrived papers ΔP𝑡 
+
+are indexed immediately by assigning them to relevant concept nodes via embedding similarity. For previously indexed papers, we condition updates on the refinement type to avoid full-corpus re-indexing: (1) Abstraction. Creating a new parent node 𝑎 over an existing child set C requires only posting-list aggregation: I𝑡 [𝑎 ] ← 
+
+Ð𝑐 ∈ C I𝑡 −1 [𝑐 ]. This is a local operation requiring no historical re-scoring. (2) Specialization. Specializing a node 𝑢 into children S
+
+requires redistributing only the affected posting list I𝑡 −1 [𝑢 ] across 
+
+S, avoiding any full-repository scan. (3) Expansion. Introducing a new node 𝑣 requires no historical re-indexing: I𝑡 [𝑣 ] is initialized as empty and populated only by matches from ΔP𝑡 and future streams. 
+
+Supporting Downstream Paper Retrieval. Given a user query 
+
+𝑞 , we route it to the taxonomy by selecting the top-𝑘 semanti-cally similar concepts U𝑞 . We then form a compact candidate set by unioning the posting lists of these concepts and their descen-dants: C𝑡 (𝑞 ) = Ð𝑢 ∈ U 𝑞 
+
+
+
+I𝑡 [𝑢 ] ∪ Ð𝑣 ∈Desc (𝑢 ) I𝑡 [𝑣 ]
+
+
+
+. Finally, papers in C𝑡 (𝑞 ) are ranked using standard retrieval models (e.g., BM25 or dense retrieval), enabling efficient candidate generation without repetitive full-corpus scanning. 
+
+## 7 EXPERIMENT 
+
+In this section, we conduct experiments to evaluate: 1) the effec-tiveness and efficiency of our proposed method on the taxonomy maintenance in the wild task (Sec. 7.1); 2) the effectiveness and effi-ciency of the semantic indexing based on the generated taxonomy (Sec. 5); 3) the sensitivity of key hyper-parameters (Sec. 7.3); and 4) a qualitative case study demonstrating how the taxonomy adapts as the corpus evolves and how the index facilitates paper search (Sec. 7.6). 
+
+## 7.1 Evaluation of Taxonomy Maintenance 
+
+Benchmarks. We simulate an “in-the-wild” setting using the Com-puter Science (CS) subset of the arXiv corpus [ 24 ], which comprises over 270K LaTeXML-converted HTML documents. To establish ground truth, we curate a benchmark of 12 survey papers spanning diverse CS domains. We select survey papers that are either pub-lished in top-tier venues or highly cited, manually extracting and verifying their author-curated taxonomies. To capture the evolution-ary dynamics of each topic, we assign distinct start times to each domain, ensuring that the topic has reached a sufficient level of development prior to the simulation. We then partition the remaining timeline into seven equal intervals, where sequential paper arrivals trigger iterative taxonomy updates. To avoid data leakage, we remove the benchmark survey papers from the arXiv corpus. Benchmark statistics are reported in Table 1, and further details on the survey papers are provided in Appendix C. 
+
+Remark. We adopt a single highly authoritative survey per domain, selected from top-tier venues or with high citation counts, rather than aggregating across multiple surveys. Aggregation would require ei-ther redefining the evaluation protocol against an ensemble of ground truths or manually reconciling disparate hierarchies into a unified gold standard, both of which would introduce substantial curator-induced bias. We acknowledge that survey-derived taxonomies favor cleaner, consensus-driven hierarchies over fully organic ones; how-ever, they capture the structured knowledge that downstream users and systems actually rely on, and purely organic benchmarks at scale are notoriously difficult to obtain. We leave the construction of such benchmarks as a promising direction for future work. 
+
+Baselines. To comprehensively evaluate GIST in the “in-the-wild” setting, we design baselines through a modular pipeline that factor-izes: (i) a taxonomy construction backbone , (ii) an updating mech-anism for sequential arrivals, and (iii) a paper search strategy for selecting evidence papers from the newly arrived papers. We denote each baseline instance as B ACKBONE UPDATE ,SEARCH .
+
+Backbones. We instantiate four representative baselines spanning the major taxonomy-construction paradigms: 1) TaxoGen [ 76 ], a point-embedding clustering method that iteratively partitions a topic term graph; 2) HyperExpan [ 39 ], a hyperbolic-embedding expan-sion method that places new concepts in negatively-curved space Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang 
+
+Table 1: Statistics of the benchmark. 
+
+Domain Research Topic (Input) Levels Nodes 
+
+DB Schema Design & Tuning (SDT) 4 24 LLM-based Text-to-SQL (LLM2SQL) 5 37 HTAP Databases (HTAP) 2 28 Graph ANN Vector Search (ANN-VS) 3 21 Distributed Graph Algorithms (DGA) 3 31 SE Auto Program Repair (APR) 3 14 AI for Software Testing (AI4ST) 3 48 ML Machine Unlearning (MU) 3 16 Fairness in ML (FairML) 3 19 IR Multimodal Recommenders (MRS) 3 29 HCI Industrial Extended Reality (I-XR) 3 58 Robotics Multi-Robot Task Allocation (MRTA) 5 23 
+
+Table 2: Taxonomy quality and efficiency comparison across all compared methods. F1 metrics are reported as mean ±std 
+
+over 5 random seeds. † and ‡ denote statistically significant improvement of our method GIST 𝐼,𝐻 over all non-box-embedding baselines , at 𝑝 < 0.01 and 𝑝 < 0.05 respectively.                                                                                                                                                                                                                   
+
+> Node Soft F1 Edge Soft F1 Runtime Tokens Cost Init Final Δ/ep Init Final Δ/ep (min) (k) ($)
+> TaxoGen
+> S+K 24.8 ±0.331.2 ±0.4+1.07 ±0.05 19.7 ±0.224.7 ±0.3+0.83 ±0.04 76.4 ––S+C 24.8 ±0.333.8 ±0.5+1.50 ±0.06 19.7 ±0.227.1 ±0.4+1.23 ±0.05 77.8 ––I+K 24.8 ±0.329.4 ±0.3+0.77 ±0.04 19.7 ±0.223.6 ±0.3+0.65 ±0.04 22.7 ––I+C 24.8 ±0.331.7 ±0.4+1.15 ±0.05 19.7 ±0.225.4 ±0.3+0.95 ±0.04 23.6 ––
+> HyperExpan
+> S+K 32.8 ±0.440.7 ±0.5+1.32 ±0.06 26.7 ±0.333.8 ±0.4+1.18 ±0.05 91.2 --S+C 32.8 ±0.443.6 ±0.6+1.80 ±0.07 26.7 ±0.336.4 ±0.5+1.62 ±0.06 92.7 --I+K 32.8 ±0.438.7 ±0.4+0.98 ±0.05 26.7 ±0.332.4 ±0.3+0.95 ±0.04 27.1 --I+C 32.8 ±0.441.2 ±0.5+1.40 ±0.06 26.7 ±0.334.8 ±0.4+1.35 ±0.05 28.4 --
+> TaxoAlign
+> S+K 38.6 ±0.756.2 ±0.8+2.93 ±0.13 32.3 ±0.647.8 ±0.7+2.58 ±0.11 451.8 2438 7.31 S+C 38.6 ±0.760.4 ±0.9+3.63 ±0.14 32.3 ±0.651.3 ±0.8+3.17 ±0.12 458.4 2552 7.64 I+K 38.6 ±0.746.4 ±0.6+1.30 ±0.10 32.3 ±0.639.7 ±0.5+1.23 ±0.09 113.4 871 2.62 I+C 38.6 ±0.749.8 ±0.7+1.87 ±0.11 32.3 ±0.642.6 ±0.6+1.72 ±0.10 117.2 928 2.78
+> TaxoAdapt
+> S+K 42.8 ±0.861.7 ±0.9+3.15 ±0.13 35.8 ±0.753.6 ±0.8+2.97 ±0.12 384.6 3756 11.27 S+C 42.8 ±0.866.2 ±0.9+3.90 ±0.14 35.8 ±0.757.8 ±0.8+3.67 ±0.12 391.8 3895 11.69 I+K 42.8 ±0.852.4 ±0.7+1.60 ±0.10 35.8 ±0.744.1 ±0.6+1.38 ±0.09 114.3 947 2.84 I+C 42.8 ±0.856.7 ±0.8+2.32 ±0.12 35.8 ±0.747.6 ±0.7+1.97 ±0.10 117.3 1003 3.01 GIST S+K 47.5 ±0.558.6 ±0.5+1.85 ±0.07 40.8 ±0.450.4 ±0.4+1.60 ±0.06 113.4 641 1.91 S+C 47.5 ±0.562.3 ±0.6+2.47 ±0.08 40.8 ±0.453.7 ±0.5+2.15 ±0.07 114.6 682 2.04 S+H 47.5 ±0.576.0 ±0.6+4.75 ±0.10 40.8 ±0.467.6 ±0.5+4.47 ±0.09 117.3 713 2.14 I+K 47.5 ±0.555.3 ±0.4+1.30 ±0.06 40.8 ±0.448.2 ±0.4+1.23 ±0.06 35.8 421 1.26
+> I+C 47.5 ±0.560.5 ±0.5+2.17 ±0.07 40.8 ±0.453.1 ±0.4+2.05 ±0.06 36.7 463 1.38 I+H 47.5 †±0.573.5 †±0.5+4.33 †±0.10 40.8 †±0.465.4 †±0.4+4.10 †±0.09 37.5 498 1.49
+
+and attaches them via geometric distances; 3) TaxoAlign builds tax-onomies via a three-stage pipeline: locating topic-related knowledge slices, aggregating these slices to form an initial taxonomy, and performing LLM-based refinement; and 4) TaxoAdapt starts with an LLM-generated taxonomy and iteratively grounds it to the collected documents. It employs top-down classification and selective expan-sion, driven by corpus density and unmapped signals, to generate a final corpus-aligned taxonomy. To provide initial concept seeds for TaxoGen and HyperExpan, we use BERTopic [ 25 ] to extract them from the input corpus. 
+
+Updating mechanisms. We instantiate each backbone under two stan-dard updating mechanisms: (1) Scratch (S): Ignores the previous state and leverages the full cumulative corpus up to interval 𝑡 . For the baselines (TaxoAlign and TaxoAdapt), this involves reconstruct-ing the taxonomy entirely from the cumulative set of papers. For GIST, this entails retraining the mapping-model parameters from scratch using all accumulated data. (2) Incremental (I): Updates the taxonomy T𝑡 −1 → T 𝑡 using only the newly arrived papers in interval 
+
+𝑡 . For the baselines, we implement a generate-and-merge approach: (i) running the backbone on the new batch to generate a “delta” tax-onomy ΔT𝑡 ; and (ii) merging ΔT𝑡 with T𝑡 −1 via concept alignment and edge union. For GIST, we employ the proposed incremental training strategy (Sec. 3.3). 
+
+Evidence Acquisition strategies. We consider three strategies: (1) 
+
+Topic-keyword search (K) : queries using the initial topic keywords as the query at each update; (2) Concept search (C) : queries using concepts in the current taxonomy; and 3) Hypothesized-concept search (H) : queries using the hypothesized concepts(specific to our method). To ensure a fair comparison across methods that may rely on different parts of each paper, we cap the amount of raw text pro-cessed from newly retrieved papers at every update. Specifically, the total evidence budget per iteration is limited to 400,000 tokens in the first iteration and 100,000 tokens thereafter, resulting in a 1,000,000-token budget per topic. We use GPT-5-mini for all methods. Note that this budget accounts only for the initial LLM input .
+
+Evaluation Metrics. We evaluate three dimensions: effectiveness, ef-ficiency, and monetary cost. For effectiveness , we report the standard 
+
+Node Soft F1 and Edge Soft F1 metrics [ 33 ]. Node Soft F1 quantifies concept-level agreement via semantic maximum-weight bipartite matching, while Edge Soft F1 measures agreement on parent–child relations, weighted by the similarity of their endpoints. Unless stated otherwise, at each iteration we evaluate against the final ground truth (𝑡 = 7). Efficiency is measured by total runtime across all iterations, and monetary cost by total API expense. 
+
+Implementation and Hyper-parameters. We implement GIST in PyTorch and run all experiments on a Linux server equipped with an NVIDIA RTX 4090 GPU. For geometric representation, we set the box-embedding dimension to 𝑑 = 12 . In the geometric-guided taxonomy integration module, we set the reliability weight to 
+
+𝜆 rel = 0.3 and the novelty weight to 𝜆 nov = 0.2. For the Cost-effective Evidence Retrieval module, we set the planning weight to 𝜆 plan = 0.2.For Gaussian proxy utility estimation, we employ a sample size of 
+
+𝑚 = 1000 to meet the probabilistic error guarantees. 
+
+Experiment Results . The comparison results across all the baselines are presented in Table 2. We can have the following observations: 
+
+• Overall. The GIST series achieves the best taxonomy quality across every quality metric in the grid. The only baselines with lower runtime or monetary cost are the two embedding-only meth-ods (TaxoGen and HyperExpan), but their taxonomy quality is far below competitive levels (Final Node F1 below 44%). Among methods with competitive quality, the proposed efficient variant GIST I,H attains the best cost–quality trade-off: an 11.0% / 13.1% improvement in Final Node / Edge F1 over the strongest LLM baseline TaxoAdapt S,C, statistically significant at 𝑝 < 0.01 , while requiring only 9.6% of its runtime and 12.7% of its monetary cost. Note that HyperExpan and TaxoGen do not involve LLM process-ing and therefore incur no API cost and run efficiently. However, Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+their performance lags substantially behind LLM-based meth-ods, reflecting the inherent trade-off between cost and taxonomy quality. 
+
+• Backbone. Because the Init score is measured at 𝑡 =1 before any updating mechanism or evidence acquisition strategy takes ef-fect, it isolates the contribution of the backbone itself. The four baseline backbones cluster into three quality tiers reflecting their representational power. The point-embedding backbone (Taxo-Gen) cannot model the asymmetric containment relations required for is-a hierarchies and remains below 35% Final Node Soft F1 un-der any update or search configuration. The hyperbolic backbone (HyperExpan) modestly improves this via negatively-curved ge-ometry but still tops out around 44%. The LLM-driven back-bones (TaxoAlign and TaxoAdapt) reach 60–66% by leveraging LLM reasoning, yet exhibit the high token cost and structural hallucination characteristic of free-form generation. GIST’s box-embedding backbone, in contrast, attains the highest Init (47 .5
+
+Node, 40 .8 Edge) – evidence that combining expert-curated partial taxonomies with a box-embedding space, which natively encodes containment, yields a stronger structural prior than any of the alternative backbones. 
+
+• Updating Mechanism. An effective updating mechanism is es-sential for the task of taxonomy maintenance in the wild. Without one (i.e., retraining from scratch at each interval), runtime grows substantially for every method, and monetary cost grows dramati-cally for the LLM-intensive backbones TaxoAdapt and TaxoAlign. With our dedicated updating mechanism and novelty-aware core-set selection, GIST’s incremental variant GIST I,H retains 96 .7% 
+
+of the fully retrained GIST S,H’s quality (Final Node F1: 73 .5 vs. 
+
+76 .0; Final Edge F1: 65 .4 vs. 67 .6, a 3.3% relative drop) while cutting runtime from 117 .3 to 37 .5 minutes ( 3.1× speedup) and monetary cost from $2.14 to $1.49 ( 30 .4% reduction). This demon-strates that scratch retraining is largely unnecessary when guided by the hybrid evidence strategy. By contrast, naive incremental updating in TaxoAdapt and TaxoAlign reduces runtime by 70 .1% /
+
+74 .4% and monetary cost by 74 .2% / 63 .6% , but at the expense of a 
+
+14 .4% / 17 .5% relative quality drop. The gap between GIST’s 3.3% 
+
+drop and the 14 –18% drop suffered by these baselines shows that simple merging is insufficient for preserving structural integrity, whereas GIST’s coreset-based mechanism keeps nearly all of the full-retraining quality at a fraction of the cost. 
+
+• Evidence Acquisition Strategy. The evidence acquisition strategy via hypothesized concepts drives the fastest taxonomy growth per epoch. It enables more targeted information acquisition and avoids retrieving redundant papers that contribute only to already-known concepts. Compared with leveraging existing concepts 
+
+and input search topics , GIST’s per-epoch gain ( Δ/ep) is 2.0×
+
+and 3.3× higher on Node Soft F1 ( GIST I,H: +4.33 , GIST I,C: +2.17 ,GIST I,K: +1.30 ), with the same 2.0× / 3.3× gap on Edge ( +4.10 vs. 
+
++2.05 / +1.23 ). Querying with concepts from the current taxonomy is also more likely to surface papers capable of expanding the taxonomy than querying with the original research topics alone. Conversely, relying on input keywords yields the smallest per-epoch progress among LLM-based incremental variants. 
+
+Table 3: Effectiveness comparison on paper search tasks. † and ‡
+
+denote statistically significant improvement of our method over all other methods, at 𝑝 < 0.01 and 𝑝 < 0.05 respectively, under paired 𝑡 -tests.                                       
+
+> Method BM25 Dense Hybrid nDCG@10 MRR nDCG@10 MRR nDCG@10 MRR Flat-Ret 0.374 0.333 0.402 0.356 0.438 0.378 TaxoAlign 0.382 0.339 0.409 0.363 0.448 0.387 TaxoAdapt 0.397 0.350 0.423 0.373 0.463 0.401 GIST ∗0.409 †0.360 †0.439 †0.386 †0.479 ‡0.420 †
+> GIST 0.409 †0.360 †0.439 †0.386 †0.479 ‡0.420 †
+
+Table 4: Evaluation of indexing efficiency.                         
+
+> Method Index (MB) Build (min) Per-paper (ms) Query (ms) Flat-Ret 0.00 0.0 0.0 58.0 TaxoAlign 2.76 6.5 82.3 45.7 TaxoAdapt 3.15 7.4 91.8 41.9
+> GIST ∗2.64 6.8 86.5 46.7 GIST 2.64 3.4 41.2 45.4
+
+## 7.2 Effectiveness in Downstream Literature Search 
+
+We evaluate the effectiveness and efficiency of the proposed semantic indexing utilizing the maintained taxonomies. We reuse the arXiv corpus and the benchmark, with the following modifications. 
+
+Query and Ground-Truth Construction. For each topic, we treat each concept node as an information need and generate two query types: (i) keyword queries using the concept name, and (ii) natural-language queries by prompting an LLM to produce a concise, user-style search query from the concept name and description; we gen-erate 5 queries of each type per topic. We derive ground truth from the corresponding survey paper: for each concept query, the relevant set comprises papers explicitly assigned to that concept/category by the survey. We ensure these papers are present in the repository by adding any missing ones to the arXiv corpus. 
+
+Evaluation Metrics. We report standard ranked-retrieval metrics averaged over topics, including nDCG@10 and MRR , under three retrieval paradigms: BM25 , Dense , and Hybrid . To quantify indexing efficiency, we additionally report: (i) index size of the taxonomy-induced inverted index at 𝑡 =7 (posting lists + metadata), (ii) cumula-tive index build/update time across all iterations, counting only the time to materialize and maintain the index given the constructed tax-onomy (i.e., assigning papers to concept nodes and updating posting lists), and (iii) query latency .
+
+Baselines. We compare GIST against taxonomies produced by TaxoAlign and TaxoAdapt (using their best-performing variants), and a flat retrieval baseline ( Flat-Ret ) that performs retrieval di-rectly over the corpus without any taxonomy-induced semantic index. To isolate the benefit of incremental indexing, we further include GIST ∗, which uses the same taxonomy as GIST but rebuilds the semantic index at each iteration via full-corpus scanning. 
+
+Evaluation Results . Table 3 reports downstream search effective-ness. We observe that all taxonomy-indexed methods consistently outperform the Flat-Ret baseline across BM25, Dense, and Hybrid retrieval, validating that a structured taxonomy improves semantic access to scholarly corpora. Moreover, GIST achieves the best effec-tiveness overall. Compared with the strongest baseline TaxoAdapt, Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang 0.0 0.2 0.4 0.6 0.8 1.0 
+
+> 0.725
+> 0.750
+> 0.775
+> 0.800
+> 0.825
+> 0.850
+> Soft F1 Score
+
+(a) 𝜆 rel 0.0 0.2 0.4 0.6 0.8 1.0  
+
+> 0.70
+> 0.75
+> 0.80
+> 0.85
+> Soft F1 Score
+
+(b) 𝜆 nov 0.0 0.2 0.4 0.6 0.8 1.0  
+
+> 0.700
+> 0.725
+> 0.750
+> 0.775
+> 0.800
+> 0.825
+> 0.850
+> Soft F1 Score
+
+(c) 𝜆 plan 0 50 100 150 200 250  
+
+> 0.70
+> 0.75
+> 0.80
+> 0.85
+> Soft F1 Score
+
+(d) 𝑑 
+
+Figure 5: Hyper-parameter sensitivity on taxonomy quality 
+
+GIST yields consistent gains; averaging nDCG@10 and MRR, it im-proves performance by 2.9%, 3.6%, and 4.1% under BM25, Dense, and Hybrid, respectively. Table 4 reports indexing efficiency under two complementary views: cumulative build time across the 7 times-tamps, and the per-paper marginal cost that characterizes streaming maintenance. GIST halves the cumulative build time of GIST ∗ (full-scan indexing, 3.4 vs. 6.8 minutes) while preserving the same index size (2.64MB), comparable query latency (45.4 vs. 46.7ms), and identical retrieval effectiveness. Decomposed at the per-paper level, the marginal indexing cost of GIST is only 41.2ms, roughly 2 ×
+
+faster than GIST ∗ (86.5ms) and the rebuild-from-scratch baselines (TaxoAlign and TaxoAdapt at 82.3–91.8ms). This per-paper over-head is well below the inter-arrival time of new papers on arXiv even for popular topics, confirming that GIST’s incremental index can be maintained in real time. 
+
+## 7.3 Hyper-parameter Study 
+
+We analyze the sensitivity of GIST to key coefficients 𝜆 rel (Eq. 1), 
+
+𝜆 nov (Eq. 3), 𝜆 plan (Eq. 7), and dimension 𝑑 (Fig. 5). We have the following observation: 1) For the reliability weight 𝜆 rel , which bal-ances concept coverage against evidence quality, performance peaks at 𝜆 rel =0.3 and remains stable within [0.4, 0.7]; overly large values over-emphasize one side of the trade-off and degrade taxonomy qual-ity. 2) The novelty weight 𝜆 nov controls the trade-off between loss preservation and diversity in coreset selection: results favor a moder-ate setting ( 𝜆 nov =0.2), where smaller values introduce redundancy and larger values sacrifice loss preservation for novelty, reducing co-herence. 3) The planning weight 𝜆 plan balances the context-relation prior against utility-driven exploitation; a moderate value ( 𝜆 plan =0.2)is optimal, while smaller values lead to myopic budget concentration and larger values over-regularize toward the prior, missing emerg-ing gaps. 4) Finally, the box dimension 𝑑 determines geometric expressiveness: small 𝑑 underfits, performance improves as 𝑑 in-creases, and saturates around 𝑑 =12 , after which gains diminish while computational costs rise. 
+
+## 7.4 Ablation Study 
+
+Beyond the configuration-level ablation analysis in Sec. 7.1, we conduct two finer-grained ablations that isolate individual design choices: the graph-selection objective (Table 5) and the budget-aware planner objective (Table 6). (1) For the graph-selection objective ,coverage-only selection ( 𝜆 rel =0) admits noisy partial taxonomies and reduces Final Node F1 by 8.2% relative to the full model, whereas reliability-only selection (removing 𝑓 cov ) over-prunes the candidate graph and reduces it by 5.6% ; since 𝑓 cov optimizes for recall while 𝑓 rel 
+
+optimizes for precision, the two terms are anti-correlated by design, and only their joint optimization recovers the reported 73 .5/65 .4 Final Node/Edge F1. (2) For the planner objective , utility-only planning increases token consumption by 186% (to 1426 k) while delivering a Node F1 that is 9.4% lower than the full model; adding the prior Πprior 
+
+Table 5: Ablation on the reliability–coverage decomposition.                    
+
+> Node F1 Edge F1 Variant Init Final Init Final
+> 𝑓 cov only ( 𝜆 rel =0)41.7 67.5 35.7 58.9
+> 𝑓 rel only (no coverage) 43.4 69.4 37.3 60.8 Full (GIST) 47.5 73.5 40.8 65.4
+
+alone yields a 2.7% relative improvement in Node F1 over utility-only planning but leaves token usage unconstrained, whereas adding the budget constraint alone limits tokens to 542 k and yields a 4.8% 
+
+relative improvement. Only the complete three-term formulation simultaneously attains high quality ( 73 .5% Node F1) and tight cost (498 k tokens), confirming that the five components— 𝑓 cov , 𝑓 rel , 𝑈 ℎ ,
+
+Πprior , and the budget constraint—are jointly indispensable. 
+
+## 7.5 Diagnostic Studies 
+
+Robustness of Related Work Detection and Extraction. We ver-ify two properties of the partial taxonomy extraction pipeline: (i) the coverage of the regex-based detector, and (ii) the accuracy of the LLM-based extractor in recovering the author-curated partial taxonomy from the detected sections. We randomly sample 40 pa-pers from the arXiv benchmark and manually annotate each with its 
+
+ground-truth Related Work span and ground-truth partial taxonomy ,against which we report detector coverage and false-positive rate , as well as extractor Node Soft F1 and Edge Soft F1. The regex detector achieves 95% coverage at a 0% false-positive rate; the missed 5% corresponds to 2 papers that contain no explicit Related Work section and are skipped entirely. This confirms that authors overwhelmingly organize related work in a dedicated section with an identifiable heading—a regularity the lightweight detector reliably exploits. The LLM extractor attains 94.7% Node Soft F1 and 93.5% Edge Soft F1 on the detected sections, indicating that the recovered partial taxonomies closely align with the 
+
+Numerical Stability under Deep Hierarchies. We verify whether box volumes shrink sharply or remain numerically well-behaved as taxonomy depth grows. To this end, we measure the smallest learned box volume and the smallest per-dimension side length across all nodes on two topics: the LLM-based Text-to-SQL taxonomy (5 levels), the deepest topic in our benchmark, and an exceptionally deep 11-level taxonomy derived from a broad topic query of Ma-chine learning . To isolate the effect of the volume regularization, we compare two variants of the bidirectional mapping model un-der otherwise identical hyperparameters: w/o Reg. , which removes the regularization term, and w/ Reg. , our full model that penalizes any box whose volume falls below the threshold 𝑉 min . As a result, without regularization both quantities collapse toward the FP32 un-derflow limit, and training diverges with NaN gradients on the deeper topic. With regularization, the smallest volumes remain at 1.2 × 10 −4
+
+and 3.5 × 10 −5—roughly 33 orders of magnitude above the FP32 underflow limit ( ≈ 10 −38 )—while the smallest side lengths stay at 
+
+0.37 and 0.26 , indicating that inner boxes retain a meaningful spatial extent and the model converges stably in both settings. 
+
+Predictive Concept Precision. To verify whether the void volumes identified by our concept emergence model correspond to plausible emergence regions, we measure Predictive Concept Precision . For each timestamp transition 𝑡 → 𝑡 +1, we collect all hypothesized concepts used for retrieval queries under each refinement context in 
+
+T𝑡 , identify all newly emerging concepts at 𝑡 +1, and compute the Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+Table 6: Ablation on the budget-aware planner objective.                     
+
+> Variant Final Node F1 Tokens (k) Cost ($)
+> 𝑈 ℎonly (no prior, no budget) 66.6 1426 4.27
+> 𝑈 ℎ+Πprior 68.4 1403 4.20
+> 𝑈 ℎ+budget 69.8 542 1.62 Full (GIST) 73.5 498 1.49
+
+Table 7: Representative taxonomy evolution stages                          
+
+> Stage Representative New Concepts Example Evidence Papers
+> 𝑡 =1Post-processing →Consistency Method; Few-shot →Replacing the task description; Model Evaluation BINDER (2022); Binding language models in sym-bolic languages (2022)
+> 𝑡 =4Pre-processing →Schema Linking (Tra-ditional vs. LLM-based); Inference →
+> Workflow (CoT / Decomposition) ACT-SQL (2023); Din-SQL (2024)
+> 𝑡 =7Workflow →Autonomous Agents; richer consistency post-processing
+> Spider 2.0 (2024); R3 (2024); MCS-SQL (2025)
+
+fraction of hypothesized concepts that are matched by at least one newly emerging concept under the soft-matching criterion. We re-port precision rather than recall because ground-truth concept sets at intermediate timestamps are not available in our benchmark, which provides ground-truth taxonomies only at the final timestamp. Aver-aged over six transitions and 12 benchmark topics, GIST achieves 54.2% precision. The precision is also relatively consistent across the three refinement contexts, with 48.5%, 55.4%, and 58.7% for Specialization, Abstraction, and Expansion, respectively. These re-sults suggest that the geometric gaps provide a useful soft prior for identifying plausible emergence regions. Unrecovered concepts are handled by the budget-aware retrieval module, as hypothesized concepts are used only as a soft prior rather than a hard filter. 
+
+## 7.6 Case Study: LLM-based Text-to-SQL 
+
+We present a qualitative case study on LLM-based Text-to-SQL ,which has one of the deepest and most fine-grained ground-truth taxonomies in our benchmark. 
+
+Taxonomy Evolution. Table 7 tracks the taxonomy’s evolution over time. Initially ( 𝑡 =1), the structure captures a coarse pipeline with broad subtopics like consistency post-processing and few-shot prompting. By the middle stage ( 𝑡 =4), it granulates significantly, separating Schema Linking from general pre-processing and refining inference workflows into Chain-of-Thought and Decomposition , re-flecting the 2023–2024 literature. Finally ( 𝑡 =7), it captures emerging trends difficult to surface via keyword search, such as Autonomous Agents and advanced consensus mechanisms. 
+
+Taxonomy-Indexed Search. We demonstrate the taxonomy’s value as a semantic index in Table 8. User queries are first aligned to the most relevant concept node, restricting retrieval to that concept’s subtree. This minimizes topic drift for overloaded terms (e.g., “con-sistency”). As shown, GIST concentrates ranking on ground-truth relevant papers (bolded) more effectively than flat retrieval ( Flat-Ret ), which often retrieves tangentially related work. 
+
+Table 8: Representative paper search results                                  
+
+> Concept & Query Top-5 Results Chain-of-Thought (CoT)
+> “chain-of-thought prompting for text-to-SQL with correction”
+> Flat-Ret: Divide and prompt (2023) ;Exploring chain of thought style prompting... (2023); ACT-SQL (2023) ;Text-to-SQL empowered... (2023)
+> GIST: Divide and prompt (2023) ;ACT-SQL (2023) ;CHESS (2024) ;CoE-SQL (2024) ;
+> OpenSearch-SQL (2025) Traditional Schema Linking
+> “schema linking with skeleton retrieval / de-semanticization”
+> Flat-Ret: De-semanticization... (2023) ;
+> DBCopilot (2023) ;C3 (2023); Open-SQL Framework (2024); RSL-SQL (2024)
+> GIST: De-semanticization... (2023) ;
+> CRUSH4SQL (2023) ;PURPLE (2024) ;
+> SGU-SQL (2024) ;OpenSearch-SQL (2025)
+
+## 8 RELATED WORK 
+
+Knowledge Graph Maintenance. Maintaining structured knowl-edge under continuous evolution is a long-standing data manage-ment problem [ 69 ]. Prior efforts can be broadly organized into three categories. (i) Incremental knowledge-base construction. Sys-tems such as DeepDive [ 60 ] and Fonduer [ 71 ] extract entities and relations from newly arriving documents to grow a knowledge base over time. (ii) Entity resolution and schema alignment. Asecond line consolidates equivalent records across heterogeneous sources through learned matchers and unified resolution frame-works [ 22 , 26 , 36 , 64 ]. (iii) Continual learning under distribution drift. Methods such as [ 31 ] adapt model parameters to shifting in-put distributions, typically guarding against catastrophic forgetting via regularization or rehearsal. These categories share a common problem setting: the underlying schema is treated as fixed , and main-tenance proceeds by growing coverage, consolidating duplicates, or adapting parameters within it. GIST instead targets a setting in which the schema itself—the concept hierarchy—evolves through expansion, abstraction, and specialization. This difference intro-duces two new challenges: (i) the supervision signal drifts with the hierarchy, so past training signals cannot be naively replayed as in rehearsal-based continual learning; and (ii) maintenance requires coupled growth and structural revision over concepts, rather than insertion under a fixed schema or instance-level record matching. 
+
+Taxonomy Construction. Automated taxonomy construction gen-erally falls into two paradigms. Entity-driven methods expand or complete existing structures by predicting concept placement [ 27 , 41 ,50 , 58 , 62 ], recently incorporating LLMs for low-resource tasks [ 45 ]. Conversely, document-driven methods induce hierarchies directly from corpora via clustering [ 76 ], seed-guided growth [ 59 ], or emerg-ing LLM-based prompting [ 29 , 33 , 74 , 78 ]. These methods treat taxonomy construction as a generation task over fixed, small cor-pora, leaving LLM-based variants prone to structural hallucination. We instead target taxonomy maintenance in the wild in a dynamic, in-the-wild setting and reframe it as a structural integration problem: LLMs are restricted to extracting author-curated hierarchical sig-nals from Related Work sections, while reliability-aware integration, hypothesized concept prediction from geometric voids, and budget-aware retrieval jointly address the efficiency and cost challenges of streaming paper arrivals. Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang 
+
+Geometric Embeddings for Hierarchical Relations. To capture the asymmetry of hierarchical relations, researchers have explored non-Euclidean geometries, including 1) hyperbolic models [ 23 , 39 , 49 ], which embed concepts as points in a negatively curved space whose exponentially expanding volume compactly accommodates tree-like structure; 2) order embeddings [ 6 , 34 , 65 ], which model is-a as a partial order, originally via coordinate-wise dominance and subse-quently extended to probabilistic and density-based formulations; and 3) box embeddings [4, 14 , 35 , 66 ], which represent each concept as an axis-aligned hyperrectangle so that is-a relations correspond to spatial inclusion between boxes. In this work, we mainly lever-age box embeddings as they provide an explicit geometric prior in which containment between boxes serves as a direct indicator for the parent–child relation, and the void volumes between boxes furnish a first-class signal of where new concepts can plausibly emerge. Neither property is available from hyperbolic or order-based rep-resentations. Furthermore, extending the existing box-embedding framework, we introduce two components tailored to in-the-wild taxonomy maintenance. First, we propose a novel bidirectional map-ping model to bridge the semantic word-embedding space and the geometric box-embedding space, employing a self-supervised dual-objective strategy for both efficient updating and robust learning. Second, we introduce a geometric concept emergence model that predicts likely emerging concepts to guide evidence retrieval. 
+
+Continual Learning. Continual learning aims to update models over a non-stationary data stream without catastrophic forgetting [ 31 ], and the literature broadly clusters into three families: regularization-based methods that anchor parameters to past optima via importance-weighted penalties (e.g., EWC [ 31 ], SI [ 75 ], MAS [ 5]); replay-based methods that maintain a small memory of past examples or generative surrogates and rehearse them alongside new data (e.g., iCaRL [ 52 ], GEM/A-GEM [ 10 , 37 ], ER [ 11 ]); and architecture-based methods that allocate or isolate sub-networks per task (e.g., Progressive Networks [54], PackNet [40]). These approaches share a common operating assumption: the label space or task structure is externally specified, and the goal is to preserve model behav-ior on previously seen tasks while accommodating new ones [ 15 ]. GIST departs from this setting in two ways. First, the supervision signal in our problem is itself drifting: the taxonomy that defines parent–child relations grows, abstracts, and specializes over time, so there is no fixed task identity to anchor regularization or rehearsal against. Second, our novelty-aware coreset selection is principled as an importance-reweighted approximation of the historical empirical risk (Sec. 3.3.2), and it explicitly trades off ERM fidelity against a novelty score that quantifies complementarity with the incoming batch—yielding a memory that is both representative of historical structural signals and non-redundant with newly extracted ones, a property that standard reservoir or random-sampling replay buffers do not provide. 
+
+## 9 CONCLUSION 
+
+We address taxonomy maintenance in the wild over evolving schol-arly repositories. We propose GIST, which leverages human-curated partial taxonomies as reliable signals and integrates them via geo-metric containment relationships, together with a probabilistic hy-pothesized concept generation module and a cost-effective evidence retrieval module. Experiments on ar5iv across 12 topics show that GIST achieves strong taxonomy quality with substantially lower runtime and monetary cost than LLM-driven baselines. 
+
+## REFERENCES 
+
+[1] [n.d.]. ACM Digital Library. https://dl.acm.org. Accessed: 2025-11-25. [2] [n.d.]. IEEE Xplore Digital Library. https://ieeexplore.ieee.org. Accessed: 2025-11-25. [3] 2012. The 2012 ACM Computing Classification System. https://www.acm.org/ publications/class-2012. Accessed 2025-11-12. [4] Ralph Abboud, Ismail Ilkan Ceylan, Thomas Lukasiewicz, and Tommaso Salvatori. 2020. BoxE: A Box Embedding Model for Knowledge Base Completion. In 
+
+Proceedings of the 34th Conference on Neural Information Processing Systems (NeurIPS) . 1–13. [5] Rahaf Aljundi, Francesca Babiloni, Mohamed Elhoseiny, Marcus Rohrbach, and Tinne Tuytelaars. 2018. Memory Aware Synapses: Learning What (Not) to Forget. In ECCV .[6] Ben Athiwaratkun and Andrew Gordon Wilson. 2018. Hierarchical Density Order Embeddings. In International Conference on Learning Representations (ICLR) .https://openreview.net/forum?id=HJCXZQbAZ [7] Sören Auer, Christian Bizer, Georgi Kobilarov, Jens Lehmann, Richard Cyganiak, and Zachary Ives. 2007. DBpedia: A Nucleus for a Web of Open Data. In The Semantic Web – ISWC 2007 + ASWC 2007 (Lecture Notes in Computer Science) ,Vol. 4825. Springer, 722–735. https://doi.org/10.1007/978-3-540-76298-0_52 [8] Christopher M. Bishop. 2006. Pattern Recognition and Machine Learning .Springer. [9] Chengliang Chai, Jiabin Liu, Nan Tang, Ju Fan, Dongjing Miao, Jiayi Wang, Yuyu Luo, and Guoliang Li. 2023. Goodcore: Data-effective and data-efficient machine learning through coreset selection over incomplete data. Proceedings of the ACM on Management of Data 1, 2 (2023), 1–27. [10] Arslan Chaudhry, Marc’Aurelio Ranzato, Marcus Rohrbach, and Mohamed Elho-seiny. 2019. Efficient Lifelong Learning with A-GEM. In ICLR .[11] Arslan Chaudhry, Marcus Rohrbach, Mohamed Elhoseiny, Thalaiyasingam Ajan-than, Puneet K. Dokania, Philip H.S. Torr, and Marc’Aurelio Ranzato. 2019. On Tiny Episodic Memories in Continual Learning. In ICML Workshop .[12] Lydia B Chilton, Juho Kim, Paul André, Felicia Cordeiro, James A Landay, Daniel S Weld, Steven P Dow, Robert C Miller, and Haoqi Zhang. 2014. Frenzy: collaborative data organization for creating conference sessions. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems . 1255–1264. [13] Peter Christen. 2012. Data Matching: Concepts and Techniques for Record Linkage, Entity Resolution, and Duplicate Detection . Springer. https://doi.org/10. 1007/978-3-642-31164-2 [14] Shib Sankar Dasgupta, Michael Boratko, Dongxu Zhang, Luke Vilnis, Xiang Lor-raine Li, and Andrew McCallum. 2020. Improving Local Identifiability in Proba-bilistic Box Embeddings. In Advances in Neural Information Processing Systems (NeurIPS) , Vol. 33. 182–192. [15] Matthias De Lange, Rahaf Aljundi, Marc Masana, Sarah Parisot, Xu Jia, Aleš Leonardis, Greg Slabaugh, and Tinne Tuytelaars. 2022. A Continual Learning Survey: Defying Forgetting in Classification Tasks. IEEE TPAMI 44, 7 (2022). [16] Yuhao Deng, Chengliang Chai, Kaisen Jin, Linan Zheng, Lei Cao, Ye Yuan, and Guoren Wang. 2025. Two birds with one stone: Efficient deep learning over mislabeled data through subset selection. Proceedings of the ACM on Management of Data 3, 3 (2025), 1–28. [17] Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. Bert: Pre-training of deep bidirectional transformers for language understanding. In Pro-ceedings of the 2019 conference of the North American chapter of the association for computational linguistics: human language technologies, volume 1 (long and short papers) . 4171–4186. [18] Bolin Ding, Haixun Wang, Ruoming Jin, Jiawei Han, and Zhongyuan Wang. 2012. Optimizing Index for Taxonomy Keyword Search. In Proceedings of the ACM SIGMOD International Conference on Management of Data . ACM, 493–504. https://doi.org/10.1145/2213836.2213892 [19] Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Amy Yang, Angela Fan, et al . 2024. The Llama 3 Herd of Models. arXiv preprint arXiv:2407.21783 
+
+(2024). https://arxiv.org/abs/2407.21783 [20] Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, and Jonathan Larson. 2024. From local to global: A graph rag approach to query-focused summarization. arXiv preprint arXiv:2404.16130 (2024). [21] Marcus Fontoura, Vanja Josifovski, Ravi Kumar, Christopher Olston, Andrew Tomkins, and Sergei Vassilvitskii. 2008. Relaxation in Text Search using Taxonomies. Proceedings of the VLDB Endowment 1, 1 (2008), 672–683. https://doi.org/10.14778/1453856.1453930 Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+[22] Sainyam Galhotra, Donatella Firmani, Barna Saha, and Divesh Srivastava. 2018. Robust entity resolution using random graphs. In Proceedings of the 2018 Interna-tional Conference on Management of Data . 3–18. [23] Octavian-Eugen Ganea, Gary Bécigneul, and Thomas Hofmann. 2018. Hyperbolic Entailment Cones for Learning Hierarchical Embeddings. In Proceedings of the 35th International Conference on Machine Learning (ICML) . PMLR, 1646–1655. https://proceedings.mlr.press/v80/ganea18a.html [24] Deyan Ginev, Bruce R. Miller, and Michael Kohlhase. 2025. ar5iv: HTML5-Converted arXiv Articles (Dataset). https://sigmathling.kwarc.info/resources/ ar5iv-dataset-2024/. Sources up to October 2025; HTML5 conversion of arXiv articles using LaTeXML. Not a live preview service. [25] Maarten Grootendorst. 2022. BERTopic: Neural topic modeling with a class-based TF-IDF procedure. arXiv preprint arXiv:2203.05794 (2022). [26] Jiacheng Huang, Zequn Sun, Qijin Chen, Xiaozhou Xu, Weijun Ren, and Wei Hu. 2023. Deep active alignment of knowledge graph entities and schemata. 
+
+Proceedings of the ACM on Management of Data 1, 2 (2023), 1–26. [27] Minhao Jiang, Xiangchen Song, Jieyu Zhang, and Jiawei Han. 2022. TaxoEnrich: Self-Supervised Taxonomy Completion via Structure-Semantic Representations. In Proceedings of The Web Conference (WWW) . Lyon, France. https://hanj.cs. illinois.edu/pdf/www22_mjiang.pdf [28] Bhargav Kanagal, Amr Ahmed, Sandeep Pandey, Vanja Josifovski, Jeffrey Yuan, and Lluis Garcia-Pueyo. 2012. Supercharging Recommender Systems using Tax-onomies for Learning User Purchase Behavior. Proceedings of the VLDB Endow-ment 5, 10 (2012), 956–967. https://vldb.org/pvldb/vol5/p956_bhargavkanagal_ vldb2012.pdf [29] Priyanka Kargupta, Nan Zhang, Yunyi Zhang, Rui Zhang, Prasenjit Mitra, and Jiawei Han. 2025. TaxoAdapt: Aligning LLM-Based Multidimensional Taxonomy Construction to Evolving Research Corpora. In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) .Association for Computational Linguistics, Bangkok, Thailand, 29834–29850. https://aclanthology.org/2025.acl-long.1442 [30] Andreas Kipf, Thomas Kipf, Bernhard Radke, Viktor Leis, Peter Boncz, and Alfons Kemper. 2019. Learned Cardinalities: Estimating Correlated Joins with Deep Learning. In CIDR .[31] James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, et al . 2017. Overcoming Catastrophic Forgetting in Neural Networks. In Proceedings of the National Academy of Sciences (PNAS) , Vol. 114. 3521–3526. [32] Andreas Krause and Daniel Golovin. 2014. Submodular Function Maximization. In Tractability: Practical Approaches to Hard Problems , Lucas Bordeaux, Youssef Hamadi, and Pushmeet Kohli (Eds.). Cambridge University Press. [33] Avishek Lahiri, Yufang Hou, and Debarshi Kumar Sanyal. 2025. TaxoAlign: Scholarly Taxonomy Generation Using Language Models. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing .30191–30211. [34] Alice Lai and Julia Hockenmaier. 2017. Learning to Predict Denotational Prob-abilities for Modeling Entailment. In Proceedings of the 15th Conference of the European Chapter of the Association for Computational Linguistics (EACL) . 721– 730. https://aclanthology.org/E17-1068/ [35] Xiang Li, Luke Vilnis, Dongxu Zhang, Michael Boratko, and Andrew McCallum. 2019. Smoothing the Geometry of Probabilistic Box Embeddings. In International Conference on Learning Representations (ICLR) . https://openreview.net/forum? id=H1xSNiRcF7 [36] Yuliang Li, Jinfeng Li, Yoshihiko Suhara, AnHai Doan, and Wang-Chiew Tan. 2020. Deep entity matching with pre-trained language models. arXiv preprint arXiv:2004.00584 (2020). [37] David Lopez-Paz and Marc’Aurelio Ranzato. 2017. Gradient Episodic Memory for Continual Learning. In NeurIPS .[38] Yuyin Lu, Hegang Chen, Pengbo Mao, Yanghui Rao, Haoran Xie, Fu Lee Wang, and Qing Li. 2024. Self-supervised Topic Taxonomy Discovery in the Box Embedding Space. Transactions of the Association for Computational Linguistics (TACL) (2024). https://doi.org/10.1162/tacl_a_00712 [39] Mingyu Derek Ma, Muhao Chen, Te-Lin Wu, and Nanyun Peng. 2021. HyperEx-pan: Taxonomy Expansion with Hyperbolic Representation Learning. In Findings of the Association for Computational Linguistics: EMNLP 2021 . Association for Computational Linguistics, 4182–4194. https://doi.org/10.18653/v1/2021. findings-emnlp.353 [40] Arun Mallya and Svetlana Lazebnik. 2018. PackNet: Adding Multiple Tasks to a Single Network by Iterative Pruning. In CVPR .[41] Yuning Mao, Xiang Ren, Jiaming Shen, Xin Gu, and Jiawei Han. 2018. End-to-End Reinforcement Learning for Automatic Taxonomy Induction. arXiv preprint arXiv:1805.04044 (2018). https://arxiv.org/abs/1805.04044 [42] Ryan Marcus, Parimarjan Negi, Hongzi Mao, Nesime Tatbul, Mohammad Al-izadeh, and Tim Kraska. 2021. Bao: Making Learned Query Optimization Practi-cal. In SIGMOD .[43] Ryan Marcus, Parimarjan Negi, Hongzi Mao, Chi Zhang, Mohammad Alizadeh, Tim Kraska, Olga Papaemmanouil, and Nesime Tatbul. 2019. Neo: A Learned Query Optimizer. In VLDB .[44] Yuto Matsubara et al . 2020. Reproducibility, Replicability, and Insights into Dense Multi-Stage Retrieval. In SIGIR .[45] Sahil Mishra, Ujjwal Sudev, and Tanmoy Chakraborty. 2024. FLAME: Self-Supervised Low-Resource Taxonomy Expansion using Large Language Models. 
+
+arXiv preprint arXiv:2402.13623 (2024). https://arxiv.org/abs/2402.13623 [46] Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar. 2018. Foundations of Machine Learning (2 ed.). The MIT Press, Cambridge, MA, USA. [47] George L. Nemhauser, Laurence A. Wolsey, and Marshall L. Fisher. 1978. An anal-ysis of approximations for maximizing submodular set functions—I. Mathematical Programming 14, 1 (1978), 265–294. https://doi.org/10.1007/BF01588971 [48] Hoa Nguyen, Ariel Fuxman, Stelios Paparizos, Juliana Freire, and Rakesh Agrawal. 2011. Synthesizing Products for Online Catalogs. Proceedings of the VLDB Endowment 4, 7 (2011), 409–418. https://doi.org/10.14778/1988776.1988777 [49] Maximilian Nickel and Douwe Kiela. 2017. Poincaré Embeddings for Learning Hierarchical Representations. In Advances in Neural Information Processing Systems (NeurIPS) . 6338–6347. [50] Robert C Nickerson, Upkar Varshney, and Jan Muntermann. 2013. A method for taxonomy development and its application in information systems. European journal of information systems 22, 3 (2013), 336–359. [51] Gary W Oehlert. 1992. A note on the delta method. The American Statistician 46, 1 (1992), 27–29. [52] Sylvestre-Alvise Rebuffi, Alexander Kolesnikov, Georg Sperl, and Christoph H. Lampert. 2017. iCaRL: Incremental Classifier and Representation Learning. In 
+
+CVPR .[53] Christian P. Robert and George Casella. 2004. Monte Carlo Statistical Methods (2 ed.). Springer. [54] Andrei A. Rusu, Neil C. Rabinowitz, Guillaume Desjardins, et al . 2016. Progres-sive Neural Networks. arXiv:1606.04671 (2016). [55] Diptikalyan Saha, Avrilia Floratou, Karthik Sankaranarayanan, Umar Farooq Minhas, Ashish R Mittal, and Fatma Özcan. 2016. ATHENA: an ontology-driven system for natural language querying over relational data stores. Proceedings of the VLDB Endowment 9, 12 (2016), 1209–1220. [56] Jaydeep Sen, Chuan Lei, Abdul Quamar, Fatma Özcan, Vasilis Efthymiou, Ayushi Dalmia, Greg Stager, Ashish Mittal, Diptikalyan Saha, and Karthik Sankara-narayanan. 2020. Athena++ natural language querying for complex nested sql queries. Proceedings of the VLDB Endowment 13, 12 (2020), 2747–2759. [57] Burr Settles. 2009. Active Learning Literature Survey . Technical Report. U. Wisconsin–Madison. [58] Jiaming Shen, Meng Jiang, Xian Li, Jian Li, and Jiawei Han. 2020. TaxoExpan: Self-supervised Taxonomy Expansion with Position-Enhanced Graph Neural Network. In Proceedings of The Web Conference (WWW) . https://hanj.cs.illinois. edu/pdf/www20_jshen.pdf [59] Jiaming Shen, Zeqiu Wu, Dongming Lei, Chao Zhang, Xiang Ren, Michelle T. Vanni, Brian M. Sadler, and Jiawei Han. 2019. HiExpan: Task-Guided Taxonomy Construction by Hierarchical Tree Expansion. In Proceedings of the 2019 Confer-ence on Empirical Methods in Natural Language Processing (EMNLP-IJCNLP) .https://arxiv.org/abs/1910.08194 [60] Jaeho Shin, Sen Wu, Feiran Wang, Christopher De Sa, Ce Zhang, and Christo-pher Ré. 2015. Incremental Knowledge Base Construction Using DeepDive. 
+
+Proc. VLDB Endow. 8, 11 (2015), 1310–1321. https://doi.org/10.14778/2809974. 2809991 [61] Fabian M. Suchanek, Gjergji Kasneci, and Gerhard Weikum. 2008. YAGO: A Large Ontology from Wikipedia and WordNet. Web Semantics: Science, Services and Agents on the World Wide Web 6, 3 (2008), 203–217. https://doi.org/10.1016/ j.websem.2008.06.001 [62] Yushi Sun, Hao Xin, Kai Sun, Yifan Ethan Xu, Xiao Yang, Xin Luna Dong, Nan Tang, and Lei Chen. 2024. Are Large Language Models a Good Replacement of Taxonomies? Proceedings of the VLDB Endowment 17, 11 (2024), 2919–2932. https://doi.org/10.14778/3681954.3681973 [63] Masahiro Tanaka, Yasuyuki Mori, and Andrzej Bargiela. 2002. Granulation of keywords into sessions for timetabling conferences. Proceedings of soft computing and intelligent systems (SCIS 2002) (2002), 1–5. [64] Jianhong Tu, Ju Fan, Nan Tang, Peng Wang, Guoliang Li, Xiaoyong Du, Xiaofeng Jia, and Song Gao. 2023. Unicorn: A unified multi-tasking model for supporting matching tasks in data integration. Proceedings of the ACM on Management of Data 1, 1 (2023), 1–26. [65] Ivan Vendrov, Ryan Kiros, Sanja Fidler, and Raquel Urtasun. 2016. Order-Embeddings of Images and Language. In International Conference on Learning Representations (ICLR) . https://arxiv.org/abs/1511.06361 [66] Luke Vilnis, Xiang Li, Shikhar Murty, and Andrew McCallum. 2018. Probabilistic Embedding of Knowledge Graphs with Box Lattice Measures. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (ACL) .263–272. https://doi.org/10.18653/v1/P18-1025 [67] Jiayi Wang, Chengliang Chai, Nan Tang, Jiabin Liu, and Guoliang Li. 2022. Coresets over multiple tables for feature-rich and data-efficient machine learning. 
+
+Proceedings of the VLDB Endowment 16, 1 (2022), 64–76. Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang 
+
+[68] Lidan Wang, Jimmy Lin, and Donald Metzler. 2011. A Cascade Ranking Model for Efficient Ranked Retrieval. (2011). [69] Gerhard Weikum. 2021. Knowledge Graphs 2021: A Data Odyssey. Proc. VLDB Endow. 14, 12 (2021), 3233–3238. https://doi.org/10.14778/3476311.3476393 [70] D. H. D. West. 1979. Updating Mean and Variance Estimates: An Improved Method. Commun. ACM 22, 9 (1979), 532–535. [71] Sen Wu, Luke Hsiao, Xiao Cheng, Braden Hancock, Theodoros Rekatsinas, Philip Levis, and Christopher Ré. 2018. Fonduer: Knowledge Base Construction from Richly Formatted Data. In Proceedings of the 2018 International Conference on Management of Data (SIGMOD ’18) . ACM, 1301–1316. https://doi.org/10.1145/ 3183713.3183729 [72] Wei Xue, Yongliang Shen, Wenqi Ren, Jietian Guo, Shiliang Pu, and Weiming Lu. 2024. Insert or Attach: Taxonomy Completion via Box Embedding. In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL) . https://aclanthology.org/2024.acl-long.212.pdf [73] Zongheng Yang, Eric Liang, Amog Kamsetty, Chenggang Wu, Yan Duan, Xi Chen, Pieter Abbeel, Joseph M. Hellerstein, Sanjay Krishnan, and Ion Stoica. 2019. Deep Unsupervised Cardinality Estimation. VLDB (2019). [74] Qingkai Zeng, Yuyang Bai, Zhaoxuan Tan, Shangbin Feng, Zhenwen Liang, Zhi-han Zhang, and Meng Jiang. 2024. Chain-of-Layer: Iteratively Prompting Large Language Models for Taxonomy Induction from Limited Examples. In Proceed-ings of the 33rd ACM International Conference on Information and Knowledge Management (CIKM) . https://arxiv.org/abs/2402.07386 also arXiv:2402.07386. [75] Friedemann Zenke, Ben Poole, and Surya Ganguli. 2017. Continual Learning Through Synaptic Intelligence. In ICML .[76] Chao Zhang, Fangbo Tao, Xiusi Chen, Jiaming Shen, Meng Jiang, Brian Sadler, Michelle Vanni, and Jiawei Han. 2018. TaxoGen: Unsupervised Topic Taxonomy Construction by Adaptive Term Embedding and Clustering. In Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining . ACM, 2701–2709. https://doi.org/10.1145/3219819.3220064 [77] Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei A Efros. 2017. Unpaired image-to-image translation using cycle-consistent adversarial networks. In Pro-ceedings of the IEEE international conference on computer vision . 2223–2232. [78] Kun Zhu, Lizi Liao, Yuxuan Gu, Lei Huang, Xiaocheng Feng, and Bing Qin. 2025. Context-aware hierarchical taxonomy generation for scientific papers via llm-guided multi-aspect clustering. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing . 15627–15645. Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+## APPENDIX A PROOFS A.1 Proof of Submodularity for Eq. (1) 
+
+LEMMA 4 (S UBMODULARITY OF THE COVERAGE TERM ). The function 𝑓 cov : 2 Ecand → R≥0 is monotone and submodular. 
+
+PROOF . Let 𝑔 (D) := Ð𝑒 ∈ D 𝑆 𝑒 . This is a standard coverage (set-union) function and is monotone submodular [ 32 ]. Since 𝑓 cov (D) =
+
+𝑔 (D)/|V cand | is just a positive scaling of 𝑔 , 𝑓 cov remains monotone and submodular. □
+
+LEMMA 5 (M ODULARITY OF THE RELIABILITY TERM ). The function 𝑓 rel : 2 Ecand → R is modular (hence submodular). Moreover, since ˜𝑤 𝑒 ∈ [ 0, 1], it is monotone. 
+
+PROOF . 𝑓 rel (D) = 1
+
+> 𝐾
+
+Í𝑒 ∈ D ˜𝑤 𝑒 is a weighted sum over selected elements, hence modular (its marginal gain for adding 𝑒 is always 
+
+˜𝑤 𝑒 /𝐾 , independent of D). Since ˜𝑤 𝑒 ≥ 0, it is also monotone. □
+
+PROPOSITION 6 (S UBMODULARITY OF 𝐹 ). The objective 𝐹 (D) =
+
+𝑓 cov (D) + 𝜆 rel 𝑓 rel (D) is submodular for any 𝜆 rel ∈ R. If 𝜆 rel ≥ 0,then 𝐹 is also monotone and non-negative. 
+
+PROOF . Coverage functions are submodular (Lemma 4) and mod-ular functions are submodular (Lemma 5). Submodularity is closed under addition and scalar multiplication [ 32 ], so 𝐹 is submodular for any 𝜆 rel . If 𝜆 rel ≥ 0, both terms are monotone and non-negative, hence so is 𝐹 . □
+
+## A.2 Proof for Proposition 1. 
+
+PROOF . Let Dold be the domain of edges, and write Π(𝑒 ) as shorthand for Πcore (𝑒 ). Eq. 3 is 
+
+max   
+
+> Π∈Δ( D old )
+
+−KL (Π ∥ ΠERM ) + 𝜆 nov E𝑒 ∼Π [𝑛 (𝑒 )] .
+
+Expanding the two terms yields the equivalent objective 
+
+max  
+
+> Π∈Δ( D old )
+
+∑︁ 𝑒 
+
+Π(𝑒 ) log ΠERM (𝑒 )
+
+Π(𝑒 ) + 𝜆 nov ∑︁ 𝑒 
+
+Π(𝑒 ) 𝑛 (𝑒 ).
+
+Since KL (·∥ ΠERM ) is strictly convex over the simplex (on the support of ΠERM ), the objective is strictly concave, hence the maximizer is unique. Introduce a Lagrange multiplier 𝛼 ∈ R for Í𝑒 Π(𝑒 ) = 1. The Lagrangian is 
+
+L( Π, 𝛼 ) =∑︁ 
+
+> 𝑒
+
+Π(𝑒 ) log ΠERM (𝑒 )
+
+Π(𝑒 ) +𝜆 nov ∑︁ 𝑒 
+
+Π(𝑒 ) 𝑛 (𝑒 )+ 𝛼 
+
+∑︁ 
+
+> 𝑒
+
+Π(𝑒 )− 1
+
+
+
+.
+
+For any 𝑒 with ΠERM (𝑒 ) > 0, optimality implies Π∗ (𝑒 ) > 0, and the stationarity condition gives 
+
+𝜕 L
+
+𝜕 Π(𝑒 ) = log ΠERM (𝑒 ) − log Π(𝑒 ) − 1 + 𝜆 nov 𝑛 (𝑒 ) + 𝛼 = 0.
+
+Rearranging, 
+
+log Π(𝑒 ) = log ΠERM (𝑒 ) + 𝜆 nov 𝑛 (𝑒 ) + ( 𝛼 − 1),
+
+and exponentiating yields 
+
+Π∗ (𝑒 ) = ΠERM (𝑒 ) exp  𝜆 nov 𝑛 (𝑒 ) · exp (𝛼 − 1).
+
+Enforcing Í𝑒 Π∗ (𝑒 ) = 1 gives the normalizer 
+
+exp (𝛼 − 1) =
+
+"∑︁ 
+
+> 𝑒 ′
+
+ΠERM (𝑒 ′) exp  𝜆 nov 𝑛 (𝑒 ′)# −1
+
+.
+
+Therefore, 
+
+Π∗ 
+
+> core
+
+(𝑒 ) = ΠERM (𝑒 ) exp 𝜆 nov 𝑛 (𝑒 )
+
+Í𝑒 ′ ΠERM (𝑒 ′) exp 𝜆 nov 𝑛 (𝑒 ′) .
+
+For any 𝑒 with ΠERM (𝑒 ) = 0, any feasible Π(𝑒 ) > 0 makes KL (Π∥ΠERM ) =
+
++∞ , so necessarily Π∗ (𝑒 ) = 0, which is also consistent with the ex-pression above. This completes the proof. □
+
+## A.3 Proof for Proposition 2 
+
+PROOF . (i) Unbiasedness is standard importance sampling. Since 
+
+𝑒 ∼ Πcore ,
+
+E
+
+ ΠERM (𝑒 )
+
+Πcore (𝑒 ) ℓ (𝑒 ; 𝜃 )
+
+
+
+=∑︁ 
+
+> 𝑒
+
+Πcore (𝑒 ) ΠERM (𝑒 )
+
+Πcore (𝑒 ) ℓ (𝑒 ; 𝜃 )
+
+=∑︁ 
+
+> 𝑒
+
+ΠERM (𝑒 )ℓ (𝑒 ; 𝜃 ) = Lold (𝜃 ),
+
+(10) and linearity of expectation yields E[ bLold (𝜃 )] = Lold (𝜃 ).(ii) The self-normalized estimator can be written as 
+
+eLold (𝜃 ) =
+
+> 1
+> 𝑚
+
+Í𝑚 𝑖 =1 𝑋 𝑖 
+
+> 1
+> 𝑚
+
+Í𝑚 𝑖 =1 𝑌 𝑖 
+
+, 𝑋 𝑖 := ˆ𝑤 𝑖 ℓ (𝑒 𝑖 ; 𝜃 ), 𝑌 𝑖 := ˆ𝑤 𝑖 .
+
+Under the stated integrability condition, the strong law of large num-bers gives 1
+
+> 𝑚
+
+Í𝑖 𝑋 𝑖 → E[𝑋 1] = Lold (𝜃 ) and 1
+
+> 𝑚
+
+Í𝑖 𝑌 𝑖 → E[𝑌 1] =
+
+Í𝑒 ΠERM (𝑒 ) = 1 almost surely. Thus the ratio converges to Lold (𝜃 )
+
+almost surely. This is the standard consistency result for self-normalized importance sampling; see, e.g., [53]. □
+
+## A.4 Proof of proposition 3. 
+
+PROOF . Step 1: Existence and uniqueness. Let 𝑆 := {ℎ : Πprior   
+
+> 𝑡 −1,ℎ
+
+>
+
+0} be the support of the prior. Any feasible Π𝑡 with Π𝑡,ℎ > 0 for some 
+
+ℎ ∉ 𝑆 yields KL (Π𝑡 ∥Πprior   
+
+> 𝑡 −1
+
+) = +∞ and is therefore never optimal. Hence it suffices to optimize over {Π𝑡 ∈ Δ𝐻 𝑡 −1 : Π𝑡,ℎ = 0 ∀ℎ ∉ 𝑆 }.On this domain, KL (·∥ Πprior   
+
+> 𝑡 −1
+
+) is strictly convex in Π𝑡 (on the rela-tive interior), so the objective is strictly concave; the feasible set is closed and bounded (and nonempty under budget feasibility), thus an optimum exists and is unique. 
+
+Step 2: KKT conditions and closed form. Introduce Lagrange multipliers 𝛼 ∈ R for Íℎ Π𝑡,ℎ = 1 and 𝜈 ≥ 0 for the budget constraint. The Lagrangian is 
+
+L( Π𝑡 , 𝛼, 𝜈 ) =∑︁ 
+
+> ℎ
+
+Π𝑡,ℎ 𝑈 ℎ − 𝜆 plan ∑︁ 
+
+> ℎ
+
+Π𝑡,ℎ log Π𝑡,ℎ 
+
+Πprior  
+
+> 𝑡 −1,ℎ
+
+− 𝛼 
+
+∑︁ 
+
+> ℎ
+
+Π𝑡,ℎ − 1
+
+
+
+− 𝜈 
+
+
+
+𝑀 𝑡 ∑︁ 
+
+> ℎ
+
+Π𝑡,ℎ ¯ℓℎ − 𝐾 𝑡 
+
+
+
+.
+
+For any ℎ ∈ 𝑆 , the optimal solution satisfies Π∗ 
+
+> 𝑡,ℎ
+
+> 0, and the stationarity condition 𝜕 L/ 𝜕 Π𝑡,ℎ = 0 gives 
+
+𝑈 ℎ − 𝜆 plan 
+
+
+
+log Π∗
+
+> 𝑡,ℎ
+
+Πprior  
+
+> 𝑡 −1,ℎ
+
++ 1
+
+
+
+− 𝛼 − 𝜈𝑀 𝑡 ¯ℓℎ = 0.
+
+Rearranging, 
+
+log Π∗
+
+> 𝑡,ℎ
+
+Πprior  
+
+> 𝑡 −1,ℎ
+
+= 𝑈 ℎ − 𝜈𝑀 𝑡 ¯ℓℎ − 𝛼 − 𝜆 plan 
+
+𝜆 plan 
+
+,
+
+Π∗ 
+
+> 𝑡,ℎ
+
+= Πprior   
+
+> 𝑡 −1,ℎ
+
+exp 
+
+𝑈 ℎ − 𝜈𝑀 𝑡 ¯ℓℎ
+
+𝜆 plan 
+
+
+
+· 𝐶, Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Daomin Ji, Hui Luo, Zhifeng Bao, Junhao Gan, and Zi Huang 
+
+where 𝐶 = exp   − ( 𝛼 + 𝜆 plan )/ 𝜆 plan 
+
+ is constant in ℎ. Enforcing 
+
+Íℎ Π∗ 
+
+> 𝑡,ℎ
+
+= 1 yields 
+
+𝐶 =
+
+" 𝐻 𝑡 −1∑︁ 
+
+> ℎ′=1
+
+Πprior   
+
+> 𝑡 −1,ℎ ′
+
+exp 
+
+𝑈 ℎ′ − 𝜈𝑀 𝑡 ¯ℓℎ′
+
+𝜆 plan 
+
+# −1
+
+.
+
+Define 𝜆 := 𝜈𝑀 𝑡 ≥ 0 and 
+
+𝑍 (𝜆 ) = 
+
+> 𝐻 𝑡 −1
+
+∑︁ 
+
+> ℎ′=1
+
+Πprior   
+
+> 𝑡 −1,ℎ ′
+
+exp 
+
+𝑈 ℎ′ − 𝜆 ¯ℓℎ′
+
+𝜆 plan 
+
+
+
+.
+
+Then, for all ℎ (including ℎ ∉ 𝑆 , where Πprior   
+
+> 𝑡 −1,ℎ
+
+= 0 implies Π∗ 
+
+> 𝑡,ℎ
+
+= 0), 
+
+Π∗ 
+
+> 𝑡,ℎ
+
+= Πprior   
+
+> 𝑡 −1,ℎ
+
+exp  (𝑈 ℎ − 𝜆 ¯ℓℎ )/ 𝜆 plan 
+
+
+
+𝑍 (𝜆 ) .
+
+This matches the claimed Gibbs form for some optimal dual multi-plier 𝜆 ∗ ≥ 0.
+
+Step 3: Determining 𝜆 ∗ and bisection. The remaining KKT condi-tions are primal feasibility and complementary slackness: 
+
+𝑀 𝑡 𝐻 𝑡 −1∑︁ 
+
+> ℎ=1
+
+Π∗ 
+
+> 𝑡,ℎ
+
+¯ℓℎ ≤ 𝐾 𝑡 ,𝜈 
+
+
+
+𝑀 𝑡 𝐻 𝑡 −1∑︁ 
+
+> ℎ=1
+
+Π∗ 
+
+> 𝑡,ℎ
+
+¯ℓℎ − 𝐾 𝑡 
+
+
+
+= 0, 𝜈 ≥ 0.
+
+Equivalently, either the budget is inactive and 𝜆 ∗ = 𝜈𝑀 𝑡 = 0, or it is active and 
+
+𝑀 𝑡 𝐻 𝑡 −1∑︁ 
+
+> ℎ=1
+
+Π𝑡,ℎ (𝜆 ∗) ¯ℓℎ = 𝐾 𝑡 ,
+
+where Π𝑡,ℎ (𝜆 ) denotes the Gibbs distribution above. Let 
+
+𝑐 (𝜆 ) := 
+
+> 𝐻 𝑡 −1
+
+∑︁ 
+
+> ℎ=1
+
+Π𝑡,ℎ (𝜆 ) ¯ℓℎ .
+
+A standard exponential-family calculation yields that 𝑐 (𝜆 ) is contin-uous and nonincreasing: 
+
+𝑑 𝑑𝜆 𝑐 (𝜆 ) = − 1
+
+𝜆 plan 
+
+Var Π𝑡 (𝜆 ) ( ¯ℓℎ ) ≤ 0.
+
+Therefore 𝑔 (𝜆 ) := 𝑀 𝑡 𝑐 (𝜆 ) − 𝐾 𝑡 is continuous and nonincreasing. If 𝑔 (0) ≤ 0, then 𝜆 ∗ = 0 satisfies the KKT conditions. Otherwise 
+
+𝑔 (0) > 0 and, under feasibility (e.g., 𝑀 𝑡 min ℎ ¯ℓℎ ≤ 𝐾 𝑡 ), we have 
+
+lim 𝜆 →∞ 𝑔 (𝜆 ) ≤ 0; thus there exists 𝜆 ∗ > 0 with 𝑔 (𝜆 ∗) = 0. Mono-tonicity allows finding 𝜆 ∗ via one-dimensional bisection, and the constraint holds with equality when active. □
+
+## A.5 Proof of Submodularity for Eq. (9) 
+
+PROOF . We prove that 𝐹 is both monotone and submodular. 
+
+Monotonicity. For any 𝐴 ⊆ 𝐵 , for every x, we have 
+
+max   
+
+> 𝑑 ∈𝐴
+
+𝑎 (𝑑, x) ≤ max   
+
+> 𝑑 ∈𝐵
+
+𝑎 (𝑑, x),
+
+hence 𝑓 x (𝐴 ) ≤ 𝑓 x (𝐵 ) and therefore 𝐹 (𝐴 ) ≤ 𝐹 (𝐵 ).
+
+Submodularity. Fix any 𝐴 ⊆ 𝐵 and any 𝑒 ∉ 𝐵 . For each x, let 
+
+𝑚 𝐴 (x) = max   
+
+> 𝑑 ∈𝐴
+
+𝑎 (𝑑, x), 𝑚 𝐵 (x) = max   
+
+> 𝑑 ∈𝐵
+
+𝑎 (𝑑, x),
+
+so that 𝑚 𝐴 (x) ≤ 𝑚 𝐵 (x). The marginal gain of adding 𝑒 to a set 𝑆 for term x is 𝑓 x (𝑆 ∪ { 𝑒 }) − 𝑓 x (𝑆 ) = max {𝑚 𝑆 (x),𝑎 (𝑒, x)} − 𝑚 𝑆 (x) = max {0, 𝑎 (𝑒, x) − 𝑚 𝑆 (x)} .
+
+Since 𝑚 𝐴 (x) ≤ 𝑚 𝐵 (x), we have 
+
+max {0, 𝑎 (𝑒, x) − 𝑚 𝐴 (x)} ≥ max {0, 𝑎 (𝑒, x) − 𝑚 𝐵 (x)} ,
+
+i.e., the marginal gain under 𝐴 is at least that under 𝐵 for every x.Summing over x ∈ X 𝑡 yields 
+
+𝐹 (𝐴 ∪ { 𝑒 }) − 𝐹 (𝐴 ) ≥ 𝐹 (𝐵 ∪ { 𝑒 }) − 𝐹 (𝐵 ),
+
+so 𝐹 is submodular. Finally, a sum of submodular functions is sub-modular, completing the proof. □
+
+## B DETAILS FOR LLM-GUIDED PARTIAL TAXONOMY EXTRACTION B.1 Regex Matching for Extracting Related Work Sections 
+
+To acquire author-curated knowledge about how a paper organizes prior studies around a given research topic, we extract Related Work 
+
+(and semantically equivalent) sections using a lightweight rule-based pipeline based on regular-expression matching. In the arXiv dataset, the LaTeX2HTML pages structure the document into section-level HTML blocks annotated with the CSS class ltx_section . We first segment each paper into ltx_section units, parse the corre-sponding section titles, and normalize them (lowercasing and strip-ping punctuation and numbering). We then match titles against a case-insensitive library of candidate patterns that cover common heading variants, including Related Work , Background , Literature Review , Prior/Previous Work , and compound forms such as Back-ground and Related Work . If multiple sections match, we prioritize the earliest highest-level match (to avoid appendices) and include its immediate subsections when they are topically consistent. Finally, we convert the matched section(s) into plain text for downstream processing, removing non-prose artifacts (e.g., figure/table captions and equations) while preserving in-text citation markers to retain bibliographic cues. 
+
+## B.2 Prompt Design 
+
+Given an extracted related-work text span and a target research topic, we use a structured prompt to instruct an LLM to: (1) identify the categorization scheme implicitly or explicitly used by the authors to organize prior work, and (2) output these categories as a machine-readable taxonomy in JSON. To improve reliability and ease of parsing, we constrain the model to a fixed JSON schema (a rooted tree with optional intermediate levels) and explicitly prohibit free-form commentary. We further require topical filtering: the model must keep only categories that are directly relevant to the given research topic, and discard generic or off-topic buckets (e.g., “other applications”) unless they contain topic-specific subcategories. To reduce hallucination, we instruct the model to ground each extracted node in the provided text (e.g., by attaching a short supporting span) and to return an empty taxonomy when the section does not provide a discernible categorization. 
+
+## C DETAILS FOR EXPERIMENT SETTING C.1 Survey Papers 
+
+The survey papers used in our benchmark are listed in Table 9. They are primarily drawn from high-impact venues, including ACM Computing Surveys (CSUR), IEEE Transactions on Knowledge and Data Engineering (TKDE), and ACM Transactions on Information Systems (TOIS). Taxonomy Maintenance In The Wild Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+Table 9: Details of the benchmark survey papers 
+
+Title Venue Year 
+
+Extended Reality (XR) Toward Building Immersive Solutions: The Key to Unlocking Industry 4.0 
+
+ACM Computing Surveys 2024 Self-tuning Database Systems: A Systematic Literature Review of Automatic Database Schema Design and Tuning 
+
+ACM Computing Surveys 2024 HTAP Databases: A Survey IEEE Transactions on Knowledge and Data Engineering 2024 A Survey on Employing Large Language Models for Text-to-SQL Tasks ACM Computing Surveys 2026 Graph Retrieval-Augmented Generation: A Survey ACM Transaction on Information Systems 2025 A Survey of Distributed Graph Algorithms on Massive Graphs ACM Computing Surveys 2025 Evolving Paradigms in Automated Program Repair: Taxonomy, Challenges, and Op-portunities 
+
+ACM Computing Surveys 2025 Artificial Intelligence Applied to Software Testing: A Tertiary Study ACM Computing Surveys 2024 Machine Unlearning: A Survey ACM Computing Surveys 2024 Fairness in Machine Learning: A Survey ACM Computing Surveys 2024 A Systematic Literature Review on Multi-Robot Task Allocation ACM Computing Surveys 2025 Multimodal Recommender Systems: A Survey ACM Computing Surveys 2025 
+
+Budgeted Retrieval and Learned Query Planning. A long line of data-management work has studied how to retrieve or process data under explicit resource constraints, including budget-constrained top-𝑘 and cascade ranking that progressively applies more expensive scorers to shrinking candidate sets [ 44 , 68 ], learned query opti-mizers and cost models that estimate per-plan latency to choose execution strategies (e.g., Neo [ 43 ], Bao [ 42 ], learned cardinality estimators [ 30 , 73 ]), and budgeted active retrieval that selects which documents or labels to acquire under a fixed query budget [ 57 ]. The unifying assumption across these works is that the query (or the workload distribution) is given and fixed, and the optimization target is to minimize cost or maximize relevance for that query. GIST addresses a fundamentally different regime in which the queries themselves do not yet exist: at each iteration, we must synthesize 
+
+candidate exploration directions from the current taxonomy via hy-pothesized concept boxes, score how strongly the incoming paper batch can support each direction (utility anchoring), and only then allocate token and API budget across these self-generated queries (Sec. 5.1). The resulting KL-regularized allocation admits a closed-form softmax solution over (𝑈 ℎ − 𝜆 ∗ ¯ℓℎ ), which to our knowledge has no direct counterpart in fixed-query budgeted retrieval or learned query planning. In this sense, GIST extends budget-aware retrieval from query execution to query generation under an evolving struc-tural target.

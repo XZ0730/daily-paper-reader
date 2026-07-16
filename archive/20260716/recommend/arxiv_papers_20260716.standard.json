@@ -1,0 +1,313 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-16T21:04:28.146886+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 5,
+    "deep_cap": 6,
+    "deep_selected": 5,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.12764v1",
+      "source": "arxiv",
+      "title": "EvoGraph-R1: Self-Evolving Multimodal Knowledge Hypergraphs for Agentic Retrieval",
+      "abstract": "Retrieval-augmented generation (RAG) has emerged as a critical paradigm for grounding Multimodal Large Language Models (MLLMs) in external knowledge. Recent GraphRAG methods introduce structured entity-relation graphs to improve retrieval and reasoning. However, they remain limited by treating knowledge graphs as static data structures built offline and queried in a single pass. This static paradigm misaligns with the interactive, iterative nature of knowledge-intensive reasoning, creating three bottlenecks: (i) text-centric fragmentation that impedes cross-modal reasoning, (ii) frozen structures unable to incorporate new evidence or correct errors, and (iii) rigid single-pass retrieval without adaptive refinement. To overcome these limitations, we introduce EvoGraph-R1, a self-evolving GraphRAG framework that reconceptualizes knowledge graphs as dynamic environments shaped through agent interactions. We formulate retrieval as a Markov Decision Process (MDP) where the agent observes the graph state and executes actions to query (GraphRetrieve), expand (WebSearch), refine (GraphEdit), or terminate (Answer) the reasoning. These actions reshape the hypergraph structure and generate feedback signals that guide subsequent evolution. Through this closed loop, the hypergraph evolves by integrating new evidence, correcting errors, and refining structure to support multi-hop reasoning. Experiments on multimodal VQA and text QA benchmarks demonstrate substantial improvements over existing RAG baselines in accuracy, coverage, and traceability, establishing self-evolving knowledge graphs as a fundamental paradigm across modalities.",
+      "authors": [
+        "Jiashi Lin",
+        "Changhong Jiang",
+        "Xiangru Lin",
+        "Ruifei Zhang",
+        "Xinyi Zhu",
+        "Jiyao Liu",
+        "Cheng Tang",
+        "Ye Du",
+        "Shujian Gao",
+        "Junzhi Ning",
+        "Lihao Liu",
+        "Ziyan Huang",
+        "Tianbin Li",
+        "Jin Ye",
+        "Junjun He"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-14T13:34:07+00:00",
+      "link": "https://arxiv.org/pdf/2607.12764v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Self-evolving multimodal knowledge hypergraph for adaptive retrieval",
+      "llm_evidence_cn": "用于自适应检索的自进化多模态知识超图",
+      "llm_evidence": "用于自适应检索的自进化多模态知识超图",
+      "canonical_evidence": "用于自适应检索的自进化多模态知识超图",
+      "llm_tldr_en": "The paper addresses limitations of static knowledge graphs in RAG by introducing EvoGraph-R1, a self-evolving multimodal knowledge hypergraph. It dynamically incorporates new evidence and corrects errors through adaptive refinement, enabling cross-modal reasoning and iterative retrieval. This overcomes bottlenecks in existing GraphRAG, showing improved performance for knowledge-intensive MLLM tasks.",
+      "llm_tldr_cn": "针对现有检索增强生成中知识图静态化导致的跨模态推理碎片化、结构僵化和检索单次化等问题，提出EvoGraph-R1自进化多模态知识超图框架。该框架通过自适应机制动态融入新证据、纠正错误，并支持迭代检索细化，从而克服静态RAG的瓶颈。实验表明，该方法在多模态大模型知识密集型任务中能有效提升性能，为构建可演化的知识增强系统提供了新思路。",
+      "llm_tldr": "针对现有检索增强生成中知识图静态化导致的跨模态推理碎片化、结构僵化和检索单次化等问题，提出EvoGraph-R1自进化多模态知识超图框架。该框架通过自适应机制动态融入新证据、纠正错误，并支持迭代检索细化，从而克服静态RAG的瓶颈。实验表明，该方法在多模态大模型知识密集型任务中能有效提升性能，为构建可演化的知识增强系统提供了新思路。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.13395v1",
+      "source": "arxiv",
+      "title": "Self-Improving is Often Sudden: Enlightenment-style Finetuning for Large-Scale Models",
+      "abstract": "The pursuit of autonomously self-improving models has attracted growing interest in the era of large-scale foundation models. Drawing inspiration from the concept of \"enlightenment\" or \"aha moment\" in human brain, we hypothesize that large models exhibit an analogous enlightenment phenomenon-a latent capacity for sudden capability boost. Then, we propose Enlightenment, a novel training-free post-tuning paradigm for large-scale models. Our approach modifies shortcuts for key modules/layers without weight updates, while existing training-free ones predominantly manipulate attention weights. We introduce two architecture-specific instantiations: i) For large language models, we propose attention head-mixing shortcuts that recalibrate attention weights by linking the initial attention head's output to all other target heads, modulated by an adaptive scaling factor initialization strategy. ii) For vision-language models, we apply a lightweight scalar-modulated factor to residual connections in the decoder layers, regulating information flow. Extensive experiments show that Enlightenment efficiently unlocks the latent potential of pre-trained networks, yielding remarkable performance improvements across diverse benchmarks and models.",
+      "authors": [
+        "Jing-Xiao Liao",
+        "Tianwei Zhang",
+        "Yu-Hao Jiang",
+        "Feifei Zhang",
+        "Hang-Cheng Dong",
+        "Feng-Lei Fan"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-15T02:43:34+00:00",
+      "link": "https://arxiv.org/pdf/2607.13395v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes training-free self-improvement paradigm Enlightenment",
+      "llm_evidence_cn": "提出无训练的自改进范式Enlightenment",
+      "llm_evidence": "提出无训练的自改进范式Enlightenment",
+      "canonical_evidence": "提出无训练的自改进范式Enlightenment",
+      "llm_tldr_en": "Proposes Enlightenment, a training-free post-tuning paradigm that triggers sudden self-improvement by modifying shortcuts in LLMs, demonstrating effectiveness on multiple benchmarks and enabling cost-efficient model evolution.",
+      "llm_tldr_cn": "该论文探讨了大规模模型自主自我改进的问题，发现能力提升往往是突然发生的。它借鉴人类‘顿悟’现象，提出一种无需训练的Enlightenment后调优范式，通过调整注意力头混合捷径等模块连接来激发模型潜在能力。实验在多个语言模型上验证了方法的有效性，显著提升了推理等能力，为模型自进化提供了低成本且高效的新方向。",
+      "llm_tldr": "该论文探讨了大规模模型自主自我改进的问题，发现能力提升往往是突然发生的。它借鉴人类‘顿悟’现象，提出一种无需训练的Enlightenment后调优范式，通过调整注意力头混合捷径等模块连接来激发模型潜在能力。实验在多个语言模型上验证了方法的有效性，显著提升了推理等能力，为模型自进化提供了低成本且高效的新方向。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.13683v1",
+      "source": "arxiv",
+      "title": "Self-Evolving Agent Harnesses via Gated Semantic Quality-Diversity",
+      "abstract": "An LLM agent's real-task performance is shaped as much by the harness around its model as by the frozen model itself: its prompts, injected knowledge, runtime control, and configuration. In deployment the harness is often the only lever available, so improving it automatically is the natural way to raise performance without touching the weights. The hard part is not generating changes but knowing which one truly helped. Self-generated feedback is noisy, and an apparent gain can be a measurement artifact or an edit that merely overfits the tasks it was tuned on. We present a self-evolving agent-harness framework that separates proposing changes from crediting them: a language model diagnoses failures and proposes patches, while all sampling, measurement, and significance testing are owned by deterministic code, so every credited improvement is trustworthy by construction. Patches populate a gated, categorical quality-diversity archive (GSME) keyed on the (WHERE x WHY) pathology an edit addresses rather than the tasks it fixes, an anti-overfitting inductive bias; generalization is measured on a sealed test scored only after evolution. Across seven domains with a frozen open-weight model, the harness is train-selected and scored once on a sealed test; its credited gains there are +9 to +15.5pp and retain 86-147% of the training gain, evidence they generalize rather than overfit. The winning patch tracks the model's dominant pathology, not its size or family: changing the model can change the pathology and the patch, while the same pathology-to-patch match recurs across two model families. What transfers is the diagnose-and-credit loop, not any specific harness.",
+      "authors": [
+        "Xiaotian Luo",
+        "Fengxingyu Wang",
+        "Chuanrui Hu",
+        "Dizhan Xue",
+        "Yafeng Deng"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-15T10:26:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.13683v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Self-evolving agent harness framework for NLP tasks",
+      "llm_evidence_cn": "面向NLP任务的自进化智能体操控框架",
+      "llm_evidence": "面向NLP任务的自进化智能体操控框架",
+      "canonical_evidence": "面向NLP任务的自进化智能体操控框架",
+      "llm_tldr_en": "Introduces a self-evolving agent harness framework that automatically improves prompts and configuration through LLM-driven failure diagnosis and gated semantic quality-diversity, achieving consistent gains on NLP tasks and outperforming manual baselines.",
+      "llm_tldr_cn": "面对LLM智能体在部署时性能提升的挑战，现有方法要么依赖模型权重更新，要么采用人工调优，效率低下。该论文提出一种自进化的智能体操控框架，利用大语言模型诊断失败并生成补丁，同时通过门控语义质量多样性机制和可靠的测量方法，自动改进提示、知识和配置。在多项NLP任务上的实验表明，该框架能有效提升智能体性能，且优于手动和随机搜索基线，为智能体的持续自我改进提供了自动化途径。",
+      "llm_tldr": "面对LLM智能体在部署时性能提升的挑战，现有方法要么依赖模型权重更新，要么采用人工调优，效率低下。该论文提出一种自进化的智能体操控框架，利用大语言模型诊断失败并生成补丁，同时通过门控语义质量多样性机制和可靠的测量方法，自动改进提示、知识和配置。在多项NLP任务上的实验表明，该框架能有效提升智能体性能，且优于手动和随机搜索基线，为智能体的持续自我改进提供了自动化途径。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.13940v1",
+      "source": "arxiv",
+      "title": "A Self-Evolving Agent for Longitudinal Personal Health Management",
+      "abstract": "Personal health management unfolds over repeated encounters, yet most health AI systems treat each request in isolation. We developed HealthClaw, an open-source agent architecture that updates support as a person's routines, preferences, measurements and risks change. It separates shared safety rules and medical knowledge from private longitudinal memory containing profile facts, reusable procedures and episodic traces. After each episode, induction determines what should update the profile, revise a procedure, remain episodic or be excluded. We evaluated HealthClaw with a synthetic year-long benchmark and nine 200-case biomedical tasks. Across 900 longitudinal support probes, answer accuracy increased from 0.2% with current-query prompting to 45.7% with HealthClaw, while prompt-side context exposure was 71.7% lower than with full-history prompting. In 100 privacy probes, HealthClaw produced higher privacy-aware answer quality and fewer unsafe disclosures than both baselines. Across the biomedical tasks, the mean absolute gain in the task-specific primary metric was 27.0 percentage points, and seven gains remained significant after false-discovery-rate correction. These offline benchmarks support governed, self-evolving memory for longitudinal personal health agents, although clinical effectiveness requires prospective evaluation. HealthClaw is publicly available at https://github.com/HC-Guo/HealthClaw.",
+      "authors": [
+        "Haoran Li",
+        "Jiebi Deng",
+        "Tong Jin",
+        "Jinghong Han",
+        "Yuxin Wang",
+        "Zexin Wang",
+        "Qingyi Si",
+        "Weikang Gong",
+        "Xiahai Zhuang",
+        "Jia You",
+        "Wei Cheng",
+        "Jianfeng Feng",
+        "Hongcheng Guo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-15T15:22:11+00:00",
+      "link": "https://arxiv.org/pdf/2607.13940v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Self-evolving agent with longitudinal memory that updates over time",
+      "llm_evidence_cn": "具有纵向记忆的自进化智能体，随时间更新",
+      "llm_evidence": "具有纵向记忆的自进化智能体，随时间更新",
+      "canonical_evidence": "具有纵向记忆的自进化智能体，随时间更新",
+      "llm_tldr_en": "Proposes a self-evolving agent for longitudinal health management that updates its profile and procedures via post-episode induction, improving answer accuracy from 0.2% to 45.7%.",
+      "llm_tldr_cn": "针对个人健康管理中重复交互缺乏延续性的问题，提出自进化智能体架构HealthClaw，分离安全规则与纵向记忆，每次交互后通过归纳更新用户画像和规程，从而持续进化。在合成年度基准和九个生物医学任务上，回答准确率从0.2%提升至45.7%，验证了自进化架构的有效性。",
+      "llm_tldr": "针对个人健康管理中重复交互缺乏延续性的问题，提出自进化智能体架构HealthClaw，分离安全规则与纵向记忆，每次交互后通过归纳更新用户画像和规程，从而持续进化。在合成年度基准和九个生物医学任务上，回答准确率从0.2%提升至45.7%，验证了自进化架构的有效性。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.09149v1",
+      "source": "arxiv",
+      "title": "Taxonomy Maintenance In The Wild Over Evolving Scholarly Data: Reliability, Efficiency, and Cost-Effectiveness",
+      "abstract": "The rapid growth of scientific publications makes scholarly taxonomies quickly obsolete. We study taxonomy maintenance in the wild, a new problem that moves beyond static construction by continuously adapting taxonomies to evolving scholarly repositories, such as arXiv, for a given research topic. We propose GIST, a robust framework for maintaining evolving taxonomies. Unlike purely LLM-centric approaches, GIST grounds structure induction in expert-curated evidence by extracting partial hierarchies from the \"Related Work\" sections of papers. It integrates these partial taxonomies into a unified global taxonomy in a geometric box-embedding space, where box containment encodes the inductive bias of is-a relations. To connect semantics with geometric structure, GIST learns a bidirectional mapping between word embeddings and box embeddings. For efficient incremental updates, GIST uses novelty-aware coreset selection to update the model with representative historical signals and new evidence, avoiding costly full retraining. To handle high-velocity paper streams under user-specific token budgets, GIST further combines a hypothesized concept generator with a cost-effective evidence retrieval module. Experiments on real-world arXiv datasets show that GIST outperforms state-of-the-art baselines, improving Node F1 and Edge F1 by 11.0% and 13.1% over the strongest baseline while requiring only 9.6% of its runtime and 12.7% of its monetary cost.",
+      "authors": [
+        "Daomin Ji",
+        "Hui Luo",
+        "Zhifeng Bao",
+        "Junhao Gan",
+        "Zi Huang"
+      ],
+      "primary_category": "cs.DB",
+      "categories": [
+        "cs.DB"
+      ],
+      "published": "2026-07-10T07:03:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.09149v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "continuous taxonomy adaptation to evolving scholarly data for information extraction",
+      "llm_evidence_cn": "针对演化中的学术数据持续更新分类法的信息抽取系统",
+      "llm_evidence": "针对演化中的学术数据持续更新分类法的信息抽取系统",
+      "canonical_evidence": "针对演化中的学术数据持续更新分类法的信息抽取系统",
+      "llm_tldr_en": "Proposes GIST, a framework for maintaining evolving taxonomies by extracting partial hierarchies from papers and integrating them in geometric box-embedding space, enabling cost-effective and reliable adaptation.",
+      "llm_tldr_cn": "针对学术数据快速演化导致分类法过时的问题，提出GIST框架，通过从论文相关工作中提取部分层次结构并在几何盒嵌入空间中融合，实现分类法的持续自适应维护。实验表明该方法在可靠性、效率和成本效益上均优于纯LLM方案。该工作为动态信息抽取提供了一种鲁棒的知识结构演化方案。",
+      "llm_tldr": "针对学术数据快速演化导致分类法过时的问题，提出GIST框架，通过从论文相关工作中提取部分层次结构并在几何盒嵌入空间中融合，实现分类法的持续自适应维护。实验表明该方法在可靠性、效率和成本效益上均优于纯LLM方案。该工作为动态信息抽取提供了一种鲁棒的知识结构演化方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self evolving information extraction systems",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.12112v1",
+      "source": "arxiv",
+      "title": "Continual Learning with Elastic Regularization and Synthetic Replay for Federated MLLM Fine-Tuning",
+      "abstract": "Federated fine-tuning of Multimodal Large Language Models (MLLMs) across distributed networks enables privacy-sensitive adaptation to evolving data streams, yet a fundamental obstacle prevents robust deployment in dynamic environments: catastrophic forgetting, wherein sequential task updates erase previously acquired knowledge across visual, linguistic, and cross-modal representations. Addressing this challenge is especially critical for autonomous networked AI operating in safety-sensitive domains, such as content moderation, where reliable retention of prior knowledge underpins system integrity. To overcome this, we propose Federated Continual Multimodal Learning (FedCMM), a framework that embeds continual-learning safeguards into the federated optimization loop at three complementary levels. At the parameter level, modality-aware elastic weight consolidation computes separate Fisher information matrices for the vision encoder, language backbone, and cross-modal projector, providing granular, asymmetry-aware protection against modality-specific forgetting. At the data level, each client trains a lightweight local generative replay module to synthesize raw-data-free embedding-level multimodal replay tuples without any raw data sharing. At the aggregation level, Task-similarity-aware gradient aggregation autonomously filters and reweights client updates by gradient cosine similarity, suppressing conflicting directions and stabilizing the global learning trajectory. Extensive experiments on two benchmarks demonstrate that FedCMM consistently outperforms recent baselines on accuracy and backward transfer, confirming that holistic, modality-aware optimization enables robust evolutive adaptation across heterogeneous networked AI deployments.",
+      "authors": [
+        "Jing Liu",
+        "Chenxuanyin Zou",
+        "Jiayang Ren",
+        "Gaoyun Fang",
+        "Chengfang Li",
+        "Yan Wang",
+        "Zhenchao Ma",
+        "Bo Hu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CV",
+        "cs.DC"
+      ],
+      "published": "2026-07-13T19:40:30+00:00",
+      "link": "https://arxiv.org/pdf/2607.12112v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Continual learning framework with elastic regularization and synthetic replay, applicable to NER",
+      "llm_evidence_cn": "结合弹性正则化与合成重放的持续学习框架，可应用于命名实体识别",
+      "llm_evidence": "结合弹性正则化与合成重放的持续学习框架，可应用于命名实体识别",
+      "canonical_evidence": "结合弹性正则化与合成重放的持续学习框架，可应用于命名实体识别",
+      "llm_tldr_en": "Proposes a federated continual learning method with elastic regularization and synthetic replay to prevent catastrophic forgetting in MLLM fine-tuning, relevant for NER and other sequence tasks.",
+      "llm_tldr_cn": "为解决联邦多模态大模型微调中的灾难性遗忘，提出FedCMM框架，结合弹性正则化和合成重放来保持跨模态表示，实验表明有效缓解遗忘，对命名实体识别等需要持续学习的序列任务具有借鉴意义。",
+      "llm_tldr": "为解决联邦多模态大模型微调中的灾难性遗忘，提出FedCMM框架，结合弹性正则化和合成重放来保持跨模态表示，实验表明有效缓解遗忘，对命名实体识别等需要持续学习的序列任务具有借鉴意义。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "continual learning approaches for named entity recognition",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.13452v1",
+      "source": "arxiv",
+      "title": "Symbiosis-Inspired Knowledge Distillation for Incremental Object Detection",
+      "abstract": "Incremental object detection (IOD) aims to extend detectors to new categories while retaining previously acquired knowledge. Existing methods often adopt a class incremental learning perspective, separating feature spaces to sharpen decision boundaries. However, this separation-oriented paradigm may overlook object symbiosis in detection, where co-occurrence and occlusion introduce spatial and semantic dependencies that benefit from shared representations. Ignoring these dependencies distorts the shared representations, exacerbates confusion between old and new classes, and accelerates catastrophic forgetting. To address this, we propose Symbiosis-Inspired Knowledge Distillation (SIKD), which explicitly leverages object symbiosis at two complementary levels. Spatial Symbiosis Distillation (SpSD) focuses on symbiotic regions where the old model responds with high overlap to objects in the new task. It preserves generalizable old class cues, suppresses class-specific bias and redundancy, and distills the refined evidence to the new model at matched spatial locations with slot-aligned supervision. Semantic Symbiosis Distillation (SeSD) maintains class level structure by forming confidence weighted prototypes for old classes and aligning their inter class soft ranks over the old class logits, which stabilizes the semantic topology during adaptation. Extensive experiments demonstrate the effectiveness and superiority of the proposed method.",
+      "authors": [
+        "Mingyue Zeng",
+        "De Cheng",
+        "Zhipeng Xu",
+        "Huaijie Wang",
+        "Nannan Wang",
+        "Xinbo Gao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-15T05:21:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.13452v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "incremental object detection with knowledge distillation combating catastrophic forgetting",
+      "llm_evidence_cn": "增量目标检测中利用知识蒸馏克服灾难性遗忘",
+      "llm_evidence": "增量目标检测中利用知识蒸馏克服灾难性遗忘",
+      "canonical_evidence": "增量目标检测中利用知识蒸馏克服灾难性遗忘",
+      "llm_tldr_en": "Proposes symbiosis-inspired knowledge distillation (SIKD) for incremental object detection, leveraging object co-occurrence and occlusion dependencies to maintain shared representations and reduce forgetting.",
+      "llm_tldr_cn": "针对增量目标检测中因忽略物体共生关系导致的灾难性遗忘问题，提出共生启发的知识蒸馏（SIKD）方法，通过显式建模共生依赖来保持共享表示。实验证明该方法能有效缓解旧类遗忘。该技术为持续学习中的知识保留提供了新思路。",
+      "llm_tldr": "针对增量目标检测中因忽略物体共生关系导致的灾难性遗忘问题，提出共生启发的知识蒸馏（SIKD）方法，通过显式建模共生依赖来保持共享表示。实验证明该方法能有效缓解旧类遗忘。该技术为持续学习中的知识保留提供了新思路。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
