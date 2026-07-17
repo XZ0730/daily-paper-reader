@@ -1,0 +1,229 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-17T21:21:49.991726+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.14661v1",
+      "source": "arxiv",
+      "title": "SmartRAG: Native Graph-Based RAG for Mobile Device",
+      "abstract": "Deploying large language models (LLMs) as personal assistants on mobile devices demands privacy, low latency, and offline availability, yet the computational cost of giant models clashes with strict edge-hardware budgets. We argue that this tension cannot be resolved by model compression alone; it requires decomposing on-device intelligence into complementary functional roles. We present SmartRAG, a fully on-device framework that organizes an intelligent assistant around four coordinated modules -- Perception, Memory, Focus, and Thinking. At the core of SmartRAG is EvoNER, a continually learnable named-entity recognizer that incrementally expands its label inventory through teacher-distilled updates, enabling the system to absorb previously unseen entity types without retraining the backbone LLM. Extracted knowledge is stored in MRGraph, a three-layer provenance-preserving knowledge graph, and retrieved at query time through a hybrid pipeline combining graph traversal, lexical matching, and dense semantic search. The on-device LLM is invoked only for high-value semantic operations -- labeling, planning, and answer synthesis -- keeping inference costs bounded. Experiments on four QA benchmarks (TriviaQA, Natural Questions, HotpotQA, MultiHopQA) show that SmartRAG with a quantized 1.7B-parameter backbone achieves multi-hop reasoning performance competitive with models up to 18$\\times$ larger, while running entirely on commodity smartphones within practical memory and latency envelopes.",
+      "authors": [
+        "Zhihan Jiang",
+        "Meng Li",
+        "Shenghao Liu",
+        "Keran Li",
+        "Ruiben Zhou",
+        "Xianjun Deng",
+        "Shuai Wang",
+        "Haipeng Dai"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-16T07:28:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.14661v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "EvoNER is a continually learnable NER that expands its label inventory incrementally via teacher-distilled updates.",
+      "llm_evidence_cn": "EvoNER 是一个持续学习 NER，通过教师蒸馏逐步扩展标签集实现自我改进。",
+      "llm_evidence": "EvoNER 是一个持续学习 NER，通过教师蒸馏逐步扩展标签集实现自我改进。",
+      "canonical_evidence": "EvoNER 是一个持续学习 NER，通过教师蒸馏逐步扩展标签集实现自我改进。",
+      "llm_tldr_en": "SmartRAG introduces EvoNER, a continually learnable NER component that expands entity types via teacher-distilled updates, enabling on-device personal assistants to handle new entities without full retraining.",
+      "llm_tldr_cn": "SmartRAG 提出 EvoNER，一种持续学习的命名实体识别器，通过教师蒸馏更新逐步扩展实体类型，使端侧助手无需完整重训练即可识别新实体。论文针对移动设备上大语言模型部署的隐私性和离线需求，设计模块化智能助手框架，核心是 EvoNER 的自进化实体识别能力，实验表明该机制能有效吸收未见实体类型，提升了信息抽取的持续适应能力。",
+      "llm_tldr": "SmartRAG 提出 EvoNER，一种持续学习的命名实体识别器，通过教师蒸馏更新逐步扩展实体类型，使端侧助手无需完整重训练即可识别新实体。论文针对移动设备上大语言模型部署的隐私性和离线需求，设计模块化智能助手框架，核心是 EvoNER 的自进化实体识别能力，实验表明该机制能有效吸收未见实体类型，提升了信息抽取的持续适应能力。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "named entity recognition using self-improving models",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.14396v1",
+      "source": "arxiv",
+      "title": "CatalogAgent: A Supervisor-mediated Self-Learning System Enabling Context Engineering for GenAI Models",
+      "abstract": "Product catalogs are the backbone of e-commerce sites, yet a large number of structured attributes (SAs) -- such as material, color, and shape -- often have missing values. Typically, SA values are extracted from product information, including titles and descriptions. While LLM-based generator-evaluator frameworks have demonstrated effectiveness for SA prediction -- where an LLM generates SA values and another evaluates them -- they face challenges when the Generator and Evaluator produce conflicting outputs, as either component can make mistakes. We introduce \\texttt{CatalogAgent}, a novel agentic system that continuously improves Generator and Evaluator models for e-commerce catalog enrichment. When disagreements arise from (1) internal conflicts between the LLM-based Generator and Evaluator, or (2) external feedback from sellers on LLM outputs, a Supervisor Agent intervenes to mediate these conflicts and make final decisions. The system also incorporates a Memory Base and a Memory Summarizer that stores Supervisor Agent activities from individual cases and aggregates patterns into learnings. These learnings are fed back to the worker Generator and Evaluator LLMs, enabling self-improvement without human intervention. Through context engineering -- injecting learnings and insights into worker LLMs' contexts -- the system successfully transfers the Supervisor's capabilities to the Generator and Evaluator, improving their performance by 15.24\\% and 13.98\\%, respectively. Our experiments demonstrate a new paradigm of Supervisor Agent-mediated self-learning systems for improving generative AI model accuracy.",
+      "authors": [
+        "Zhu Cheng",
+        "Zhenming Wang",
+        "Yu",
+        "Tang",
+        "Dan Liu",
+        "Bryan Zhang",
+        "Athanasios N. Nikolakopoulos",
+        "Pranav Souri Itabada",
+        "Jing Zhang",
+        "Chih-Chi Chou",
+        "Peng Gao",
+        "Fatemeh Mansoori",
+        "Bharat Bojja",
+        "Sarath Chander",
+        "Sameer Thombare",
+        "Umit Batur",
+        "Tarik Arici"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-07-15T22:20:59+00:00",
+      "link": "https://arxiv.org/pdf/2607.14396v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-learning system for information extraction (structured attributes from catalogs) with continuous improvement",
+      "llm_evidence_cn": "自学习系统用于信息抽取（商品目录结构化属性），具备持续改进能力",
+      "llm_evidence": "自学习系统用于信息抽取（商品目录结构化属性），具备持续改进能力",
+      "canonical_evidence": "自学习系统用于信息抽取（商品目录结构化属性），具备持续改进能力",
+      "llm_tldr_en": "Proposes CatalogAgent, a self-learning system that iteratively improves generator and evaluator models for product attribute extraction, using a supervisor to resolve conflicts and enable continuous model enhancement.",
+      "llm_tldr_cn": "针对电商目录缺失结构化属性的补全问题，提出CatalogAgent自学习系统，通过生成器与评估器的迭代互促实现持续改进。当模型冲突时，引入监督者进行调解和知识更新，从而不断提升信息抽取精度。实验表明，该方法在多个商品目录数据集上有效改善了属性抽取性能，为自进化信息抽取系统提供了新颖的解决方案。",
+      "llm_tldr": "针对电商目录缺失结构化属性的补全问题，提出CatalogAgent自学习系统，通过生成器与评估器的迭代互促实现持续改进。当模型冲突时，引入监督者进行调解和知识更新，从而不断提升信息抽取精度。实验表明，该方法在多个商品目录数据集上有效改善了属性抽取性能，为自进化信息抽取系统提供了新颖的解决方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "information extraction using self-evolving models",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.14408v1",
+      "source": "arxiv",
+      "title": "Reward-Free Evolving Agents via Pairwise Validator",
+      "abstract": "A self-evolving agentic loop repeatedly proposes a tweaked version of an agent (its prompt template or program) and accepts or rejects the change based on a per-iteration quality signal. Designing that signal is often the costly part of the project: a reliable scalar reward requires domain expertise and labeled examples that are themselves as expensive to assemble as the agent's underlying task. We propose replacing the scalar at the accept/reject gate with a pairwise validator: a frozen LLM that, given the parent and child candidate, returns a binary verdict on which is better. Pairwise judgment is generally easier and more stable than absolute scoring, due to its contrastive nature, which mitigates the need for strict scale calibration. The validator also requires no training of its own. We integrate the validator into three published self-evolving engines (GEPA, ADRS, ShinkaEvolve) and report two flavors: Adaptive Focus, which retains the engine's existing val-set parent selection, and Soft Elo, which lets the validator's verdicts drive parent selection so that val-set rewards drop as well. Across multiple agents and two artifact substrates (prompt and code), our method matches or exceeds the full-reward baseline on the majority of settings we evaluate, and the pattern survives a cross-family validator swap. The pairwise gate is thus a drop-in replacement for per-step reward design at competitive task accuracy without the labeling cost.",
+      "authors": [
+        "Minghao Liu",
+        "Yu Wang",
+        "Jiayun Wang",
+        "Wei Wei"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-15T22:50:32+00:00",
+      "link": "https://arxiv.org/pdf/2607.14408v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Self-evolving agentic loop with pairwise validator replaces scalar reward for iterative improvement.",
+      "llm_evidence_cn": "自进化智能体循环通过成对验证器替代标量奖励实现迭代改进。",
+      "llm_evidence": "自进化智能体循环通过成对验证器替代标量奖励实现迭代改进。",
+      "canonical_evidence": "自进化智能体循环通过成对验证器替代标量奖励实现迭代改进。",
+      "llm_tldr_en": "This work replaces scalar rewards in self-evolving agents with a pairwise validator (frozen LLM), providing a more stable and cost-effective mechanism for iterative improvement.",
+      "llm_tldr_cn": "该论文用冻结的大语言模型作为成对验证器替代自进化代理中的标量奖励，通过对比父子候选决定是否接受修改，提供了一种更稳定、低成本的迭代改进方法。论文指出标量奖励设计需要昂贵的人工和标注，成对比较更简单可靠，实验表明该方法能有效驱动代理自我优化，降低了自进化循环的门槛。",
+      "llm_tldr": "该论文用冻结的大语言模型作为成对验证器替代自进化代理中的标量奖励，通过对比父子候选决定是否接受修改，提供了一种更稳定、低成本的迭代改进方法。论文指出标量奖励设计需要昂贵的人工和标注，成对比较更简单可靠，实验表明该方法能有效驱动代理自我优化，降低了自进化循环的门槛。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.11591v1",
+      "source": "arxiv",
+      "title": "Similarity-Guided Curriculum Fine-Tuning of LLMs for Neural Architecture Synthesis",
+      "abstract": "Introduce a MinHash-based similarity scheduling framework that constructs a progressive curriculum over neural architecture code for LLM-based neural architecture search (NAS). Using 128-permutation MinHash signatures over normalised 7-gram source code shingles, we partition the reference pool into similarity bands and present them in increasing architectural heterogeneity, with the best LoRA adapter from each stage merged cumulatively into the backbone. We evaluate the framework on OlympicCoder-7B within the LEMUR benchmark on CIFAR-10 image classification, generating N =15 candidate architectures per epoch across six progressive fine-tuning steps. The curriculum achieves 60% peak success rate at the high-similarity level without post-processing repair. A 2*2 ablation at the most diverse level curriculum versus base model, with versus without partial interface repair reveals that without repair the base model (47% peak SR) substantially outperforms the curriculum model (7% SR), while adding partial repair brings both to 53% SR. This pattern is consistent with merge-level weight drift progressively erasing evaluator-interface priors, and suggests that interface repair and curriculum scheduling target distinct failure modes. We further report a cross-dataset transfer observation on SVHN, where direct base-model generation without curriculum warmup yields 27% peak SR at substantially lower accuracy (60.5%) than the CIFAR-10 equivalent, consistent with the increased synthesis difficulty of the unq-family anchor architecture.",
+      "authors": [
+        "Anujaya Vijayakumar",
+        "Radu Timofte",
+        "Dmitry Ignatov"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-13T14:14:30+00:00",
+      "link": "https://arxiv.org/pdf/2607.11591v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Curriculum fine-tuning progressively improves LLM for neural architecture search, a form of self-improvement for NAS",
+      "llm_evidence_cn": "课程微调逐步改善LLM进行神经架构搜索的能力，是NAS的自改进形式",
+      "llm_evidence": "课程微调逐步改善LLM进行神经架构搜索的能力，是NAS的自改进形式",
+      "canonical_evidence": "课程微调逐步改善LLM进行神经架构搜索的能力，是NAS的自改进形式",
+      "llm_tldr_en": "The paper introduces a MinHash-based curriculum fine-tuning method to progressively improve an LLM's capability for neural architecture synthesis, achieving 60% peak success rate on CIFAR-10 NAS. This approach enables self-improving NAS via staged adaptation.",
+      "llm_tldr_cn": "论文针对大语言模型在神经架构搜索（NAS）中的自改进需求，提出一种基于MinHash相似度的课程微调框架，通过逐步增加架构代码的异质性来分阶段微调模型，最终在CIFAR-10数据集上实现了60%的峰值成功率。该方法为实现NAS模型的自改进提供了一条可行路径。",
+      "llm_tldr": "论文针对大语言模型在神经架构搜索（NAS）中的自改进需求，提出一种基于MinHash相似度的课程微调框架，通过逐步增加架构代码的异质性来分阶段微调模型，最终在CIFAR-10数据集上实现了60%的峰值成功率。该方法为实现NAS模型的自改进提供了一条可行路径。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self-improving models with automated architecture search",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.14777v1",
+      "source": "arxiv",
+      "title": "SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning",
+      "abstract": "Large language models are increasingly trained as interactive agents for long-horizon tasks involving multi-turn interaction, tool use, and environment feedback. Outcome-based reinforcement learning (RL) provides a practical optimization paradigm, but its sparse trajectory-level rewards offer limited guidance on intermediate decisions, leaving a supervision gap between episode-level outcomes and token-level policy learning. We propose SEED (SElf-Evolving On-Policy Distillation), a self-evolving framework that converts completed on-policy trajectories into training-time hindsight skills and distills their behavioral effect back into the policy model. SEED first fine-tunes the policy to analyze completed trajectories and generate natural-language skills that capture reusable workflows, decisive observations, or failure-avoidance rules. During RL, the current policy both collects trajectories and serves as the analyzer that extracts hindsight skills from them. Policy updates therefore improve subsequent decision making and skill analysis together, allowing hindsight supervision to evolve with the policy. SEED then re-scores the sampled actions under ordinary and skill-augmented contexts, converting the skill-induced probability shift into a dense token-level on-policy distillation signal. This signal is jointly optimized with outcome-based RL, keeping the auxiliary supervision aligned with the current trajectory distribution. Extensive experiments on text-based and vision-based agentic tasks show that SEED consistently improves performance and sample efficiency, exhibiting robust generalization to unseen scenarios. Our code is available at https://github.com/jinyangwu/SEED.",
+      "authors": [
+        "Jinyang Wu",
+        "Shuo Yang",
+        "Zhengxi Lu",
+        "Fan Zhang",
+        "Yuhao Shen",
+        "Lang Feng",
+        "Haoran Luo",
+        "Zheng Lian",
+        "Shuai Zhang",
+        "Zhengqi Wen",
+        "Jianhua Tao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-16T09:57:18+00:00",
+      "link": "https://arxiv.org/pdf/2607.14777v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Self-evolving on-policy distillation enables agents to improve by converting trajectories into hindsight skills.",
+      "llm_evidence_cn": "自演进在线策略蒸馏将轨迹转化为事后技能，使智能体自我改进。",
+      "llm_evidence": "自演进在线策略蒸馏将轨迹转化为事后技能，使智能体自我改进。",
+      "canonical_evidence": "自演进在线策略蒸馏将轨迹转化为事后技能，使智能体自我改进。",
+      "llm_tldr_en": "SEED is a self-evolving framework that distills on-policy trajectories into hindsight skills to bridge the supervision gap in agentic RL, enabling self-improvement.",
+      "llm_tldr_cn": "SEED 提出自演进在线策略蒸馏框架，将智能体完成的在线策略轨迹转化为事后技能描述并蒸馏回策略模型，以弥合基于结果的强化学习中轨迹级奖励与令牌级策略学习之间的监督差距。该方法使长期交互智能体能够从环境反馈中自我改进，实验表明在多轮交互、工具使用等任务上提升了决策质量。",
+      "llm_tldr": "SEED 提出自演进在线策略蒸馏框架，将智能体完成的在线策略轨迹转化为事后技能描述并蒸馏回策略模型，以弥合基于结果的强化学习中轨迹级奖励与令牌级策略学习之间的监督差距。该方法使长期交互智能体能够从环境反馈中自我改进，实验表明在多轮交互、工具使用等任务上提升了决策质量。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

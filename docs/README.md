@@ -6,43 +6,37 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-16
-- 运行时间：2026-07-16 21:11:26 UTC
+- 最新运行日期：2026-07-17
+- 运行时间：2026-07-17 21:27:46 UTC
 - 运行状态：成功
-- 本次总论文数：7
-- 精读区：5
+- 本次总论文数：5
+- 精读区：3
 - 速读区：2
 
 ### 今日简报（AI）
-1) 今日精读两篇9.0分研究，揭示多模态知识超图如何赋能智能体检索，以及大模型自我改进中的“突然开悟”现象。  
-2) 最值得关注的方向是：用进化式多模态知识超图提升检索智能体能力，和启蒙式微调让模型突然自我提升的机制。  
-3) 建议读者跟进知识图谱与进化学习融合的思路，在微调时留意模型可能出现的跳跃式成长。
-- 详情：[/202607/16/README](/202607/16/README)
+今日聚焦端侧智能与自适应学习，精读移动端图检索增强和GenAI上下文自学习系统。  
+SmartRAG用原生图结构提升手机端RAG推理，CatalogAgent实现无需人工的上下文自我优化，带来轻量高效的新思路。  
+建议开发者尝试将图知识库与自演进提示工程结合，提升端侧模型在复杂任务中的表现。
+- 详情：[/202607/17/README](/202607/17/README)
 
 ### 精读区论文标签
-1. [EvoGraph-R1: Self-Evolving Multimodal Knowledge Hypergraphs for Agentic Retrieval](/202607/16/2607.12764v1-evograph-r1-self-evolving-multimodal-knowledge-hypergraphs-for-agentic-retrieval)  
+1. [SmartRAG: Native Graph-Based RAG for Mobile Device](/202607/17/2607.14661v1-smartrag-native-graph-based-rag-for-mobile-device)  
+   标签：评分：10.0/10、query:self-evolve
+   evidence：EvoNER 是一个持续学习 NER，通过教师蒸馏逐步扩展标签集实现自我改进。
+2. [CatalogAgent: A Supervisor-mediated Self-Learning System Enabling Context Engineering for GenAI Models](/202607/17/2607.14396v1-catalogagent-a-supervisor-mediated-self-learning-system-enabling-context-engineering-for-genai-models)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：用于自适应检索的自进化多模态知识超图
-2. [Self-Improving is Often Sudden: Enlightenment-style Finetuning for Large-Scale Models](/202607/16/2607.13395v1-self-improving-is-often-sudden-enlightenment-style-finetuning-for-large-scale-models)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：提出无训练的自改进范式Enlightenment
-3. [Self-Evolving Agent Harnesses via Gated Semantic Quality-Diversity](/202607/16/2607.13683v1-self-evolving-agent-harnesses-via-gated-semantic-quality-diversity)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：面向NLP任务的自进化智能体操控框架
-4. [A Self-Evolving Agent for Longitudinal Personal Health Management](/202607/16/2607.13940v1-a-self-evolving-agent-for-longitudinal-personal-health-management)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：具有纵向记忆的自进化智能体，随时间更新
-5. [Taxonomy Maintenance In The Wild Over Evolving Scholarly Data: Reliability, Efficiency, and Cost-Effectiveness](/202607/16/2607.09149v1-taxonomy-maintenance-in-the-wild-over-evolving-scholarly-data-reliability-efficiency-and-cost-effectiveness)  
+   evidence：自学习系统用于信息抽取（商品目录结构化属性），具备持续改进能力
+3. [Reward-Free Evolving Agents via Pairwise Validator](/202607/17/2607.14408v1-reward-free-evolving-agents-via-pairwise-validator)  
    标签：评分：8.0/10、query:self-evolve
-   evidence：针对演化中的学术数据持续更新分类法的信息抽取系统
+   evidence：自进化智能体循环通过成对验证器替代标量奖励实现迭代改进。
 
 ### 速读区论文标签
-1. [Continual Learning with Elastic Regularization and Synthetic Replay for Federated MLLM Fine-Tuning](/202607/16/2607.12112v1-continual-learning-with-elastic-regularization-and-synthetic-replay-for-federated-mllm-fine-tuning)  
+1. [Similarity-Guided Curriculum Fine-Tuning of LLMs for Neural Architecture Synthesis](/202607/17/2607.11591v1-similarity-guided-curriculum-fine-tuning-of-llms-for-neural-architecture-synthesis)  
    标签：评分：7.0/10、query:self-evolve
-   evidence：结合弹性正则化与合成重放的持续学习框架，可应用于命名实体识别
-2. [Symbiosis-Inspired Knowledge Distillation for Incremental Object Detection](/202607/16/2607.13452v1-symbiosis-inspired-knowledge-distillation-for-incremental-object-detection)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：增量目标检测中利用知识蒸馏克服灾难性遗忘
+   evidence：课程微调逐步改善LLM进行神经架构搜索的能力，是NAS的自改进形式
+2. [SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning](/202607/17/2607.14777v1-seed-self-evolving-on-policy-distillation-for-agentic-reinforcement-learning)  
+   标签：评分：7.0/10、query:self-evolve
+   evidence：自演进在线策略蒸馏将轨迹转化为事后技能，使智能体自我改进。
 
 
 <div class="dpr-home-promo-card">
