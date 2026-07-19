@@ -1,0 +1,292 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-19T20:42:13.443338+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 5,
+    "deep_cap": 6,
+    "deep_selected": 5,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.10127v1",
+      "source": "arxiv",
+      "title": "GAE: Graph-Augmented Evolution for Scientific Discovery via Reinforcement Optimization",
+      "abstract": "Evolutionary program search guided by Large Language Models (LLMs) has emerged as a powerful paradigm for automated scientific discovery. However, current approaches are fundamentally constrained by three bottlenecks: structurally blind parent selection, sparse whole-program evaluation rewards, and static mutation operators that fail to adapt during search. We present GAE (Graph-Augmented Evolution), a framework that resolves these limitations through a tightly coupled, three-pillar architecture. First, a relational graph neural network (GNN) parses programs into typed computation graphs, producing structure-aware embeddings. Second, an RL-optimized meta-controller leverages these embeddings to replace blind evolutionary sampling with a directed policy, dynamically selecting optimal parents and mutation directions based on reward history. Third, an online GRPO fine-tuning loop continuously updates the LLM mutation operator at test-time using group-normalized evaluation rewards, directly aligning the model's generation distribution with high-fitness structural edits. We evaluate GAE on a challenging scientific discovery task: symbolic regression for complex nonlinear oscillator systems. By transforming stochastic search into a directed, self-improving trajectory, GAE efficiently discovers closed-form physical equations, consistently matching or outperforming static LLM-driven baselines and achieving state-of-the-art out-of-distribution performance.",
+      "authors": [
+        "Xuanzhou Chen",
+        "Taoli Cheng"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-11T05:32:54+00:00",
+      "link": "https://arxiv.org/pdf/2607.10127v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "graph-augmented evolution with RL-optimized meta-controller for program search, self-improving model",
+      "llm_evidence_cn": "图增强进化与强化学习优化的元控制器，用于程序搜索的自改进模型",
+      "llm_evidence": "图增强进化与强化学习优化的元控制器，用于程序搜索的自改进模型",
+      "canonical_evidence": "图增强进化与强化学习优化的元控制器，用于程序搜索的自改进模型",
+      "llm_tldr_en": "Introduces GAE, a self-improving program evolution framework that uses a GNN for structure-aware embeddings and an RL meta-controller to guide mutations and parent selection.",
+      "llm_tldr_cn": "现有基于大语言模型的进化程序搜索存在父代选择盲目、奖励稀疏和变异算子静态等问题。该论文提出GAE框架，利用图神经网络解析程序为计算图以获取结构感知嵌入，并通过强化学习优化的元控制器指导父代选择和变异，实现了更高效的自动化科学发现。实验表明，GAE在程序进化任务上显著优于传统随机进化方法，提高了搜索效率和发现质量。",
+      "llm_tldr": "现有基于大语言模型的进化程序搜索存在父代选择盲目、奖励稀疏和变异算子静态等问题。该论文提出GAE框架，利用图神经网络解析程序为计算图以获取结构感知嵌入，并通过强化学习优化的元控制器指导父代选择和变异，实现了更高效的自动化科学发现。实验表明，GAE在程序进化任务上显著优于传统随机进化方法，提高了搜索效率和发现质量。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self-improving models with automated architecture search",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.13070v1",
+      "source": "arxiv",
+      "title": "Falsifiable Release Gates for Self-Improving Systems",
+      "abstract": "Safety claims on self-improving agent runtimes are almost always self-graded: a policy file, a guardrail, or a README commitment. We describe falsifiable release gates, and a methodology to build and validate such systems, such that every new capability must pass a pre-specified, machine-verifiable acceptance suite before it ships, and a fixed set of standing invariants is preserved at each gate. I think we applied the method in the Antahkarana, an open runtime, via seven gates from basic observability into a self governing loop that suggests changes to its own policy. no action goes to an effector without a safety-critical property capability token minted by a control ring is exhaustively machine-checked over the one million recorded reachable state space of a bounded model and re-checked against execution traces. A purposely broken model gives the shortest counterexample, so the checker has teeth, is apparent. The self-enhancement loop is positively Constrained: the entire write surface is policy rules, tightening changes. may auto-apply loosening changes always require a human merge and a proposal autoclosed is one that mispredicts its own effect; We publish the acceptance measured results for all the seven gates, define precisely the scope of each claim (a bounded of the coordination skeleton (not the learned components) and free the runtime, either command line tools and the gate suite, so the results reproduce, and gates can run against other agent frameworks. Reviewers may repeat the single command central non-bypass in seconds.",
+      "authors": [
+        "Deepak Soni"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.AI"
+      ],
+      "published": "2026-07-11T06:06:34+00:00",
+      "link": "https://arxiv.org/pdf/2607.13070v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "describes falsifiable release gates for self-improving agent runtimes with a self-governing loop",
+      "llm_evidence_cn": "描述自改进系统可证伪发布门限，包含自我治理循环",
+      "llm_evidence": "描述自改进系统可证伪发布门限，包含自我治理循环",
+      "canonical_evidence": "描述自改进系统可证伪发布门限，包含自我治理循环",
+      "llm_tldr_en": "Proposes falsifiable release gates to ensure safety in self-improving systems, requiring machine-verifiable checks before new capabilities are deployed. Applied in an open runtime with a self-governing loop.",
+      "llm_tldr_cn": "针对自改进系统安全性自评的不足，提出可证伪发布门限方法，通过预定义的机器可验证接受测试确保每次新能力发布的安全性。在Antahkarana运行时中实现了从基本可观测性到自我治理循环的七道门限，验证了方法可行性。该研究为自进化系统的安全部署提供了实用框架。",
+      "llm_tldr": "针对自改进系统安全性自评的不足，提出可证伪发布门限方法，通过预定义的机器可验证接受测试确保每次新能力发布的安全性。在Antahkarana运行时中实现了从基本可观测性到自我治理循环的七道门限，验证了方法可行性。该研究为自进化系统的安全部署提供了实用框架。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.10532v1",
+      "source": "arxiv",
+      "title": "Implicit Fine-tuning via Context Engineering: A Curriculum Learning Framework for Multimodal Entity Alignment",
+      "abstract": "Multimodal Entity Alignment (MMEA) aims to identify equivalent entities across different modalities. While existing methods enhance MMEA performance through black-box context engineering strategies, their reliance on LLM parameter capacity and lack of theoretical interpretability remain unresolved. To this end, we first theoretically validate the mathematical equivalence between context engineering and model fine-tuning in MMEA tasks, demonstrating that prompt components simulate contrastive learning-based sequential fine-tuning in MMEA. Building on this foundation, we then propose PTFEA, a curriculum-learning-inspired framework that translates fine-tuning strategies into interpretable context engineering. Specifically, adaptive difficulty modulation dynamically adjusts information injection stages using confidence thresholds, establishing mathematical equivalence between curriculum learning weights and context sample selection; and three-stage progressive inference incorporates entity information from simple to complex cases, mirroring the gradient descent process in fine-tuning. Experiments on five public datasets demonstrate that PTFEA consistently outperforms strong baselines. In particular, on the ICWIKI dataset, PTFEA narrows the H@1 gap between Qwen2.5-72B and 14B to 0.6%. Moreover, compared with the representative context-engineering-based MMEA method MM-ChatAlign, PTFEA reduces the runtime of Qwen2.5-72B from 21 hours to 1 hour and lowers token consumption from 2200-3000 to 200-400, achieving over 80% reduction on the ICWIKI dataset. This work provides the first theoretical framework unifying context engineering and fine-tuning in MMEA, paving the way for future research that seeks to translate additional fine-tuning strategies into context engineering paradigms. Our code is available at https://github.com/DMiC-Lab-HFUT/PTFEA.",
+      "authors": [
+        "Yunpeng Hong",
+        "Chenyang Bu",
+        "Di Wu",
+        "Yi He",
+        "Xindong Wu"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-07-12T02:01:40+00:00",
+      "link": "https://arxiv.org/pdf/2607.10532v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Applies implicit fine-tuning via curriculum context engineering to multimodal entity alignment, a self-evolving approach for information extraction.",
+      "llm_evidence_cn": "通过课程上下文工程实现隐式微调，用于多模态实体对齐，是一种自我进化的信息抽取方法。",
+      "llm_evidence": "通过课程上下文工程实现隐式微调，用于多模态实体对齐，是一种自我进化的信息抽取方法。",
+      "canonical_evidence": "通过课程上下文工程实现隐式微调，用于多模态实体对齐，是一种自我进化的信息抽取方法。",
+      "llm_tldr_en": "Proposes PTFEA, a curriculum learning framework that translates fine-tuning into interpretable context engineering for multimodal entity alignment, achieving self-improvement without weight updates.",
+      "llm_tldr_cn": "针对多模态实体对齐中黑箱上下文工程缺乏可解释性的问题，本文提出PTFEA框架，从理论上证明提示组件等价于对比学习驱动的顺序微调，并将课程学习策略转化为上下文工程，实现无需参数更新的自我改进。实验表明该方法能稳定提升实体对齐性能，为低资源场景下的信息抽取自我进化提供了新范式。",
+      "llm_tldr": "针对多模态实体对齐中黑箱上下文工程缺乏可解释性的问题，本文提出PTFEA框架，从理论上证明提示组件等价于对比学习驱动的顺序微调，并将课程学习策略转化为上下文工程，实现无需参数更新的自我改进。实验表明该方法能稳定提升实体对齐性能，为低资源场景下的信息抽取自我进化提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "information extraction using self-evolving models",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.14658v1",
+      "source": "arxiv",
+      "title": "TopoAgent: A Self-Evolving Topological Agent for Multimodal Scientific Reasoning",
+      "abstract": "While Multimodal Large Language Models (MLLMs) excel in general tasks, rigorous scientific reasoning remains challenging due to the limitations of monolithic, linear planning. Such sequential designs often suffer from visual-semantic misalignment, long-context hallucinations, and brittle execution under fixed task granularity. We propose TopoAgent, a self-evolving topological framework that replaces linear trajectories with dynamic, state-isolated graph evolution. TopoAgent first employs a front-end decomposer to fracture complex queries into visually-grounded atoms. These atoms are organized into a Directed Acyclic Graph (DAG) based on their dependencies, enabling strict context isolation to shield the reasoning engine from irrelevant historical noise. Furthermore, we introduce adaptive atomic fission, which dynamically splits bottleneck nodes into finer-grained sub-atoms at runtime when tool capability boundaries are exceeded. Extensive experiments across mathematics, physics, and chemistry benchmarks demonstrate that TopoAgent significantly outperforms state-of-the-art linear agent frameworks, providing a robust, noise-resistant, and self-correcting paradigm for autonomous scientific reasoning.",
+      "authors": [
+        "Mingze Xu",
+        "Yinghui Li",
+        "Jiayi Kuang",
+        "Zhanhui Kang",
+        "Di Yin",
+        "Ying Shen",
+        "Xing Sun",
+        "Yuxing Han"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-16T07:22:59+00:00",
+      "link": "https://arxiv.org/pdf/2607.14658v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "proposes a self-evolving topological framework",
+      "llm_evidence_cn": "提出一种自进化拓扑框架",
+      "llm_evidence": "提出一种自进化拓扑框架",
+      "canonical_evidence": "提出一种自进化拓扑框架",
+      "llm_tldr_en": "Proposes TopoAgent, a self-evolving DAG-based framework that decomposes complex queries into atoms for multimodal scientific reasoning, improving robustness and accuracy.",
+      "llm_tldr_cn": "针对多模态大语言模型在科学推理中面临的视觉语义错位和幻觉等问题，提出自进化拓扑智能体TopoAgent，将复杂查询分解为视觉原子并组织成有向无环图，实现严格上下文隔离，实验表明在多个基准上性能显著提升。",
+      "llm_tldr": "针对多模态大语言模型在科学推理中面临的视觉语义错位和幻觉等问题，提出自进化拓扑智能体TopoAgent，将复杂查询分解为视觉原子并组织成有向无环图，实现严格上下文隔离，实验表明在多个基准上性能显著提升。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15092v1",
+      "source": "arxiv",
+      "title": "Rubrics on Trial: Evolving Rubrics from a Single Query via Synthetic Pairwise Evidence",
+      "abstract": "Rubrics provide structured, fine-grained signals for training and evaluating large language models (LLMs). Yet reliable query-specific rubrics are difficult to construct. Existing approaches often derive supervision from human-written rubrics, preference data, or sampled responses. Direct query-to-rubric generation avoids these resources, but provides no explicit check that a plausible rubric is useful. Such a rubric may fail to distinguish answer quality, reward an optional style, or penalize a valid alternative strategy. We introduce Rubrics on Trial, a query-only framework that evolves a rubric set from an empty set without external annotations or model training. It derives supervision solely from synthetic rubric-conditioned response pairs and validates each proposed rubric before adding it, screening out non-discriminative, over-specific, and style-only candidate rubrics. Experiments across five preference benchmark suites demonstrate the effectiveness of Rubrics on Trial, which achieves the best average accuracy and leads on six of seven evaluation sets.",
+      "authors": [
+        "Haocheng Yang",
+        "Licheng Pan",
+        "Xiaoxi Li",
+        "Zhichao Chen",
+        "Zhiheng Zhang",
+        "Yuan Lu",
+        "Haoxuan Li",
+        "Hao Wang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-16T15:01:33+00:00",
+      "link": "https://arxiv.org/pdf/2607.15092v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Framework evolves rubrics from empty set via synthetic evidence, a self-improving process for NLP evaluation.",
+      "llm_evidence_cn": "框架通过合成证据从空集演化评分标准，是 NLP 评估中的自改进过程。",
+      "llm_evidence": "框架通过合成证据从空集演化评分标准，是 NLP 评估中的自改进过程。",
+      "canonical_evidence": "框架通过合成证据从空集演化评分标准，是 NLP 评估中的自改进过程。",
+      "llm_tldr_en": "Proposes Rubrics on Trial, which evolves query-specific rubrics from an empty set using synthetic pairwise evidence, ensuring usefulness without external annotations, improving LLM training and evaluation.",
+      "llm_tldr_cn": "现有查询特异的评分标准要么依赖人工注释，要么直接生成可能无用的标准；本文提出 Rubrics on Trial 方法，仅从单一查询出发，通过合成成对证据迭代演化出高质量的评分标准集，无需外部标注即能有效区分答案质量，为 LLM 训练和评估提供了自我改进的可靠信号。",
+      "llm_tldr": "现有查询特异的评分标准要么依赖人工注释，要么直接生成可能无用的标准；本文提出 Rubrics on Trial 方法，仅从单一查询出发，通过合成成对证据迭代演化出高质量的评分标准集，无需外部标注即能有效区分答案质量，为 LLM 训练和评估提供了自我改进的可靠信号。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.13591v1",
+      "source": "arxiv",
+      "title": "Memory as a Controlled Process: Learned Adaptive Memory Management for LLM Agents",
+      "abstract": "Large Language Model (LLM) agents increasingly rely on external memory systems to accumulate experience across tasks. Yet nearly all existing approaches, from graph-structured memories to reflective insight stores, access memory through fixed, hand-designed heuristics. We argue that this static view of memory is a core bottleneck for agentic learning because optimal memory behavior is fundamentally context-dependent. The early stages of the tasks, benefit from minimal retrieval because memory is sparse; recurring goal types benefit from plan reuse rather than generic nearest-neighbor lookup; stuck agents benefit from re-retrieval with alternative queries; and across long task streams, the memory store itself must be consolidated and pruned to remain useful. We present Memory as a Controlled Process (MemCon), a framework that models memory operations as a Markov Decision Process and learns an online policy that adaptively decides when, what, and how much to retrieve, when to inject a distilled plan, and when to consolidate or forget. MemCon is backend-agnostic: it wraps any existing memory implementation, learns from task-by-task binary feedback with no pretraining and no additional LLM calls, and uses a lightweight tabular contextual bandit with UCB exploration that converges within tens of tasks. Across 6 benchmarks, 3 agent frameworks, and 3 LLM backbones, MemCon consistently outperforms multiple memory baselines by up to 15.2 points in task success while reducing token consumption by 5--20%.",
+      "authors": [
+        "Eric Hanchen Jiang",
+        "Zhi Zhang",
+        "Yuchen Wu",
+        "Levina Li",
+        "Dong Liu",
+        "Xiao Liang",
+        "Rui Sun",
+        "Yubei Li",
+        "Edward Sun",
+        "Haozheng Luo",
+        "Zhaolu Kang",
+        "Aylin Caliskan",
+        "Kai-Wei Chang",
+        "Ying Nian Wu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-07-15T08:32:40+00:00",
+      "link": "https://arxiv.org/pdf/2607.13591v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Learned adaptive memory management allows LLM agents to self-evolve context-dependent memory strategies.",
+      "llm_evidence_cn": "学习自适应记忆管理使 LLM 智能体能够自演化上下文依赖的记忆策略。",
+      "llm_evidence": "学习自适应记忆管理使 LLM 智能体能够自演化上下文依赖的记忆策略。",
+      "canonical_evidence": "学习自适应记忆管理使 LLM 智能体能够自演化上下文依赖的记忆策略。",
+      "llm_tldr_en": "Proposes learned adaptive memory management for LLM agents to replace fixed heuristics, enabling context-dependent retrieval and consolidation, improving agent performance across varied tasks.",
+      "llm_tldr_cn": "针对现有 LLM 智能体记忆系统依赖固定启发式规则、无法适应多变任务的局限性，提出通过学习将记忆管理建模为受控过程，实现自适应的检索、整合和剪枝操作，实验显示该方法能在多种任务流中持续改进智能体性能，为智能体自我进化提供了关键的记忆组件。",
+      "llm_tldr": "针对现有 LLM 智能体记忆系统依赖固定启发式规则、无法适应多变任务的局限性，提出通过学习将记忆管理建模为受控过程，实现自适应的检索、整合和剪枝操作，实验显示该方法能在多种任务流中持续改进智能体性能，为智能体自我进化提供了关键的记忆组件。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.11112v1",
+      "source": "arxiv",
+      "title": "CA-DGCL: Dynamic Graph Continual Learning via Condensation and Attachment",
+      "abstract": "Dynamic graph continual learning (DGCL) is an effective manner for handling catastrophic forgetting in dynamic graphs. However, existing DGCL methods underutilize temporal information across graph snapshots. To address this critical issue, we propose a novel framework for Dynamic Graph Continual Learning via Condensation and Attachment (CA-DGCL). Specifically, CA-DGCL first condenses historical graph snapshots into compact semantic representations efficiently. Further, a cross-timestamp node chains is built to construct a third-order tensor and Tucker decomposition is applied to this tensor for obtaining stable node features, which encapsulate historical knowledge. Finally, these node features are used to generate new nodes and attached to the current graph for replaying of past information without compromising the new patterns. In addtion, a refined forgetting measure is introduced to make it more suitable for dynamic graph settings. Extensive experiments demonstrate that CA-DGCL outperforms baselines in forgetting suppression as well as maintain competitive accuracy, proving its efficacy for dynamic graph continual learning.",
+      "authors": [
+        "Tingxu Yan Ye Yuan"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-13T05:41:05+00:00",
+      "link": "https://arxiv.org/pdf/2607.11112v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "dynamic graph continual learning with condensation and attachment, a self-evolving technique",
+      "llm_evidence_cn": "基于压缩与附着的动态图持续学习方法，是一种自进化技术",
+      "llm_evidence": "基于压缩与附着的动态图持续学习方法，是一种自进化技术",
+      "canonical_evidence": "基于压缩与附着的动态图持续学习方法，是一种自进化技术",
+      "llm_tldr_en": "Proposes CA-DGCL, a continual learning method for dynamic graphs that condenses historical snapshots and attaches new nodes, enabling model self-evolution without forgetting.",
+      "llm_tldr_cn": "针对动态图持续学习中历史信息利用不足的问题，该论文提出CA-DGCL框架，通过压缩历史快照并利用Tucker分解提取稳定节点特征，通过生成新节点并将其附着到当前图上，有效缓解灾难性遗忘。这种方法为图数据的自进化提供了新的解决方案，适用于不断演变的环境中。实验表明，该方法在多个动态图任务上优于现有持续学习方法，实现了更稳定的知识积累。",
+      "llm_tldr": "针对动态图持续学习中历史信息利用不足的问题，该论文提出CA-DGCL框架，通过压缩历史快照并利用Tucker分解提取稳定节点特征，通过生成新节点并将其附着到当前图上，有效缓解灾难性遗忘。这种方法为图数据的自进化提供了新的解决方案，适用于不断演变的环境中。实验表明，该方法在多个动态图任务上优于现有持续学习方法，实现了更稳定的知识积累。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

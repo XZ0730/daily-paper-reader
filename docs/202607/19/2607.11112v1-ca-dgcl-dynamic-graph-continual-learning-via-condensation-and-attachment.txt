@@ -1,0 +1,340 @@
+Title: CA-DGCL: Dynamic Graph Continual Learning via Condensation and Attachment
+
+URL Source: https://arxiv.org/pdf/2607.11112v1
+
+Published Time: Tue, 14 Jul 2026 02:49:59 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# CA-DGCL: Dynamic Graph Continual Learning via Condensation and Attachment 
+
+Tingxu Yan 1 and Ye Yuan* 
+
+Abstract — Dynamic graph continual learning (DGCL) is an effective manner for handling catastrophic forgetting in dynamic graphs. However, existing DGCL methods underutilize temporal information across graph snapshots. To address this critical issue, we propose a novel framework for Dynamic Graph Continual Learning via Condensation and Attachment (CA-DGCL). Specifically, CA-DGCL first condenses historical graph snapshots into compact semantic representations effi-ciently. Further, a cross-timestamp node chains is built to construct a third-order tensor and Tucker decomposition is applied to this tensor for obtaining stable node features, which encapsulate historical knowledge. Finally, these node features are used to generate new nodes and attached to the current graph for replaying of past information without compromising the new patterns. In addtion, a refined forgetting measure is introduced to make it more suitable for dynamic graph settings. Extensive experiments demonstrate that CA-DGCL outperforms baselines in forgetting suppression as well as maintain competitive accuracy, proving its efficacy for dynamic graph continual learning. 
+
+I. INTRODUCTION Graphs serve as fundamental structures for modeling re-lational data across domains such as social networks. Graph Neural Networks (GNNs) have emerged as the predomi-nant approach for graph representation learning, achieving considerable success. Recent graph-oriented studies have further explored dynamic graph modeling, graph-based clus-tering, neural community search, graph pooling, and graph-regularized representation learning [31], [34], [37]–[39], [41], [51]. Meanwhile, representative GNN architectures and scalable training strategies, such as attention-based aggrega-tion, expressive graph isomorphism networks, personalized propagation, simplified graph convolution, clustering-based mini-batching, sampling-based training, edge dropping, and self-supervised graph representation learning, have broad-ened the practical applicability of graph learning [77]– [84]. Nevertheless, real-world graphs are inherently dynamic, continuously evolving through the addition or removal of nodes and edges. This temporal aspect poses significant challenges for conventional GNNs tailored to static graphs, often resulting in catastrophic forgetting where newly learned patterns overwrite previously acquired knowledge. Although continual learning research has been extended to dynamic graph settings, existing methods do not effectively exploit the temporal information inherent in sequences of graph snapshots to capture intrinsic node characteristics.       
+
+> 1Tingxu Yan and Ye Yuan* are with the College of Computer and Information Science, Southwest University, Chongqing 400715, China
+
+a020909@email.swu.edu.cn,yuanyekl@swu.edu.cn 
+
+Related studies on dynamic, spatio-temporal, and tensor-based representation learning demonstrate the importance of modeling temporal evolution and high-order dependencies in non-stationary data [27], [29], [32], [35], [36], [40], [42], [44], [53], [60], [62]. Dynamic graph representation learning methods further show that evolving node states, temporal self-attention, continuous-time interactions, temporal neigh-borhoods, and triadic closure are important for capturing non-stationary graph patterns [85]–[90]. Meanwhile, current evaluation frameworks also lack adaptations specific to the properties of dynamic graphs. Metrics borrowed from static domains—such as forgetting rate—measure a model’s per-formance on prior tasks after training on subsequent ones. However, in practical scenarios where tasks are segmented by time in dynamic graphs, retrospective performance on earlier tasks becomes less relevant. Taking node classification as an example, greater emphasis should instead be placed on nodes that persist across multiple tasks. To address these limitations, we propose the framework for Dynamic Graph Continual Learning via Condensation and Attachment (CA-DGCL). Our approach first condenses historical graph snapshots into compact semantic representa-tions. By constructing tensors from semantic representations across different timestamps and applying tensor decompo-sition, CA-DGCL uncovers the intrinsic stable features of nodes. Based on these intrinsic stable features, it generates new nodes enriched with historical information, which are then selectively attached to the graph of the current task. This framework is designed to capture the intrinsic features of node communities and preserve historical knowledge in a task-adaptive manner for the current graph structure. Our contributions are:  
+
+> •
+
+We propose CA-DGCL, a condensation-attachment framework for dynamic graph continual learning. It condenses historical snapshots into compact semantic representations and attaches new nodes carrying histor-ical information to the current graph, preserving past knowledge while adapting to new patterns.  
+
+> •
+
+We shift the evaluation focus from retrospective per-formance to more practical, persistence-based metrics, better aligning with real-world dynamic graph scenarios. This metric directly reflects whether useful historical knowledge remains effective for nodes that persist across evolving graph snapshots.  
+
+> •
+
+Extensive experiments on real-world datasets show that CA-DGCL captures long-term node community traits and preserves past knowledge without losing adaptabil-ity to new patterns. arXiv:2607.11112v1 [cs.LG] 13 Jul 2026 Fig. 1: An overview of CA-DGCL. Each task’s graph is condensed to form a sequence of condensed graphs. Through cross-time-step node matching, node chains are constructed, which are then used to build a third-order tensor of dimensions (number of node chains × node feature dimension × time steps). Tucker decomposition is applied to obtain a node factor matrix. This matrix is then mapped back to the original feature space via a linear layer, and the generated new nodes are connected to the current task’s original graph. This linear layer not only performs feature mapping but also learns differentiated mapping weights according to the importance of each node factor to the current task, thereby replaying historical knowledge without affecting the model’s plasticity. II. RLEATED WORK 
+
+Graph Neural Networks. Graph neural networks (GNNs) [1] extend deep learning methodologies to data with graph structures, typically by propagating and integrating infor-mation from adjacent nodes to generate informative node representations. For instance, the Graph Convolutional Net-work (GCN) [2] pioneered an efficient spectral convolution operator based on a first-order approximation of graph Lapla-cians. Subsequently, GraphSAGE [3] introduced an inductive framework that relies on sampling and aggregating features from a node’s local neighborhood rather than considering all neighbors. In addition, a plethora of other GNN variants [4]–[13] have been proposed, each contributing to substantial progress and achieving strong empirical results across a wide range of graph learning tasks. 
+
+Continual Learning. Continual learning empowers models to assimilate knowledge from a continuous stream of data while safeguarding against the catastrophic forgetting of pre-vious knowledge. Current methodologies generally fall into three primary categories: Regularization-based approaches aim to preserve learned representations by imposing spe-cific constraints on the loss function. For instance, TWP [14] leverages parameter sensitivity regarding topological structures to apply regularization. Similarly, DyGRAIN [15] focuses on the receptive field to pinpoint affected nodes. Memory replay-based strategies reinforce knowledge by stor-ing and replaying historical data. Within this domain, ER-GNN [16] utilizes diverse tactics for selecting nodes to replay. SSM [17] employs sparsified subgraphs as memory units to maintain topological integrity. DSLR [18] chooses replay nodes based on coverage metrics and incorporates a link prediction module, while PUMA [19] condenses original graphs into memory graphs for retraining purposes. Parame-ter isolation-based techniques dedicate specific parameters to new tasks. PI-GNN [20] identifies stable parameters via knowledge rectification and expands the network with isolated parameters to capture evolving patterns. Beyond graph continual learning, general continual learn-ing methods have established important mechanisms for forgetting mitigation, including parameter regularization, dis-tillation, exemplar memory, episodic memory constraints, efficient memory projection, and replay-based experience consolidation [91]–[96]. In addition, latent factor analysis, tensor decomposition, autoencoding, stochastic optimization, and robust representation learning provide useful tools for compactly preserving stable information in high-dimensional data [28], [30], [33], [43], [45], [47]–[50], [52], [54]–[56], [58], [59], [61], [63]–[76]. Our proposed framework follows the memory-replay paradigm by extracting cross-temporal stable features from condensed graphs and injecting them into the current graph through generated nodes. This design consolidates cross-temporal semantic stability and effectively reduces catas-trophic forgetting. III. METHOD This section presents the details of the CA-DGCL method, as illustrated in Fig.1. 
+
+A. Problem Formulation 
+
+We define the dynamic graph as a temporal sequence of snapshots, represented by G = {G (1) , G(2) , . . . , G(T )}. At any specific time step t, the graph snapshot is formulated as 
+
+G(t) = ( V(t), E(t)), where V(t) = {v1, v 2, . . . , v n} denotes the set of nodes and E(t) = {eij | vi, v j ∈ V (t)} captures the edges representing their interactions. Given the non-static nature of the dynamic graph, both the node set V(t) and edge set E(t) evolve over time, leading to variations in graph size and composition. To mathematically describe the structural connectivity, we utilize a series of adjacency matrices A = {A (1) , A(2) , . . . , A(t)}. Here, the matrix A(t) ∈ { 0, 1}N (t)×N (t)
+
+serves as a binary indicator, where A(t) 
+
+> ij
+
+= 1 signifies the existence of an edge eij within 
+
+E(t).The attributes of the nodes are captured by the fea-ture sequence X = {X (1) , X (2) , . . . , X (t)}. The matrix 
+
+X (t) ∈ RN (t)×d aggregates the feature vectors for the N (t)
+
+nodes present at time t, with each node vi possessing a d-dimensional vector x(t) 
+
+> i
+
+. The input fed into the graph neural network at step t is the pair D(t) = ( A(t), X (t)).
+
+B. Graph Condensation 
+
+Let 
+
+n
+
+G(1)  
+
+> C
+
+, G(2)  
+
+> C
+
+, . . . , G(T )
+
+> C
+
+o
+
+represent the sequence of condensed historical graphs, where each G(t) 
+
+> C
+
+=(V(t) 
+
+> C
+
+, E(t) 
+
+> C
+
+, X (t) 
+
+> C
+
+). Our approach adopts the training-free Class-partitioned Graph Condensation framework(CGC) [21]. CGC first computes the K-step propagated features 
+
+H = ˆAK X, where ˆA is the normalized adjacency matrix with self-loops. The condensed node features X′ are then obtained by partitioning each class via an aggregation matrix ˆP ∈ RN ′×N (with N and N ′ being the original and condensed node counts), i.e., X′ = ˆPH . This reduces condensation to a class partition problem, efficiently solvable by clustering without gradient-based optimization. This design is consistent with graph and dataset condensation studies that construct compact synthetic or structure-free representations through gradient matching, trajectory matching, and scalable graph-free condensation [97]–[100], as well as compact neural representation methods that use tensor compression or low-rank modeling to retain key structural and semantic information [46], [57]. 
+
+C. Generation of New Nodes with Historical Information 
+
+To facilitate the replay of information from condensed historical graphs, we align nodes across temporal snapshots to construct node chains comprising highly similar nodes across different time steps. By establishing correspondences across adjacent timestamps, we form continuous trajectories that preserve the identity and feature evolution of each node community over time. Subsequently, these node chains are stacked into a third-order tensor with dimensions correspond-ing to the number of nodes, feature dimension, and time length. The specific methodology is formalized as follows: 
+
+Node Chain Construction. For two consecutive condensed temporal snapshots Gt−1 
+
+> C
+
+and GtC with feature matrices 
+
+X t−1 
+
+> C
+
+∈ RN (t−1) ×d and X tC ∈ RN (t)×d, we compute the cosine similarity matrix S as: 
+
+S = norm (X t−1 
+
+> C
+
+) norm (X tC )⊤ ∈ RN (t−1) ×N (t)
+
+(1) where norm( ·) denotes ℓ2 row-wise normalization. The matching set M is obtained by: 
+
+M = Match( S, τ ) (2) with Match being a greedy or Hungarian algorithm that pairs nodes based on the similarity matrix and threshold τ .Matching nodes between condensed graphs at adjacent time steps yields multiple node chains across the sequence. Based on the matching result, the construction of node chains adheres to a threshold-governed policy. Specifically, if a node pair in M exhibits a similarity score above the threshold τ , the source node’s existing chain from Gt−1 
+
+> C
+
+is extended to include the matched target node from GtC . Con-versely, any node in GtC that fails to form a match exceeding 
+
+τ is considered a newly emergent entity and thus initiates a new node chain. This policy ensures that chains exclusively represent persistent node communities with consistent feature evolution, while naturally accommodating the birth of novel nodes in the dynamic graph. Following the matching process described above, node chains are constructed to track the evolution of individual nodes across the sequence. To maintain consistency, the timeline length of each node chain is always equal to the total number of compressed graphs processed so far. When a new time step arrives, all existing chains first receive a marker indicating absence at the current step. Then, based on the matching set M obtained from the current and previous snapshots, the marker of a matched chain is replaced with the actual node identifier from the current compressed graph; unmatched chains retain the absence marker. Consequently, historical absence markers from previous time steps are never retroactively modified, even if the node reappears later. These past missing entries remain as markers of absence and are later filled during the construction of the evolution tensor. Specifically, for each chain, all observed features are collected. For any time step where the node is absent, the nearest preceding observation is first sought; if none exists, the nearest succeeding observation is used instead. The feature from that nearest observed time step is then employed to fill the missing entry. This design ensures that all chains have uniform length (equal to the number of time steps) while preserving the original record of node appearances and absences, which facilitates modeling the complete temporal evolution via tensor decomposition. 
+
+Tensor Construction. By aligning matched nodes across time steps, we can obtain node chains, and thereby construct a third-order evolution tensor X ∈ RN ×d×T , where N is the total number of node chains, d is the feature dimension, and T is the number of time steps. For each node chain c at time t, the feature vector is placed as: 
+
+X c, :,t = xc,t ∈ Rd, ∀c = 1 , . . . , N, t = 1 , . . . , T (3) 
+
+Tucker Decomposition. The tensor X is decomposed via Tucker decomposition: 
+
+X ≈ G ×1 U ×2 V ×3 W (4) where G ∈ RR1×R2×R3 is the core tensor, U ∈ RN ×R1
+
+is the node factor matrix, V ∈ Rd×R2 is the feature factor matrix, and W ∈ RT ×R3 is the time factor matrix. The symbol ×n denotes the n-mode product. The decomposition is solved by the Higher-Order Orthogonal Iteration (HOOI) algorithm, which iteratively optimizes: 
+
+min  
+
+> G,U,V,W
+
+X − G ×1 U ×2 V ×3 W 2 
+
+> F
+
+(5) subject to U, V, W having orthogonal columns. 
+
+Node Generation and Graph Expansion. Given the node factor matrix U ∈ RN ×R1 obtained from Tucker decompo-sition, we map all node factors back to the original feature space via a learnable projection P ∈ RR1×d:
+
+Xnew = UP ∈ RN ×d (6) These generated nodes are then attached with the original graph via a similarity-based strategy (e.g., linking each new node to its k most similar original nodes). The resulting extended graph Gext = ( Vext , Eext , Xext ) is then fed into the downstream graph neural network encoder. Within each task, we re-generate Xnew and re-connect the nodes at every train-ing epoch using the current projection P. This encourages the learnable mapping to adaptively emphasize informative node factors and suppress redundant ones, thereby enabling targeted historical replay. 
+
+D. Node Embedding 
+
+The expanded graph G(t) 
+
+> ext
+
+= ( V(t) 
+
+> ext
+
+, E(t) 
+
+> ext
+
+, X (t) 
+
+> ext
+
+) is fed into a graph neural network encoder to produce node representa-tions for the current time step. In this work, we adopt GAT as the backbone encoder. Our framework is model-agnostic and can be extended to other GNN architectures like GCN or GraphSAGE. Let the node feature matrix of the expanded graph be 
+
+X (t) 
+
+> ext
+
+∈ RNext ×d, where Next = Norig + Nnew denotes the total number of nodes in the expanded graph, with Norig 
+
+being the number of original nodes and Nnew the number of generated nodes. The corresponding adjacency matrix is 
+
+A(t) 
+
+> ext
+
+∈ RNext ×Next .GAT updates node representations by leveraging a self-attention mechanism over a node’s local neighborhood. For-mally, the embedding of node v at the ℓ+1 -th layer is updated as: 
+
+h(ℓ+1)  
+
+> v
+
+= σ
+
+ 1
+
+K
+
+> K
+
+X
+
+> k=1
+
+X 
+
+> u∈N (v)∪{ v}
+
+α(k,ℓ ) 
+
+> vu
+
+W(k,ℓ )h(ℓ)
+
+> u
+
+ (7) where h(ℓ) 
+
+> v
+
+is the embedding of node v at layer ℓ, N (v)
+
+denotes the set of neighboring nodes, W(k,ℓ ) is a learnable weight matrix for the k-th attention head, α(k,ℓ ) 
+
+> vu
+
+is the attention coefficient computed via a shared attention mecha-nism LeakyReLU (aT [Wh v ∥Wh u]) —where a is a learnable weight vector used to compute the attention score—followed by softmax normalization over neighbors, K is the number of independent attention heads, ∥ denotes concatenation, and 
+
+σ(·) is a non-linear activation function. After propagating through L layers, we obtain the final node embeddings for all nodes in the expanded graph: 
+
+Z(t) 
+
+> ext
+
+∈ RNext ×dout (8) where dout is the output embedding dimension. Since the generated new nodes serve only as carriers of historical knowledge for replay and are not supervised in the current task, we extract the embeddings of the original nodes from the expanded graph: 
+
+Z(t) 
+
+> orig
+
+= Z(t) 
+
+> ext
+
+[1 : Norig , :] ∈ RNorig ×dout (9) These embeddings are then passed to a classifier: 
+
+Y = Z(t)
+
+> orig
+
+W(c), W(c) ∈ Rdout ×|Z| (10) where Z denotes the set of classes. The probability that node 
+
+i belongs to class z is computed as: 
+
+ˆyiz = exp( Yiz )
+
+P|Z|  
+
+> z′=1
+
+exp( Yiz ′ ) (11) Finally, the classification loss is defined as the cross-entropy over the original nodes only: 
+
+Lcls = − 1
+
+Norig 
+
+> Norig
+
+X
+
+> i=1
+> |Z|
+
+X
+
+> z=1
+
+Iiz log ˆ yiz (12) where Iiz is the indicator of the ground-truth class for node i.This design ensures that the model focuses on the nodes that actually exist in the current task during training, while the generated new nodes participate only in message propagation as carriers of historical knowledge, thereby mitigating catas-trophic forgetting without introducing additional supervision signals. IV. EXPERIMENTS In this section, we present the experimental results of CA-DGCL on four real-world datasets. Fig. 2: t-SNE visualization of test node embeddings for a class across different tasks on Arxiv-S. (Left) Fine-tuning (task-adaptive updating only, no continual learning): both the overall feature space and the intra-task embedding distributions appear relatively loose. (Right) The proposed CA-DGCL model: the overall embedding distribution across tasks remains more compact, and the intra-task clusters are also more concentrated, validating the model’s ability to preserve feature space stability. TABLE I Statistics of Datasets                     
+
+> Dataset Nodes Edges Attributes Tasks Cora 2,708 5,429 1,433 14 Elliptic 203769 234355 165 25 DBLP-S 20,000 75,706 128 26 Arxiv-S 40,726 88,691 128 13
+
+A. Setup 
+
+Datasets. We conduct experiments on three real-world graph datasets with diverse application scenarios: DBLP-S [22], Arxiv-S [20], Cora [23] and Elliptic [24]. Following [21], for the streaming graphs DBLP and Arxiv-S, we split them into tasks by timestamps. For the static graphs Cora, we turn it into streaming graphs by adding one new class every two tasks. For the Elliptic, we split it into streaming tasks by its timestamps following our approach. For each dataset, we partition the nodes of GT into training, validation, and test sets with a 60%/20%/20% split, respectively. This partition is applied consistently across all temporal snapshots. Summary statistics for each dataset are provided in Table I. 
+
+Baselines. The following baselines are compared: • ContinualGNN [25] alleviates catastrophic forgetting by detecting new patterns via influence propagation and consol-idating existing knowledge through multi-view replay and regularization. • TWP mitigates catastrophic forgetting by preserving the topological structure of the graph and stabilizing important parameters. • ER-GNN mitigates catastrophic forgetting by storing repre-sentative experience nodes from previous tasks and replaying them during the learning of new tasks. • PDGNNs-TEM [26] addresses the memory explosion prob-lem by decoupling trainable parameters from topological aggregation and compressing computation ego-subnetworks into compact topology-aware embeddings for efficient mem-ory replay. 
+
+Metrics. Two evaluation metrics are adopted: Performance Mean (PM) and Forgetting Measure (FM). PM measures the average model performance: 
+
+P M = 1
+
+T
+
+> T
+
+X
+
+> i=1
+
+ai (13) where T is the total number of tasks, and ai refers to the accuracy of model on task i.To adapt to dynamic graph scenarios, we modify the tradi-tional forgetting metric. FM measures the ratio of nodes that were correctly predicted in the previous task but incorrectly predicted in the next task. It is defined as the proportion of nodes that are in both the set of correctly predicted nodes in task i and the set of incorrectly predicted nodes in task i + 1 :
+
+F M = |Ci ∩ Ei+1 ||Ci| (14) where Ci represents the set of nodes that were correctly predicted in task i, Ei+1 represents the set of nodes that were incorrectly predicted in task i + 1 denotes the intersection of the two sets, i.e., the nodes that were correctly predicted in task i but incorrectly predicted in task i + 1 . Traditional forgetting metrics usually work by averaging accuracy drops across all old tasks after training on new ones. However, this method requires keeping data from earlier tasks. This is often not feasible in realistic dynamic graph environments. Furthermore, these retrospective assessments miss the main point of continual learning. The goal is not just to keep performance on obsolete tasks. Instead, it is to sustain useful historical knowledge for current and future inference. Our proposed metric addresses this directly. It measures the TABLE II Performance Mean(PM) and Forgetting Measure(FM) of Different Methods for Node Classification                                                                                                                                    
+
+> Method Arxiv-S DBLP-S Cora Elliptic
+> PM FM PM FM PM FM PM FM ER-GNN 76 .63 ±0.00% 3.48 ±0.00% 55 .41 ±0.00% 4.35 ±0.02% 75 .75 ±0.89% 4.93 ±0.39% 97 .13 ±0.06% 0.41 ±0.00%
+> ContinualGNN 34 .80 ±2.83% 32 .67 ±5.04% 50 .90 ±0.60% 8.43 ±1.16% 77 .34 ±2.20% 3.37 ±0.18% 93 .15 ±0.20% 0.97 ±0.03%
+> TWP 77 .31 ±0.10% 4.04 ±0.17% 49 .29 ±2.23% 7.20 ±1.09% 71 .59 ±0.50% 5.75 ±0.72% 97 .35 ±0.05% 0.10 ±0.01%
+> PDGNNs-TEM 72 .49 ±0.77% 6.78 ±0.22% 55 .13 ±0.06% 5.64 ±0.44% 71 .80 ±1.02% 5.04 ±0.20% 97 .52 ±0.01 %0.42 ±0.01%
+> Ours 79 .61 ±0.01 %3.13 ±0.00 %56 .02 ±0.08 %2.81 ±0.02 %77 .73 ±0.20 %2.23 ±0.06 %97 .31 ±0.05% 0.09 ±0.00 %
+
+continuity of beneficial knowledge retention across adjacent tasks. 
+
+B. Overall Results 
+
+The experimental results are presented in Table II. In terms of Forgetting Measure (FM), CA-DGCL consistently achieves the lowest values across all four datasets. This demonstrates that the integration of cross-task node chain modeling with Tucker decomposition of the evolution ten-sor effectively captures and preserves stable class-specific semantic patterns, thereby safeguarding previously acquired knowledge against catastrophic forgetting. With respect to Performance Measure (PM), CA-DGCL exhibits highly com-petitive overall accuracy on every benchmark, ranking ei-ther optimal or on par with the strongest baseline. More importantly, this strong discriminative performance is at-tained in conjunction with the most favorable forgetting suppression—a dual objective that the majority of baselines fail to balance. Typical methods either overfit to the most recent tasks, which degrades FM, or sacrifice plasticity to retain historical knowledge, which compromises PM. CA-DGCL resolves this stability–plasticity trade-off by extract-ing intrinsic stable node features from temporal information and leveraging a trainable projection layer to generate new nodes that encode historical knowledge. Critically, this pro-jection layer learns to inject informative historical semantics without perturbing the representation of the current task. Consequently, the augmented graph enriches the model’s contextual awareness while preserving the integrity of the previously learned feature space. This design enables CA-DGCL to simultaneously maintain high accuracy across the task sequence and minimize forgetting, substantiating its effectiveness in continual graph learning scenarios. 
+
+C. Cross-Task Stability Of Feature Space 
+
+As illustrated in the Fig. 2, the proposed CA-DGCL method demonstrates enhanced cross-task stability in the feature representations of same-class nodes, accompanied by more compact intra-task clustering, when compared to the fine-tuning. These observed improvements indicate that the model has effectively captured the discriminative character-istics of the corresponding node class. V. CONCLUSIONS In this paper, we proposed CA-DGCL for dynamic graph continual learning. CA-DGCL condenses historical graphs, constructs cross-temporal node chains, and applies Tucker decomposition to extract stable node features. These features are mapped into replay nodes and attached to the current graph to mitigate catastrophic forgetting. We also introduced a persistence-based forgetting measure for dynamic graphs. Experiments on four real-world datasets demonstrate that CA-DGCL consistently reduces forgetting while maintaining competitive classification performance. REFERENCES [1] F. Scarselli, M. Gori, A. C. Tsoi, M. Hagenbuchner, and G. Monfar-dini, “The graph neural network model,” IEEE Transactions on Neural Networks , vol. 20, no. 1, pp. 61–80, Jan. 2009. [2] T. N. Kipf and M. Welling, “Semi-supervised classification with graph convolutional networks,” in International Conference on Learning Representations (ICLR) , 2017. [3] W. L. Hamilton, R. Ying, and J. Leskovec, “Inductive representation learning on large graphs,” in Advances in Neural Information Process-ing Systems (NeurIPS) , pp. 1024–1034, 2017. [4] L. Wang, K. Liu, and Y. Yuan, “GT-A2T: Graph tensor alliance attention network,” IEEE/CAA J. Autom. Sinica , vol. 12, no. 10, pp. 2165–2167, 2025. [5] M. Han, L. Wang, Y. Yuan, and X. Luo, “SGD-DyG: Self-Reliant Global Dependency Apprehending on Dynamic Graphs,” Proc. ACM SIGKDD Conference on Knowledge Discovery and Data Mining , pp. 802–813, 2025. [6] J. Li, Y. Yuan, and X. Luo, “Learning Error Refinement in Stochastic Gradient Descent-based Latent Factor Analysis via Diversified PID Controllers,” IEEE Transactions on Emerging Topics in Computational Intelligence , vol. 9, no. 5, pp. 3582–3597. [7] Y. Yuan, Y. Wang, and X. Luo, “A Node-Collaboration-Informed Graph Convolutional Network for Highly Accurate Representation to Undirected Weighted Graph,” IEEE Transactions on Neural Networks and Learning Systems , vol. 36, no. 6, pp. 11507–11519, 2025. [8] Y. Yuan, S. Lu, and X. Luo, “A Proportional Integral Controller-Enhanced Non-negative Latent Factor Analysis Model,” IEEE/CAA Journal of Automatica Sinica , vol. 12, no. 6, pp. 1246–1259, 2025. [9] Y. Yuan, J. Li, and X. Luo, “A Fuzzy PID-Incorporated Stochastic Gradient Descent Algorithm for Fast and Accurate Latent Factor Analysis,” IEEE Transactions on Fuzzy Systems , vol. 32, no. 7, pp. 4049–4061, 2024. [10] L. Wang, Y. Yuan, and X. Luo, “Graph tensor convolutional network,” IEEE Trans. Syst., Man, Cybern., Syst. , 2026, doi: 10.1109/TSMC.2026.3655418. [11] L. Wang, Y. Yuan, and X. Luo, “Advanced high-order graph convolu-tional networks with assorted time-frequency transforms,” IEEE/CAA J. Autom. Sinica , vol. 13, no. 2, pp. 394–408, 2026. [12] T. He, Z. Duan, and X. Luo, “Modularized graph convolutional network,” IEEE/CAA J. Autom. Sinica , 2025, doi: 10.1109/JAS.2025.125336. [13] J. Gou, Y. Cheng, B. Ma, L. Du, X. Luo, and Z. Yi, “Multi-scale collaborative distillation graph neural networks for session-based recommendation,” IEEE Trans. Serv. Comput. , vol. 19, no. 1, pp. 504– 517, 2026. [14] H. Liu, Y. Yang, and X. Wang, “Overcoming catastrophic forgetting in graph neural networks,” in Proceedings of the AAAI Conference on Artificial Intelligence , 2021. pp. 3158–3164, 2022. [15] S. Kim, S. Yun, and J. Kang, “DyGRAIN: An incremental learning framework for dynamic graphs,” in Proc. Int. Joint Conf. Artif. Intell. (IJCAI) , 2022, pp. 3157–3163. [16] F. Zhou and C. Cao, “Overcoming catastrophic forgetting in graph neural networks with experience replay,” in Proceedings of the AAAI Conference on Artificial Intelligence , vol. 34, pp. 1–8, April 2020. [17] X. Zhang, D. Song, and D. Tao, “Sparsified subgraph memory for continual graph representation learning,” in Proc. IEEE Int. Conf. Data Mining (ICDM) , Orlando, FL, USA, 2022, pp. 1335–1340, doi: 10.1109/ICDM54844.2022.00168. [18] S. Choi, W. Kim, S. Kim, Y. In, S. Kim, and C. Park, “DSLR: Di-versity enhancement and structure learning for rehearsal-based graph continual learning,” in Proceedings of the ACM Web Conference 2024 ,Singapore, Singapore, pp. 1–12, May 2024. [19] Y. Liu, R. Qiu, Y. Tang, H. Yin, and Z. Huang, “PUMA: Efficient continual graph learning for node classification with graph condensa-tion,” IEEE Trans. Knowl. Data Eng. , vol. 37, no. 1, pp. 451–465, Jan. 2025. [20] P. Zhang, Y. Yan, C. Li, S. Wang, X. Xie, G. Song, and S. Kim, “Continual learning on dynamic graphs via parameter isolation,” in 
+
+Proc. 46th Int. ACM SIGIR Conf. Res. Develop. Inf. Retr. (SIGIR) ,Taipei, Taiwan, 2023, pp. 1–11. [21] X. Gao, G. Ye, T. Chen, W. Zhang, J. Yu, and H. Yin, “Rethinking and accelerating graph condensation: A training-free approach with class partition,” in Proc. ACM Web Conf. (WWW) , Sydney, NSW, Australia, 2025, pp. 1–15. [22] J. Tang, J. Zhang, L. Yao, J. Li, L. Zhang, and Z. Su, “Arnetminer: extraction and mining of academic social networks,” in Proc. 14th ACM SIGKDD Int. Conf. Knowl. Discov. Data Min. (KDD) , Las Vegas, NV, USA, 2008, pp. 990–998. [23] A. K. McCallum, K. Nigam, J. Rennie, and K. Seymore, “Automating the construction of internet portals with machine learning,” in Infor-mation Retrieval , vol. 3, pp. 127–163, 2000. [24] M. Weber, G. Domeniconi, J. Chen, D. K. I. Weidele, C. Bellei, T. Robinson, and C. E. Leiserson, “Anti-money laundering in bitcoin: Experimenting with graph convolutional networks for financial foren-sics,” arXiv preprint arXiv:1908.02591, 2019. [25] J. Wang, G. Song, Y. Wu, and L. Wang, “Streaming Graph Neural Networks via Continual Learning,” in Proceedings of the 29th ACM In-ternational Conference on Information and Knowledge Management ,2020, pp. 1–10. [26] X. Zhang, D. Song, Y. Chen, and D. Tao, “Topology-aware embedding memory for continual learning on expanding networks,” in Proc. 30th ACM SIGKDD Conf. Knowl. Discov. Data Min. (KDD) , Barcelona, Spain, 2024, pp. 4326–4337. [27] Y. Yuan, S. Wang, H. Zhou, L. Wang, and X. Luo, “A novel approach to temporal QoS estimation via extended Kalman filter-incorporated latent feature analysis,” IEEE Trans. Services Comput. , 2026, doi: 10.1109/TSC.2026.3697552. [28] J. Li, Y. Yuan, T. He, and X. Luo, “Adaptive PID-incorporated nonnegative latent factor analysis,” IEEE Trans. Syst., Man, Cybern., Syst. , 2026, doi: 10.1109/TSMC.2026.3678292. [29] H. Wu, Q. Wang, X. Luo, and Z. Wang, “Learning accurate repre-sentation to nonstandard tensors via a mode-aware Tucker network,” 
+
+IEEE Trans. Knowl. Data Eng. , vol. 37, no. 12, pp. 7272–7285, 2025. [30] C. Lyu, Z. Ma, X. Luo, and Y. Shi, “Dynamic stochastic reorientation particle swarm optimization for adaptive latent factor analysis in high-dimensional sparse matrices,” IEEE Trans. Knowl. Data Eng. , vol. 38, no. 1, pp. 222–234, 2026. [31] F. Bi, T. He, Y.-S. Ong, and X. Luo, “Discovering spatio-temporal-individual coupled features from nonstandard tensors: A novel dy-namic graph mixer approach,” IEEE Trans. Neural Netw. Learn. Syst. ,vol. 36, no. 11, pp. 19834–19848, 2025. [32] F. Bi, T. He, and X. Luo, “Spatiotemporal graph neural network-incorporated latent factorization of tensors for dynamic QoS estimation,” IEEE/CAA J. Autom. Sinica , 2025, doi: 10.1109/JAS.2025.125750. [33] P. Tang, X. Luo, and J. Woodcock, “Auto-encoding neural Tucker factorization,” IEEE Trans. Knowl. Data Eng. , vol. 37, no. 10, pp. 5795–5807, 2025. [34] L. Lin, Q. Li, M. Qiao, Z. Wang, J. Zhao, R.-H. Li, X. Luo, and T. Jia, “NCSAC: Effective neural community search via attribute-augmented conductance,” IEEE Trans. Knowl. Data Eng. , vol. 38, no. 2, pp. 1221– 1235, 2026. [35] X. Liao, H. Wu, T. He, and X. Luo, “A Proximal-ADMM-incorporated nonnegative latent-factorization-of-tensors model for representing dy-namic cryptocurrency transaction network,” IEEE Trans. Syst., Man, Cybern., Syst. , vol. 55, no. 11, pp. 8387–8401, 2025. [36] X. Liao, H. Wu, and X. Luo, “A novel tensor causal convolution network model for highly-accurate representation to spatio-temporal data,” IEEE Trans. Autom. Sci. Eng. , vol. 22, pp. 19525–19537, 2025. [37] Q. Wang, H. Wu, and X. Luo, “A convolution bias-incorporated nonnegative latent factorization of tensors model for accurate represen-tation learning to dynamic directed graphs,” IEEE Trans. Syst., Man, Cybern., Syst. , vol. 55, no. 12, pp. 8902–8914, 2025. [38] Y. Yang, L. Hu, G. Li, D. Li, P. Hu, and X. Luo, “Link-based attributed graph clustering via approximate generative Bayesian learning,” IEEE Trans. Syst., Man, Cybern., Syst. , vol. 55, no. 8, pp. 5730–5743, 2025. [39] M.-Y. Wu, P. Hu, Z.-H. You, J. Zhang, L. Hu, and X. Luo, “Graph-based prediction of miRNA-drug associations with multisource infor-mation and metapath enhancement matrices,” IEEE J. Biomed. Health Inform. , 2025, doi: 10.1109/JBHI.2025.3558303. [40] Y. Hou, P. Tang, and X. Luo, “Multi-aspect self-attending neu-ral Tucker factorization for spatiotemporal representation learning,” 
+
+IEEE/CAA J. Autom. Sinica , 2025, doi: 10.1109/JAS.2025.125723. [41] F. Bi, T. He, Y.-S. Ong, and X. Luo, “Graph linear convolution pooling for learning in incomplete high-dimensional data,” IEEE Trans. Knowl. Data Eng. , vol. 37, no. 4, pp. 1838–1852, 2025. [42] D. Wu, Z. Li, Z. Yu, Y. He, and X. Luo, “Robust low-rank latent feature analysis for spatio-temporal signal recovery,” IEEE Trans. Neural Netw. Learn. Syst. , vol. 36, no. 2, pp. 2829–2842, 2025. [43] P. Tang and X. Luo, “Neural Tucker factorization,” IEEE/CAA J. Autom. Sinica , vol. 12, no. 2, pp. 475–477, 2025. [44] H. Yang, M. Lin, H. Chen, X. Luo, and Z. Xu, “Latent factor analysis model with temporal regularized constraint for road traffic data imputation,” IEEE Trans. Intell. Transp. Syst. , vol. 26, no. 1, pp. 724–741, 2025. [45] H. Wu, Y. Qiao, and X. Luo, “A fine-grained regularization scheme for nonnegative latent factorization of high-dimensional and incomplete tensors,” IEEE Trans. Services Comput. , vol. 17, no. 6, pp. 3006– 3021, 2024. [46] N. Zeng, X. Li, P. Wu, H. Li, and X. Luo, “A novel tensor decomposition-based efficient detector for low-altitude aerial objects with knowledge distillation scheme,” IEEE/CAA J. Autom. Sinica , vol. 11, no. 2, pp. 487–501, 2024. [47] D. Wu, P. Zhang, Y. He, and X. Luo, “MMLF: Multi-metric latent feature analysis for high-dimensional and incomplete data,” IEEE Trans. Services Comput. , vol. 17, no. 2, pp. 575–588, 2024. [48] W. Qin, X. Luo, and M. Zhou, “Adaptively-accelerated parallel stochastic gradient descent for high-dimensional and incomplete data representation learning,” IEEE Trans. Big Data , vol. 10, no. 1, pp. 92–107, 2024. [49] W. Li, R. Wang, and X. Luo, “A generalized Nesterov-accelerated second-order latent factor model for high-dimensional and incomplete data,” IEEE Trans. Neural Netw. Learn. Syst. , vol. 36, no. 1, pp. 1518– 1532, 2024. [50] F. Bi, T. He, and X. Luo, “A fast nonnegative autoencoder-based approach to latent feature analysis on high-dimensional and incomplete data,” IEEE Trans. Services Comput. , vol. 17, no. 3, pp. 733–746, 2024. [51] Z. Liu, X. Luo, and M. Zhou, “Symmetry and graph bi-regularized non-negative matrix factorization for precise community detection,” 
+
+IEEE Trans. Autom. Sci. Eng. , vol. 21, no. 2, pp. 1406–1420, 2024. [52] D. Wu, X. Luo, Y. He, and M. Zhou, “A prediction-sampling-based multilayer-structured latent factor model for accurate representation to high-dimensional and sparse data,” IEEE Trans. Neural Netw. Learn. Syst. , vol. 35, no. 3, pp. 3845–3858, 2024. [53] M. Chen, Y. Qiao, R. Wang, and X. Luo, “A generalized Nesterov’s accelerated gradient-incorporated non-negative latent-factorization-of-tensors model for efficient representation to dynamic QoS data,” IEEE Trans. Emerg. Topics Comput. Intell. , vol. 8, no. 3, pp. 2386–2400, 2024. [54] W. Qin, X. Luo, S. Li, and M. Zhou, “Parallel adaptive stochastic gra-dient descent algorithms for latent factor analysis of high-dimensional and incomplete industrial data,” IEEE Trans. Autom. Sci. Eng. , vol. 21, no. 3, pp. 2716–2729, 2024. [55] J. Wang, W. Li, and X. Luo, “A distributed adaptive second-order latent factor analysis model,” IEEE/CAA J. Autom. Sinica , vol. 11, no. 11, pp. 2343–2345, 2024. [56] W. Qin, Y. Ding, and X. Luo, “A robust approach to electricity theft detection via tensor representation-driven contrastive distillation,” 
+
+IEEE Trans. Ind. Informat. , 2026, doi: 10.1109/TII.2026.3659333. [57] Y. He and X. Luo, “Tensor low-rank orthogonal compression for convolutional neural networks,” IEEE/CAA J. Autom. Sinica , vol. 13, no. 1, pp. 227–229, 2026. [58] D. Wu, C. Liang, Y. He, Y. Qiao, and X. Luo, “Multi met-ric autoencoder for representing high-dimensional and incom-plete data,” IEEE Trans. Syst., Man, Cybern., Syst. , 2025, doi: 10.1109/TSMC.2025.3646863. [59] Q. Hu, H. Wu, and X. Luo, “A comprehensive review of parallel optimization algorithms for high-dimensional and incomplete matrix factorization,” IEEE/CAA J. Autom. Sinica , vol. 12, no. 12, pp. 2399– 2426, 2025. [60] X. Xu, M. Lin, Z. Xu, and X. Luo, “A sampling-neighborhood-regularized latent factorization of tensor for dynamic QoS estimation,” 
+
+IEEE Trans. Netw. Service Manag. , vol. 23, pp. 1707–1722, 2026. [61] X. Xu, M. Lin, Z. Xu, and X. Luo, “Attention-mechanism-based neural latent-factorization-of-tensors model,” ACM Trans. Knowl. Discov. Data , vol. 19, no. 4, pp. 1–27, 2025. [62] X. Xu, M. Lin, X. Luo, and Z. Xu, “An adaptively bias-extended non-negative latent factorization of tensors model for accurately rep-resenting the dynamic QoS data,” IEEE Trans. Services Comput. , vol. 18, no. 2, pp. 603–617, 2025. [63] W. Li, M. Lin, X. Xu, L. Lin, Z. Xu, and X. Luo, “Neural non-negative latent factorization of tensors model with acceleration and unconstraint,” IEEE Trans. Syst., Man, Cybern., Syst. , vol. 56, no. 1, pp. 164–178, 2026. [64] D. Wu, S. Li, Y. He, X. Luo, and X. Gao, “Non-gradient hash factor learning for high-dimensional and incomplete data represen-tation learning,” IEEE Trans. Pattern Anal. Mach. Intell. , 2026, doi: 10.1109/TPAMI.2026.3653780. [65] L. Wei, L. Jin, and X. Luo, “A robust coevolutionary neural-based optimization algorithm for constrained nonconvex optimization,” IEEE Trans. Neural Netw. Learn. Syst. , vol. 35, no. 6, pp. 7778–7791, 2024. [66] Q. Jiang, D. Liu, H. Zhu, S. Wu, N. Wu, X. Luo, and Y. Qiao, “Iterative role negotiation via the bi-level GRA++ with decision tolerance,” IEEE Trans. Comput. Social Syst. , vol. 11, no. 6, pp. 7484–7499, 2024. [67] C. Li, P. Huang, J. Qin, and X. Luo, “Knowledge-driven multiple instance learning with hierarchical cluster-incorporated aware filtering for larynx pathological grading,” IEEE J. Biomed. Health Inform. ,2025, doi: 10.1109/JBHI.2025.3609838. [68] X. Deng, P. Hu, T. Herget, F. Tan, X. Zhu, J. Zhang, Y.-A. Huang, L. Hu, Z. You, and X. Luo, “Fuzzy mixture-of-experts aggregation for organoid identification with multi-scale state space features,” IEEE Trans. Fuzzy Syst. , vol. 34, no. 1, pp. 324–335, 2026. [69] J. Liu, X. Li, M. Lin, and X. Luo, “A scalable multi-channel sentiment analysis model with enhanced semantic understanding and redundancy reduction,” IEEE Trans. Comput. Social Syst. , 2025, doi: 10.1109/TCSS.2025.3619188. [70] X. Luo, Z. Li, W. Yue, and S. Li, “A calibrator fuzzy ensemble for highly-accurate robot arm calibration,” IEEE Trans. Neural Netw. Learn. Syst. , vol. 36, no. 2, pp. 2169–2181, 2025. [71] Z. Luo, X. Jin, Y. Luo, Q. Zhou, and X. Luo, “Analysis of students’ positive emotion and smile intensity using sequence-relative key-frame labeling and deep-asymmetric convolutional neural network,” 
+
+IEEE/CAA J. Autom. Sinica , vol. 12, no. 4, pp. 806–820, 2025. [72] Z. He, M. Lin, X. Luo, and Z. Xu, “Structure-preserved self-attention for fusion image information in multiple color spaces,” IEEE Trans. Neural Netw. Learn. Syst. , vol. 36, no. 7, pp. 13021–13035, 2025. [73] D. Wu, Y. Hu, K. Liu, J. Li, X. Wang, S. Deng, N. Zheng, and X. Luo, “An outlier-resilient autoencoder for representing high-dimensional and incomplete data,” IEEE Trans. Emerg. Topics Comput. Intell. , vol. 9, no. 2, pp. 1379–1391, 2025. [74] M. Chen, L. Tao, J. Lou, and X. Luo, “Latent factorization of tensors incorporated battery cycle life prediction,” IEEE/CAA J. Autom. Sinica ,vol. 12, no. 3, pp. 633–635, 2025. [75] X. Liao, K. Hoang, and X. Luo, “Local search-based anytime algo-rithms for continuous distributed constraint optimization problems,” 
+
+IEEE/CAA J. Autom. Sinica , vol. 12, no. 1, pp. 1–3, 2024. [76] Y. Zhong, K. Liu, S. Gao, and X. Luo, “Alternating-direction-method of multipliers-based adaptive nonnegative latent factor analysis,” IEEE Trans. Emerg. Topics Comput. Intell. , vol. 8, no. 5, pp. 3544–3558, 2024. [77] P. Velickovic, G. Cucurull, A. Casanova, A. Romero, P. Lio, and Y. Bengio, “Graph attention networks,” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2018. [78] K. Xu, W. Hu, J. Leskovec, and S. Jegelka, “How powerful are graph neural networks?” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2019. [79] J. Klicpera, A. Bojchevski, and S. Gunnemann, “Predict then propa-gate: Graph neural networks meet personalized PageRank,” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2019. [80] F. Wu, A. Souza, T. Zhang, C. Fifty, T. Yu, and K. Weinberger, “Simplifying graph convolutional networks,” in Proc. Int. Conf. Mach. Learn. (ICML) , 2019, pp. 6861–6871. [81] W.-L. Chiang, X. Liu, S. Si, Y. Li, S. Bengio, and C.-J. Hsieh, “Cluster-GCN: An efficient algorithm for training deep and large graph convolutional networks,” in Proc. ACM SIGKDD Conf. Knowl. Discov. Data Min. (KDD) , 2019, pp. 257–266. [82] H. Zeng, H. Zhou, A. Srivastava, R. Kannan, and V. Prasanna, “GraphSAINT: Graph sampling based inductive learning method,” in 
+
+Proc. Int. Conf. Learn. Represent. (ICLR) , 2020. [83] Y. Rong, W. Huang, T. Xu, and J. Huang, “DropEdge: Towards deep graph convolutional networks on node classification,” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2020. [84] P. Velickovic, W. Fedus, W. L. Hamilton, P. Lio, Y. Bengio, and R. D. Hjelm, “Deep graph infomax,” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2019. [85] A. Pareja, G. Domeniconi, J. Chen, T. Ma, T. Suzumura, H. Kanezashi, T. Kaler, T. B. Schardl, and C. E. Leiserson, “EvolveGCN: Evolving graph convolutional networks for dynamic graphs,” in Proc. AAAI Conf. Artif. Intell. , vol. 34, no. 4, 2020, pp. 5363–5370. [86] A. Sankar, Y. Wu, L. Gou, W. Zhang, and H. Yang, “DySAT: Deep neural representation learning on dynamic graphs via self-attention networks,” in Proc. ACM Int. Conf. Web Search Data Mining (WSDM) ,2020, pp. 519–527. [87] S. Kumar, X. Zhang, and J. Leskovec, “Predicting dynamic embedding trajectory in temporal interaction networks,” in Proc. ACM SIGKDD Conf. Knowl. Discov. Data Min. (KDD) , 2019, pp. 1269–1278. [88] D. Xu, C. Ruan, E. Korpeoglu, S. Kumar, and K. Achan, “Inductive representation learning on temporal graphs,” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2020. [89] P. Goyal, N. Kamra, X. He, and Y. Liu, “DynGEM: Deep embedding method for dynamic graphs,” in Proc. Int. Joint Conf. Artif. Intell. (IJCAI) , 2018, pp. 2742–2748. [90] L. Zhou, Y. Yang, X. Ren, F. Wu, and Y. Zhuang, “Dynamic network embedding by modeling triadic closure process,” in Proc. AAAI Conf. Artif. Intell. , vol. 32, no. 1, 2018, pp. 571–578. [91] J. Kirkpatrick, R. Pascanu, N. Rabinowitz, J. Veness, G. Desjardins, A. Rusu, K. Milan, J. Quan, T. Ramalho, A. Grabska-Barwinska, D. Hassabis, C. Clopath, D. Kumaran, and R. Hadsell, “Overcoming catastrophic forgetting in neural networks,” Proc. Natl. Acad. Sci. U.S.A. , vol. 114, no. 13, pp. 3521–3526, 2017. [92] Z. Li and D. Hoiem, “Learning without forgetting,” in Proc. Eur. Conf. Comput. Vis. (ECCV) , 2016, pp. 614–629. [93] S.-A. Rebuffi, A. Kolesnikov, G. Sperl, and C. H. Lampert, “iCaRL: Incremental classifier and representation learning,” in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR) , 2017, pp. 2001–2010. [94] D. Lopez-Paz and M. Ranzato, “Gradient episodic memory for con-tinual learning,” in Adv. Neural Inf. Process. Syst. (NeurIPS) , 2017, pp. 6467–6476. [95] A. Chaudhry, M. Ranzato, M. Rohrbach, and M. Elhoseiny, “Efficient lifelong learning with A-GEM,” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2019. [96] P. Buzzega, M. Boschini, A. Porrello, D. Abati, and S. Calderara, “Dark experience for general continual learning: A strong, simple baseline,” in Adv. Neural Inf. Process. Syst. (NeurIPS) , vol. 33, 2020, pp. 15920–15930. [97] W. Jin, L. Zhao, S. Zhang, Y. Liu, J. Tang, and N. Shah, “Graph condensation for graph neural networks,” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2022. [98] B. Zhao, K. R. Mopuri, and H. Bilen, “Dataset condensation with gradient matching,” in Proc. Int. Conf. Learn. Represent. (ICLR) , 2021. [99] G. Cazenavette, T. Wang, A. Torralba, A. A. Efros, and J.-Y. Zhu, “Dataset distillation by matching training trajectories,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR) , 2022, pp. 4750–4759. [100] X. Zheng, M. Zhang, C. Chen, Q. V. H. Nguyen, X. Zhu, and S. Pan, “Structure-free graph condensation: From large-scale graphs to condensed graph-free data,” in Adv. Neural Inf. Process. Syst. (NeurIPS) , vol. 36, 2023, pp. 3842–3867.
