@@ -1,0 +1,69 @@
+{
+  "label": "2026-07-20",
+  "date": "2026-07-20",
+  "generated_at": "2026-07-20T21:38:19",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202607/20/2607.13104v1-self-improvements-in-modern-agentic-systems-a-survey",
+      "section": "deep",
+      "title_en": "Self-Improvements in Modern Agentic Systems: A Survey",
+      "authors": "Zhe Ren, Yimeng Chen, Dandan Guo, Guowei Rong, Tonghui Li, R. B. Xiong, Qingfeng Lan, Wenyi Wang, Li Nanbo, Yibo Yang, Mingchen Zhuge, Jürgen Schmidhuber",
+      "date": "2026-07-14",
+      "pdf": "https://arxiv.org/pdf/2607.13104v1",
+      "score": "9.0",
+      "evidence": "自我改进自主智能体综述与更新算子框架",
+      "tldr": "随着大语言模型等基础模型的成熟，自主代理从研究原型迈向实际部署，其关键能力在于从自身经验中持续学习与进化，即自我改进。本调查将现代自我改进代理系统化为自适应系统，并提出系统级框架：代理被建模为基础模型与操作支架（提示、记忆、工具、控制逻辑）的耦合，自我改进被形式化为对模型参数或支架的自诱导更新。该综述据此框架，全面梳理了现有工作，按更新目标（参数微调 vs. 支架优化）和驱动信号（外部反馈、自反思、多代理交互等）进行系统分类，并综述了在编程、网页导航等领域的应用与评估方法。本调查为该领域构建了统一的框架和分类体系，并展望了可解释性、安全约束、支架组合性等未来方向。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Self-improving autonomous agents are moving from research prototypes to deployed systems. The primary goal is controllable evolution, or adaptation, from experience with minimal or even no human input. This survey frames modern self-improving agents as adaptive systems that convert experience into accumulated capability gains. We offer a system-level framework that represents a modern agent as a configuration coupling a foundation model with an operational scaffold of prompts, memory, tools, and control logic. Within this framework, self-improvement is formalized as a self-induced update operator that obtains and commits updates to model parameters or scaffold components. We organize prior work by update target and by the signals that drive change, then review applications and discuss evaluation, before closing with open problems and future directions. For convenience, we track technical updates on https://github.com/selfimproving-agent/awesome-Self-Improving-Agents.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/20/2607.15509v1-llm-driven-automl-for-cross-lingual-handwritten-ocr-closed-loop-neural-architecture-search-with-gpt-5-gpt-4o-and-claude-sonnet-4",
+      "section": "deep",
+      "title_en": "LLM-Driven AutoML for Cross-Lingual Handwritten OCR: Closed-Loop Neural Architecture Search with GPT-5, GPT-4o, and Claude Sonnet 4",
+      "authors": "Mobina Kashaniyan, Amirhossein Ghassemi, Nasser Mozayani",
+      "date": "2026-07-16",
+      "pdf": "https://arxiv.org/pdf/2607.15509v1",
+      "score": "9.0",
+      "evidence": "LLM通过性能反馈迭代设计、训练、评估并优化神经网络架构，实现自我改进的架构搜索",
+      "tldr": "跨语言手写光学字符识别（OCR）通常需要针对不同语言进行大量手工特征工程和架构设计，难以实现自动化扩展。本研究提出一种闭环AutoML框架，将GPT-5、GPT-4o和Claude Sonnet 4作为自主神经架构搜索代理，通过性能反馈闭环迭代优化。每个LLM独立生成候选网络，训练评估后利用结果指导下一轮搜索，无需人工干预。在阿拉伯语、波斯语和英语手写数据集上的270次实验表明，生成模型平均准确率超过93%，最佳达98.1%，推理延迟仅41-44毫秒。该研究证明LLM能有效替代人工进行神经架构搜索，为跨语言手写OCR提供了一种可扩展且脚本自适应的新范式。",
+      "tags": "query:self-evolve",
+      "abstract_en": "We present a fully automated closed-loop AutoML framework that uses GPT-5, GPT-4o, and Claude Sonnet 4 as autonomous neural architecture designers for cross-lingual handwritten optical character recognition. Each large language model independently generates, trains, evaluates, and iteratively refines neural network architectures using performance feedback from previous trials. The framework is evaluated on Arabic, Persian, and English handwriting datasets through 270 independent experiments. It consistently discovers accurate and computationally efficient models without manual architecture design, domain-specific preprocessing, or hyperparameter tuning. The generated models achieve mean test accuracies above 93 percent, a best accuracy of 98.1 percent, and inference latency between 41 and 44 milliseconds. The results demonstrate that large language models can function as effective AutoML agents for neural architecture search, enabling scalable, script-adaptive, and reproducible handwriting recognition across languages.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/20/2607.15715v1-behavioral-controllability-of-agentic-models-for-information-extraction-from-fixed-workflows-to-reflective-agents",
+      "section": "deep",
+      "title_en": "Behavioral Controllability of Agentic Models for Information Extraction: From Fixed Workflows to Reflective Agents",
+      "authors": "Lujia Zhang, Xingzhou Chen, Hongwei Feng",
+      "date": "2026-07-17",
+      "pdf": "https://arxiv.org/pdf/2607.15715v1",
+      "score": "9.0",
+      "evidence": "研究具有记忆和自我改进能力的反思型智能体用于信息抽取",
+      "tldr": "大型语言模型代理在复杂信息提取中日益普及，但其反思、记忆等组件是否比固定工作流带来可观测且可控的改进尚不明晰。本研究以会议论文PDF数据集提取为场景，系统对比固定基线、反射代理及优化代理S2，并着重分析工具调用、重试、反思及故障恢复等过程级指标。结果揭示了代理行为变化的条件及故障模式，并验证了优化代理设计的必要性，为构建可解释、高效的代理系统提供指导。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Large language model (LLM) agents are increasingly used for complex information-extraction tasks, yet it remains unclear whether agentic components such as reflection and memory lead to observable and controllable improvements over fixed LLM workflows. We study this question through conference-paper dataset extraction, where a system must identify datasets mentioned in scholarly PDFs and produce structured records. We compare a fixed workflow baseline with reflective agent variants and specify an optimized agent condition (S2) that extends the same task with richer PDF tools and dynamic tool selection. Our evaluation emphasizes process-level behavior--including tool execution, retries, reflection, memory use, runtime, and failure recovery--while treating extraction coverage and field completeness as secondary outcome measures. The paper characterizes when agentic mechanisms change system behavior, whether these changes improve task completion, and how the observed failure modes motivate an optimized agent design under the same evaluation harness.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/20/2607.15524v1-recursive-harness-self-improvement",
+      "section": "quick",
+      "title_en": "Recursive Harness Self-Improvement",
+      "authors": "Hyunin Lee, Jinglue Xu, Jeffrey Seely, Donghyun Lee, Matei Zaharia, Yujin Tang",
+      "date": "2026-07-17",
+      "pdf": "https://arxiv.org/pdf/2607.15524v1",
+      "score": "7.0",
+      "evidence": "递归式外围自改进，优化智能体循环与执行轨迹质量",
+      "tldr": "模型-脚手架协同进化中，脚手架的执行痕迹影响未来模型，但持续更新成本高。提出递归脚手架自改进（RHI），将脚手架表示为提示级代理循环，通过自身修订历史的成对反馈迭代优化。在30个合成任务上，几次迭代使低推理代理性能超越最大推理设置，并降低60%推理成本，收益来自更有效的代理间信息流。RHI为模型-脚手架协同进化提供了轻量实用的持续学习算法。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Under model--harness co-evolution, harnesses are not merely inference-time scaffolds but data-generating components whose execution traces can shape future foundation models. This motivates harness-in-the-loop learning: optimizing harnesses for both immediate agent performance and the quality of traces used for future model training. However, continually updating provider-built scaffolds is costly and labor-intensive. We therefore investigate whether optimizing user-constructed harnesses in a task-specific manner can improve execution-trace quality while remaining computationally lightweight and requiring only a few update iterations. To this end, we introduce Recursive Harness Self-Improvement (RHI), which represents the harness as a prompt-level specification of the agent loop and iteratively refines it using pairwise feedback over its own revision history. Across 30 synthetic machine-learning research tasks spanning quantitative finance, robotics, and pharmacy, a few RHI iterations suffice to substantially raise the performance ceiling of low-reasoning-effort agents, exceeding the corresponding maximum-reasoning-effort setting while reducing inference cost by up to 60%. We show that these gains arise primarily from improved task-specific context management through more effective inter-agent information flow rather than longer reasoning traces. Finally, we formalize this behavior as an information-theoretic hypothesis for RHI's implicit optimization objective, suggesting RHI as a practical algorithm for continual learning within the paradigm of model--harness co-evolution.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

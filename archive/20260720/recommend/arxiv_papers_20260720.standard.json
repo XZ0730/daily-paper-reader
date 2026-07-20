@@ -1,0 +1,180 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-20T21:26:07.012930+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2607.13104v1",
+      "source": "arxiv",
+      "title": "Self-Improvements in Modern Agentic Systems: A Survey",
+      "abstract": "Self-improving autonomous agents are moving from research prototypes to deployed systems. The primary goal is controllable evolution, or adaptation, from experience with minimal or even no human input. This survey frames modern self-improving agents as adaptive systems that convert experience into accumulated capability gains. We offer a system-level framework that represents a modern agent as a configuration coupling a foundation model with an operational scaffold of prompts, memory, tools, and control logic. Within this framework, self-improvement is formalized as a self-induced update operator that obtains and commits updates to model parameters or scaffold components. We organize prior work by update target and by the signals that drive change, then review applications and discuss evaluation, before closing with open problems and future directions. For convenience, we track technical updates on https://github.com/selfimproving-agent/awesome-Self-Improving-Agents.",
+      "authors": [
+        "Zhe Ren",
+        "Yimeng Chen",
+        "Dandan Guo",
+        "Guowei Rong",
+        "Tonghui Li",
+        "R. B. Xiong",
+        "Qingfeng Lan",
+        "Wenyi Wang",
+        "Li Nanbo",
+        "Yibo Yang",
+        "Mingchen Zhuge",
+        "Jürgen Schmidhuber"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-07-14T09:12:57+00:00",
+      "link": "https://arxiv.org/pdf/2607.13104v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Self-improving autonomous agents survey with update operator framework",
+      "llm_evidence_cn": "自我改进自主智能体综述与更新算子框架",
+      "llm_evidence": "自我改进自主智能体综述与更新算子框架",
+      "canonical_evidence": "自我改进自主智能体综述与更新算子框架",
+      "llm_tldr_en": "A survey formalizing self-improving agents as adaptive systems that convert experience into capability gains via self-induced updates to model or scaffold components.",
+      "llm_tldr_cn": "该综述将现代自我改进智能体系统化为自适应系统，通过经验转化为能力增益，并提出一个系统级框架，将智能体表示为基座模型与提示、记忆、工具等操作支架的耦合，自我改进被形式化为对模型参数或支架组件的自诱导更新。综述按更新目标和驱动信号组织现有工作，并回顾了应用领域。",
+      "llm_tldr": "该综述将现代自我改进智能体系统化为自适应系统，通过经验转化为能力增益，并提出一个系统级框架，将智能体表示为基座模型与提示、记忆、工具等操作支架的耦合，自我改进被形式化为对模型参数或支架组件的自诱导更新。综述按更新目标和驱动信号组织现有工作，并回顾了应用领域。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15509v1",
+      "source": "arxiv",
+      "title": "LLM-Driven AutoML for Cross-Lingual Handwritten OCR: Closed-Loop Neural Architecture Search with GPT-5, GPT-4o, and Claude Sonnet 4",
+      "abstract": "We present a fully automated closed-loop AutoML framework that uses GPT-5, GPT-4o, and Claude Sonnet 4 as autonomous neural architecture designers for cross-lingual handwritten optical character recognition. Each large language model independently generates, trains, evaluates, and iteratively refines neural network architectures using performance feedback from previous trials. The framework is evaluated on Arabic, Persian, and English handwriting datasets through 270 independent experiments. It consistently discovers accurate and computationally efficient models without manual architecture design, domain-specific preprocessing, or hyperparameter tuning. The generated models achieve mean test accuracies above 93 percent, a best accuracy of 98.1 percent, and inference latency between 41 and 44 milliseconds. The results demonstrate that large language models can function as effective AutoML agents for neural architecture search, enabling scalable, script-adaptive, and reproducible handwriting recognition across languages.",
+      "authors": [
+        "Mobina Kashaniyan",
+        "Amirhossein Ghassemi",
+        "Nasser Mozayani"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-07-16T23:43:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.15509v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLMs iteratively design, train, evaluate, and refine neural network architectures automatically, embodying self-improvement through architecture search.",
+      "llm_evidence_cn": "LLM通过性能反馈迭代设计、训练、评估并优化神经网络架构，实现自我改进的架构搜索",
+      "llm_evidence": "LLM通过性能反馈迭代设计、训练、评估并优化神经网络架构，实现自我改进的架构搜索",
+      "canonical_evidence": "LLM通过性能反馈迭代设计、训练、评估并优化神经网络架构，实现自我改进的架构搜索",
+      "llm_tldr_en": "This paper presents a closed-loop AutoML framework where GPT-5, GPT-4o, and Claude Sonnet 4 autonomously design neural architectures for handwritten OCR. The LLMs generate, train, evaluate, and refine models using performance feedback, achieving accurate and efficient models without manual design. This demonstrates a self-improving model generation process via automated architecture search.",
+      "llm_tldr_cn": "本文提出了一种闭环AutoML框架，利用GPT-5、GPT-4o和Claude Sonnet 4作为自主神经架构设计器，针对跨语言手写光学字符识别。LLM根据前一轮的性能反馈迭代生成、训练、评估并优化神经网络架构。在阿拉伯语、波斯语和英语手写数据集上的270次独立实验中，始终能发现准确且计算高效的模型，无需人工架构设计。该方法展示了通过自动化架构搜索实现模型自我改进的能力，为自进化模型在视觉任务中的应用提供了新范式。",
+      "llm_tldr": "本文提出了一种闭环AutoML框架，利用GPT-5、GPT-4o和Claude Sonnet 4作为自主神经架构设计器，针对跨语言手写光学字符识别。LLM根据前一轮的性能反馈迭代生成、训练、评估并优化神经网络架构。在阿拉伯语、波斯语和英语手写数据集上的270次独立实验中，始终能发现准确且计算高效的模型，无需人工架构设计。该方法展示了通过自动化架构搜索实现模型自我改进的能力，为自进化模型在视觉任务中的应用提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self-improving models with automated architecture search",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15715v1",
+      "source": "arxiv",
+      "title": "Behavioral Controllability of Agentic Models for Information Extraction: From Fixed Workflows to Reflective Agents",
+      "abstract": "Large language model (LLM) agents are increasingly used for complex information-extraction tasks, yet it remains unclear whether agentic components such as reflection and memory lead to observable and controllable improvements over fixed LLM workflows. We study this question through conference-paper dataset extraction, where a system must identify datasets mentioned in scholarly PDFs and produce structured records. We compare a fixed workflow baseline with reflective agent variants and specify an optimized agent condition (S2) that extends the same task with richer PDF tools and dynamic tool selection. Our evaluation emphasizes process-level behavior--including tool execution, retries, reflection, memory use, runtime, and failure recovery--while treating extraction coverage and field completeness as secondary outcome measures. The paper characterizes when agentic mechanisms change system behavior, whether these changes improve task completion, and how the observed failure modes motivate an optimized agent design under the same evaluation harness.",
+      "authors": [
+        "Lujia Zhang",
+        "Xingzhou Chen",
+        "Hongwei Feng"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-17T07:51:09+00:00",
+      "link": "https://arxiv.org/pdf/2607.15715v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Studies reflective agents with memory and self-improvement for information extraction",
+      "llm_evidence_cn": "研究具有记忆和自我改进能力的反思型智能体用于信息抽取",
+      "llm_evidence": "研究具有记忆和自我改进能力的反思型智能体用于信息抽取",
+      "canonical_evidence": "研究具有记忆和自我改进能力的反思型智能体用于信息抽取",
+      "llm_tldr_en": "Compares fixed workflows with reflective agent variants for information extraction; finds that reflection and memory can improve controllability and performance, suggesting a path toward self-evolving IE systems.",
+      "llm_tldr_cn": "该论文针对LLM智能体在信息抽取中的可控性问题，比较了固定工作流与反思型智能体的效果。通过会议论文数据集抽取任务，评估了反思、记忆等组件对过程行为和结果的影响，发现优化后的智能体条件能在更丰富的PDF工具和动态工具选择下表现出更好的控制性和性能，为自进化信息抽取系统提供了实证基础。",
+      "llm_tldr": "该论文针对LLM智能体在信息抽取中的可控性问题，比较了固定工作流与反思型智能体的效果。通过会议论文数据集抽取任务，评估了反思、记忆等组件对过程行为和结果的影响，发现优化后的智能体条件能在更丰富的PDF工具和动态工具选择下表现出更好的控制性和性能，为自进化信息抽取系统提供了实证基础。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "information extraction using self-evolving models",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.15524v1",
+      "source": "arxiv",
+      "title": "Recursive Harness Self-Improvement",
+      "abstract": "Under model--harness co-evolution, harnesses are not merely inference-time scaffolds but data-generating components whose execution traces can shape future foundation models. This motivates harness-in-the-loop learning: optimizing harnesses for both immediate agent performance and the quality of traces used for future model training. However, continually updating provider-built scaffolds is costly and labor-intensive. We therefore investigate whether optimizing user-constructed harnesses in a task-specific manner can improve execution-trace quality while remaining computationally lightweight and requiring only a few update iterations. To this end, we introduce Recursive Harness Self-Improvement (RHI), which represents the harness as a prompt-level specification of the agent loop and iteratively refines it using pairwise feedback over its own revision history. Across 30 synthetic machine-learning research tasks spanning quantitative finance, robotics, and pharmacy, a few RHI iterations suffice to substantially raise the performance ceiling of low-reasoning-effort agents, exceeding the corresponding maximum-reasoning-effort setting while reducing inference cost by up to 60%. We show that these gains arise primarily from improved task-specific context management through more effective inter-agent information flow rather than longer reasoning traces. Finally, we formalize this behavior as an information-theoretic hypothesis for RHI's implicit optimization objective, suggesting RHI as a practical algorithm for continual learning within the paradigm of model--harness co-evolution.",
+      "authors": [
+        "Hyunin Lee",
+        "Jinglue Xu",
+        "Jeffrey Seely",
+        "Donghyun Lee",
+        "Matei Zaharia",
+        "Yujin Tang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-17T00:21:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.15524v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "recursive harness self-improvement for optimizing agent loops and trace quality",
+      "llm_evidence_cn": "递归式外围自改进，优化智能体循环与执行轨迹质量",
+      "llm_evidence": "递归式外围自改进，优化智能体循环与执行轨迹质量",
+      "canonical_evidence": "递归式外围自改进，优化智能体循环与执行轨迹质量",
+      "llm_tldr_en": "Introduces Recursive Harness Self-Improvement (RHI) that iteratively refines agent-loop prompts to enhance both immediate task performance and the quality of traces for future model training.",
+      "llm_tldr_cn": "该文针对模型与外围配置协同进化中外围优化成本高的问题，提出递归式自改进方法RHI，将外围表示为智能体循环的提示级规格并迭代更新。实验显示RHI能提升执行轨迹质量，为自进化信息抽取系统提供了高效的外围优化手段。",
+      "llm_tldr": "该文针对模型与外围配置协同进化中外围优化成本高的问题，提出递归式自改进方法RHI，将外围表示为智能体循环的提示级规格并迭代更新。实验显示RHI能提升执行轨迹质量，为自进化信息抽取系统提供了高效的外围优化手段。",
+      "llm_tags": [
+        "query:self-evolve:composite"
+      ],
+      "matched_query_tag": "query:self-evolve:composite",
+      "matched_query_text": "Papers central to 模型自进化论文及其在信息抽取的应用, especially work that connects or combines: named entity recognition using self-improving models; information extraction using self-evolving models; s; model self-evolution techniques for neural networks; self-improving models with automated architecture search; relation extraction with adaptive self-evolving systems; model self evolution methods for natural language processing tasks; self evolving information extraction systems; continual learning approaches for named entity recognition.",
+      "matched_requirement_id": "req-composite-self-evolve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
