@@ -1,0 +1,218 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-21T21:26:10.949246+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.17043v1",
+      "source": "arxiv",
+      "title": "Learning from Synthetic Data without Model Collapse in Iterative Instruction Tuning",
+      "abstract": "Model collapse is a central challenge in learning from synthetic data: as later-generation large language models (LLMs) are trained on an increasing proportion of model-generated data, performance can degrade due to narrowed coverage and accumulated bias. Existing work mainly studies how to bound this degradation. In iterative model evolution, however, the more meaningful objective is to ensure that each successive model improves over its predecessor, which requires diagnosing collapse at a granularity that is actionable for data curation. We study this problem in synthetic data self-improving for instruction tuning. We show that collapse in this setting is not simply uniform performance degradation, but can appear as a polarization of competence, where synthetic training reinforces already strong skills while further degrading weak ones. Motivated by this observation, we propose KITE (Knowledge-boundary Instruction Tuning via Exploration), a two-stage framework that combines failure-guided data generation with boundary-aware uncertainty curation. Experiments across several datasets and multiple open-source LLMs show that KITE yields more stable improvement than strong synthetic-data baselines.",
+      "authors": [
+        "Xiaonan Luo",
+        "Yue Huang",
+        "Kehan Guo",
+        "Ping He",
+        "Chuan Zou",
+        "Ting Hua",
+        "Xiangliang Zhang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-19T03:20:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.17043v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "addresses model collapse in iterative self-improving for instruction tuning, proposes action-level diagnosis and data curation to ensure each generation improves",
+      "llm_evidence_cn": "研究迭代自改进指令调优中的模型崩溃问题，提出行动级诊断和数据筛选以确保每代模型提升",
+      "llm_evidence": "研究迭代自改进指令调优中的模型崩溃问题，提出行动级诊断和数据筛选以确保每代模型提升",
+      "canonical_evidence": "研究迭代自改进指令调优中的模型崩溃问题，提出行动级诊断和数据筛选以确保每代模型提升",
+      "llm_tldr_en": "This paper studies model collapse in iterative instruction tuning with synthetic data, showing that collapse manifests as performance polarization, and proposes granular diagnosis and data curation strategies to enable reliable self-improvement across model generations.",
+      "llm_tldr_cn": "针对迭代自改进指令调优中合成数据导致的模型崩溃问题，本文揭示了崩溃并非均匀性能退化，而是表现为能力极化，并提出细粒度的诊断框架和数据筛选策略，确保每代模型均能超越前代，为实现稳定自进化提供了可操作的解决方案。实验表明该方法能有效避免迭代退化，推动LLM可靠自改进。",
+      "llm_tldr": "针对迭代自改进指令调优中合成数据导致的模型崩溃问题，本文揭示了崩溃并非均匀性能退化，而是表现为能力极化，并提出细粒度的诊断框架和数据筛选策略，确保每代模型均能超越前代，为实现稳定自进化提供了可操作的解决方案。实验表明该方法能有效避免迭代退化，推动LLM可靠自改进。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.17281v1",
+      "source": "arxiv",
+      "title": "AIGB-R1: Self-Evolving Generative Auto-Bidding via Hierarchical Planner-Executor Optimization",
+      "abstract": "Auto-bidding plays an essential role in online advertising, automatically adjusting bids for advertisers to optimize their commercial goals. The emerging AI-Generated Bidding (AIGB) paradigm widely adopts generative modeling to optimize bidding strategies, yet suffers from the limited mode coverage of offline datasets and inadequate task-state understanding, hindering effective exploration of optimal strategies. Large Language Models (LLMs), with prior world knowledge and reasoning capabilities, offer a promising approach to overcome these limitations. However, directly applying LLMs to auto-bidding tasks faces inherent challenges in limited numerical precision, hallucinations, and inference latency. To address these limitations, we propose AIGB-R1, a hierarchical self-evolving auto-bidding framework aiming to enhance AI-Generated Bidding via LLMs' Reasoning capabilities, comprising a high-level Planner module for macro-level strategy planning and a low-level Executor module for fine-grained decision-making. Building upon this, we design an experience-driven self-evolving loop, enabling autonomous strategy exploration and optimization from accumulated experience. We adopt a two-stage pipeline of offline pre-training and post-training alignment, and build an interactive bidding simulation environment for strategy rollout. Furthermore, we propose Decoupled Group Relative Policy Optimization (D-GRPO) to achieve end-to-end optimization via advantage decoupling. Experimental results on a large-scale public dataset demonstrate the effectiveness of AIGB-R1.",
+      "authors": [
+        "Yuejia Dou",
+        "Hesong Wang",
+        "Xinyu Zhang",
+        "Tianyu Wang",
+        "Zhilin Zhang",
+        "Chuan Yu",
+        "Jian Xu",
+        "Bo Zheng",
+        "Qi Qi"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-19T14:59:12+00:00",
+      "link": "https://arxiv.org/pdf/2607.17281v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes self-evolving generative auto-bidding model with hierarchical planner-executor optimization for self-improvement",
+      "llm_evidence_cn": "提出自进化生成式自动竞价模型，采用分层规划器-执行器优化实现自我改进",
+      "llm_evidence": "提出自进化生成式自动竞价模型，采用分层规划器-执行器优化实现自我改进",
+      "canonical_evidence": "提出自进化生成式自动竞价模型，采用分层规划器-执行器优化实现自我改进",
+      "llm_tldr_en": "This paper proposes AIGB-R1, a self-evolving generative auto-bidding framework using hierarchical planner-executor optimization with LLMs, addressing limited data coverage and task understanding, and demonstrating effective strategy improvement.",
+      "llm_tldr_cn": "为解决生成式自动竞价在离线数据覆盖和任务状态理解上的局限，本文提出AIGB-R1，一种基于分层规划器-执行器的自进化框架，通过大语言模型的推理能力进行策略优化，并在实验中验证了其有效性，推动了自进化方法在神经网络中的应用。",
+      "llm_tldr": "为解决生成式自动竞价在离线数据覆盖和任务状态理解上的局限，本文提出AIGB-R1，一种基于分层规划器-执行器的自进化框架，通过大语言模型的推理能力进行策略优化，并在实验中验证了其有效性，推动了自进化方法在神经网络中的应用。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.17352v1",
+      "source": "arxiv",
+      "title": "Self-Modifying Lean Proof Agents with Verifier-Grounded Benchmark Coevolution",
+      "abstract": "Designing effective Lean proof agents is a central challenge in formal mathematical reasoning. Beyond building stronger provers, recent work emphasizes the workflow around Lean: how an agent decomposes proof obligations, uses tools and compiler feedback, diagnoses failures, repairs proofs, and maintains structured proof context. Motivated by code-level self-evolving agents, we study whether such workflows can be evolved rather than hand-designed. We present a self-evolving Lean proof agent in which a small fixed, trusted runtime wraps a fully mutable workspace: the proof workflow, prompts, and tools. Unlike most self-evolving systems, which optimize against a fixed external benchmark, our system coevolves the agent and its benchmark. Between generations, the highest-scoring agent (the champion) revises the active task distribution through a mastery-throttled curriculum update that introduces harder proof obligations only after the current level is mastered, and a single-anchor recalibration re-runs the champion on the updated benchmark to keep scores comparable as difficulty rises. All evolution stays inside a Lean-grounded verification loop: however the agent rewrites itself, a success counts only when its behavior yields Lean-verified proofs under a trusted snapshot, and each attempt must emit a machine-readable, Lean-grounded proof context whose representation may evolve but whose groundedness is enforced. We run the coevolving trajectory and a fixed-benchmark baseline for 15 active generations and compare them on a held-out miniF2F test split. The best coevolving agent reaches a 45.1% held-out solve rate, versus 12.7% for the seed and 32.0% for the best fixed-benchmark agent, showing that verifier-grounded self-evolution can improve Lean proof workflows under a coevolving benchmark.",
+      "authors": [
+        "Yuqing Li",
+        "Zeguan Wu",
+        "Yu Gan",
+        "Junyu Liu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "quant-ph"
+      ],
+      "published": "2026-07-19T17:26:59+00:00",
+      "link": "https://arxiv.org/pdf/2607.17352v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "self-evolving agent, workflow evolution, benchmark coevolution",
+      "llm_evidence_cn": "自进化智能体，工作流进化，基准协同进化",
+      "llm_evidence": "自进化智能体，工作流进化，基准协同进化",
+      "canonical_evidence": "自进化智能体，工作流进化，基准协同进化",
+      "llm_tldr_en": "Proposes a self-evolving Lean proof agent where workflow, prompts, and tools are mutable and co-evolved with a benchmark, advancing self-evolution for formal reasoning.",
+      "llm_tldr_cn": "针对Lean证明智能体工作流设计依赖人工的问题，提出一种自进化框架，将证明工作流、提示和工具置于可变工作区，与基准协同进化，为形式化推理中的自适应系统提供新方法。",
+      "llm_tldr": "针对Lean证明智能体工作流设计依赖人工的问题，提出一种自进化框架，将证明工作流、提示和工具置于可变工作区，与基准协同进化，为形式化推理中的自适应系统提供新方法。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.15524v1",
+      "source": "arxiv",
+      "title": "Recursive Harness Self-Improvement",
+      "abstract": "Under model--harness co-evolution, harnesses are not merely inference-time scaffolds but data-generating components whose execution traces can shape future foundation models. This motivates harness-in-the-loop learning: optimizing harnesses for both immediate agent performance and the quality of traces used for future model training. However, continually updating provider-built scaffolds is costly and labor-intensive. We therefore investigate whether optimizing user-constructed harnesses in a task-specific manner can improve execution-trace quality while remaining computationally lightweight and requiring only a few update iterations. To this end, we introduce Recursive Harness Self-Improvement (RHI), which represents the harness as a prompt-level specification of the agent loop and iteratively refines it using pairwise feedback over its own revision history. Across 30 synthetic machine-learning research tasks spanning quantitative finance, robotics, and pharmacy, a few RHI iterations suffice to substantially raise the performance ceiling of low-reasoning-effort agents, exceeding the corresponding maximum-reasoning-effort setting while reducing inference cost by up to 60%. We show that these gains arise primarily from improved task-specific context management through more effective inter-agent information flow rather than longer reasoning traces. Finally, we formalize this behavior as an information-theoretic hypothesis for RHI's implicit optimization objective, suggesting RHI as a practical algorithm for continual learning within the paradigm of model--harness co-evolution.",
+      "authors": [
+        "Hyunin Lee",
+        "Jinglue Xu",
+        "Jeffrey Seely",
+        "Donghyun Lee",
+        "Matei Zaharia",
+        "Yujin Tang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-17T00:21:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.15524v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "harness self-improvement, recursive optimization, model-harness co-evolution",
+      "llm_evidence_cn": "工具自改进，递归优化，模型-工具协同进化",
+      "llm_evidence": "工具自改进，递归优化，模型-工具协同进化",
+      "canonical_evidence": "工具自改进，递归优化，模型-工具协同进化",
+      "llm_tldr_en": "Proposes Recursive Harness Self-Improvement (RHI) to optimize harnesses for better agent performance and trace quality, enabling lightweight iterative self-improvement.",
+      "llm_tldr_cn": "针对模型与工具协同进化中工具更新成本高的问题，提出递归式工具自改进（RHI）方法，将工具表示为智能体循环的提示级规范，通过少量迭代优化提升执行轨迹质量，为实现高效自改进提供新途径。",
+      "llm_tldr": "针对模型与工具协同进化中工具更新成本高的问题，提出递归式工具自改进（RHI）方法，将工具表示为智能体循环的提示级规范，通过少量迭代优化提升执行轨迹质量，为实现高效自改进提供新途径。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.13387v1",
+      "source": "arxiv",
+      "title": "Change-Aware Self-Adaptive AI-Aided Kalman Filters With Neural Change Point Detection",
+      "abstract": "Reliable state estimation in dynamical systems is often challenged by model mismatches, unknown noise statistics, and temporal variations. While AI-aided Kalman filters such as KalmanNet leverage deep learning to enhance classical estimation, they remain vulnerable to distribution shifts and lack mechanisms for autonomous adaptation. This work introduces Change-Aware Self-Adaptive KalmanNet (CASA-KalmanNet), an online adaptation framework that integrates a dedicated neural module, termed CPDNet, to monitor the interpretable internal features of KalmanNet and provide soft indicators of reliability degradation. These indicators dynamically regulate an online learning process, enabling data-efficient and timely adaptation to both abrupt and gradual changes in the system without requiring additional state labels from the changed regime. Numerical experiments on linear and nonlinear state-space models show that CASA-KalmanNet consistently outperforms existing learning-based filters under model mismatch, while approaching the accuracy of optimal classical methods with full domain knowledge.",
+      "authors": [
+        "Wenyi Zhang",
+        "Xiaoyong Ni",
+        "Nir Shlezinger",
+        "Zengfu Wang"
+      ],
+      "primary_category": "eess.SY",
+      "categories": [
+        "eess.SY"
+      ],
+      "published": "2026-07-15T02:28:55+00:00",
+      "link": "https://arxiv.org/pdf/2607.13387v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "self-adaptive neural network with change detection",
+      "llm_evidence_cn": "带变点检测的自适应神经网络",
+      "llm_evidence": "带变点检测的自适应神经网络",
+      "canonical_evidence": "带变点检测的自适应神经网络",
+      "llm_tldr_en": "Proposes CASA-KalmanNet, an online adaptation framework that uses a neural change point detector to trigger self-adaptation in Kalman filters, enabling efficient response to distribution shifts.",
+      "llm_tldr_cn": "针对AI辅助卡尔曼滤波器对分布偏移脆弱且缺乏自主适应机制的问题，本文提出CASA-KalmanNet框架。该方法集成一个神经变点检测模块（CPDNet），通过监控卡尔曼网络内部特征提供可靠性退化软指示，并动态调节在线学习过程。实验表明，该框架能够数据高效地及时适应系统的突变和渐变，为神经网络自进化提供了一种基于变点检测的在线自适应技术。",
+      "llm_tldr": "针对AI辅助卡尔曼滤波器对分布偏移脆弱且缺乏自主适应机制的问题，本文提出CASA-KalmanNet框架。该方法集成一个神经变点检测模块（CPDNet），通过监控卡尔曼网络内部特征提供可靠性退化软指示，并动态调节在线学习过程。实验表明，该框架能够数据高效地及时适应系统的突变和渐变，为神经网络自进化提供了一种基于变点检测的在线自适应技术。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

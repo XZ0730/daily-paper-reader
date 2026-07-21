@@ -6,34 +6,37 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-20
-- 运行时间：2026-07-20 21:38:07 UTC
+- 最新运行日期：2026-07-21
+- 运行时间：2026-07-21 21:30:55 UTC
 - 运行状态：成功
-- 本次总论文数：4
+- 本次总论文数：5
 - 精读区：3
-- 速读区：1
+- 速读区：2
 
 ### 今日简报（AI）
-今日聚焦智能体自我改进与LLM驱动的自动化设计：精读了两篇9分综述和前沿方案，包括《现代智能体系统自我改进综述》及用GPT-5、Claude等顶级模型实现闭环神经架构搜索的跨语言手写OCR。  
-自改进正成智能体能力跃迁的核心引擎，而大模型已能像“AI研究员”一样自主设计出高性能OCR模型，实测效果显著。  
-建议读者从综述梳理的自改进技术全景入手，并关注大模型自动设计垂直领域模型的范式，它可能比手调更高效。
-- 详情：[/202607/20/README](/202607/20/README)
+今日精读两篇9分论文，一篇破解了迭代指令微调中合成数据导致模型崩溃的难题，另一篇让生成式自动出价系统通过分层规划实现自我进化；速读则关注递归自我提升和自适应卡尔曼滤波器。
+合成数据训练的安全策略与自进化规划-执行框架是今日最值得跟进的两大方向。
+建议深入关注如何在不损害模型能力的前提下利用合成数据，并尝试将分层自我进化思路引入自己的自动化决策场景。
+- 详情：[/202607/21/README](/202607/21/README)
 
 ### 精读区论文标签
-1. [Self-Improvements in Modern Agentic Systems: A Survey](/202607/20/2607.13104v1-self-improvements-in-modern-agentic-systems-a-survey)  
+1. [Learning from Synthetic Data without Model Collapse in Iterative Instruction Tuning](/202607/21/2607.17043v1-learning-from-synthetic-data-without-model-collapse-in-iterative-instruction-tuning)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：自我改进自主智能体综述与更新算子框架
-2. [LLM-Driven AutoML for Cross-Lingual Handwritten OCR: Closed-Loop Neural Architecture Search with GPT-5, GPT-4o, and Claude Sonnet 4](/202607/20/2607.15509v1-llm-driven-automl-for-cross-lingual-handwritten-ocr-closed-loop-neural-architecture-search-with-gpt-5-gpt-4o-and-claude-sonnet-4)  
+   evidence：研究迭代自改进指令调优中的模型崩溃问题，提出行动级诊断和数据筛选以确保每代模型提升
+2. [AIGB-R1: Self-Evolving Generative Auto-Bidding via Hierarchical Planner-Executor Optimization](/202607/21/2607.17281v1-aigb-r1-self-evolving-generative-auto-bidding-via-hierarchical-planner-executor-optimization)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：LLM通过性能反馈迭代设计、训练、评估并优化神经网络架构，实现自我改进的架构搜索
-3. [Behavioral Controllability of Agentic Models for Information Extraction: From Fixed Workflows to Reflective Agents](/202607/20/2607.15715v1-behavioral-controllability-of-agentic-models-for-information-extraction-from-fixed-workflows-to-reflective-agents)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：研究具有记忆和自我改进能力的反思型智能体用于信息抽取
+   evidence：提出自进化生成式自动竞价模型，采用分层规划器-执行器优化实现自我改进
+3. [Self-Modifying Lean Proof Agents with Verifier-Grounded Benchmark Coevolution](/202607/21/2607.17352v1-self-modifying-lean-proof-agents-with-verifier-grounded-benchmark-coevolution)  
+   标签：评分：8.0/10、query:self-evolve
+   evidence：自进化智能体，工作流进化，基准协同进化
 
 ### 速读区论文标签
-1. [Recursive Harness Self-Improvement](/202607/20/2607.15524v1-recursive-harness-self-improvement)  
+1. [Recursive Harness Self-Improvement](/202607/21/2607.15524v1-recursive-harness-self-improvement)  
    标签：评分：7.0/10、query:self-evolve
-   evidence：递归式外围自改进，优化智能体循环与执行轨迹质量
+   evidence：工具自改进，递归优化，模型-工具协同进化
+2. [Change-Aware Self-Adaptive AI-Aided Kalman Filters With Neural Change Point Detection](/202607/21/2607.13387v1-change-aware-self-adaptive-ai-aided-kalman-filters-with-neural-change-point-detection)  
+   标签：评分：6.0/10、query:self-evolve
+   evidence：带变点检测的自适应神经网络
 
 
 <div class="dpr-home-promo-card">
