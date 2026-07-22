@@ -1,0 +1,54 @@
+{
+  "label": "2026-07-22",
+  "date": "2026-07-22",
+  "generated_at": "2026-07-22T21:30:08",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202607/22/2607.18358v1-a-classifier-that-teaches-itself-self-improving-frozen-gate-training-sift-for-dynamic-document-classification",
+      "section": "deep",
+      "title_en": "A Classifier That Teaches Itself: Self-Improving, Frozen-gate Training (SIFT) for Dynamic Document Classification",
+      "authors": "Bogdan Raduta, Horia Velicu, Alexandru Preda, Serban Chiricescu",
+      "date": "2026-07-20",
+      "pdf": "https://arxiv.org/pdf/2607.18358v1",
+      "score": "9.0",
+      "evidence": "通过SIFT实现自改进的文档分类",
+      "tldr": "企业文档分类常受困于高昂的前期标注成本和模型自动更新带来的安全风险。SIFT提出一种自提升、冻结门训练的分类器，利用廉价CPU流水线（SPLADE+LightGBM）处理大部分文档，仅将低置信度少数文档升级至LLM法官，法官判决写回标注语料库，实现昂贵模型持续教导廉价模型。随使用进程，升级率逐渐下降，语料库从生产流量中生长，分类准确率持续提升。为确保安全，SIFT采用双重门控机制：关键标签F1值回归检查与冻结黄金回归集，任何一个不通过则拒绝模型更新，防止自动更新导致性能退化。因此，新文档体系仅需声明式设定，无需专项标注工程，边际标注成本趋于零，从根本上改变了企业文档分类的采纳方式。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Document classification is a solved problem in the laboratory and an unsolved one in the enterprise. The blocker is rarely model architecture; it is the labeling project that must precede a model and the institutional fear of letting a model retrain itself once one exists. We present SIFT (Self-Improving, Frozen-gate Training), a dynamic classifier service, which attacks both. SIFT serves classification from a deliberately cheap, CPU-bound pipeline, a SPLADE sparse encoder feeding a LightGBM head, and escalates only the low-confidence minority of pages to an LLM judge. The judge's verdicts are written back into a labeled corpus, so the expensive model continuously teaches the cheap one: the escalation rate falls, the corpus grows from production traffic rather than from an up-front annotation effort, and accuracy compounds with use. Onboarding a new document family requires only a declarative bundle, label space, anchor phrases, and a judge glossary, not a labeling project. The harder problem is safety: an autonomously retraining classifier can silently regress. SIFT resolves this with a two-part promote gate, a critical-label F1 regression check plus a frozen golden regression set the model is never trained on, either of which vetoes promotion. This turns \"retrain monthly without a human\" from reckless into routine. We describe the architecture, the self-feeding corpus loop, the frozen-gate promotion mechanism, and an illustrative multi-domain deployment, and we discuss the economics of a classifier whose marginal labeling cost trends toward zero.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/22/2607.18973v1-verifiable-self-evolution-for-open-ended-dialogue-skills-via-future-feedback-prediction",
+      "section": "deep",
+      "title_en": "Verifiable Self-Evolution for Open-Ended Dialogue Skills via Future-Feedback Prediction",
+      "authors": "ChaoJin Zhao, Xuan Jiang",
+      "date": "2026-07-21",
+      "pdf": "https://arxiv.org/pdf/2607.18973v1",
+      "score": "8.0",
+      "evidence": "通过未来反馈预测实现对话技能自进化",
+      "tldr": "开放式对话中助手的回复会改变用户反应，导致传统固定记录的验证信号无法评估技能改进。本文提出未来反馈技能进化，将进化目标从直接优化回答转向预测当前回答是否会带来积极或消极的后续用户信号。通过在固定日志数据上训练预测模型，该方法实现了离线、可复现的验证门控文本优化，在销售助理数据集上达到了超过75%的预测准确率。该框架将变动的对话反馈转化为固定学习目标，为对话系统的可信自我进化提供了新途径。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Textual skills provide a lightweight way to improve frozen language-model agents, but their self-evolution normally requires a stable validation signal. Such signals are natural in mathematics or code, where an answer can be checked after it changes, yet are problematic in open-ended dialogue: changing the assistant response also changes the user's next reaction, so a logged reaction cannot directly evaluate a counterfactual response. We propose future-feedback skill evolution, which first redirects self-evolution from prescribing the current answer to predicting whether the observed answer will lead to a positive or negative subsequent user signal. This prediction task is verifiable on fixed logged tuples and therefore supports validation-gated textual optimization. The evolved feedback skill captures interpretable criteria for response quality and can subsequently serve as a diagnostic and optimization target for answer skills. On a proprietary, privacy-preserving sales-assistant dataset, careful quality filtering and a balanced resolved/unresolved split yield more than 75% prediction accuracy. Beyond this result, the central contribution is a formulation that converts otherwise moving conversational feedback into a fixed offline learning target, enabling reproducible skill evolution without placing every candidate skill in live traffic. We discuss the boundary between observational verification and counterfactual validity, and position the method as an offline optimization stage rather than a replacement for final human or online evaluation.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/22/2607.17558v1-why-does-feedback-augmented-self-distillation-fail-to-improve-retrieval-interleaved-search-agents",
+      "section": "quick",
+      "title_en": "Why Does Feedback-Augmented Self-Distillation Fail to Improve Retrieval-Interleaved Search Agents?",
+      "authors": "Fan Yang, Rui Meng, Yuxin Wen",
+      "date": "2026-07-20",
+      "pdf": "https://arxiv.org/pdf/2607.17558v1",
+      "score": "6.0",
+      "evidence": "研究反馈增强自蒸馏这一自进化技术在智能搜索代理上的失效原因。",
+      "tldr": "反馈增强自蒸馏在检索交织搜索代理中表现不佳，发现模型陷入解码坍缩，产生与输入无关的重复模板，使KL散度信号失效。分析表明监督不一致是根源，包括模型和提示不一致，其中提示不一致显著降低监督质量。提出使用指数移动平均教师稳定自教师，尽管需要预热阶段，但最终提供一致监督，提升性能。该工作揭示了复杂代理任务中自蒸馏的失败模式，并提供缓解策略。",
+      "tags": "query:self-evolve",
+      "abstract_en": "On-policy self-distillation (OPSD) offers a promising approach for training large language models without relying on a separate teacher model. However, its effectiveness on complex agentic tasks remains largely unexplored. In this work, we instantiate Feedback-Augmented Self-Distillation (FA-SD), a self-distillation algorithm for agentic search that leverages successful demonstrations as privileged information. We identify that models can rely on recurring reasoning-and-search output templates, producing trajectories that appear diverse but are largely agnostic to the input question, making the KL-based self-distillation signal uninformative. We term this phenomenon decoding collapse, a failure mode that can be missed by existing evaluation metrics. To understand its underlying cause, we show that although the self-teacher achieves stronger performance, learning remains inherently unstable due to inconsistent supervision signals. We further decompose this inconsistency into model inconsistency and prompt inconsistency, and show that the latter can significantly degrade the quality of the supervision signal, limiting the effectiveness of self-teacher learning. To mitigate this inconsistency, we introduce an exponential moving average (EMA) teacher to stabilize the self-teacher and provide more consistent supervision signals. Although the EMA teacher requires a warm-up phase during which performance may temporarily regress, it ultimately improves model performance by providing more stable supervision.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

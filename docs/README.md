@@ -6,37 +6,31 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-21
-- 运行时间：2026-07-21 21:30:55 UTC
+- 最新运行日期：2026-07-22
+- 运行时间：2026-07-22 21:30:00 UTC
 - 运行状态：成功
-- 本次总论文数：5
-- 精读区：3
-- 速读区：2
+- 本次总论文数：3
+- 精读区：2
+- 速读区：1
 
 ### 今日简报（AI）
-今日精读两篇9分论文，一篇破解了迭代指令微调中合成数据导致模型崩溃的难题，另一篇让生成式自动出价系统通过分层规划实现自我进化；速读则关注递归自我提升和自适应卡尔曼滤波器。
-合成数据训练的安全策略与自进化规划-执行框架是今日最值得跟进的两大方向。
-建议深入关注如何在不损害模型能力的前提下利用合成数据，并尝试将分层自我进化思路引入自己的自动化决策场景。
-- 详情：[/202607/21/README](/202607/21/README)
+今日精读两篇自进化学习论文，速读一篇反思失败案例。  
+最亮眼的是让分类器通过冻结门机制自我教学（SIFT），以及通过预测未来反馈让对话技能可验证地自我进化。  
+建议关注冻结参数的自改进方法，它们像给模型装了“成长开关”，近期可尝试在动态文本场景替换传统微调。
+- 详情：[/202607/22/README](/202607/22/README)
 
 ### 精读区论文标签
-1. [Learning from Synthetic Data without Model Collapse in Iterative Instruction Tuning](/202607/21/2607.17043v1-learning-from-synthetic-data-without-model-collapse-in-iterative-instruction-tuning)  
+1. [A Classifier That Teaches Itself: Self-Improving, Frozen-gate Training (SIFT) for Dynamic Document Classification](/202607/22/2607.18358v1-a-classifier-that-teaches-itself-self-improving-frozen-gate-training-sift-for-dynamic-document-classification)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：研究迭代自改进指令调优中的模型崩溃问题，提出行动级诊断和数据筛选以确保每代模型提升
-2. [AIGB-R1: Self-Evolving Generative Auto-Bidding via Hierarchical Planner-Executor Optimization](/202607/21/2607.17281v1-aigb-r1-self-evolving-generative-auto-bidding-via-hierarchical-planner-executor-optimization)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：提出自进化生成式自动竞价模型，采用分层规划器-执行器优化实现自我改进
-3. [Self-Modifying Lean Proof Agents with Verifier-Grounded Benchmark Coevolution](/202607/21/2607.17352v1-self-modifying-lean-proof-agents-with-verifier-grounded-benchmark-coevolution)  
+   evidence：通过SIFT实现自改进的文档分类
+2. [Verifiable Self-Evolution for Open-Ended Dialogue Skills via Future-Feedback Prediction](/202607/22/2607.18973v1-verifiable-self-evolution-for-open-ended-dialogue-skills-via-future-feedback-prediction)  
    标签：评分：8.0/10、query:self-evolve
-   evidence：自进化智能体，工作流进化，基准协同进化
+   evidence：通过未来反馈预测实现对话技能自进化
 
 ### 速读区论文标签
-1. [Recursive Harness Self-Improvement](/202607/21/2607.15524v1-recursive-harness-self-improvement)  
-   标签：评分：7.0/10、query:self-evolve
-   evidence：工具自改进，递归优化，模型-工具协同进化
-2. [Change-Aware Self-Adaptive AI-Aided Kalman Filters With Neural Change Point Detection](/202607/21/2607.13387v1-change-aware-self-adaptive-ai-aided-kalman-filters-with-neural-change-point-detection)  
+1. [Why Does Feedback-Augmented Self-Distillation Fail to Improve Retrieval-Interleaved Search Agents?](/202607/22/2607.17558v1-why-does-feedback-augmented-self-distillation-fail-to-improve-retrieval-interleaved-search-agents)  
    标签：评分：6.0/10、query:self-evolve
-   evidence：带变点检测的自适应神经网络
+   evidence：研究反馈增强自蒸馏这一自进化技术在智能搜索代理上的失效原因。
 
 
 <div class="dpr-home-promo-card">

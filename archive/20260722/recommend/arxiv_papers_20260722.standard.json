@@ -1,0 +1,130 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-22T21:27:36.143459+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2607.18358v1",
+      "source": "arxiv",
+      "title": "A Classifier That Teaches Itself: Self-Improving, Frozen-gate Training (SIFT) for Dynamic Document Classification",
+      "abstract": "Document classification is a solved problem in the laboratory and an unsolved one in the enterprise. The blocker is rarely model architecture; it is the labeling project that must precede a model and the institutional fear of letting a model retrain itself once one exists. We present SIFT (Self-Improving, Frozen-gate Training), a dynamic classifier service, which attacks both. SIFT serves classification from a deliberately cheap, CPU-bound pipeline, a SPLADE sparse encoder feeding a LightGBM head, and escalates only the low-confidence minority of pages to an LLM judge. The judge's verdicts are written back into a labeled corpus, so the expensive model continuously teaches the cheap one: the escalation rate falls, the corpus grows from production traffic rather than from an up-front annotation effort, and accuracy compounds with use. Onboarding a new document family requires only a declarative bundle, label space, anchor phrases, and a judge glossary, not a labeling project. The harder problem is safety: an autonomously retraining classifier can silently regress. SIFT resolves this with a two-part promote gate, a critical-label F1 regression check plus a frozen golden regression set the model is never trained on, either of which vetoes promotion. This turns \"retrain monthly without a human\" from reckless into routine. We describe the architecture, the self-feeding corpus loop, the frozen-gate promotion mechanism, and an illustrative multi-domain deployment, and we discuss the economics of a classifier whose marginal labeling cost trends toward zero.",
+      "authors": [
+        "Bogdan Raduta",
+        "Horia Velicu",
+        "Alexandru Preda",
+        "Serban Chiricescu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-07-20T12:38:50+00:00",
+      "link": "https://arxiv.org/pdf/2607.18358v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-improving document classification via SIFT",
+      "llm_evidence_cn": "通过SIFT实现自改进的文档分类",
+      "llm_evidence": "通过SIFT实现自改进的文档分类",
+      "canonical_evidence": "通过SIFT实现自改进的文档分类",
+      "llm_tldr_en": "SIFT uses a cheap model with an LLM judge to self-improve by adding low-confidence judgments as training data, reducing labeling cost and fear of retraining.",
+      "llm_tldr_cn": "针对企业文档分类中标注缺失和自动再训练的恐惧，提出SIFT方法：使用SPLADE+LightGBM流水线，仅将低置信度文档交给LLM法官，并将LLM的判决写回标注语料库，让昂贵的模型持续教导便宜的模型。实验表明该方法降低了LLM调用量和人工标注需求，同时保持分类性能。该工作为NLP任务中的模型自进化提供了一种实用框架。",
+      "llm_tldr": "针对企业文档分类中标注缺失和自动再训练的恐惧，提出SIFT方法：使用SPLADE+LightGBM流水线，仅将低置信度文档交给LLM法官，并将LLM的判决写回标注语料库，让昂贵的模型持续教导便宜的模型。实验表明该方法降低了LLM调用量和人工标注需求，同时保持分类性能。该工作为NLP任务中的模型自进化提供了一种实用框架。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.18973v1",
+      "source": "arxiv",
+      "title": "Verifiable Self-Evolution for Open-Ended Dialogue Skills via Future-Feedback Prediction",
+      "abstract": "Textual skills provide a lightweight way to improve frozen language-model agents, but their self-evolution normally requires a stable validation signal. Such signals are natural in mathematics or code, where an answer can be checked after it changes, yet are problematic in open-ended dialogue: changing the assistant response also changes the user's next reaction, so a logged reaction cannot directly evaluate a counterfactual response. We propose future-feedback skill evolution, which first redirects self-evolution from prescribing the current answer to predicting whether the observed answer will lead to a positive or negative subsequent user signal. This prediction task is verifiable on fixed logged tuples and therefore supports validation-gated textual optimization. The evolved feedback skill captures interpretable criteria for response quality and can subsequently serve as a diagnostic and optimization target for answer skills. On a proprietary, privacy-preserving sales-assistant dataset, careful quality filtering and a balanced resolved/unresolved split yield more than 75% prediction accuracy. Beyond this result, the central contribution is a formulation that converts otherwise moving conversational feedback into a fixed offline learning target, enabling reproducible skill evolution without placing every candidate skill in live traffic. We discuss the boundary between observational verification and counterfactual validity, and position the method as an offline optimization stage rather than a replacement for final human or online evaluation.",
+      "authors": [
+        "ChaoJin Zhao",
+        "Xuan Jiang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-07-21T11:06:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.18973v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "self-evolution of dialogue skills via future-feedback prediction",
+      "llm_evidence_cn": "通过未来反馈预测实现对话技能自进化",
+      "llm_evidence": "通过未来反馈预测实现对话技能自进化",
+      "canonical_evidence": "通过未来反馈预测实现对话技能自进化",
+      "llm_tldr_en": "Proposes future-feedback skill evolution for open-ended dialogue, redirecting self-evolution to predicting user reaction valence from fixed logs, enabling verifiable self-improvement.",
+      "llm_tldr_cn": "针对开放域对话中技能自进化缺乏稳定验证信号的问题，提出未来反馈技能进化方法，将自进化重定向为预测用户后续信号的正负，利用固定对话元组验证。实验表明该方法能有效利用用户反馈实现自我改进，为开放域智能体自进化提供新范式。",
+      "llm_tldr": "针对开放域对话中技能自进化缺乏稳定验证信号的问题，提出未来反馈技能进化方法，将自进化重定向为预测用户后续信号的正负，利用固定对话元组验证。实验表明该方法能有效利用用户反馈实现自我改进，为开放域智能体自进化提供新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.17558v1",
+      "source": "arxiv",
+      "title": "Why Does Feedback-Augmented Self-Distillation Fail to Improve Retrieval-Interleaved Search Agents?",
+      "abstract": "On-policy self-distillation (OPSD) offers a promising approach for training large language models without relying on a separate teacher model. However, its effectiveness on complex agentic tasks remains largely unexplored. In this work, we instantiate Feedback-Augmented Self-Distillation (FA-SD), a self-distillation algorithm for agentic search that leverages successful demonstrations as privileged information. We identify that models can rely on recurring reasoning-and-search output templates, producing trajectories that appear diverse but are largely agnostic to the input question, making the KL-based self-distillation signal uninformative. We term this phenomenon decoding collapse, a failure mode that can be missed by existing evaluation metrics. To understand its underlying cause, we show that although the self-teacher achieves stronger performance, learning remains inherently unstable due to inconsistent supervision signals. We further decompose this inconsistency into model inconsistency and prompt inconsistency, and show that the latter can significantly degrade the quality of the supervision signal, limiting the effectiveness of self-teacher learning. To mitigate this inconsistency, we introduce an exponential moving average (EMA) teacher to stabilize the self-teacher and provide more consistent supervision signals. Although the EMA teacher requires a warm-up phase during which performance may temporarily regress, it ultimately improves model performance by providing more stable supervision.",
+      "authors": [
+        "Fan Yang",
+        "Rui Meng",
+        "Yuxin Wen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-20T05:07:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.17558v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Studies the failure of feedback-augmented self-distillation, a self-evolution technique, in improving agentic search models.",
+      "llm_evidence_cn": "研究反馈增强自蒸馏这一自进化技术在智能搜索代理上的失效原因。",
+      "llm_evidence": "研究反馈增强自蒸馏这一自进化技术在智能搜索代理上的失效原因。",
+      "canonical_evidence": "研究反馈增强自蒸馏这一自进化技术在智能搜索代理上的失效原因。",
+      "llm_tldr_en": "This work instantiates Feedback-Augmented Self-Distillation (FA-SD) for agentic search, aiming to improve models via self-training from successful demonstrations. It identifies a failure mode called decoding collapse where the model relies on generic reasoning templates, making the self-distillation signal uninformative. The paper provides insights into challenges of self-evolution in NLP agents.",
+      "llm_tldr_cn": "本研究将反馈增强自蒸馏方法应用于智能搜索代理，通过从成功示范中学习来提升模型。它发现了一种名为“解码崩溃”的失败模式，即模型依赖通用推理模板，导致自蒸馏信号无效。该工作揭示了自进化方法在NLP代理任务中的实际挑战。",
+      "llm_tldr": "本研究将反馈增强自蒸馏方法应用于智能搜索代理，通过从成功示范中学习来提升模型。它发现了一种名为“解码崩溃”的失败模式，即模型依赖通用推理模板，导致自蒸馏信号无效。该工作揭示了自进化方法在NLP代理任务中的实际挑战。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
