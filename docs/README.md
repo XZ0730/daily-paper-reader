@@ -6,31 +6,29 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-22
-- 运行时间：2026-07-22 21:30:00 UTC
+- 最新运行日期：2026-07-23
+- 运行时间：2026-07-23 21:09:16 UTC
 - 运行状态：成功
-- 本次总论文数：3
+- 本次总论文数：2
 - 精读区：2
-- 速读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-今日精读两篇自进化学习论文，速读一篇反思失败案例。  
-最亮眼的是让分类器通过冻结门机制自我教学（SIFT），以及通过预测未来反馈让对话技能可验证地自我进化。  
-建议关注冻结参数的自改进方法，它们像给模型装了“成长开关”，近期可尝试在动态文本场景替换传统微调。
-- 详情：[/202607/22/README](/202607/22/README)
+今日精读两篇高分研究，探索AI推理模型如何通过自进化实现“顿悟”式能力提升，覆盖文本与音频两大模态。  
+最值得关注的是：大模型能靠自我剪枝与“啊哈时刻”偏好优化自主强化推理能力，音频模型也首次实现了无需标签的细粒度推理自进化。  
+建议关注“自引导进化”这条技术路线，它可能大幅降低高质量推理模型的持续训练成本。
+- 详情：[/202607/23/README](/202607/23/README)
 
 ### 精读区论文标签
-1. [A Classifier That Teaches Itself: Self-Improving, Frozen-gate Training (SIFT) for Dynamic Document Classification](/202607/22/2607.18358v1-a-classifier-that-teaches-itself-self-improving-frozen-gate-training-sift-for-dynamic-document-classification)  
+1. [EvoThink: Evolving Thinking in Large Reasoning Models via Self-Pruning and Aha-Moment Preference Optimization](/202607/23/2607.19962v1-evothink-evolving-thinking-in-large-reasoning-models-via-self-pruning-and-aha-moment-preference-optimization)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：通过SIFT实现自改进的文档分类
-2. [Verifiable Self-Evolution for Open-Ended Dialogue Skills via Future-Feedback Prediction](/202607/22/2607.18973v1-verifiable-self-evolution-for-open-ended-dialogue-skills-via-future-feedback-prediction)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：通过未来反馈预测实现对话技能自进化
+   evidence：自剪枝与偏好优化实现推理模型自进化
+2. [Audio-Zero: Label-Free Self-Evolution for Fine-Grained Audio Reasoning](/202607/23/2607.20166v1-audio-zero-label-free-self-evolution-for-fine-grained-audio-reasoning)  
+   标签：评分：9.0/10、query:self-evolve
+   evidence：用于音频推理的无标签自进化框架
 
 ### 速读区论文标签
-1. [Why Does Feedback-Augmented Self-Distillation Fail to Improve Retrieval-Interleaved Search Agents?](/202607/22/2607.17558v1-why-does-feedback-augmented-self-distillation-fail-to-improve-retrieval-interleaved-search-agents)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：研究反馈增强自蒸馏这一自进化技术在智能搜索代理上的失效原因。
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-23",
+  "date": "2026-07-23",
+  "generated_at": "2026-07-23T21:09:27",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/23/2607.19962v1-evothink-evolving-thinking-in-large-reasoning-models-via-self-pruning-and-aha-moment-preference-optimization",
+      "section": "deep",
+      "title_en": "EvoThink: Evolving Thinking in Large Reasoning Models via Self-Pruning and Aha-Moment Preference Optimization",
+      "authors": "Xinbang Dai, Zheyu Xin, Huikang Hu, Lin Ren, Rihui Jin, Guohui Xiao, Guilin Qi, Kuicai Dong, Zhaocheng Du, Yuyang Zhang",
+      "date": "2026-07-22",
+      "pdf": "https://arxiv.org/pdf/2607.19962v1",
+      "score": "9.0",
+      "evidence": "自剪枝与偏好优化实现推理模型自进化",
+      "tldr": "大型推理模型常因冗余验证步骤而过思考，现有方法粗粒度优化易损害推理能力。EvoThink通过自剪枝训练和Aha-Moment偏好优化，在减少冗余步骤的同时鼓励探索新推理路径，实现推理效率与能力的同步提升。在数学推理和代码生成任务上，EvoThink显著降低推理Token消耗并增强推理性能，为高效推理模型训练提供了新范式。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Large Reasoning Models (LRMs) often suffer from overthinking due to redundant verification steps. Existing approaches for mitigating overthinking, such as fast-slow thinking switching and reasoning trajectory compression, fail to make a fine-grained distinction between beneficial and redundant steps within the LRM's reasoning process, and may thus impair reasoning capability in their pursuit of efficiency. To simultaneously improve reasoning efficiency and capability, we propose EvoThink, a framework that reduces redundant verification and encourages the exploration of new reasoning paths. EvoThink comprises two key components: Self-Pruning Training (SPT), an unsupervised method that iteratively prunes redundant reasoning steps and self-trains on the concise trajectories; and Aha-Moment Preference Optimization (AMPO), which, inspired by genetic algorithms, identifies valuable failed reasoning attempts, synthesizes from-wrong-to-right aha-moment data, and optimizes the model to internalize this reasoning pattern. Extensive evaluations across mathematical reasoning and code generation benchmarks demonstrate that EvoThink not only substantially reduces inference-time token usage but also improves the reasoning capability of LRMs.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/23/2607.20166v1-audio-zero-label-free-self-evolution-for-fine-grained-audio-reasoning",
+      "section": "deep",
+      "title_en": "Audio-Zero: Label-Free Self-Evolution for Fine-Grained Audio Reasoning",
+      "authors": "Siqian Tong, Xuan Li, Chaozhuo Li, Baolong Bi, Yiwei Wang, Yujun Cai, Shenghua Liu, Chengpeng Hao",
+      "date": "2026-07-22",
+      "pdf": "https://arxiv.org/pdf/2607.20166v1",
+      "score": "9.0",
+      "evidence": "用于音频推理的无标签自进化框架",
+      "tldr": "大型音频语言模型在处理事件顺序、重复和时长等细粒度推理时仍有困难。现有后训练方法依赖昂贵外部标签或仅提供粗粒度语义信号。Audio-Zero提出首个无标签自进化框架，通过构造听觉自对弈游戏，让模型从无标注音频对比对中自我改进。游戏强制模型生成细粒度听觉描述并推理线索不一致以识别异常听者，提供可验证奖励。在Qwen2-Audio和Qwen2.5-Omni模型上实验表明，该方法有效提升细粒度音频推理，同时保持广泛音频理解能力。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Large Audio Language models (LALMs) have made rapid progress on acoustic understanding, yet they still struggle with fine-grained audio reasoning (e.g., recognizing event order, repetitions and duration). Existing post-training methods heavily rely on expensive external labels or provide only coarse semantic signals. To bridge this gap, we introduce Audio-Zero, the first label-free self-evolution framework in the field of LALMs that improves fine-grained auditory perception and reasoning. Audio-Zero constructs an auditory self-play game from unlabeled audio contrast pairs: most players hear a reference audio, while one odd listener hears a subtle variant. The model first generates clues describing what it hears and then identifies the odd listener by reasoning over inconsistencies among clues. Since the odd listener is known by construction, the game provides verifiable rewards without any annotated answers. Experiments with Qwen2-Audio-7B-Instruct and Qwen2.5-Omni-7B on TREA, MMAU Test-mini and MMAR show that Audio-Zero improves fine-grained audio reasoning while preserving broad audio understanding. Evolutionary and diagnostic analyses further reveal that increasingly fine-grained auditory descriptions emerge naturally from game pressure.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

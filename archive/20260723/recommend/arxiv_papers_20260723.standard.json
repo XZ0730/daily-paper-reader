@@ -1,0 +1,102 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-23T21:06:48.719599+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.19962v1",
+      "source": "arxiv",
+      "title": "EvoThink: Evolving Thinking in Large Reasoning Models via Self-Pruning and Aha-Moment Preference Optimization",
+      "abstract": "Large Reasoning Models (LRMs) often suffer from overthinking due to redundant verification steps. Existing approaches for mitigating overthinking, such as fast-slow thinking switching and reasoning trajectory compression, fail to make a fine-grained distinction between beneficial and redundant steps within the LRM's reasoning process, and may thus impair reasoning capability in their pursuit of efficiency. To simultaneously improve reasoning efficiency and capability, we propose EvoThink, a framework that reduces redundant verification and encourages the exploration of new reasoning paths. EvoThink comprises two key components: Self-Pruning Training (SPT), an unsupervised method that iteratively prunes redundant reasoning steps and self-trains on the concise trajectories; and Aha-Moment Preference Optimization (AMPO), which, inspired by genetic algorithms, identifies valuable failed reasoning attempts, synthesizes from-wrong-to-right aha-moment data, and optimizes the model to internalize this reasoning pattern. Extensive evaluations across mathematical reasoning and code generation benchmarks demonstrate that EvoThink not only substantially reduces inference-time token usage but also improves the reasoning capability of LRMs.",
+      "authors": [
+        "Xinbang Dai",
+        "Zheyu Xin",
+        "Huikang Hu",
+        "Lin Ren",
+        "Rihui Jin",
+        "Guohui Xiao",
+        "Guilin Qi",
+        "Kuicai Dong",
+        "Zhaocheng Du",
+        "Yuyang Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-22T09:40:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.19962v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-pruning and preference optimization for evolving reasoning models",
+      "llm_evidence_cn": "自剪枝与偏好优化实现推理模型自进化",
+      "llm_evidence": "自剪枝与偏好优化实现推理模型自进化",
+      "canonical_evidence": "自剪枝与偏好优化实现推理模型自进化",
+      "llm_tldr_en": "EvoThink improves large reasoning models by iteratively pruning redundant reasoning steps and encouraging exploration of new paths, achieving both efficiency and capability gains.",
+      "llm_tldr_cn": "大型推理模型常因冗余验证步骤而过度思考。EvoThink提出自剪枝训练和顿悟偏好优化，迭代剪除冗余步骤并鼓励探索新推理路径，在保持推理能力的同时提升效率。实验表明该方法在多个基准上提升了推理性能，为模型自进化提供了一种有效策略。",
+      "llm_tldr": "大型推理模型常因冗余验证步骤而过度思考。EvoThink提出自剪枝训练和顿悟偏好优化，迭代剪除冗余步骤并鼓励探索新推理路径，在保持推理能力的同时提升效率。实验表明该方法在多个基准上提升了推理性能，为模型自进化提供了一种有效策略。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.20166v1",
+      "source": "arxiv",
+      "title": "Audio-Zero: Label-Free Self-Evolution for Fine-Grained Audio Reasoning",
+      "abstract": "Large Audio Language models (LALMs) have made rapid progress on acoustic understanding, yet they still struggle with fine-grained audio reasoning (e.g., recognizing event order, repetitions and duration). Existing post-training methods heavily rely on expensive external labels or provide only coarse semantic signals. To bridge this gap, we introduce Audio-Zero, the first label-free self-evolution framework in the field of LALMs that improves fine-grained auditory perception and reasoning. Audio-Zero constructs an auditory self-play game from unlabeled audio contrast pairs: most players hear a reference audio, while one odd listener hears a subtle variant. The model first generates clues describing what it hears and then identifies the odd listener by reasoning over inconsistencies among clues. Since the odd listener is known by construction, the game provides verifiable rewards without any annotated answers. Experiments with Qwen2-Audio-7B-Instruct and Qwen2.5-Omni-7B on TREA, MMAU Test-mini and MMAR show that Audio-Zero improves fine-grained audio reasoning while preserving broad audio understanding. Evolutionary and diagnostic analyses further reveal that increasingly fine-grained auditory descriptions emerge naturally from game pressure.",
+      "authors": [
+        "Siqian Tong",
+        "Xuan Li",
+        "Chaozhuo Li",
+        "Baolong Bi",
+        "Yiwei Wang",
+        "Yujun Cai",
+        "Shenghua Liu",
+        "Chengpeng Hao"
+      ],
+      "primary_category": "cs.SD",
+      "categories": [
+        "cs.SD",
+        "cs.AI"
+      ],
+      "published": "2026-07-22T14:03:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.20166v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "label-free self-evolution framework for audio reasoning",
+      "llm_evidence_cn": "用于音频推理的无标签自进化框架",
+      "llm_evidence": "用于音频推理的无标签自进化框架",
+      "canonical_evidence": "用于音频推理的无标签自进化框架",
+      "llm_tldr_en": "Introduces Audio-Zero, a label-free self-evolution framework using an auditory self-play game to improve fine-grained audio reasoning in large audio language models.",
+      "llm_tldr_cn": "针对现有音频语言模型在细粒度推理上的不足，提出无标签自进化框架Audio-Zero。通过构建听觉自博弈游戏，从无标签音频对比对中生成线索并识别异类，实现模型自我改进。实验证明该框架有效提升事件顺序、重复和时长等细粒度感知能力，为神经网络自进化技术提供了新范式。",
+      "llm_tldr": "针对现有音频语言模型在细粒度推理上的不足，提出无标签自进化框架Audio-Zero。通过构建听觉自博弈游戏，从无标签音频对比对中生成线索并识别异类，实现模型自我改进。实验证明该框架有效提升事件顺序、重复和时长等细粒度感知能力，为神经网络自进化技术提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}
