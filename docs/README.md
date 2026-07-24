@@ -6,26 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-23
-- 运行时间：2026-07-23 21:09:16 UTC
+- 最新运行日期：2026-07-24
+- 运行时间：2026-07-24 20:16:39 UTC
 - 运行状态：成功
 - 本次总论文数：2
 - 精读区：2
 - 速读区：0
 
 ### 今日简报（AI）
-今日精读两篇高分研究，探索AI推理模型如何通过自进化实现“顿悟”式能力提升，覆盖文本与音频两大模态。  
-最值得关注的是：大模型能靠自我剪枝与“啊哈时刻”偏好优化自主强化推理能力，音频模型也首次实现了无需标签的细粒度推理自进化。  
-建议关注“自引导进化”这条技术路线，它可能大幅降低高质量推理模型的持续训练成本。
-- 详情：[/202607/23/README](/202607/23/README)
+今日精读两篇高分论文，分别探索AI记忆的反思循环与深度研究智能体的自我进化机制。
+核心发现：通过“探索-同化”双重反思可构建更稳定的长期记忆，而递归自我改进框架能让AI研究助手持续提升性能。
+若你对智能体如何自我成长感兴趣，不妨跟进这两条思路：反思式记忆更新与递归增强策略。
+- 详情：[/202607/24/README](/202607/24/README)
 
 ### 精读区论文标签
-1. [EvoThink: Evolving Thinking in Large Reasoning Models via Self-Pruning and Aha-Moment Preference Optimization](/202607/23/2607.19962v1-evothink-evolving-thinking-in-large-reasoning-models-via-self-pruning-and-aha-moment-preference-optimization)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：自剪枝与偏好优化实现推理模型自进化
-2. [Audio-Zero: Label-Free Self-Evolution for Fine-Grained Audio Reasoning](/202607/23/2607.20166v1-audio-zero-label-free-self-evolution-for-fine-grained-audio-reasoning)  
-   标签：评分：9.0/10、query:self-evolve
-   evidence：用于音频推理的无标签自进化框架
+1. [Exploratory and Assimilating Reflection: Reflective Recall Cycle for Long-term Memory](/202607/24/2607.17879v1-exploratory-and-assimilating-reflection-reflective-recall-cycle-for-long-term-memory)  
+   标签：评分：8.0/10、query:self-evolve
+   evidence：反思性记忆适应作为代理的自进化技术
+2. [AREX: Towards a Recursively Self-Improving Agent for Deep Research](/202607/24/2607.21461v1-arex-towards-a-recursively-self-improving-agent-for-deep-research)  
+   标签：评分：8.0/10、query:self-evolve
+   evidence：递归自改进智能体，包含内外循环；自改进循环审计并求精答案。
 
 ### 速读区论文标签
 - 本次无速读推荐。

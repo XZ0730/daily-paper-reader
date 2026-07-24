@@ -1,0 +1,111 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-24T20:13:51.040362+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.17879v1",
+      "source": "arxiv",
+      "title": "Exploratory and Assimilating Reflection: Reflective Recall Cycle for Long-term Memory",
+      "abstract": "LLM-based autonomous agents require external memory to overcome their statelessness and limited context window for long-term interaction and dynamic knowledge reasoning. However, existing memory retrieval methods often lack adaptability and sample efficiency, and struggle to retrieve the right mixture of memories from heterogeneous stores. We propose Exploratory-Assimilating Reflection (EAR), a framework for high initial retrieval performance and sample-efficient adaptation. EAR combines two mechanisms: Exploratory Reflection, which performs iterative search to bootstrap retrieval and collect useful experiences for each query, and Assimilating Reflection, which replays these experiences from an Experience Buffer to refine a global reranker more efficiently than methods relying only on immediate rewards. Experiments show that EAR improves retrieval by up to 17.9% over the baseline retriever on two long-term dialogue benchmarks. We also show that EAR is highly sample-efficient and robust to noisy feedback.",
+      "authors": [
+        "Ganesh Senrayan",
+        "Moyuru Yamada",
+        "Ishan Jindal",
+        "Kiran Purohit"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-20T12:30:17+00:00",
+      "link": "https://arxiv.org/pdf/2607.17879v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Reflective memory adaptation as self-evolution technique for agents",
+      "llm_evidence_cn": "反思性记忆适应作为代理的自进化技术",
+      "llm_evidence": "反思性记忆适应作为代理的自进化技术",
+      "canonical_evidence": "反思性记忆适应作为代理的自进化技术",
+      "llm_tldr_en": "EAR framework uses exploratory and assimilating reflection to continuously improve long-term memory retrieval for LLM agents, enabling sample-efficient adaptation and self-evolution.",
+      "llm_tldr_cn": "LLM智能体在长期交互中面临记忆检索适应性差和样本效率低的问题。本文提出探索-同化反思框架EAR，通过探索反思积累检索经验，同化反思利用经验重播优化全局重排序器，实现记忆检索的自进化。实验表明，EAR在保证初始高性能的同时，能以极低样本成本适应新记忆分布。该框架为模型自进化技术应用于NLP任务提供了通用方法。",
+      "llm_tldr": "LLM智能体在长期交互中面临记忆检索适应性差和样本效率低的问题。本文提出探索-同化反思框架EAR，通过探索反思积累检索经验，同化反思利用经验重播优化全局重排序器，实现记忆检索的自进化。实验表明，EAR在保证初始高性能的同时，能以极低样本成本适应新记忆分布。该框架为模型自进化技术应用于NLP任务提供了通用方法。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.21461v1",
+      "source": "arxiv",
+      "title": "AREX: Towards a Recursively Self-Improving Agent for Deep Research",
+      "abstract": "Deep research requires agents to find answers that jointly satisfy multiple constraints. Discovering such answers is costly, whereas verifying a candidate can often be decomposed into tractable constraint-wise checks. This discovery--verification asymmetry suggests that a research agent should do more than simply search longer: it should recursively improve its current answer by verifying intermediate results and using the partially verified state to guide subsequent refinement. We introduce AREX, a family of Recursively Self-Improving (RSI) deep research agents. AREX alternates between an inner research loop that gathers evidence and constructs a provisional answer, and an outer self-improvement loop that audits the answer constraint-wise, identifies unresolved claims, and launches targeted follow-up research. To sustain RSI over long horizons, AREX learns an autonomous context-update tool that compresses growing interaction history into a compact improvement state preserving verified evidence and unresolved constraints, without relying on an external model. We train AREX on verified synthetic tasks and high-quality trajectories through agentic mid-training and long-horizon reinforcement learning. To mitigate sparse final rewards during long horizon learning, we emphasize key steps where decisive evidence is acquired or erroneous research directions are corrected. We instantiate a dense 4B model and a 122B-A10B Mixture-of-Experts model. Across BrowseComp, WideSearch, DeepSearchQA, Humanity's Last Exam (HLE), and other reasoning and tool-use benchmarks, AREX substantially outperforms comparable-scale baselines and remains competitive with models using substantially more activated parameters.",
+      "authors": [
+        "Shuqi Lu",
+        "Chaofan Li",
+        "Kun Luo",
+        "Zhang Zhang",
+        "Hui Wang",
+        "Hongwang Xiao",
+        "Zheng Liu",
+        "Lei Xiong",
+        "Jiahao Wang",
+        "Sen Wang",
+        "Xiyan Jiang",
+        "Wanli Li",
+        "Yuyang Hu",
+        "Hongjin Qian",
+        "Bingyu Yan",
+        "Ziyi Xia",
+        "Yingxia Shao",
+        "Kang Liu",
+        "Zhicheng Dou",
+        "Di He",
+        "Chaozhuo Li",
+        "Qiwei Ye",
+        "Zhongyuan Wang",
+        "Zheng Liu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-23T16:05:46+00:00",
+      "link": "https://arxiv.org/pdf/2607.21461v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Recursively self-improving agent with inner/outer loop; self-improvement loop audits and refines answers.",
+      "llm_evidence_cn": "递归自改进智能体，包含内外循环；自改进循环审计并求精答案。",
+      "llm_evidence": "递归自改进智能体，包含内外循环；自改进循环审计并求精答案。",
+      "canonical_evidence": "递归自改进智能体，包含内外循环；自改进循环审计并求精答案。",
+      "llm_tldr_en": "AREX introduces recursively self-improving agents for deep research, alternating between evidence gathering and self-auditing refinement, improving multi-constraint satisfaction.",
+      "llm_tldr_cn": "AREX提出递归自改进智能体，用于深度研究。针对多约束答案发现成本高但验证可分解的问题，通过内部研究循环收集证据构建初步答案，外部自改进循环逐约束审计并修复未满足部分，逐步提升答案质量。实验表明该方法能有效分解复杂研究任务并提高答案的约束满足率，为开放式研究中的自我改进提供了新框架。",
+      "llm_tldr": "AREX提出递归自改进智能体，用于深度研究。针对多约束答案发现成本高但验证可分解的问题，通过内部研究循环收集证据构建初步答案，外部自改进循环逐约束审计并修复未满足部分，逐步提升答案质量。实验表明该方法能有效分解复杂研究任务并提高答案的约束满足率，为开放式研究中的自我改进提供了新框架。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

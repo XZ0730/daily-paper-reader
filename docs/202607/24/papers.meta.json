@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-24",
+  "date": "2026-07-24",
+  "generated_at": "2026-07-24T20:16:50",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/24/2607.17879v1-exploratory-and-assimilating-reflection-reflective-recall-cycle-for-long-term-memory",
+      "section": "deep",
+      "title_en": "Exploratory and Assimilating Reflection: Reflective Recall Cycle for Long-term Memory",
+      "authors": "Ganesh Senrayan, Moyuru Yamada, Ishan Jindal, Kiran Purohit",
+      "date": "2026-07-20",
+      "pdf": "https://arxiv.org/pdf/2607.17879v1",
+      "score": "8.0",
+      "evidence": "反思性记忆适应作为代理的自进化技术",
+      "tldr": "基于LLM的自主代理在长期交互中面临记忆检索适应性差、样本效率低的问题。本文提出探索同化反思(EAR)框架，通过探索性反思迭代搜索收集经验，再经同化反思精调重排序器，实现高效检索。在对话基准上，EAR最多将检索性能提升17.9%，且对噪声鲁棒。该框架为LLM代理的长期记忆提供了样本高效且鲁棒的解决方案。",
+      "tags": "query:self-evolve",
+      "abstract_en": "LLM-based autonomous agents require external memory to overcome their statelessness and limited context window for long-term interaction and dynamic knowledge reasoning. However, existing memory retrieval methods often lack adaptability and sample efficiency, and struggle to retrieve the right mixture of memories from heterogeneous stores. We propose Exploratory-Assimilating Reflection (EAR), a framework for high initial retrieval performance and sample-efficient adaptation. EAR combines two mechanisms: Exploratory Reflection, which performs iterative search to bootstrap retrieval and collect useful experiences for each query, and Assimilating Reflection, which replays these experiences from an Experience Buffer to refine a global reranker more efficiently than methods relying only on immediate rewards. Experiments show that EAR improves retrieval by up to 17.9% over the baseline retriever on two long-term dialogue benchmarks. We also show that EAR is highly sample-efficient and robust to noisy feedback.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/24/2607.21461v1-arex-towards-a-recursively-self-improving-agent-for-deep-research",
+      "section": "deep",
+      "title_en": "AREX: Towards a Recursively Self-Improving Agent for Deep Research",
+      "authors": "Shuqi Lu, Chaofan Li, Kun Luo, Zhang Zhang, Hui Wang, Hongwang Xiao, Zheng Liu, Lei Xiong, Jiahao Wang, Sen Wang, Xiyan Jiang, Wanli Li, Yuyang Hu, Hongjin Qian, Bingyu Yan, Ziyi Xia, Yingxia Shao, Kang Liu, Zhicheng Dou, Di He, Chaozhuo Li, Qiwei Ye, Zhongyuan Wang, Zheng Liu",
+      "date": "2026-07-23",
+      "pdf": "https://arxiv.org/pdf/2607.21461v1",
+      "score": "8.0",
+      "evidence": "递归自改进智能体，包含内外循环；自改进循环审计并求精答案。",
+      "tldr": "深度研究任务中，发现同时满足多个约束的答案往往成本高昂，但验证候选答案可分解为可处理的逐约束检查。利用这一非对称性，AREX提出递归自改进框架：内层研究循环收集证据构建临时答案，外层自改进循环审计答案约束、定位未解决声明并启动针对性研究。为维持长期改进，AREX学习自主上下文更新工具，将交互历史压缩为紧凑改进状态。通过智能体中训练和长时强化学习，AREX 4B和122B-A10B MoE模型在BrowseComp等基准上大幅超越同规模基线，甚至与更大激活参数模型竞争，确立了递归自改进在深度研究中的价值。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Deep research requires agents to find answers that jointly satisfy multiple constraints. Discovering such answers is costly, whereas verifying a candidate can often be decomposed into tractable constraint-wise checks. This discovery--verification asymmetry suggests that a research agent should do more than simply search longer: it should recursively improve its current answer by verifying intermediate results and using the partially verified state to guide subsequent refinement. We introduce AREX, a family of Recursively Self-Improving (RSI) deep research agents. AREX alternates between an inner research loop that gathers evidence and constructs a provisional answer, and an outer self-improvement loop that audits the answer constraint-wise, identifies unresolved claims, and launches targeted follow-up research. To sustain RSI over long horizons, AREX learns an autonomous context-update tool that compresses growing interaction history into a compact improvement state preserving verified evidence and unresolved constraints, without relying on an external model. We train AREX on verified synthetic tasks and high-quality trajectories through agentic mid-training and long-horizon reinforcement learning. To mitigate sparse final rewards during long horizon learning, we emphasize key steps where decisive evidence is acquired or erroneous research directions are corrected. We instantiate a dense 4B model and a 122B-A10B Mixture-of-Experts model. Across BrowseComp, WideSearch, DeepSearchQA, Humanity's Last Exam (HLE), and other reasoning and tool-use benchmarks, AREX substantially outperforms comparable-scale baselines and remains competitive with models using substantially more activated parameters.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
