@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-25 <!--dpr-date:20260725-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/25/2607.17052v1-searching-for-task-specific-vision-paths-evolutionary-block-pruning-across-vision-language-models" data-sidebar-item="{&quot;title&quot;: &quot;Searching for Task-Specific Vision Paths: Evolutionary Block Pruning Across Vision-Language Models&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.17052v1-searching-for-task-specific-vision-paths-evolutionary-block-pruning-across-vision-language-models&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;self-evolve&quot;}], &quot;evidence&quot;: &quot;基于进化搜索的任务特定视觉块剪枝&quot;}">Searching for Task-Specific Vision Paths: Evolutionary Block Pruning Across Vision-Language Models</a>
   * 2026-07-24 <!--dpr-date:20260724-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/24/2607.17879v1-exploratory-and-assimilating-reflection-reflective-recall-cycle-for-long-term-memory" data-sidebar-item="{&quot;title&quot;: &quot;Exploratory and Assimilating Reflection: Reflective Recall Cycle for Long-term Memory&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.17879v1-exploratory-and-assimilating-reflection-reflective-recall-cycle-for-long-term-memory&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;self-evolve&quot;}], &quot;evidence&quot;: &quot;反思性记忆适应作为代理的自进化技术&quot;}">Exploratory and Assimilating Reflection: Reflective Recall Cycle for Long-term Memory</a>

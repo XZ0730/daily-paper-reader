@@ -1,0 +1,51 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-25T21:03:32.001898+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.17052v1",
+      "source": "arxiv",
+      "title": "Searching for Task-Specific Vision Paths: Evolutionary Block Pruning Across Vision-Language Models",
+      "abstract": "Vision-language models normally execute the same complete vision encoder for every question, even when OCR, counting, object, attribute, and spatial queries may not require identical computation. We study whether fixed-budget combinations of vision blocks can be skipped without fine-tuning. A shared K-block route skips one searched set of exactly K blocks for every question, while a capability-specific K-block policy selects one same-size route using a known capability label. We introduce a source-balanced evolutionary search and compare it with independent ranking, contiguous removal, and random routes at matched budgets. Experiments use Qwen2.5-VL-3B-Instruct, SmolVLM2-2.2B-Instruct, and an 876-example image-disjoint selection split. Search transfers across architectures: on SmolVLM2, the searched shared four-block route beats independent construction by 4.91 percentage points. Capability specialization is less stable. On Qwen, the six-block capability policy beats the shared route by 2.17 points, driven by a 7.10-point OCR gain. On sealed IIIT5K, however, the SmolVLM2 OCR-specific route trails its shared route by 13.6 points. Combinatorial search reliably improves route construction, but capability labels do not define universally transferable vision pathways.",
+      "authors": [
+        "Tarun Tomar"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-19T03:43:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.17052v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "evolutionary search for task-specific vision block pruning",
+      "llm_evidence_cn": "基于进化搜索的任务特定视觉块剪枝",
+      "llm_evidence": "基于进化搜索的任务特定视觉块剪枝",
+      "canonical_evidence": "基于进化搜索的任务特定视觉块剪枝",
+      "llm_tldr_en": "Introduces evolutionary block pruning for vision-language models to skip task-irrelevant vision blocks, using source-balanced search. Finds efficient fixed-budget routes without fine-tuning, outperforming uniform removal, enabling task-adaptive computation.",
+      "llm_tldr_cn": "本文针对视觉语言模型对所有查询统一执行完整视觉编码的局限，引入进化搜索自动为不同任务寻找最优的视觉模块子集。通过对Qwen2.5-VL和SmolVLM2等模型进行块级剪枝，在固定计算预算下，源平衡进化搜索发现的路径在多个视觉问答基准上显著优于均匀移除或随机路径。该方法无需微调即可实现任务自适应推理，为构建高效且自适应的多模态模型提供了新方案。",
+      "llm_tldr": "本文针对视觉语言模型对所有查询统一执行完整视觉编码的局限，引入进化搜索自动为不同任务寻找最优的视觉模块子集。通过对Qwen2.5-VL和SmolVLM2等模型进行块级剪枝，在固定计算预算下，源平衡进化搜索发现的路径在多个视觉问答基准上显著优于均匀移除或随机路径。该方法无需微调即可实现任务自适应推理，为构建高效且自适应的多模态模型提供了新方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self-improving models with automated architecture search",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

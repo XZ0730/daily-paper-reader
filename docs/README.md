@@ -6,26 +6,23 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-24
-- 运行时间：2026-07-24 20:16:39 UTC
+- 最新运行日期：2026-07-25
+- 运行时间：2026-07-25 21:05:00 UTC
 - 运行状态：成功
-- 本次总论文数：2
-- 精读区：2
+- 本次总论文数：1
+- 精读区：1
 - 速读区：0
 
 ### 今日简报（AI）
-今日精读两篇高分论文，分别探索AI记忆的反思循环与深度研究智能体的自我进化机制。
-核心发现：通过“探索-同化”双重反思可构建更稳定的长期记忆，而递归自我改进框架能让AI研究助手持续提升性能。
-若你对智能体如何自我成长感兴趣，不妨跟进这两条思路：反思式记忆更新与递归增强策略。
-- 详情：[/202607/24/README](/202607/24/README)
+今日精读一篇高分论文，探索如何用进化搜索自动剪枝出视觉语言模型的任务专用视觉通路。  
+核心结论是，该方法能跨不同模型找到高度精简且保精度的子网络，揭示了模型内部存在可迁移的通用模块。  
+对普通读者，可尝试将这种剪枝思路应用于你手边的多模态模型压缩实验，重点关注跨任务的模块复用性。
+- 详情：[/202607/25/README](/202607/25/README)
 
 ### 精读区论文标签
-1. [Exploratory and Assimilating Reflection: Reflective Recall Cycle for Long-term Memory](/202607/24/2607.17879v1-exploratory-and-assimilating-reflection-reflective-recall-cycle-for-long-term-memory)  
+1. [Searching for Task-Specific Vision Paths: Evolutionary Block Pruning Across Vision-Language Models](/202607/25/2607.17052v1-searching-for-task-specific-vision-paths-evolutionary-block-pruning-across-vision-language-models)  
    标签：评分：8.0/10、query:self-evolve
-   evidence：反思性记忆适应作为代理的自进化技术
-2. [AREX: Towards a Recursively Self-Improving Agent for Deep Research](/202607/24/2607.21461v1-arex-towards-a-recursively-self-improving-agent-for-deep-research)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：递归自改进智能体，包含内外循环；自改进循环审计并求精答案。
+   evidence：基于进化搜索的任务特定视觉块剪枝
 
 ### 速读区论文标签
 - 本次无速读推荐。
