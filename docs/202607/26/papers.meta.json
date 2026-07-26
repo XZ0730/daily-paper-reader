@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-26",
+  "date": "2026-07-26",
+  "generated_at": "2026-07-26T20:10:43",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/26/2607.21125v1-causal-agentir-self-evolving-causal-memory-for-adaptive-image-restoration-agents",
+      "section": "deep",
+      "title_en": "Causal-AgentIR: Self-Evolving Causal Memory for Adaptive Image Restoration Agents",
+      "authors": "Hu Gao, Yulong Chen, Lizhuang Ma",
+      "date": "2026-07-23",
+      "pdf": "https://arxiv.org/pdf/2607.21125v1",
+      "score": "8.0",
+      "evidence": "自适应智能体的自演化因果记忆结构",
+      "tldr": "真实世界图像复原要求智能体应对多样化不可预测退化，但现有方法知识表示静态，缺乏因果推理与知识演化能力，难以从长期经验中学习。为此，本文提出Causal-AgentIR层次多智能体框架，核心是自演化因果记忆图，它将退化模式、图像区域、复原工具、操作序列、质量变化及用户偏好等多维信息组织为结构化图，支持图检索与多跳因果推理，使智能体能够理解不同操作对复原质量的因果效应。该框架通过多个智能体协作，包括规划、退化分析、工具专家、因果推理、结果评价与记忆管理，实现复原经验的可控添加、更新、合并、强化与遗忘。实验结果显示，Causal-AgentIR有效提升了自适应图像复原性能，为构建具备持续学习能力的复原智能开辟了新方向。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Image restoration agents have recently emerged as a flexible paradigm for handling diverse and unpredictable degradations in real-world scenarios. Existing agents typically formulate restoration as a tool-using process, where the agent perceives degradations, searches candidate tools, executes restoration operations, and revises the plan through reflection or rollback. However, their knowledge is often stored as static tool descriptions, manually defined degradation priors, or unstructured textual summaries, which limits the accumulation, verification, revision, and forgetting of restoration knowledge over long-term experience. In this paper, we propose Causal-AgentIR, a hierarchical multi-agent framework with self-evolving causal memory for collective image restoration intelligence. Instead of representing restoration experience as isolated textual records, Causal-AgentIR organizes degradation patterns, image regions, restoration tools, actions, quality changes, and user preferences into a structured causal memory graph. This graph supports graph-based retrieval and multi-hop causal reasoning, enabling agents to infer how specific restoration operations or tool sequences affect restoration quality under different degradation conditions. The framework further organizes multiple agents into a collaborative system, including planning, degradation analysis, tool expertise, causal memory reasoning, outcome critique, and memory curation. Through this design, restoration experience can be added, updated, merged, reinforced, ignored, or discarded according to observed quality changes and feedback, allowing the agent to maintain reliable and transferable restoration knowledge.   Extensive experiments demonstrate the effectiveness of the proposed framework.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/26/2607.21324v1-gradrag-cross-component-prompt-adaptation-for-coordinated-multi-agent-rag",
+      "section": "deep",
+      "title_en": "GRADRAG: Cross-Component Prompt Adaptation for Coordinated Multi-Agent RAG",
+      "authors": "Paolo Pedinotti, Enrico Santus",
+      "date": "2026-07-23",
+      "pdf": "https://arxiv.org/pdf/2607.21324v1",
+      "score": "8.0",
+      "evidence": "通过反馈驱动的提示优化迭代更新智能体",
+      "tldr": "多智能体RAG系统通常孤立优化各组件，缺乏跨流水线的协调改进。GRADRAG提出跨组件提示适应框架，将RAG流水线建模为计算图，利用评估器生成结构化反馈，通过提示优化器迭代更新检索器、图构建器等上游智能体，并在输出满意时早停。在SQUALITY和QMSUM基准上，无论基于块检索还是图检索，GRADRAG均优于仅优化最终生成器的单步细化方法，在LLM评判的成对比较中取得12-15个百分点的净偏好优势，且多数增益在两次迭代内实现。该工作为多智能体RAG的端到端联合优化提供了有效方案，展现出跨组件协同优化的显著潜力。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Retrieval-Augmented Generation (RAG) systems increasingly employ multiple LLM agents. Yet, most prior work optimizes components in isolation rather than coordinating improvements across the pipeline. We introduce GRADRAG, a framework for cross-component prompt adaptation that models the RAG pipeline as a computational graph and propagates structured evaluation feedback to update upstream agents. An Evaluator critiques downstream answers and supporting evidence, producing actionable feedback that a Prompt Optimizer uses to iteratively update adaptive agents, such as retrievers, graph constructors, and answerers. The Evaluator also triggers early stopping when the output is deemed satisfactory. We evaluate GRADRAG on the SQUALITY and QMSUM benchmarks under two retrieval paradigms: flat chunk-based retrieval using IRCoT-style query refinement (Trivedi et al., 2023), and graph-based retrieval that constructs and iteratively enriches an entity-relation graph from the document. Across both settings, GRADRAG consistently outperforms one-step refinement baselines that update only the final generator, achieving a 12-15 percentage point net preference margin in LLM-judged pairwise comparisons, with most gains realized within two refinement iterations.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
