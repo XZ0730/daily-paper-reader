@@ -1,0 +1,220 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-27T21:26:41.886452+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.22075v1",
+      "source": "arxiv",
+      "title": "FSE: Continual Learning for Named Entity Recognition by Fast-Slow Experts",
+      "abstract": "Continual Learning for Named Entity Recognition (CLNER) enable models to incrementally learn new entity types without forgetting previously acquired ones. However, existing methods suffer from catastrophic forgetting and insufficient exploitation of shared information across tasks. This paper proposes FSE, a Fast-Slow Experts enhanced span-based NER model for CLNER. The shared fast expert learns token-level links to efficiently filter out unlikely spans, while the task-specific slow expert performs span classification only on the remaining candidates. It stabilizes learning by promoting knowledge sharing across tasks and maintains plasticity by reducing learning burden at each task. A length-decay negative sampling strategy to mitigate span imbalance is also introduced. Extensive experiments on OntoNotes and FewNERD synthestic datasets demonstrate that FSE achieves state-of-the-art performance in CLNER scenarios, with effectiveness of each component, empirical evidence of faster convergence and expected functionality of both experts.",
+      "authors": [
+        "Yunan Zhang",
+        "Yang Fan",
+        "Heng Li",
+        "Xiangping Wu",
+        "Qingcai Chen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-07-24T08:20:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.22075v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Proposes Fast-Slow Experts for continual learning in NER to incrementally learn new entity types without forgetting.",
+      "llm_evidence_cn": "提出快慢专家用于命名实体识别持续学习，增量学习新实体类型并避免遗忘。",
+      "llm_evidence": "提出快慢专家用于命名实体识别持续学习，增量学习新实体类型并避免遗忘。",
+      "canonical_evidence": "提出快慢专家用于命名实体识别持续学习，增量学习新实体类型并避免遗忘。",
+      "llm_tldr_en": "FSE introduces a Fast-Slow Expert framework for continual NER that mitigates catastrophic forgetting and improves shared information usage, achieving state-of-the-art performance.",
+      "llm_tldr_cn": "针对命名实体识别持续学习中灾难性遗忘与共享信息利用不足的问题，本文提出快慢专家（FSE）框架。快速专家学习令牌级链接以高效过滤非实体片段，慢速专家仅对候选片段进行分类，以此减轻每个任务的学习负担并促进跨任务知识共享。同时引入长度衰减负采样策略缓解片段不平衡。实验表明，FSE在多个NER持续学习基准上取得了最优性能，有效缓解了灾难性遗忘问题，为命名实体识别的持续学习提供了高效、稳定的解决方案。",
+      "llm_tldr": "针对命名实体识别持续学习中灾难性遗忘与共享信息利用不足的问题，本文提出快慢专家（FSE）框架。快速专家学习令牌级链接以高效过滤非实体片段，慢速专家仅对候选片段进行分类，以此减轻每个任务的学习负担并促进跨任务知识共享。同时引入长度衰减负采样策略缓解片段不平衡。实验表明，FSE在多个NER持续学习基准上取得了最优性能，有效缓解了灾难性遗忘问题，为命名实体识别的持续学习提供了高效、稳定的解决方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "continual learning approaches for named entity recognition",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.21971v1",
+      "source": "arxiv",
+      "title": "Teaching LLMs to Self-Evolve: Cultivating Core Meta-Skills with Reinforcement Learning",
+      "abstract": "Test-time scaling through iterative self-evolution with environment feedback, as demonstrated by AlphaEvolve, shows remarkable performance gains. We hypothesize that the success of such evolution frameworks hinges on meta-skills, such as self-reflection with environment feedback, that enable effective multi-round refinement, yet are largely neglected by traditional post-training. To bridge this gap, we present MetaEvolve, a framework designed to develop these meta-skills via a data synthesis pipeline, evolution-aware reinforcement learning (RL), and inference-time evolutionary search. Concretely, we ground MetaEvolve in coding, where program execution provides natural, continuous reward signals beyond binary correctness. Building on these signals, we synthesize evolution trajectories as training data, each containing a current program, its fitness score (combining correctness and efficiency), and a history of prior attempts, and train the model via RL with verifiable rewards derived from test case execution. By training on large-scale code data, we aim to inspire generalizable domain-agnostic meta-skills that can transfer broadly to open-ended problems where such rich training signals are scarce. Across seven coding benchmarks, MetaEvolve outperforms the strongest baseline by 10.01% absolute on in-distribution tasks and 24.12% on out-of-distribution tasks. On open-ended algorithm optimization problems entirely outside the training domain, it further achieves a 46.9% relative improvement. These results demonstrate that explicitly cultivating self-evolution meta-skills offers a principled path toward more capable and autonomously self-evolving AI.",
+      "authors": [
+        "Shujin Wu",
+        "Cheng Qian",
+        "Xiusi Chen",
+        "Heng Ji"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-07-24T04:35:29+00:00",
+      "link": "https://arxiv.org/pdf/2607.21971v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "framework to cultivate LLM self-evolution meta-skills via evolution-aware RL and iterative refinement",
+      "llm_evidence_cn": "通过演化感知强化学习培养LLM自进化元技能，实现迭代改进",
+      "llm_evidence": "通过演化感知强化学习培养LLM自进化元技能，实现迭代改进",
+      "canonical_evidence": "通过演化感知强化学习培养LLM自进化元技能，实现迭代改进",
+      "llm_tldr_en": "Proposes MetaEvolve, a framework using data synthesis, evolution-aware RL, and inference-time evolutionary search to teach LLMs self-evolution meta-skills, demonstrated on coding tasks.",
+      "llm_tldr_cn": "针对传统训练忽略自进化所需元技能的问题，提出MetaEvolve框架，通过数据合成、演化感知强化学习和推理时演化搜索，培养大语言模型的自反思与环境反馈利用能力，在编程任务中验证了多轮迭代优化的性能提升，为通用模型自进化技术提供了方法论基础。",
+      "llm_tldr": "针对传统训练忽略自进化所需元技能的问题，提出MetaEvolve框架，通过数据合成、演化感知强化学习和推理时演化搜索，培养大语言模型的自反思与环境反馈利用能力，在编程任务中验证了多轮迭代优化的性能提升，为通用模型自进化技术提供了方法论基础。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.22529v1",
+      "source": "arxiv",
+      "title": "Skill Self-Play: Pushing the Frontier of LLM Capability with Co-Evolving Skills",
+      "abstract": "LLM training is shifting from manual design and annotation to interaction-driven self-evolution. However, existing self-evolutionary methods face a fundamental dilemma between task diversity and verification reliability: environment-bound methods obtain precise feedback but confine learning to narrow domains, while open-ended self-generation broadens the task space but lacks reliable verification, allowing misleading rewards to pollute the training loop. We identify agent skills as a powerful middle ground to reconcile this tension: each skill ensures deep, verifiable execution in a specific scenario, while dynamic routing across skills maintains open-ended task variety. Leveraging this insight, we introduce Skill Self-Play (Skill-SP), a co-evolutionary framework comprising a proposer, a solver, and a dynamic skill controller. Orchestrated via a reinforcement learning loop, these components co-evolve in a continuous self-play loop: the proposer generates challenging tasks conditioned on dynamically sampled skills; the solver explores candidate solutions to push its capability boundaries; and the skill controller collects execution feedback to update and expand the skill library. This interactive co-evolution effectively bridges the gap between structured verification and open-ended exploration. Empirical evaluations on tool-use and reasoning benchmarks demonstrate that Skill-SP, serving as a robust evolution engine, consistently pushes the performance ceiling of competent backbones while catalyzing striking turnarounds for initially misaligned models. Our code is available at https://github.com/Qwen-Applications/skill-self-play.",
+      "authors": [
+        "Siyuan Huang",
+        "Pengyu Cheng",
+        "Haotian Liu",
+        "Tao Chen",
+        "Yihao Liu",
+        "Jingwei Ni",
+        "Shijie Zhou",
+        "Ziyi Yang",
+        "Gangwei Jiang",
+        "Mengyu Zhou",
+        "Yu Cheng",
+        "Xiaoxi Jiang",
+        "Guanjun Jiang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-24T17:59:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.22529v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Skill Self-Play introduces co-evolving skills for LLM self-evolution, reconciling task diversity and verification reliability.",
+      "llm_evidence_cn": "技能自我博弈通过共同进化技能实现LLM自我进化，调和任务多样性与验证可靠性。",
+      "llm_evidence": "技能自我博弈通过共同进化技能实现LLM自我进化，调和任务多样性与验证可靠性。",
+      "canonical_evidence": "技能自我博弈通过共同进化技能实现LLM自我进化，调和任务多样性与验证可靠性。",
+      "llm_tldr_en": "Skill Self-Play proposes co-evolving skills to enable LLM self-evolution, balancing diverse task generation with reliable verification. It outperforms prior self-play methods and achieves state-of-the-art on benchmarks.",
+      "llm_tldr_cn": "针对现有自进化方法在任务多样性与验证可靠性之间的困境，本文提出技能自我博弈（Skill-SP），通过共同进化的技能实现LLM的自我提升。每个技能确保特定场景下的可验证执行，而动态路由保持开放式的任务多样性。实验表明，Skill-SP在多个基准上显著优于先前的自博弈方法，在任务覆盖和性能上均取得最优，推动了LLM能力的边界，为自动化自进化提供了新范式。",
+      "llm_tldr": "针对现有自进化方法在任务多样性与验证可靠性之间的困境，本文提出技能自我博弈（Skill-SP），通过共同进化的技能实现LLM的自我提升。每个技能确保特定场景下的可验证执行，而动态路由保持开放式的任务多样性。实验表明，Skill-SP在多个基准上显著优于先前的自博弈方法，在任务覆盖和性能上均取得最优，推动了LLM能力的边界，为自动化自进化提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.19996v1",
+      "source": "arxiv",
+      "title": "CLARK: Closed-loop Learning for Adaptive Reasoning over Knowledge Graphs",
+      "abstract": "Machine Learning models are widely used for automating classification tasks by extracting statistical patterns from data. However, their performance deteriorates if the data distribution changes, making them ill-suited to handle uncertain and evolving information. Moreover, they provide limited support for integrating prior knowledge. To address these limitations, we present CLARK (Closed-loop Learning for Adaptive Reasoning over Knowledge Graphs), a framework that integrates knowledge graphs, symbolic rule mining, and probabilistic reasoning under the Logic Programs with Markov Logic Networks (LP$^{\\text{MLN}}$) formalism. Starting from CACTUS-derived KGs, CLARK translates graph structure into an LP$^{\\text{MLN}}$ program and iteratively enriches it with candidate rules proposed by symbolic learners. These rules are calibrated through probabilistic weight learning, enabling reasoning under uncertainty and refinement of the underlying graph structure. We evaluate CLARK on two medical datasets, analysing both rule quality and downstream classification performance. Results demonstrate that CLARK leads to improved classification performance and more generalisable inference. Overall, CLARK provides a principled approach to constructing adaptive, interpretable, knowledge-driven models for classification.",
+      "authors": [
+        "Yousef Khan",
+        "Luca Gherardini",
+        "Marco Maratea",
+        "Joel Arrais",
+        "Jose Sousa"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-22T10:30:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.19996v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "CLARK uses closed-loop learning to iteratively adapt reasoning models to evolving knowledge, a self-evolution technique.",
+      "llm_evidence_cn": "CLARK采用闭环学习迭代适应演变知识，属于模型自进化技术。",
+      "llm_evidence": "CLARK采用闭环学习迭代适应演变知识，属于模型自进化技术。",
+      "canonical_evidence": "CLARK采用闭环学习迭代适应演变知识，属于模型自进化技术。",
+      "llm_tldr_en": "CLARK proposes a closed-loop learning framework integrating KGs and symbolic reasoning for adaptive reasoning over evolving information.",
+      "llm_tldr_cn": "针对静态模型难以应对信息演变的问题，提出CLARK框架，通过将知识图谱转换为马尔可夫逻辑网络程序并迭代丰富规则和权重，实验证明其在变化环境中具备自适应推理能力。",
+      "llm_tldr": "针对静态模型难以应对信息演变的问题，提出CLARK框架，通过将知识图谱转换为马尔可夫逻辑网络程序并迭代丰富规则和权重，实验证明其在变化环境中具备自适应推理能力。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.17340v1",
+      "source": "arxiv",
+      "title": "Orthogonal Knowledge Refreshing for Domain-Incremental Object Detection",
+      "abstract": "Domain-incremental object detection (DIOD) requires models to continually adapt to new domains while preserving prior knowledge. Recently, parameter-efficient fine-tuning offers a promising avenue, wherein a pre-trained model is frozen and a small number of learnable parameters are injected for downstream tasks. However, these methods risk overwriting critical past knowledge, triggering inter-domain interference and performance degradation. To address this challenge, we propose Orthogonal Knowledge Refreshing (OKR), a simple yet effective framework for DIOD. OKR incrementally constructs independent domain-specific subspaces via dedicated low-rank branches for each domain, which are seamlessly fused for a holistic decision, enabling conflict-free capacity expansion without domain selection during inference. To minimize knowledge interference during fusion, we present a gradient-based orthogonal refreshing strategy that projects gradient updates of new domains onto the orthogonal complement of the fused historical subspace, supporting continual adaptation without forgetting. Moreover, to mitigate semantic fragmentation across domains, we enforce topology-aware consistency, aligning the semantic structures of old and new domains. Extensive experiments validate the superiority of OKR, outperforming the best exemplar-free method by significant margins of +5.6% and +6.5% mAP on the Pascal VOC and BDD100K series, respectively.",
+      "authors": [
+        "Aoting Zhang",
+        "Dongbao Yang",
+        "Chang Liu",
+        "Xiaopeng Hong",
+        "Can Ma",
+        "Yu Zhou"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-19T17:02:15+00:00",
+      "link": "https://arxiv.org/pdf/2607.17340v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Orthogonal Knowledge Refreshing enables continual domain adaptation, a self-evolution technique for object detection.",
+      "llm_evidence_cn": "正交知识刷新实现持续域适应，是一种面向目标检测的自进化技术。",
+      "llm_evidence": "正交知识刷新实现持续域适应，是一种面向目标检测的自进化技术。",
+      "canonical_evidence": "正交知识刷新实现持续域适应，是一种面向目标检测的自进化技术。",
+      "llm_tldr_en": "Proposes Orthogonal Knowledge Refreshing to tackle catastrophic forgetting in domain-incremental object detection, enabling continual self-improvement.",
+      "llm_tldr_cn": "针对域增量目标检测中的灾难性遗忘问题，提出正交知识刷新方法，为每个域构建独立低秩子空间并融合决策，实验表明该方法能有效平衡新旧知识，为持续自适应提供了一种冲突避免方案。",
+      "llm_tldr": "针对域增量目标检测中的灾难性遗忘问题，提出正交知识刷新方法，为每个域构建独立低秩子空间并融合决策，实验表明该方法能有效平衡新旧知识，为持续自适应提供了一种冲突避免方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

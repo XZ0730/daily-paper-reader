@@ -6,29 +6,37 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-26
-- 运行时间：2026-07-26 20:10:32 UTC
+- 最新运行日期：2026-07-27
+- 运行时间：2026-07-27 21:30:08 UTC
 - 运行状态：成功
-- 本次总论文数：2
-- 精读区：2
-- 速读区：0
+- 本次总论文数：5
+- 精读区：3
+- 速读区：2
 
 ### 今日简报（AI）
-今日精读两篇智能体前沿论文，聚焦记忆机制与多agent协同。  
-Causal-AgentIR 用自进化因果记忆让图像修复会“自我调整”，GRADRAG 用跨组件提示适配提升多智能体检索一致性。  
-想跟进 Agent 自我进化方向，可从记忆设计与协同优化这两条路径深入研究。
-- 详情：[/202607/26/README](/202607/26/README)
+今日聚焦持续学习与模型自我进化，精读的FSE快慢专家NER方案和LLM自我进化研究双双给出高分新范式。  
+最值得关注：快慢专家架构让命名实体识别实现抗遗忘增量学习，而强化学习驱动的元技能培养可使大模型自主进化。  
+建议读者尝试将混合专家动态路由与内在激励结合，探索AI在开放世界中持续自适应能力。
+- 详情：[/202607/27/README](/202607/27/README)
 
 ### 精读区论文标签
-1. [Causal-AgentIR: Self-Evolving Causal Memory for Adaptive Image Restoration Agents](/202607/26/2607.21125v1-causal-agentir-self-evolving-causal-memory-for-adaptive-image-restoration-agents)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：自适应智能体的自演化因果记忆结构
-2. [GRADRAG: Cross-Component Prompt Adaptation for Coordinated Multi-Agent RAG](/202607/26/2607.21324v1-gradrag-cross-component-prompt-adaptation-for-coordinated-multi-agent-rag)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：通过反馈驱动的提示优化迭代更新智能体
+1. [FSE: Continual Learning for Named Entity Recognition by Fast-Slow Experts](/202607/27/2607.22075v1-fse-continual-learning-for-named-entity-recognition-by-fast-slow-experts)  
+   标签：评分：10.0/10、query:self-evolve
+   evidence：提出快慢专家用于命名实体识别持续学习，增量学习新实体类型并避免遗忘。
+2. [Teaching LLMs to Self-Evolve: Cultivating Core Meta-Skills with Reinforcement Learning](/202607/27/2607.21971v1-teaching-llms-to-self-evolve-cultivating-core-meta-skills-with-reinforcement-learning)  
+   标签：评分：9.0/10、query:self-evolve
+   evidence：通过演化感知强化学习培养LLM自进化元技能，实现迭代改进
+3. [Skill Self-Play: Pushing the Frontier of LLM Capability with Co-Evolving Skills](/202607/27/2607.22529v1-skill-self-play-pushing-the-frontier-of-llm-capability-with-co-evolving-skills)  
+   标签：评分：9.0/10、query:self-evolve
+   evidence：技能自我博弈通过共同进化技能实现LLM自我进化，调和任务多样性与验证可靠性。
 
 ### 速读区论文标签
-- 本次无速读推荐。
+1. [CLARK: Closed-loop Learning for Adaptive Reasoning over Knowledge Graphs](/202607/27/2607.19996v1-clark-closed-loop-learning-for-adaptive-reasoning-over-knowledge-graphs)  
+   标签：评分：7.0/10、query:self-evolve
+   evidence：CLARK采用闭环学习迭代适应演变知识，属于模型自进化技术。
+2. [Orthogonal Knowledge Refreshing for Domain-Incremental Object Detection](/202607/27/2607.17340v1-orthogonal-knowledge-refreshing-for-domain-incremental-object-detection)  
+   标签：评分：6.0/10、query:self-evolve
+   evidence：正交知识刷新实现持续域适应，是一种面向目标检测的自进化技术。
 
 
 <div class="dpr-home-promo-card">
