@@ -1,0 +1,357 @@
+Title: Learning to Access Computation: Accessibility Plasticity as a Principle of Adaptive Intelligence
+
+URL Source: https://arxiv.org/pdf/2607.22748v1
+
+Published Time: Tue, 28 Jul 2026 00:07:25 GMT
+
+Number of Pages: 22
+
+Markdown Content:
+# Learning to Access Computation: Accessibility Plasticity as a Principle of Adaptive Intelligence 
+
+# Zhaowen Fan ∗
+
+Abstract 
+
+Modern neural networks primarily adapt through parameter modification within predefined computational structures. While recent methods introduce modularity, con-ditional computation, and parameter-efficient adaptation, they generally do not distin-guish computational capability from computational accessibility as separate adaptive variables. This work introduces Accessibility Plasticity, a principle of adaptive compu-tation in which systems adapt not only by changing what computation exists, but also by reorganizing which existing computations can interact and participate. We formalize Accessibility Plasticity through a relationship-based operational realization and estab-lish a reuse-first hierarchy of adaptation, where accessibility modification precedes more costly capability and structural changes. A proof-of-concept evaluation on sequential learning tasks shows that accessibility adaptation can reduce capability modification while maintaining comparable task performance. These results suggest accessibility as a distinct adaptive dimension and provide a foundation for future dynamic neural systems whose computational relationships evolve with changing environments. 
+
+# Keywords 
+
+Accessibility Plasticity; adaptive computation; continual learning; neural plasticity; condi-tional computation; dynamic neural systems 
+
+# 1 Introduction 
+
+Most contemporary artificial neural systems are optimized under a parameter-centric learn-ing paradigm: a computational architecture is specified before deployment, and adaptation is primarily achieved by modifying numerical parameters within that fixed computational organization [13]. This paradigm has enabled remarkable progress in large-scale perception, language modeling, and decision-making, with modern foundation models achieving unprece-dented capabilities through large-scale pretraining and parameter optimization [22, 5, 16, 4]. 
+
+> ∗
+
+Department of Computer Science, Sichuan University, Email: iamsuperfan@stu.scu.edu.cn 
+
+1arXiv:2607.22748v1 [cs.LG] 23 Jul 2026 However, when deployed in dynamic environments with continuously evolving data distri-butions, tasks, and operational conditions, parameter-centric adaptation remains costly and prone to catastrophic forgetting, limiting the ability to preserve and efficiently reuse previ-ously acquired capabilities [17]. Recent advances have explored alternatives by introducing modularity, [18] conditional computation [3], and parameter-efficient adaptation [6]. Residual architectures such as ResNet [8] demonstrate the value of preserving existing computational pathways, while graph neural networks [12, 2] highlight the role of relationships among computational units in infor-mation propagation. Adapters [10] and low-rank adaptation [11] reduce modification cost by restricting parameter updates, whereas mixture-of-experts [21], attention mechanisms [22], and routing strategies [20] dynamically regulate information flow and component selection. Nevertheless, these approaches are generally developed as architecture-specific mechanisms rather than as a unified adaptive principle. They manipulate connectivity, parameter sub-sets, expert selection, or information routing, but do not explicitly distinguish computational capability from computational accessibility or treat the evolving relationships among com-putations as a first-class adaptive object. Biological intelligence suggests that such a separation may be fundamental. [7] Organ-isms rarely respond to environmental changes by immediately reconstructing their entire computational machinery; instead, adaptation occurs across multiple timescales [19]. Exist-ing pathways are reused whenever possible [1], functional relationships and activity patterns are reorganized, synaptic strengths are modified [14], and only over longer timescales does large-scale structural reorganization occur [9]. This ordering suggests that efficient adapta-tion may depend not only on learning new computations, but also on dynamically controlling access to existing computational resources [15], motivating the concept of Accessibility Plas-ticity introduced in this work. This paper investigates the following question: 
+
+Can artificial systems adapt more efficiently by modifying how existing computation is accessed before modifying what computation exists? 
+
+We introduce Accessibility Plasticity as a distinct adaptive degree of freedom that sepa-rates computational capability from computational accessibility: the former describes what transformations a system can perform, while the latter describes which computational com-ponents can interact during adaptation. Under this perspective, learning is not only a process of changing computational operators, but also a process of reorganizing relationships among existing computations. We formalize this principle through a relationship-based computational system in which capability and accessibility evolve as separate states. The proposed reuse-first principle pri-oritizes accessibility adaptation before more costly capability or structural modifications. We show through a proof-of-concept evaluation that accessibility adaptation can reduce ca-pability modification while maintaining comparable task performance in sequential learning scenarios. The operational mechanism studied in this work is one realization of Accessibil-ity Plasticity, providing a foundation for future adaptive systems in which computational relationships evolve continuously with changing environments. 22 Conceptual Framework 
+
+# 2.1 Capability, Accessibility, and Scope 
+
+Standard feedforward descriptions of neural computation can be summarized as Architecture → Parameters → Computation .
+
+In that view, the architecture determines which transformations may interact, while the learned parameters determine the specific behavior realized along those fixed routes. The proposed perspective introduces an additional dimension. Architecture does not fully determine realized computation; it provides only potential computation. Accessible computation depends on the relationships that determine whether existing capabilities can interact under current conditions. The adaptive computational substrate is the formal object used here to represent this idea. It is not the claim itself. The claim is that accessibility should be treated as a distinct computational object, alongside capability, and that its adaptation can precede modification of computational capability. At the most compact level, the manuscript distinguishes two fundamental computational objects: 
+
+W determines what computation exists, 
+
+A determines what computation is accessible. The theory concerns the second object without reducing it to the first. This manuscript does not claim to provide a complete theory of intelligence. It proposes a missing adaptive degree of freedom: the ability of a computational system to modify accessibility independently from capability. The purpose of the paper is therefore to isolate and formalize that degree of freedom, not to claim that all adaptation reduces to this single mechanism. 
+
+# 2.2 Reuse Before Modification 
+
+The conceptual principle is: 
+
+An intelligent adaptive system should exhaust cheaper and more reversible forms of modification before invoking more expensive and more persistent ones. 
+
+This principle changes the optimization target. Traditional optimization primarily fo-cuses on maximizing task performance. The proposed paradigm instead seeks performance-efficient adaptation: max P (T ) · R(S)
+
+Cadapt 
+
+(1) 3where P (T ) denotes task performance, R(S) denotes computational reuse of the sub-strate, and Cadapt denotes the cost of changing the system. The shift is conceptual as well as technical: intelligence is not only the ability to achieve a goal, but the ability to achieve goals by efficiently reusing existing computational resources. This formulation is particularly relevant to continual learning, where repeated parameter overwriting can become a liability. 
+
+# 2.3 Accessibility Plasticity versus Selection 
+
+Selection answers which already accessible path should be used now. Accessibility plasticity answers how the future structure of accessible computation should change through experi-ence. The first is an inference-time choice inside a given accessibility state; the second is a learning-time modification of that accessibility state itself. This distinction matters because a selection mechanism can choose among already avail-able possibilities without changing the substrate that makes those possibilities available. Accessibility plasticity instead changes the accessibility landscape so that future compu-tations are shaped by past experience. Thus accessibility is not only a parameter to be optimized at a single endpoint. It can be treated as a dynamically evolving computational state whose trajectory reflects interaction with a changing environment. 
+
+# 3 Formalization 
+
+# 3.1 Adaptive Computational Substrate 
+
+We represent the substrate as an undirected graph 
+
+G = ( V, E ). (2) Each node vi ∈ V is a computational unit 
+
+vi = Wi, (3) where Wi denotes the local transition operator and no persistent node state is stored inside the vertex itself. For a transient input signal xti, the node computes ˜x ti = Wixti, (4) so the node contributes only its transition matrix and does not introduce an additional nonlinear transformation at this stage. Each undirected relation index eij = eji ∈ E marks a potential computational relation-ship. The adaptive computational object associated with that potential relationship is the relationship state: 
+
+Rij = ( Fij , d ij ), (5) 4where Fij is a learned compatibility function and dij ≥ 0 denotes computational re-sistance. Given an information flow, the relationship state evaluates the compatibility of the interaction and modifies the future accessibility of this computational relationship. The evolving relationship state already encodes the history of previous interactions, so no separate relation-memory variable is required. 
+
+# 3.2 Relationship State and Accessibility 
+
+Computation in an adaptive computational substrate is not determined solely by the exis-tence of computational units or by fixed connections between them. Instead, relationships between computational units define an adaptive accessibility structure that determines which transformations can participate in the current computation. Crucially, accessibility is not identical to the relation set E. The set E specifies potential relationships in the substrate, whereas accessibility specifies which relationships become computationally available under the current adaptive state. Relationship states are therefore one realization of accessibility, not accessibility itself. For a potential relationship between computational units i and j, the relationship state evaluates an interaction tendency: 
+
+stij = Fij (xti, x tj ), (6) where Fij represents a discrimination mechanism that evaluates whether interaction be-tween the two computational capabilities is computationally meaningful. The tendency is modulated by a resistance term: 
+
+ztij = stij − βd ij , (7) where dij ≥ 0 represents the intrinsic difficulty of establishing the relationship and β
+
+controls the influence of resistance. The accessibility of the relationship is then determined by 
+
+atij = g(ztij ), (8) where g(·) maps the evaluated tendency into an accessibility state. The resulting acces-sibility does not represent a message weight. Instead, it defines whether and to what degree the computational relationship becomes available within the current substrate configuration. The effective computational substrate at time t is therefore induced by the set of accessible relationships: 
+
+E∗ 
+
+> t
+
+= {(i, j ) ∈ E | atij > θ }, (9) which forms a dynamically accessible substrate: 
+
+Gt = ( V, E ∗ 
+
+> t
+
+). (10) 5Multiple adaptive relationships may become simultaneously accessible, producing con-current computational pathways within the induced substrate Gt. Accordingly, the system does not rely on a single predetermined execution trajectory. Instead, computation emerges from the collective configuration of active relationships. The central distinction is that relationships are not passive communication channels. Their states are adaptive computational structures that evaluate, enable, suppress, and reshape future accessibility between existing capabilities. At the principle level, accessibility evolves according to an abstract update operator: 
+
+At+1 = PA(At, Xt). (11) This equation is intentionally more general than the particular relationship-state imple-mentation used in the proof-of-concept experiments. It states that accessibility is a time-indexed computational object whose future state may depend on its present configuration and on the encountered environment Xt. Updates to Fij or dij are possible realizations of this principle, not definitions of Accessibility Plasticity itself. 
+
+# 3.3 Computational Interpretation 
+
+The model separates two usually entangled concepts: 
+
+• node operators determine what local computation can be performed; 
+
+• accessibility states determine whether and how existing computation can be reached. This separation is the core design move of the paradigm. Learning is therefore not only the acquisition or modification of computational capability. It is also the reorganization of access to capabilities that already exist in the substrate. The system can respond to new tasks by reshaping relationships to existing operators before rewriting the operators themselves. Unlike conventional neural networks, where learning is primarily stored in node param-eters, the proposed substrate allows learning to emerge from the evolution of relationships between computational units. Adaptation occurs through the evolution of computational relationships, not through explicit storage of interaction history. In compact form, the interpretation is: 
+
+W ⇒ what computation exists ,
+
+A ⇒ what computation is accessible .
+
+The contribution of the paper is Accessibility Plasticity as a first-class object of learning, not a new family of network architectures. 6Reuse R
+
+> Exploit existing computation
+> Accessibility Plasticity ∆ A
+> Reorganize what existing computation becomes accessible
+> Capability Plasticity ∆ W
+> Modify computational operators
+> Substrate Plasticity ∆( D, G )
+> Reorganize computational organization
+
+Figure 1: Adaptive systems possess multiple degrees of adaptive freedom. The proposed hierarchy orders forms of adaptation by increasing depth: systems should preferentially reuse existing computation, then modify computational accessibility, then modify computational capability, and only at the deepest level reorganize computational organization itself. Lower levels preserve more of the current computational identity of the system, whereas higher levels incur greater modification cost and structural persistence. The hierarchy denotes an ordering of adaptive depth rather than a mandatory optimization schedule. 
+
+# 3.4 Hierarchy of Adaptive Depth 
+
+Adaptive systems possess multiple degrees of adaptive freedom. These degrees of freedom differ in persistence, reversibility, and modification cost. Adaptive freedom refers to the hi-erarchy of internal degrees of freedom through which a system can respond to environmental change. We propose a reuse-first ordering in which a system first exploits existing computa-tional capability, then reorganizes computational accessibility, then modifies computational capability itself, and only finally reconfigures the organization of computation. The hierarchy can be summarized as: 
+
+R ≺ ∆A ≺ ∆W ≺ ∆( D, G )where R denotes pure computational reuse without modification of accessibility, capa-bility, or organization; ∆ A denotes changes in computational accessibility; ∆ W denotes modifications of computational capability; and ∆( D, G ) denotes reorganization of the com-putational substrate. The ordering does not represent a fixed algorithmic procedure or a mandatory optimiza-tion sequence. It is an ordering of adaptation depth. Lower levels preserve more of the existing computational identity of the system, whereas higher levels introduce increasingly 7fundamental changes to what the system can compute and how computation is organized. 
+
+Reuse The first adaptive response is to exploit existing computational capability without modification. Given a new task or a shift in input distribution, the system first evaluates whether its current computational organization already contains sufficient capability to solve the problem. Successful reuse preserves existing knowledge and incurs minimal adaptation cost because neither accessibility relations nor computational operators are altered. 
+
+Accessibility plasticity When the required computational capability already exists but is not effectively reachable under the current configuration, adaptation occurs through changes in computational accessibility. Accessibility is therefore not an additional computational capability; it is a property describing whether existing capabilities can participate in com-putation. We refer to this process as accessibility plasticity. In the adaptive computational sub-strate studied here, relationship-state evolution provides one substrate-level realization of this principle. Unlike mechanisms that merely select among existing pathways at inference time, accessibility plasticity modifies the underlying relationship landscape through which future computational pathways emerge. Let the accessibility configuration of the computational substrate be 
+
+At = {atij }, (12) where atij represents the accessibility of the computational relationship between units i
+
+and j under the current substrate state. For the adaptive computational substrate, accessibility is induced by the relationship state Rtij = ( Ftij , d tij ): 
+
+atij = g  Ftij (xti, x tj ) − βd tij 
+
+ , (13) where Ftij evaluates relational compatibility and dtij represents computational distance between units. The mapping from relationship state to accessibility is not unique; the purpose of Eq. 13 is to provide one realizable coordinate system for an otherwise abstract adaptive variable. The evolution of accessibility is therefore described at an abstract level as: 
+
+At+1 = PA(At, Xt), (14) where PA denotes an accessibility plasticity operator and Xt represents the computational experience accumulated by the system at time t, including interaction outcomes, task feed-back, and environmental signals. This formulation emphasizes that accessibility is itself an adaptive state variable whose evolution is governed by experience, rather than a fixed prop-erty of the computational substrate. The abstract update At+1 = PA(At, Xt) is therefore the 8protected theoretical statement; any concrete distance-based update or relationship-state update is only one possible realization, not the definition of Accessibility Plasticity. A concrete realization of this principle can be obtained by adapting the underlying rela-tionship geometry. For example, computational distance may evolve according to: 
+
+dt+1  
+
+> ij
+
+= dtij − ηdstij , (15) where stij denotes the interaction outcome between computational units i and j. Suc-cessful interactions reduce computational distance and increase future accessibility, whereas unsuccessful interactions weaken the corresponding relationship. In this realization, the his-tory of interaction is implicitly stored in the evolving relationship state rather than through an external memory mechanism. Therefore, adaptation occurs first by reshaping access to existing computation rather than modifying the computation itself. 
+
+Capability plasticity When accessibility adaptation is insufficient because the existing computational capability cannot adequately represent the required transformation within the current substrate, the system modifies its local computational capabilities. This corresponds to conventional parameter adaptation, but with a stronger interpre-tation: capability plasticity changes what computation is available within the substrate, whereas accessibility plasticity changes whether existing computation can be reached. 
+
+Wi ← Wi + ∆ Wi. (16) Because modifying operators can overwrite previously acquired competence, it is consid-ered a deeper and more costly form of adaptation than accessibility plasticity. 
+
+Substrate plasticity The highest level of adaptation occurs when both accessibility and capability modification become insufficient. At this level, the organization of computation itself changes. The learned computational distance matrix D = [ dij ] defines the relational geometry of the substrate. Persistent low-distance regions indicate strong computational affinity, while high-distance regions indicate weak relationships. Through this learned geometry, the substrate may reorganize itself by: 
+
+• forming computational modules with persistent relational affinity; 
+
+• dissolving obsolete structures when their internal relationships become incompatible; 
+
+• redistributing computational boundaries according to learned relational geometry. Therefore, substrate plasticity is not presented here as a search procedure over architec-tures. It is the deepest adaptive level at which computational organization itself changes. A generic substrate adaptation objective can be written as: 9min  
+
+> D,G
+
+Ltask + λsCs(D, G ) (17) where Cs(D, G ) measures the cost of reorganizing computational organization under the learned relational geometry. At this highest level, adaptation no longer changes only information flow or individual computational operators. Instead, it transforms the computational landscape in which future computation becomes possible. 
+
+# 4 Operational Realization (Experimental Setup) 
+
+The experiments are designed as proof-of-concept validation of the principle, not as a bench-mark campaign for state-of-the-art continual learning. Their role is to test whether accessi-bility behaves as a distinct adaptive variable and whether reuse-first adaptation can reduce shared capability modification under sequential tasks. Concretely, the experimental design evaluates the following hypotheses: 
+
+• accessibility plasticity constitutes a meaningful adaptive degree of freedom; 
+
+• adaptive systems can reduce capability modification by first modifying accessibility; 
+
+• accessibility adaptation is not equivalent to merely adding extra adaptive parameters; 
+
+• accessibility alone is insufficient for continual adaptation, consistent with the proposed hierarchy R ≺ ∆A ≺ ∆W ≺ ∆( D, G ). 
+
+# 4.1 Proof-of-Concept Realization and Training Protocol 
+
+The reuse-first hierarchy defines a general preference over modification depth: adaptation should first exploit existing computation, then reorganize accessibility, and only afterwards rewrite computational capability. At the principle level, the objective is not only low task loss, but low task loss with minimal internal transformation. One practical realization there-fore augments the task objective with separate costs for accessibility and capability change: 
+
+L = Ltask + λACA + λW CW . (18) The key point is not regularization by itself. The point is that the optimization dis-tinguishes modification depths by assigning different costs to changes in accessibility and changes in capability. In the present instantiation, 
+
+CA = ∥∆F∥ 1 + ∥∆D∥1,CW = X
+
+> i
+
+∥∆Wi∥F . (19) 10 The first term measures reorganization of relationship state, while the second measures changes to shared computational operators. The intended inductive preference is 
+
+λA ≤ λW ,
+
+so that capability plasticity remains available but is invoked only when shallower adap-tation is insufficient. Algorithm 1 summarizes one operational realization of the principle. It should be read as an instantiation rather than as the contribution itself. The experiments implement the hierarchy using a performance-based controller: at each task, the system attempts the shal-lowest adaptation depth and avoids deeper modification if the current depth satisfies a fixed training criterion. Operationally, 
+
+s∗ = min  
+
+> s
+
+{s : Acc( s) ≥ τ }, s ∈ { reuse , ∆A, ∆W }. (20) Here τ = 0 .9 is the task-sequential experimental performance constraint, not the theo-retical definition of Accessibility Plasticity. The dynamic datastream demonstration uses a slightly stricter target-environment controller threshold ( τ = 0.92) because it tracks progress toward the hardest stream endpoint rather than per-task adaptation alone. The task-sequential experiments contain three controlled stages for each task after the first: 1. Reuse: adapt only the task-specific readout head while freezing shared capability and accessibility; 2. Accessibility plasticity: freeze shared capability and update only the relationship state that induces accessibility; 3. Capability plasticity: freeze the learned relationship state and update only the shared computational operators if the previous stages do not achieve the task-accuracy threshold. The first task is used to initialize the shared capability bank, so it necessarily invokes capability plasticity. Thereafter, adaptation-stage decisions are made on the current task’s training split, while the reported continual-learning metrics are measured on held-out test data. This design avoids using test performance to decide when deeper modification stages are activated. In the dynamic datastream demonstration, the same staged preference is preserved, but reuse corresponds to evaluating the current model state on the incoming stream slice rather than to head-only adaptation. 
+
+# 4.2 Datasets, Baselines, and Evaluation Metrics 
+
+All experiments are CPU-only and use a single fixed random seed. Two controlled continual-learning settings are evaluated. 
+
+Split MNIST. Five sequential binary tasks are constructed from MNIST: 0 versus 1, 2 versus 3, 4 versus 5, 6 versus 7, and 8 versus 9. 11 Environment and task input         
+
+> xt,Xt
+> Existing computational capability
+> W1, W 2, . . . , W n
+> Relationship state
+> Rij = ( Fij , d ij )
+> Accessibility state
+> At
+> Task computation and output
+> yt
+> Satisfied with the output?
+> Organizational plasticity Update organization ∆( D, G )
+> Capability plasticity Update computation ∆W
+> Accessibility plasticity Update relationship state Rt+1
+> At+1 =PA(At,Xt)
+
+Figure 2: Operational realization of the adaptive transformation hierarchy. The system first evaluates output satisfaction. If adaptation is required, it proceeds through a hi-erarchical routing structure: first modifying accessibility state via relationship updates (At+1 = PA(At, Xt)), then invoking capability plasticity (∆ W ) if needed, and finally en-gaging theoretical organizational plasticity (∆( D, G )) as a deeper evolutionary layer. 
+
+Permuted MNIST. The same binary task sequence is retained, but each task receives a fixed task-specific pixel permutation. This benchmark preserves the simple continual-learning protocol while introducing a stronger distribution shift. For both datasets, each class contributes 250 training examples and 120 test examples per task. The baseline and EWC models are two-layer multilayer perceptrons with hidden dimension 64 and task-specific binary heads. The operational realization of Accessibility Plasticity uses a shared bank of 8 experts, hidden dimension 64, and a task-conditioned relationship state R = ( F, d ) that induces accessibility over the experts. The experimental comparisons include: 
+
+• Baseline MLP: direct capability modification of a shared trunk; 
+
+• Accessibility Plasticity Realization: reuse-first accessibility plasticity with capa-bility updates when necessary; 
+
+• Fixed Relationships: the same capability bank with accessibility adaptation dis-abled; 
+
+• Accessibility Only: accessibility adaptation allowed, later capability plasticity dis-abled; 
+
+• Random Accessibility Control: the same accessibility-state budget as the opera-tional realization, but accessibility updates are random rather than relationship-driven; 12 Algorithm 1 One Reuse-First Instantiation in the Operational Realization 
+
+Require: computational graph G = ( V, E ), task batch B, adaptation thresholds ϵr, ϵ A, ϵ W 
+
+> 1:
+
+Evaluate current configuration on B 
+
+> 2:
+
+if task loss ≤ ϵr then  
+
+> 3:
+
+return without modification  
+
+> 4:
+
+end if  
+
+> 5:
+
+Update accessibility state A 
+
+> 6:
+
+Realize accessibility adaptation through relationship updates  
+
+> 7:
+
+if task loss ≤ ϵA then  
+
+> 8:
+
+return after accessibility adaptation  
+
+> 9:
+
+end if  
+
+> 10:
+
+Freeze accessibility state A 
+
+> 11:
+
+Update computational operators W 
+
+> 12:
+
+if task loss ≤ ϵW then  
+
+> 13:
+
+return after capability adaptation  
+
+> 14:
+
+end if  
+
+> 15:
+
+Trigger deeper organizational reconfiguration if required 
+
+• EWC: a classical weight-preservation baseline. 
+
+4.2.1 Dynamic Accessibility Evolution 
+
+In addition to the two task-sequential demonstrations, we include a lightweight streaming distribution-shift experiment. Its purpose is not benchmark comparison, but to test whether accessibility behaves as a dynamically evolving adaptive state. A single binary MNIST classifier is first trained on an easy stationary slice of digits 0 versus 1 to establish an initial computational state. The same classifier and readout are then exposed to an eight-step datastream in which permutation strength and noise level increase gradually over time. At each stream step, the system first evaluates the current model state, then updates the accessibility-inducing relationship state, and only then updates shared capability parameters if accessibility adaptation remains insufficient. The main readout is a learning-progress curve on the fixed hardest target distribution at the endpoint of the stream, together with the measured accessibility movement ∆ At and shared capability movement ∆ Wt at each step. The primary reported metrics are final average accuracy, average forgetting, capability modification cost CW , accessibility modification cost CA, and modification-efficiency score MES = Performance 
+
+CA + CW
+
+. (21) In the experiments, CW is measured as the accumulated movement of the shared capabil-ity parameters only. For the baseline and EWC models, these parameters are the shared MLP trunk. For the operational realization of Accessibility Plasticity, they are the shared expert bank and shared post layer. Task-specific heads are excluded from CW , and relationship-state 13 Model Accuracy Forgetting CW CA MES Baseline MLP 0.9583 0.0250 8.4460 0.0000 0.1135 Accessibility Plasticity Realization 0.9183 0.0177 2.8674 1.4131 0.2145 Fixed Relationships 0.9350 0.0052 6.8209 0.0000 0.1371 Accessibility Only 0.6625 0.0000 0.9107 1.2227 0.3105 Random Accessibility Control 0.8858 0.0083 1.8810 2.7926 0.1895 EWC 0.9658 0.0177 8.7388 0.0000 0.1105 
+
+Table 1: Proof-of-concept results on Split MNIST. The central comparison is not raw ac-curacy alone, but the relationship between performance and shared capability modification cost. 
+
+Model Accuracy Forgetting CW CA MES Baseline MLP 0.9700 0.0125 9.5016 0.0000 0.1021 Accessibility Plasticity Realization 0.9242 0.0094 2.2484 0.5597 0.3291 Fixed Relationships 0.9408 0.0156 6.2389 0.0000 0.1508 Accessibility Only 0.6375 0.0000 0.9107 1.3141 0.2865 Random Accessibility Control 0.8608 0.0052 1.7982 2.9599 0.1809 EWC 0.9700 0.0104 9.3522 0.0000 0.1037 
+
+Table 2: Proof-of-concept results on Permuted MNIST. The qualitative pattern observed on Split MNIST remains visible under stronger distribution shift. parameters are excluded from CW and counted instead in CA. This distinction is important because the experimental claim concerns modification of shared computational capability, not all trainable parameters indiscriminately. 
+
+# 5 Results & Discussion 
+
+Table 1 reports the results on Split MNIST, and Table 2 reports the results on Permuted MNIST. The results should be interpreted as proof-of-concept evidence for the proposed principle rather than as benchmark rankings. 
+
+# 5.1 Experimental Observations 
+
+The first empirical observation is that the operational realization of Accessibility Plasticity does not achieve the highest raw accuracy. The strongest raw accuracies are obtained by the baseline MLP and EWC. This is consistent with the purpose of the experiments: they are not intended to establish state-of-the-art continual learning, but to test whether adaptation can move into a lower shared-capability-modification regime. Figures 3 and 4 summarize this empirical trade-off directly. 
+
+Split MNIST. On Split MNIST, the operational realization of Accessibility Plasticity reaches accuracy 0 .9183 with capability cost 2 .8674, compared with baseline accuracy 0 .9583 14 Figure 3: Capability modification cost across methods on Split MNIST and Permuted MNIST. The operational realization of Accessibility Plasticity occupies a markedly lower capability-modification regime than the direct weight-updating baselines while remaining meaningfully above zero, indicating reduced but not eliminated capability plasticity. and capability cost 8 .4460. The same model attains lower raw accuracy than Fixed Rela-tionships (0 .9350), but requires much less capability modification (2 .8674 versus 6 .8209). The Random Accessibility Control reaches 0 .8858 accuracy while incurring accessibility cost 2.7926, substantially higher than the accessibility cost of the learned operational realiza-tion (1 .4131). The Accessibility Only ablation yields final accuracy 0 .6625, indicating that accessibility adaptation alone does not carry the full sequential-learning burden. 
+
+Permuted MNIST. On Permuted MNIST, the same qualitative pattern remains visible under stronger distribution shift. The operational realization reaches accuracy 0 .9242 with capability cost 2 .2484, compared with baseline accuracy 0 .9700 and capability cost 9 .5016. Fixed Relationships attains accuracy 0 .9408, but again with much larger capability cost (6 .2389). The Random Accessibility Control falls to 0 .8608 accuracy while spending accessi-bility cost 2 .9599, compared with 0 .5597 for the learned operational realization. Accessibility Only remains insufficient, with final accuracy 0 .6375. 
+
+Accuracy-capability trade-off. Figure 5 summarizes the same empirical pattern in a single view. The operational realization of Accessibility Plasticity remains well below the baseline and EWC in capability modification cost while avoiding the severe performance collapse of the Accessibility Only ablation. Fixed Relationships and Random Accessibility Control occupy distinct intermediate regimes, reinforcing that the central effect is not merely 15 Figure 4: Final average accuracy on Split MNIST and Permuted MNIST. The purpose of the comparison is not to identify the highest-accuracy method in isolation, but to show that reduced capability modification under Accessibility Plasticity does not come from collapse of task performance. the presence of additional adaptive state, but the learned use of accessibility as a separate adaptive degree of freedom. 
+
+5.1.1 Dynamic Accessibility Evolution 
+
+Figure 6 tests the temporal interpretation of Accessibility Plasticity. Before the stream begins, the initialized model state reaches 0 .7792 accuracy on the hardest target environment. As the datastream progressively approaches that environment, target accuracy rises from 0.8083 at the first stream step to 0 .9250 at the last. Accessibility changes at every step, with ∆ At remaining nonzero throughout the stream, while shared capability modification is withheld until the final two and hardest steps (∆ Wt = 0 .0556 and 0 .0620). The stagewise curves show that accessibility adaptation already improves target accuracy during the stream, from 0 .7792 to 0 .8958 before the late capability updates, after which the final target accuracy reaches 0 .9250. This experiment is intentionally small, but it provides a clearer proof-of-concept for the claim that accessibility is not only an optimization variable at an endpoint; it can function as a continuously evolving adaptive state under feedback from a changing datastream. 16 Figure 5: Accuracy-capability trade-off space for all methods on both datasets. Colors iden-tify methods and marker shapes identify datasets, allowing the figure to compare adaptation regimes without crowding the plot with direct point labels. Dashed and dash-dotted curves show smooth objective-front fits to the empirical non-dominated trends within each dataset, not theoretical Pareto fronts over the broader model class. The operational realization of Accessibility Plasticity occupies a region with competitive accuracy and substantially lower shared capability modification than the direct weight-updating baselines. 
+
+# 5.2 Interpretation Relative to the Central Claims 
+
+The experiments support this claim. Removing accessibility adaptation while keeping the shared capability bank produces a materially different regime. Compared with Fixed Rela-tionships, the operational realization reduces capability modification by approximately 58 .0% on Split MNIST and 64 .0% on Permuted MNIST. This is the most direct evidence in the current experiments that accessibility is not a decorative auxiliary variable, but a meaningful adaptive degree of freedom. The support for this claim is positive but appropriately qualified. After the first task, the operational realization follows the trace reuse → accessibility → capability on every subsequent task in both datasets. Accessibility adaptation often improves the current-task training signal before capability plasticity is enabled, and the relationship state is frozen once capability plasticity begins. Across the eight post-initial tasks, accessibility adaptation improves current-task training accuracy in seven cases. The effect is especially visible on 17 Permuted MNIST, where the accessibility stage raises current-task training accuracy from 0.520 to 0 .544, from 0 .618 to 0 .650, from 0 .494 to 0 .576, and from 0 .564 to 0 .792 before shared capability is updated. However, accessibility adaptation alone is usually not sufficient to reach the target threshold, so capability plasticity is still invoked. The experiments therefore support a reduction-before-rewriting interpretation rather than a claim that accessibility generally eliminates the need for capability change. The random accessibility control is designed precisely for this question. It matches the operational realization at the level of accessibility-state budget, but replaces relationship-driven updates with random perturbations. If the effect were only a consequence of adding extra adaptable state, the random control should behave similarly to the learned realization. It does not. On Split MNIST, the random control attains lower accuracy (0 .8858 versus 0.9183) while spending much more accessibility cost (2 .7926 versus 1 .4131). On Permuted MNIST, the gap is even clearer: 0 .8608 versus 0 .9242 in accuracy, with 2 .9599 versus 0 .5597 in accessibility cost. These comparisons support the claim that structured relationship adap-tation matters, not merely the presence of extra adaptive parameters. The Accessibility Only variant strongly supports this claim. Once later capability plas-ticity is disabled, final accuracy drops to 0 .6625 on Split MNIST and 0 .6375 on Permuted MNIST. Forgetting is low in this condition, but that low forgetting is inseparable from the model’s limited ability to absorb the full task sequence. In other words, accessibility plas-ticity can carry part of the adaptation burden, but not the whole burden. This is consistent with the proposed hierarchy: reuse and accessibility plasticity are meaningful shallower re-sponses, but deeper capability plasticity remains necessary when the required computation does not become sufficiently available through accessibility alone. 
+
+# 5.3 Relationship to Existing Adaptive Mechanisms 
+
+These experiments do not establish state-of-the-art continual learning, nor do they show superiority over all continual-learning baselines. They also do not constitute empirical com-parisons against attention, routing, gating, mixture-of-experts systems, dynamic networks, or deeper organizational plasticity. That is intentional. The present paper proposes Accessibil-ity Plasticity as a higher-level adaptive abstraction rather than as a competing architectural mechanism. Existing mechanisms such as attention, routing, gating, and mixture-of-experts may be viewed as possible realizations of accessibility modulation at different levels of de-scription; direct empirical comparisons with those mechanisms are left for future work. 
+
+# 5.4 Limitations and Future Work 
+
+The current empirical evidence should therefore be interpreted narrowly and carefully. It provides proof-of-concept support for the claim that accessibility is a distinct computational object whose adaptation can precede and reduce shared capability modification. It does not yet validate the deepest level of the hierarchy, ∆( D, G ), and it does not yet provide the scale of evidence that would be required for a mature benchmark paper. Natural next steps include multiple random seeds, confidence intervals, larger continual-learning benchmarks, stronger 18 ablation studies, larger-scale online environments, embodied agents, and lifelong-learning settings in which environmental change is not organized into hand-designed phases. These extensions would broaden the empirical case; they are not prerequisites for the narrower proof-of-concept conclusions drawn here. 
+
+# 6 Conclusion 
+
+This paper develops Accessibility Plasticity as a paradigm for reuse-first adaptation and presents one graph-based operational realization. The key move is to separate computa-tional capability from computational accessibility and to treat accessibility as a fundamental computational object. In this view, W determines what computation exists, whereas A
+
+determines what computation is accessible. Learning is therefore not only changing what computation exists; it is changing how existing computation becomes accessible. The re-sulting framework is mathematically simple enough to instantiate, yet conceptually broad enough to connect continual learning and adaptive computation under a shared principle. If validated empirically, the paradigm would support a shift from architecture-centric learning toward relationship-centric adaptation. Even if future experiments reveal limita-tions, the formulation provides a rigorous starting point for studying whether intelligent systems can adapt by reorganizing computation before rebuilding it. 
+
+# References 
+
+[1] Michael L Anderson. Neural reuse: A fundamental organizational principle of the brain. 
+
+Behavioral and brain sciences , 33(4):245–266, 2010. [2] Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, et al. Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261 , 2018. [3] Yoshua Bengio, Nicholas L´ eonard, and Aaron Courville. Estimating or propagat-ing gradients through stochastic neurons for conditional computation. arXiv preprint arXiv:1308.3432 , 2013. [4] Rishi Bommasani, Drew A Hudson, Ehsan Adeli, Russ Altman, Simran Arora, Sydney von Arx, Michael S Bernstein, Jeannette Bohg, Antoine Bosselut, Emma Brunskill, et al. On the opportunities and risks of foundation models. arXiv preprint arXiv:2108.07258 ,2021. [5] Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are few-shot learners. Advances in neural information processing sys-tems , 33:1877–1901, 2020. 19 [6] Ning Ding, Yujia Qin, Guang Yang, Fuchao Wei, Zonghan Yang, Yusheng Su, Shengding Hu, Yulin Chen, Chi-Min Chan, Weize Chen, et al. Parameter-efficient fine-tuning of large-scale pre-trained language models. Nature machine intelligence , 5(3):220–235, 2023. [7] Demis Hassabis, Dharshan Kumaran, Christopher Summerfield, and Matthew Botvinick. Neuroscience-inspired artificial intelligence. Neuron , 95(2):245–258, 2017. [8] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition , pages 770–778, 2016. [9] Anthony Holtmaat and Karel Svoboda. Experience-dependent structural synaptic plas-ticity in the mammalian brain. Nature Reviews Neuroscience , 10(9):647–658, 2009. [10] Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin De Laroussilhe, Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. Parameter-efficient transfer learning for nlp. In International conference on machine learning ,pages 2790–2799. PMLR, 2019. [11] Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Liang Wang, Weizhu Chen, et al. Lora: Low-rank adaptation of large language models. 
+
+Iclr , 1(2):3, 2022. [12] Thomas N Kipf and Max Welling. Semi-supervised classification with graph convolu-tional networks. arXiv preprint arXiv:1609.02907 , 2016. [13] Yann LeCun, Yoshua Bengio, and Geoffrey Hinton. Deep learning. nature ,521(7553):436–444, 2015. [14] Jeffrey C Magee and Christine Grienberger. Synaptic plasticity forms and functions. 
+
+Annual review of neuroscience , 43(1):95–117, 2020. [15] Eve Marder and Vatsala Thirumalai. Cellular, synaptic and network effects of neuro-modulation. Neural Networks , 15(4-6):479–493, 2002. [16] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. nature ,518(7540):529–533, 2015. [17] German I Parisi, Ronald Kemker, Jose L Part, Christopher Kanan, and Stefan Wermter. Continual lifelong learning with neural networks: A review. Neural networks , 113:54–71, 2019. [18] Jonas Pfeiffer, Sebastian Ruder, Ivan Vuli´ c, and Edoardo Maria Ponti. Modular deep learning. arXiv preprint arXiv:2302.11529 , 2023. 20 [19] Blake A Richards, Timothy P Lillicrap, Philippe Beaudoin, Yoshua Bengio, Rafal Bo-gacz, Amelia Christensen, Claudia Clopath, Rui Ponte Costa, Archy de Berker, Surya Ganguli, et al. A deep learning framework for neuroscience. Nature neuroscience ,22(11):1761–1770, 2019. [20] Clemens Rosenbaum, Tim Klinger, and Matthew Riemer. Routing networks: Adaptive selection of non-linear functions for multi-task learning. arXiv preprint arXiv:1711.01239 , 2017. [21] Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc Le, Geoffrey Hinton, and Jeff Dean. Outrageously large neural networks: The sparsely-gated mixture-of-experts layer. arXiv preprint arXiv:1701.06538 , 2017. [22] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all you need. Advances in neural information processing systems , 30, 2017. 21 Figure 6: Online adaptation in a gradually shifting datastream. A modest initial state is established first, after which the same binary MNIST classifier is exposed to an eight-step stream with increasing permutation mix and noise level. The top panel shows the controlled shift schedule, the middle panel reports accessibility and capability modification at each step, and the bottom panel tracks accuracy on the fixed hardest target environment before adaptation, after accessibility adaptation, and after the final model state. The trajectory shows continuous accessibility evolution throughout the stream, with capability plasticity appearing only at the latest and hardest steps. 22

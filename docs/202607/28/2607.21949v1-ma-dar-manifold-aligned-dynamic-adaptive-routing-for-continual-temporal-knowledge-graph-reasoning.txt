@@ -1,0 +1,482 @@
+Title: MA-DAR: Manifold-Aligned Dynamic Adaptive Routing for Continual Temporal Knowledge Graph Reasoning
+
+URL Source: https://arxiv.org/pdf/2607.21949v1
+
+Published Time: Mon, 27 Jul 2026 00:22:34 GMT
+
+Number of Pages: 9
+
+Markdown Content:
+# MA-DAR: Manifold-Aligned Dynamic Adaptive Routing for Continual Temporal Knowledge Graph Reasoning 
+
+Xiangjun Shi 1, Chong Mu 1, Jinchuan Zhang 1,* ∗, Lizong Zhang 1, Yuefeng He 1, Shang Liu 1
+
+> 1
+
+School of Computer Science and Engineering, University of Electronic Science and Technology of China 
+
+Abstract 
+
+Continual temporal knowledge graph (TKG) reasoning aims to continuously incorporate newly emerging facts while pre-serving previously acquired knowledge. Replay-based contin-ual learning has achieved promising performance by revisiting historical representations. However, existing methods primar-ily focus on what to replay, while largely overlooking how re-played representations should be integrated with current ones. Such direct integration often gives rise to two critical forms of representation conflict: norm domination and semantic blur-ring , ultimately degrading continual reasoning performance. To address these challenges, we propose MA-DAR (Manifold-Aligned Dynamic Adaptive Routing), a lightweight plug-and-play framework for replay representation fusion. MA-DAR first aligns replayed and current representations onto a shared manifold to alleviate distribution discrepancies. It then em-ploys a dynamic gating mechanism to learn dimension-wise fusion weights, adaptively determining the contribution of re-played and current representations to the fused representation. Furthermore, a polarization regularizer encourages more de-cisive routing behaviors by discouraging ambiguous gating decisions, resulting in more stable and effective knowledge integration. Extensive experiments on four public continual TKG benchmarks demonstrate that MA-DAR consistently im-proves the performance of representative TKG encoders while remaining effective under different replay settings. Compre-hensive ablation studies and visualization analyses further verify the effectiveness of manifold alignment and dynamic adaptive routing in mitigating representation conflicts and im-proving continual reasoning. 
+
+Introduction 
+
+Temporal Knowledge Graphs (TKGs) have emerged as highly effective structures for capturing the evolutionary dynamics of facts across time, underpinning critical downstream appli-cations such as event forecasting and intelligent risk analysis (Huang et al. 2024; Chen et al. 2024a; Zheng and Cai 2020). A TKG represents facts as sequences of quadruples, com-prising subject, relation, object, and timestamp. A primary challenge in this domain is extrapolation reasoning: inferring missing facts at unseen future timestamps based on historical topological patterns (Lacroix, Obozinski, and Usunier 2020; Goel et al. 2020; Li et al. 2021; Jin et al. 2020). 
+
+> ∗
+
+Corresponding author. 
+
+Real-world TKG data typically arrives in continuous, streaming snapshots. Sequential training on such streaming graphs natively induces catastrophic forgetting (Kirkpatrick et al. 2017), where the model abruptly loses previously ac-quired historical dependencies. To address this, consider-able efforts have been focused on updating graph encoders to capture richer and more expressive structural representa-tions. For instance, RE-GCN models local structural evolu-tion (Li et al. 2021), TiRGN (Li, Sun, and Zhao 2022) incor-porates local-global historical patterns, and LogCL (Meng et al. 2023) introduces contrastive learning to alleviate data sparsity. Meanwhile, experience replay methods attempt to preserve historical knowledge by revisiting past information during incremental updates. For instance, ER (Rolnick et al. 2019) mitigates forgetting by storing and rehearsing a raw subset of historical facts, while DGAR (Zhang et al. 2025b) explores generative replay by producing pseudo-historical distributions through a diffusion model. However, existing replay-based methods mainly focus on what to replay, while paying less attention to how replayed representations should be integrated with current representa-tions. Most baselines rely on global scalar weights or linear concatenation to merge the historical replay representation with the current topological update (Wu et al. 2021; Cui et al. 2023). This coarse-grained fusion strategy ignores the semantic complexity of high-dimensional embeddings, lead-ing to two critical representation conflicts: norm domination 
+
+and semantic blurring . Specifically, generative replay meth-ods such as DGAR (Zhang et al. 2025b) may introduce scale discrepancies during the reconstruction of historical embed-dings, causing the replayed representations to dominate the fusion process. As depicted in Figure 1(a), such magnitude imbalance weakens the contribution of current structural up-dates during representation integration. Meanwhile, with-out dimension-aware constraints, conventional gating mecha-nisms tend to produce ambiguous weights around 0.5, result-ing in insufficient separation between historical information and current dynamics and ultimately blurring the synthesized semantic space. In this paper, we propose the Manifold-Aligned Dynamic Adaptive Routing (MA-DAR). Diverging from standard end-to-end architectures, MA-DAR acts as a generic, plug-and-play routing plugin that decouples replay representation fu-sion from current-step structural encoding. As depicted in arXiv:2607.21949v1 [cs.LG] 24 Jul 2026 (a) Traditional Fusion  (b) MA -DAR Fusion            
+
+> 𝑯 𝒆
+> 𝒓𝒆𝒑𝒍𝒂𝒚
+> 𝑯 𝒆
+> 𝒄𝒖𝒓𝒓𝒆𝒏𝒕
+> 𝑯 𝒆
+> 𝒓𝒆𝒑𝒍𝒂𝒚
+> 𝑯 𝒆
+> 𝒄𝒖𝒓𝒓𝒆𝒏𝒕
+> 𝑯 𝒆
+> 𝒇𝒊𝒏𝒂𝒍
+> Direct sum or simple interpolation leads to result dominated
+> by history, unable to learn new features
+> History
+> Semantic
+> Cluster
+> Current
+> Semantic
+> Cluster
+> vacuum
+> zone
+> Semantic
+> space Semantic
+> space
+> Gate value
+> =0.5
+> Fused Vector
+> (Blurred)
+> Prediction Boundary Failed
+> 𝑯 𝒆
+> 𝒓𝒆𝒑𝒍𝒂𝒚
+> 𝑯 𝒆
+> 𝒄𝒖𝒓𝒓𝒆𝒏𝒕
+> ෩𝑯 𝒆
+> 𝒄𝒖𝒓𝒓𝒆𝒏𝒕
+> ෩𝑯 𝒆
+> 𝒓𝒆𝒑𝒍𝒂𝒚
+> Projected onto hypersphere
+> scale imbalance eliminated
+> History
+> Semantic
+> Cluster
+> Current
+> Semantic
+> Cluster
+> vacuum
+> zone
+> Semantic
+> space Semantic
+> space
+> Zi≈ 0
+> or
+> Zi≈ 1
+> 𝑯 𝒆
+> 𝒇𝒊𝒏𝒂𝒍
+> Decisive prediction to either cluster
+> Zi≈ 0 Zi≈1Polarization
+> norm domination & semantic blurring Manifold Alignment
+
+Figure 1: Comparison of feature fusion mechanisms in TKG reasoning. Figure 1(b), MA-DAR establishes dual data interfaces to in-gest both the current temporal state from an arbitrary base encoder (e.g., RE-GCN, TiRGN, LogCL) and the long-term historical representations provided by an independent replay model, executing localized feature rectification within its own module. To overcome fusion bottlenecks, the MA-DAR plu-gin executes a compact sequence of operations: Manifold Alignment first normalizes historical and current represen-tations to map them without norm domination; Dynamic Gating then aligns semantics by calculating distinct weights for individual dimensions; and finally, a Polarization Penalty regularizes the fusion process to force explicit, binary-like retention decisions. Our contributions are summarized as follows: 
+
+• We propose the MA-DAR framework, a lightweight and plug-and-play replay representation fusion framework that identifies and alleviates two critical representation conflicts, namely norm domination and semantic blur-ring , in continual TKG reasoning. 
+
+• We design a multi-stage routing protocol inside the plu-gin, blending Manifold Alignment, Dynamic Gating, and a differentiable Polarization Penalty to eliminate norm discrepancy and achieve sharp, binary-like feature de-coupling. 
+
+• We conduct extensive evaluations across multiple con-tinual TKG benchmarks, demonstrating that MA-DAR achieves state-of-the-art performance while remaining ef-fective under different replay settings and TKG encoders. 
+
+Related Work 
+
+Specialized Architectural Optimization 
+
+Traditional and early temporal knowledge graph reason-ing approaches captured evolutionary dynamics via static time embeddings (Bordes et al. 2013; Leblay and Chekol 2018; Dasgupta, Ray, and Talukdar 2018) or autoregressive sequence layers (Jin et al. 2020). Subsequently, message-passing schemes via structural GNNs became prevalent, with RE-GCN capturing local evolution (Li et al. 2021) and TiRGN modeling local-global periodic patterns (Li, Sun, and Zhao 2022). More recently, deep-tuning paradigms have in-troduced advanced multi-granularity and contrastive regular-izers to alleviate topological sparsity (Xu et al. 2023; Meng et al. 2023; Chen et al. 2024b; Wang et al. 2024b), while others leverage dual correspondence or latent relational as-sociations to mine periodic patterns (Liang et al. 2023; Zhang et al. 2023). To capture unobserved topologies, contemporary architectures incorporate multi-graph convolutions or histor-ically relevant event structures to dynamically prune depen-dency paths (Zhang et al. 2024, 2025a). Despite their ex-pressive structural encoding capabilities, these models gen-erally lack explicit memory retention mechanisms; contin-uous streaming updates may gradually overwrite previously captured patterns, leading to catastrophic forgetting. 
+
+Regularization and Distillation 
+
+Regularization-based paradigms penalize parameter or rep-resentation deviation to preserve historical weight locations (Kirkpatrick et al. 2017; Zenke, Poole, and Ganguli 2017; Aljundi et al. 2018). Early alignment methods enforced con-sistency via embedding coordinate tracking (Wang et al. 2019). In graph domains, these constraints manifest as tem-poral consistency metrics (Wu et al. 2021), L2-norm penal-ties over expanding structures (Cui et al. 2023), or specialized debiasing paths to counter spurious forgetting (Zhu, Fu, and Duan 2025). Beyond weight penalties, knowledge distillation and evo-lutionary tokens act as structural regularizers, inheriting the foundational principle of learning without forgetting (Li and Hoiem 2017). Modern variants align incremental graphs via incremental distillation from offline teachers (Liu et al. 2024) or handle entity growth through scale-aware gradual evolu-tion (Li et al. 2025). To optimize parameter efficiency during streaming, task-driven tokens (Zhu et al. 2025) and selective incremental subgraph training (Jia et al. 2025) have been explored. Local-global structural distillation also serves to simultaneously constrain multi-granularity graph semantics (Shi et al. 2025). Nevertheless, these continuous scalar penal-ties inherently force representations into a compromised in-termediate state, failing to cleanly separate historical stability from current plasticity. 
+
+Experience Replay 
+
+Experience replay mitigates forgetting by interleaving stored or generated historical distributions with current streaming updates (Lopez-Paz and Ranzato 2017; Rolnick et al. 2019; Daruna et al. 2021). To accommodate continuous relational drift, advanced frameworks integrate external guidance from large language models (Wang et al. 2024a) or utilize dy-namic state tracking to update representations (Zhang, Shao, and Cui 2023). Concurrently, generative replay based on con-ditional score-matching and denoising diffusion probabilis-tic models has emerged to synthesize high-fidelity historical contexts resilient to long-term drift (Ho, Jain, and Abbeel 2020; Austin et al. 2021; Long et al. 2024; Cai et al. 2024; Zhang et al. 2025b; Chen et al. 2026). However, a critical bot-tleneck remains: many existing replay-based TKG methods rely on coarse global scalar weights or vector concatena-tion to fuse replayed distributions with current states. This ignores high-dimensional scale disparities, inducing severe 
+
+norm domination and semantic blurring , which motivates the need for a more adaptive replay representation fusion mechanism. Problem Formulation 
+
+A Temporal Knowledge Graph G is formalized as a sequence of snapshots G = {G1, G 2, . . . , G |T | }. Each snapshot Gt
+
+contains a set of quadruples (s, r, o, t ). In the streaming TKG reasoning setting, the model is tasked with answering queries 
+
+(s, r, ?, t ) or (? , r, o, t ) given the historical graphs up to t−1.The model is continuously trained on sequentially arriving snapshots and evaluated on its ability to perform continual reasoning while preserving previously acquired knowledge. 
+
+Methodology 
+
+The overall architecture of the proposed Manifold-Aligned Dynamic Adaptive Routing (MA-DAR) framework is illus-trated in Figure 2. Architecturally, MA-DAR is designed as a standalone modular plugin that establishes dual data in-terfaces to seamlessly couple with two independent exter-nal input streams: Current Encoding and Historical Replay Representation. Upon receiving these heterogeneous feature representations, the MA-DAR plugin routes them through its core components to systematically alleviate norm domi-nation and semantic blurring .
+
+Current Encoding 
+
+To capture the short-term evolutionary dynamics of the cur-rent TKG snapshot, MA-DAR interfaces with a base struc-tural encoder E. Let Gt−m:t−1 denote the sequence of recent historical subgraphs. At each timestamp, the base encoder typically employs a multi-relational Graph Convolutional Network (GCN) to aggregate local neighborhood informa-tion. For a given entity e, its structural representation at layer 
+
+l is updated via message passing: 
+
+h(l) 
+
+> e
+
+= σ
+
+X
+
+> r∈R
+
+X 
+
+> v∈N r(e)
+
+W (l) 
+
+> r
+
+h(l−1) 
+
+> v
+
+ (1) where Nr (e) is the set of neighbors connected by relation r,and W (l) 
+
+> r
+
+is the relation-specific weight matrix. Subsequently, a Gated Recurrent Unit (GRU) evolves the entity state over the temporal window to capture dynamic trends, producing the current-step representation H(t)
+
+> current
+
+:
+
+H(t) 
+
+> current
+
+= GRU (H(t) 
+
+> GCN
+
+, H (t−1) 
+
+> current
+
+) (2) The mathematical independence of MA-DAR from the inter-nal mechanics of E empowers it to seamlessly interface with diverse representative TKG encoders, treating their final out-put identically as H(t)
+
+> current
+
+.
+
+Historical Replay Representation 
+
+Relying solely on recent topological updates leads to the catastrophic forgetting of long-term patterns. To provide a robust historical counterpart to H(t)
+
+> current
+
+, MA-DAR receives historical replay representations H(t) 
+
+> replay
+
+provided by exter-nal replay mechanisms. In our implementation, we instantiate the replay mechanism with the diffusion-based generative re-play strategy adopted in DGAR as a representative source of historical representations. In our diffusion-based instantiation, we follow DGAR to obtain the historical replay representation through a guided reverse-denoising process conditioned on the temporal query. The resulting representation H(t)replay is treated as an external input to MA-DAR. Importantly, MA-DAR is agnostic to the internal form of the replay mechanism and can also operate with directly sampled experience replay, as evaluated in RQ3. 
+
+Components of MA-DAR 
+
+Upon receiving H(t) 
+
+> current
+
+and H(t) 
+
+> replay
+
+via its dual entry inter-faces, the MA-DAR plugin processes these representations through three sequentially cascaded alignment and gating steps. 
+
+Manifold Alignment Vectors of disparate scales skew the fusion result, causing the magnitude-heavy representation to overshadow the other. To eliminate this norm domination 
+
+prior to integration, MA-DAR projects both the current and replay representations onto a uniform hypersphere manifold: 
+
+˜Hcurrent = Hcurrent 
+
+∥Hcurrent ∥2 + ϵ (3) 
+
+˜Hreplay = Hreplay 
+
+∥Hreplay ∥2 + ϵ (4) where ϵ is a small constant for numerical stability. This nor-malization removes norm-based scale advantages before the subsequent routing operation. The normalization is applied independently to each entity representation. 
+
+Dynamic Gating To alleviate the semantic blurring caused by ambiguous global scalar weights, MA-DAR computes a fine-grained, dimension-level gating vector z ∈ [0 , 1] d using a shallow multilayer perceptron (MLP): 
+
+z = σ(MLP ( ˜Hreplay ⊕ ˜Hcurrent )) (5) where ⊕ denotes concatenation and σ is the sigmoid ac-tivation function. This vector evaluates information at the feature-wise level, allowing the model to adaptively route specific semantic dimensions from either the historical dis-tribution or the current context. Finally, the adaptive semantic synthesis is performed using this gating vector: 
+
+Hf inal = z ⊙ ˜Hreplay + (1 − z) ⊙ ˜Hcurrent (6) where ⊙ represents the element-wise Hadamard product. 
+
+Polarization Penalty Without additional structural con-straints, the routing vector z calculated in the gating stage may remain in ambiguous intermediate states (e.g., values near 0.5), leading to less decisive retention behaviors. To force definitive choices and prevent features from blurring into a noisy superposition state, we introduce a strict Polar-ization Penalty Lpolar during the optimization phase: 
+
+Lpolar = 1
+
+|B| d
+
+X
+
+> e∈B
+> d
+
+X
+
+> j=1
+
+ze,j (1 − ze,j ), (7) where B denotes the set of entities in the current mini-batch and ze,j is the gate value of entity e at dimension j. This 𝐺 𝑡 −𝑘 
+
+> …
+
+𝐺 𝑡 −1 𝐺 𝑡 
+
+Evolution Snapshots  Current Snapshots  Prediction Target 
+
+# ?
+
+TKG  Time line        
+
+> External Replay Mechanism
+> New Query 𝒆 𝒒 ,𝒓 𝒒 ,?,𝒕
+> Historical
+> Context
+> Extraction 𝐺 𝑡 −1
+> 𝐺 1
+
+…           
+
+> Experience
+> Replay Pool
+> Prompt re _1
+> Vreplay
+> …
+> Prompt re _𝑘
+> Historical Context Learning
+> Current Context Learning
+> Noise Z
+> R0
+> S0
+> [XnX1]…
+> Denoise
+> Guider
+> 𝐺 𝑡 −𝑘
+> 𝑯 𝒆
+> 𝒓𝒆𝒑𝒍𝒂𝒚
+> 𝑯 𝒆
+> 𝒄𝒖𝒓𝒓𝒆𝒏𝒕 =GRU 𝒉 𝒆 ,𝒕
+> 𝒂𝒈𝒈 ,𝑯 𝒆
+> 𝒕 −𝟏
+> Base Encoder
+> 𝒉 𝒆 ,𝒕
+> 𝒂𝒈𝒈
+> MA -DAR :Manifold -Aligned Dynamic Adaptive Routing
+> L2
+> Normalization
+> Decoder
+> L2
+> Normalization
+> ෩𝑯 𝒆
+> 𝒓𝒆𝒑𝒍𝒂𝒚
+> ෩𝑯 𝒆
+> 𝒄𝒖𝒓𝒓𝒆𝒏𝒕
+> 𝑧 ∈ℝ𝕕
+> 𝑳 𝒑𝒐𝒍𝒂𝒓
+> Polarization
+> Penalty
+
+×  
+
+> Manifold Alignment Dynamic Gating Polarization Penalty
+
+×
+
+> 𝑯 𝒆
+> 𝒓𝒆𝒑𝒍𝒂𝒚
+> 𝑯 𝒆
+> 𝒄𝒖𝒓𝒓𝒆𝒏𝒕
+
+1 -
+
+> Z
+> 𝑯 𝒆
+> 𝒇𝒊𝒏𝒂𝒍
+
+Figure 2: Overall architecture of the MA-DAR plugin. Operating as a plug-and-play extension, MA-DAR establishes dual data interfaces to ingest external current temporal features and replayed historical representations. These heterogeneous context representations are sequentially aligned and routed within the plugin through Manifold Alignment, Dynamic Gating, and a Polarization Penalty. regularizer penalizes ambiguous intermediate gate values and encourages each dimension toward more decisive val-ues near 0 or 1, without imposing non-differentiable hard routing decisions. 
+
+Joint Training Objective 
+
+After obtaining the final polarized representation Hf inal ,the decoder evaluates scores for candidate entities. We treat entity prediction as a multi-class classification task. For a streaming snapshot at task t, the task-specific training loss 
+
+Ltask is optimized via cross-entropy: 
+
+Ltask = − X
+
+> q∈D (t)
+> train
+
+X
+
+> e∈E
+
+yq,e log pθ (e | q), (8) where q denotes an entity prediction query, yq,e is its one-hot ground-truth label, and pθ (e | q) is the predicted probability of candidate entity e.To counteract the historical information loss caused by overfitting to current temporal facts, we incorporate histor-ical replay facts as an auxiliary replay objective. The loss associated with historical replay, Lreplay , is calculated iden-tically to Equation 8, with the difference that it computes classification errors over historical facts sampled from Preplay 
+
+instead of current snapshots. By incorporating the proposed dimension-level polariza-tion regularizer while maintaining the original optimization objective of the backbone encoder, the joint training objective 
+
+L for the entire framework is formalized as follows: 
+
+L = Ltask + μLreplay + λLpolar + αLorig (9) where μ, λ, and α control the contributions of historical re-play, dimensional polarization, and the original optimization objective of the backbone encoder, respectively. The additional computational overhead introduced by MA-DAR is negligible, as it only involves lightweight manifold alignment, dynamic gating, and polarization operations. Em-pirical profiling shows that the MA-DAR routing module accounts for less than 1% of the total training time across both ER and diffusion-based replay settings. In the profiled diffusion-based configurations, it further accounts for only 0.18%-0.22% of the total inference time. Detailed efficiency analysis and hardware profiling are provided in the supple-mentary material. 
+
+Experiments 
+
+To systematically evaluate the proposed framework, our ex-periments are designed to answer the following five Research Questions (RQs): 
+
+• RQ1 (Superiority): Does MA-DAR consistently en-hance representative base TKG encoders in streaming scenarios? 
+
+• RQ2 (Ablation): Do the core components of Manifold Alignment, Dynamic Gating, and Polarization Penalty contribute synergistically to performance improvements? 
+
+• RQ3 (Replay Compatibility): Can MA-DAR effectively integrate historical representations generated by different replay mechanisms? 
+
+• RQ4 (Norm Analysis): How does Manifold Alignment alleviate scale imbalance and resolve norm domination ?Table 1: Performance (in percentage) comparisons on ICEWS14s, ICEWS18, GDELT, and ICEWS05-15 datasets under the time-aware filter setting. Bold values indicate the best performance in each base encoder group.                                                                                                                                                                                                                                           
+
+> Method ICEWS14s ICEWS18 GDELT ICEWS05-15 MRR H@1 H@10 MRR H@1 H@10 MRR H@1 H@10 MRR H@1 H@10
+> FT 37.46 26.95 58.20 25.35 15.97 44.36 15.60 8.73 29.05 41.88 30.55 63.82 ER 42.14 31.03 63.80 27.20 16.88 48.19 16.21 8.97 30.42 45.55 33.34 69.07 TIE 41.07 30.28 62.39 28.73 18.40 49.60 16.40 8.94 30.98 42.56 30.90 64.67 LKGE 37.51 27.13 58.51 25.56 16.12 44.70 15.52 8.69 28.90 42.46 30.99 64.51 IncDE 36.57 26.20 56.95 25.52 16.07 44.74 15.49 8.64 28.86 40.56 29.34 62.17 L2TKG 47.40 35.36 71.05 33.36 22.15 55.04 20.53 12.89 35.83 57.43 41.86 80.69 RPC 44.55 34.87 65.08 34.91 24.34 55.89 22.41 14.42 38.33 51.14 39.47 71.75 HisRES 50.48 39.57 71.09 37.69 26.46 59.70 26.58 16.90 46.31 59.07 48.62 78.48 DGAR 50.12 39.36 70.48 33.00 21.74 55.63 28.30 17.38 51.39 54.33 43.11 75.13 RE-GCN 41.50 30.86 62.47 30.55 20.00 51.46 19.31 11.99 33.59 46.41 35.17 67.64 RE-GCN+MA-DAR 52.51 41.74 72.50 36.55 24.51 61.05 28.71 17.44 52.67 55.52 44.55 76.34
+> ∆Improve +26.53% +35.26% +16.06% +19.64% +22.55% +18.64% +48.68% +45.45% +56.80% +19.63% +26.67% +12.86%
+> TiRGN 44.04 33.83 63.84 33.66 23.19 54.22 21.67 13.63 37.60 50.04 39.25 70.71 TiRGN+MA-DAR 52.40 42.20 71.30 35.56 23.63 59.75 29.04 17.56 52.48 56.54 44.92 75.51
+> ∆Improve +18.98% +24.74% +11.69% +5.64% +1.90% +10.20% +34.01% +28.83% +39.57% +12.99% +14.45% +6.79%
+> LogCL 48.87 37.76 70.26 35.67 24.53 57.74 23.75 14.64 42.33 57.04 46.07 77.87 LogCL+MA-DAR 66.20 55.40 85.50 46.12 31.85 74.72 29.56 17.94 54.32 64.89 53.97 84.96
+> ∆Improve +35.46% +46.72% +21.69% +29.30% +29.84% +29.41% +24.46% +22.54% +28.33% +13.76% +17.15% +9.10%
+
+• RQ5 (Gating Analysis): How does the Polarization Penalty mitigate semantic blurring and encourage deci-sive dimension-wise routing? 
+
+Experimental Setup 
+
+Datasets We evaluate the proposed MA-DAR framework on four widely used Temporal Knowledge Graph benchmark datasets: ICEWS14s, ICEWS18, ICEWS05-15, and GDELT. The detailed statistics of these temporal knowledge graph benchmarks, including their chronological snapshots and temporal granularities, are provided in the supplementary material. 
+
+Baselines We compare MA-DAR against representative state-of-the-art baselines from different paradigms: (1) con-tinual knowledge graph reasoning methods, including FT (Fine-Tuning), ER (Rolnick et al. 2019), TIE (Wu et al. 2021), LKGE (Cui et al. 2023), IncDE (Liu et al. 2024), and DGAR (Zhang et al. 2025b); and (2) representative TKG reason-ing methods with specialized modeling strategies, including RPC (Liang et al. 2023), L 2TKG (Zhang et al. 2023), and HisRES (Zhang et al. 2025a). To demonstrate the plug-and-play capability of MA-DAR, we integrate it with diverse representative base encoders, including RE-GCN (Li et al. 2021), TiRGN (Li, Sun, and Zhao 2022), and LogCL (Meng et al. 2023). 
+
+Implementation Details 
+
+Following common settings in continual TKG reasoning, the embedding dimension d is set to 200, the learning rate is set to 0.001, and optimization is performed using Adam. The historical replay sample size k is configured to 35, 25, 40, and 32 for ICEWS14s, ICEWS18, ICEWS05-15, and GDELT, respectively, with μ = 1 .For the internal routing operations within MA-DAR, the stability constant ϵ in Manifold Alignment is fixed at 
+
+1 × 10 −5. The Dynamic Gating network is implemented as a shallow MLP with sigmoid activation. Its hidden dimension, number of layers, and dropout rate are selected according to the adopted backbone encoder. The polarization penalty coefficient is set to λ = 0 .2 for RE-GCN and λ = 0 .5 for TiRGN and LogCL. Detailed backbone-specific configura-tions are provided in the supplementary material. To ensure fair evaluation, the auxiliary loss coefficient α follows the de-fault structural objectives of different base encoders: α = 0 .1
+
+for RE-GCN’s static constraints, α = 1 .0 for TiRGN’s evo-lution loss, and α = 0 .5 for LogCL’s graph contrastive ob-jective. Detailed hyperparameter analysis is provided in the supplementary material. To assess robustness to random ini-tialization, we repeat the representative RE-GCN+MA-DAR configuration three times with different random seeds on all four datasets. The mean results are reported in the main paper, while the corresponding mean ± standard deviation results are provided in the supplementary material. Additionally, the replay mechanism employed in the main experiments is the diffusion-based generative replay. Under this setting, MA-DAR can be regarded as diffusion + RE-GCN. 
+
+Main Results (RQ1) 
+
+The continual reasoning performance across four benchmark datasets under the strict time-aware filter setting is presented in Table 1. The upper section of the table reports the results of continual learning baselines and representative TKG rea-soning methods with specialized modeling strategies, while the lower section presents the performance of representa-tive base encoders equipped with our MA-DAR plugin to demonstrate the improvements brought by MA-DAR. Based on the quantitative results, several observations can be established. First, equipping diverse base encoders with MA-DAR consistently improves performance across differ-ent datasets. Regardless of whether the underlying model re-lies on local structural evolution modeling (RE-GCN), local-global periodic pattern modeling (TiRGN), or structural con-trastive learning (LogCL), the consistent improvements from each Baseline to Baseline +MA-DAR counterpart in Table 1 demonstrate the general applicability of MA-DAR as a plug-and-play enhancement module. For instance, integrat-Table 2: Ablation study of the proposed MA-DAR on three datasets across representative base encoders. “w/o” denotes the removal of a specific component. 
+
+Method ICEWS14s ICEWS18 ICEWS05-15 MRR H@1 H@10 MRR H@1 H@10 MRR H@1 H@10 
+
+Base Encoder: RE-GCN w/o MA (Manifold Alignment) 51.92 40.95 72.20 35.36 23.53 59.18 54.01 43.82 75.83 
+
+w/o DG (Dynamic Gating) 51.44 40.61 71.20 34.91 23.16 58.62 54.68 43.27 75.49 
+
+w/o PP (Polarization Penalty) 52.28 41.34 72.36 36.21 24.17 60.68 55.13 44.17 76.04 
+
++ MA-DAR (Full) 52.51 41.74 72.50 36.55 24.51 61.05 55.52 44.55 76.34 
+
+Base Encoder: TiRGN w/o MA (Manifold Alignment) 51.75 41.36 70.98 34.42 22.68 57.85 55.08 44.15 74.98 
+
+w/o DG (Dynamic Gating) 51.28 41.05 70.05 33.95 22.31 57.34 55.62 43.65 74.65 
+
+w/o PP (Polarization Penalty) 52.12 41.83 71.15 35.21 23.32 59.35 56.12 44.52 75.18 
+
++ MA-DAR (Full) 52.40 42.20 71.30 35.56 23.63 59.75 56.54 44.92 75.51 
+
+Base Encoder: LogCL w/o MA (Manifold Alignment) 58.15 46.22 78.30 40.12 27.55 66.85 59.15 48.82 79.25 
+
+w/o DG (Dynamic Gating) 56.40 44.85 76.95 38.85 26.20 65.10 58.05 47.95 78.45 
+
+w/o PP (Polarization Penalty) 61.25 49.95 81.45 42.65 29.35 70.25 61.88 50.75 81.65 
+
++ MA-DAR (Full) 66.20 55.40 85.50 46.12 31.85 74.72 64.89 53.97 84.96 
+
+ing MA-DAR with the basic RE-GCN model achieves a rela-tive MRR improvement of 26.53% on ICEWS14s and a rel-ative H@10 improvement of 56.80% on the high-frequency GDELT dataset under the same filter evaluation protocol. Second, combining LogCL with MA-DAR achieves the strongest overall performance among all evaluated meth-ods. Compared with competitive baselines such as His-RES and DGAR, LogCL+MA-DAR achieves an absolute MRR of 66.20% on ICEWS14s, outperforming HisRES by an absolute margin of 15.72% . It also obtains relative MRR improvements of 22.37% on ICEWS18 and 9.85% 
+
+on ICEWS05-15 over HisRES. These results demonstrate the effectiveness of fine-grained dimension-level routing in MA-DAR for integrating historical and current representa-tions. 
+
+Ablation Study (RQ2) 
+
+To evaluate the contribution of the core components within the plugin, we examine three variants of MA-DAR across all representative encoders: (1) w/o MA (Manifold Align-ment), which skips hypersphere projection and directly feeds raw embeddings into the routing module; (2) w/o DG (Dynamic Gating), which disables the dimension-level MLP router and replaces it with simple scalar averaging (Hf inal = 0 .5 ˜Hreplay + 0 .5 ˜Hcurrent ); and (3) w/o PP (Po-larization Penalty), which optimizes without the Lpolar reg-ularizer. Quantitative results in Table 2 show that removing any in-dividual component leads to performance degradation across all backbones, demonstrating the contribution of each com-ponent to the overall effectiveness of MA-DAR. Specifically, the w/o DG variant suffers the largest performance degrada-tion (e.g., LogCL’s MRR decreases by 9.80% on ICEWS14s), indicating that scalar averaging is insufficient for effective representation integration. Meanwhile, the degradation of the w/o MA variant demonstrates that removing hypersphere Table 3: Replay compatibility analysis of MA-DAR on ICEWS14s. Method Replay MRR LogCL None 48.87 Diffusion + LogCL Gen. 51.58 ER + LogCL + MA-DAR Real 51.70 Diffusion + LogCL + MA-DAR Gen. 66.20 alignment makes the fusion process more sensitive to scale discrepancies between historical and current representations. Finally, the performance decrease of the w/o PP variant indi-cates that removing polarization regularization weakens the ability of the gating module to make decisive dimension-wise routing decisions. Overall, these results demonstrate that Manifold Alignment, Dynamic Gating, and Polarization Penalty provide complementary benefits, and their combina-tion enables MA-DAR to effectively integrate historical and current representations, answering RQ2. 
+
+Replay Compatibility Analysis (RQ3) 
+
+To investigate whether MA-DAR can effectively utilize his-torical representations from different replay mechanisms, we further evaluate its compatibility with both real expe-rience replay (ER) and generative replay settings. Specif-ically, we combine MA-DAR with LogCL under different historical representation sources and compare the resulting performance. The results are summarized in Table 3. Under the real experience replay setting, MA-DAR improves LogCL from 48.87% to 51.70% MRR, demonstrating that the proposed alignment and routing mechanism remains effective when historical representations are obtained through direct sam-pling. Furthermore, under the generative replay setting, in-tegrating MA-DAR with LogCL further improves the MRR 0 200 400 600 800 1000 1200 1400      
+
+> Sampled Entity Index
+> 10 5
+> 10 3
+> 10 1
+> 10 1
+> 10 3
+> 10 5
+> 10 7
+> L2 Norm  H 2 (Log Scale)
+> (a) Raw Norm Distribution
+> Replay ( Hreplay )
+> Current ( Hcurrent )
+> 0.5
+> 1.0
+> (Unit Sphere)
+> (b) Hypersphere Manifold Projection
+> Aligned Hreplay
+> Aligned Hcurrent
+
+Figure 3: Analysis of feature norms. (a) L2 norm distributions of raw current and replay representations. (b) Projection onto the unit hypersphere manifold via Manifold Alignment. from 51.58% to 66.20%. The consistent improvements un-der different replay sources indicate that MA-DAR focuses on resolving representation integration conflicts rather than relying on a specific replay generation mechanism. 
+
+Norm Domination Analysis (RQ4) 
+
+To answer RQ4, we visualize the L2 norms of the hidden representations before and after Manifold Alignment. As de-picted in Figure 3(a), the raw feature spaces exhibit noticeable 
+
+norm domination . Specifically, the historical replay represen-tations ( Hreplay ) exhibit a different magnitude distribution compared with the current representations ( Hcurrent ), re-sulting in an imbalance during direct feature fusion. This magnitude discrepancy indicates that directly combining the raw representations may cause one representation source to dominate the fusion process. If these raw representations are directly fused, the magnitude-dominant representation may bias the optimization process and weaken the contribution of the other representation source. As shown in Figure 3(b), Manifold Alignment projects these heterogeneous representations onto a uniform hyper-sphere manifold ( || H|| 2 = 1 ). This normalization reduces the scale discrepancy between historical and current repre-sentations, alleviating norm domination before subsequent semantic routing. 
+
+Regularized Gating Analysis (RQ5) 
+
+To address RQ5, we extract and visualize the test-phase dis-tribution of dimension-level gating weights z ∈ [0 , 1] d on ICEWS14s using RE-GCN equipped with MA-DAR under the diffusion replay setting. As illustrated in Figure 4(a), soft gating without Lpolar regularization leaves a large propor-tion of gating values (41.5%) in the ambiguous middle zone (0.4 ≤ z ≤ 0.6), which may lead to semantic blurring during representation fusion. With the proposed Polarization Penalty, the proportion of ambiguous intermediate values is reduced to 19.7% (Fig-ure 4(b)), encouraging gating values toward clearer binary-like decisions. This distribution indicates that MA-DAR pro-duces more decisive dimension-wise routing patterns, reduc-ing uncertain intermediate allocations during representation fusion. Unlike a non-differentiable hard threshold, the pro-posed penalty encourages decisive routing while preserving end-to-end gradient-based optimization. 0.0 0.2 0.4 0.6 0.8 1.0          
+
+> Dimension-level Gating Value ( z)
+> 0%
+> 5%
+> 10%
+> 15%
+> 20%
+> Distribution Probability
+> z < 0.1: 0.3% z > 0.9: 0.8%
+> 0.4 z0.6: 41.5%
+> (a) w/o Polarization Penalty
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Dimension-level Gating Value ( z)
+> z < 0.1: 0.6% z > 0.9: 13.6%
+> 0.4 z0.6: 19.7%
+> (b) w/ Polarization Penalty
+
+Figure 4: Distribution of dimension-level gating values z on ICEWS14s using RE-GCN equipped with MA-DAR under the diffusion replay setting. (a) Standard soft-gating with-out the polarization penalty. (b) Gating distribution with the polarization penalty, encouraging more decisive dimension-wise routing decisions. 
+
+Figure 5: Case study of temporal gating evolution for rep-resentative entities on ICEWS14s using RE-GCN equipped with MA-DAR under the diffusion replay setting. Beyond the statistical distribution, we further provide a case study to illustrate how MA-DAR dynamically adjusts gating behaviors during temporal evolution. As shown in Figure 5, we track the gating trajectories of representative entities on ICEWS14s using the same RE-GCN-based MA-DAR configuration under diffusion replay. The trajectories show that gating values vary across timestamps rather than re-maining fixed, indicating that MA-DAR dynamically adjusts the contributions of historical and current representations according to evolving temporal contexts. 
+
+Conclusion 
+
+In this paper, we introduced MA-DAR, a general plug-and-play routing for replay representation fusion in continual TKG reasoning. By decoupling historical representation inte-gration from backbone temporal encoding, MA-DAR can be flexibly combined with diverse architectures, including RE-GCN, TiRGN, and LogCL. Through Manifold Alignment, Dynamic Gating, and Polarization Penalty, MA-DAR effec-tively resolves representation conflicts between historical and current features by alleviating norm domination and seman-tic blurring . Extensive experiments under the strict time-aware filter protocol demonstrate that MA-DAR consistently improves different backbone encoders and establishes new state-of-the-art performance across multiple benchmarks. References 
+
+Aljundi, R.; Babiloni, F.; Elhoseiny, M.; Rohrbach, M.; and Tuytelaars, T. 2018. Memory aware synapses: Learning what (not) to forget. In Proceedings of the European Conference on Computer Vision (ECCV) , 139–154. Austin, J.; Johnson, D. D.; Ho, J.; Tarlow, D.; and Van Den Berg, R. 2021. Structured denoising diffusion models in discrete state-spaces. In Advances in Neural Information Processing Systems (NeurIPS) , volume 34, 17981–17993. Bordes, A.; Usunier, N.; Garcia-Duran, A.; Weston, J.; and Yakhnenko, O. 2013. Translating embeddings for modeling multi-relational data. In Advances in Neural Information Processing Systems (NeurIPS) , volume 26. Cai, Y.; Liu, Q.; Gan, Y.; Li, C.; Liu, X.; Lin, R.; Luo, D.; and Yang, J. 2024. Predicting the unpredictable: Uncertainty-aware reasoning over temporal knowledge graphs via diffu-sion process. In Findings of the Association for Computa-tional Linguistics (ACL) , 5766–5778. Chen, D.; Guo, C.; Li, Q.; Gu, J.; Xie, M.; and Zhu, H. 2026. Lifelong knowledge graph embedding via diffusion model. 
+
+Neural Networks , 199: 108630. Chen, K.; Wang, Y.; Li, Y.; Li, A.; Yu, H.; and Song, X. 2024a. A unified temporal knowledge graph reasoning model towards interpolation and extrapolation. In Proceedings of the 62nd Annual Meeting of the Association for Computa-tional Linguistics (ACL) , 117–132. Chen, W.; Wan, H.; Wu, Y.; Zhao, S.; Cheng, J.; Li, Y.; and Lin, Y. 2024b. Local-global history-aware contrastive learning for temporal knowledge graph reasoning. In 2024 IEEE 40th International Conference on Data Engineering (ICDE) , 733–746. Cui, Y.; Wang, Y.; Sun, Z.; Liu, W.; Jiang, Y.; Han, K.; and Hu, W. 2023. Lifelong embedding learning and transfer for growing knowledge graphs. In Proceedings of the AAAI Conference on Artificial Intelligence , volume 37, 4217–4224. Daruna, A.; Gupta, M.; Sridharan, M.; and Chernova, S. 2021. Continual learning of knowledge graph embeddings. 
+
+IEEE Robotics and Automation Letters , 6(2): 1128–1135. Dasgupta, S. S.; Ray, S. N.; and Talukdar, P. 2018. Hyte: Hyperplane-based temporally aware knowledge graph em-bedding. In Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP) , 2001– 2011. Goel, R.; Kazemi, S. M.; Brubaker, M.; and Poupart, P. 2020. Diachronic embedding for temporal knowledge graph com-pletion. In Proceedings of the AAAI Conference on Artificial Intelligence , volume 34, 3988–3995. Ho, J.; Jain, A.; and Abbeel, P. 2020. Denoising diffusion probabilistic models. In Advances in Neural Information Processing Systems (NeurIPS) , volume 33, 6840–6851. Huang, R.; Wei, W.; Qu, X.; Zhang, S.; Chen, D.; and Cheng, Y. 2024. Confidence is not timeless: Modeling temporal va-lidity for rule-based temporal knowledge graph forecasting. In Proceedings of the 62nd Annual Meeting of the Associa-tion for Computational Linguistics (ACL) , 10783–10794. Jia, Z.; Liu, H.; Li, H.; and Chen, L. 2025. SIT: Selective incremental training for dynamic knowledge graph embed-ding. In 2025 IEEE 41st International Conference on Data Engineering (ICDE) , 1607–1618. Jin, W.; Qu, M.; Jin, X.; and Ren, X. 2020. Recurrent event network: Autoregressive structure inference over temporal knowledge graphs. In Proceedings of the Conference on Em-pirical Methods in Natural Language Processing (EMNLP) ,6669–6683. Kirkpatrick, J.; Pascanu, R.; Rabinowitz, N.; Veness, J.; Des-jardins, G.; Rusu, A. A.; Milan, K.; Quan, J.; Ramalho, T.; Grabska-Barwinska, A.; et al. 2017. Overcoming catas-trophic forgetting in neural networks. Proceedings of the National Academy of Sciences (PNAS) , 114(13): 3521–3526. Lacroix, T.; Obozinski, G.; and Usunier, N. 2020. Tensor decompositions for temporal knowledge base completion. In 
+
+8th International Conference on Learning Representations (ICLR) .Leblay, J.; and Chekol, M. W. 2018. Deriving validity time in knowledge graph. In Companion Proceedings of the The Web Conference (WWW) , 1771–1776. Li, Y.; Sun, S.; and Zhao, J. 2022. TiRGN: Time-guided recurrent graph network with local-global historical patterns for temporal knowledge graph reasoning. In Proceedings of the Thirty-First International Joint Conference on Artificial Intelligence (IJCAI) , 2152–2158. Li, Y.; Zhang, L.; Yan, H.; Zhao, T.; Ma, Z.; Huang, M.; and Liu, J. 2025. SAGE: Scale-aware gradual evolution for continual knowledge graph embedding. In Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining , 1600–1611. Li, Z.; and Hoiem, D. 2017. Learning without forgetting. 
+
+IEEE Transactions on Pattern Analysis and Machine Intelli-gence (TPAMI) , 40(12): 2935–2947. Li, Z.; Jin, X.; Li, W.; Guan, S.; Guo, J.; Shen, H.; Wang, Y.; and Cheng, X. 2021. Temporal knowledge graph reasoning based on evolutional representation learning. In Proceed-ings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval , 408– 417. Liang, K.; Meng, L.; Liu, M.; Liu, Y.; Tu, W.; Wang, S.; Zhou, S.; and Liu, X. 2023. Learn from Relational Correlations and Periodic Events for Temporal Knowledge Graph Reasoning. In Proceedings of the 46th International ACM SIGIR Confer-ence on Research and Development in Information Retrieval (SIGIR) , 1559–1568. Liu, J.; Ke, W.; Wang, P.; Shang, Z.; Gao, J.; Li, G.; Ji, K.; and Liu, Y. 2024. Towards continual knowledge graph embedding via incremental distillation. In Proceedings of the AAAI Conference on Artificial Intelligence , volume 38, 8759–8768. Long, X.; Zhuang, L.; Li, A.; Li, H.; and Wang, S. 2024. Fact embedding through diffusion model for knowledge graph completion. In Proceedings of the ACM on Web Conference (WWW) , 2020–2029. Lopez-Paz, D.; and Ranzato, M. 2017. Gradient episodic memory for continual learning. In Advances in Neural Infor-mation Processing Systems (NeurIPS) , volume 30. Meng, Y.; Li, W.; Jin, X.; Guo, J.; Cheng, Y.; and Xue, X. 2023. LogCL: Logical contrastive learning for tempo-ral knowledge graph reasoning. In Proceedings of the 61st Annual Meeting of the Association for Computational Lin-guistics (Volume 1: Long Papers) , 8358–8371. Rolnick, D.; Ahuja, A.; Schwarz, J.; Lillicrap, T.; and Wayne, G. 2019. Experience replay for continual learning. In Ad-vances in Neural Information Processing Systems (NeurIPS) ,volume 32. Shi, X.; Tian, L.; Xiao, W.; Mu, C.; Yan, B.; and Wang, J. 2025. A Continual Knowledge Graph Embedding Method Based on Local-Global Distillation. In 2025 8th Interna-tional Symposium on Big Data and Applied Statistics (ISB-DAS) , 798–802. IEEE. Wang, H.; Xiong, W.; Yu, M.; Guo, X.; Chang, S.; and Wang, W. Y. 2019. Sentence embedding alignment for lifelong re-lation extraction. In Proceedings of the Conference of the North American Chapter of the Association for Computa-tional Linguistics (NAACL) , 796–806. Wang, J.; Sun, K.; Luo, L.; Wei, W. b.; Hu, Y.; Liew, A. W.; Pan, S.; and Yin, B. 2024a. Large language models-guided dynamic adaptation for temporal knowledge graph reason-ing. Advances in Neural Information Processing Systems (NeurIPS) , 37: 8384–8410. Wang, T.; Zheng, X.; Zhang, J.; and Tian, L. 2024b. Fed-eral graph contrastive learning with secure cross-device val-idation. IEEE Transactions on Mobile Computing , 23(12): 14145–14158. Wu, J.; Xu, Y.; Zhang, Y.; Ma, C.; Coates, M.; and Che-ung, J. C. K. 2021. TIE: A framework for embedding-based incremental temporal knowledge graph completion. In Pro-ceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval , 428– 437. Xu, Y.; Ou, J.; Xu, H.; and Fu, L. 2023. Temporal knowledge graph reasoning with historical contrastive learning. In Pro-ceedings of the AAAI Conference on Artificial Intelligence ,volume 37, 4765–4773. Zenke, F.; Poole, B.; and Ganguli, S. 2017. Continual learn-ing through synaptic intelligence. In International Confer-ence on Machine Learning (ICML) , 3987–3995. Zhang, J.; Hui, B.; Mu, C.; and Tian, L. 2024. Learning multi-graph structure for temporal knowledge graph reason-ing. Expert Systems with Applications , 255: 124561. Zhang, J.; Shao, J.; and Cui, B. 2023. StreamE: Learning to update representations for temporal knowledge graphs in streaming scenarios. In Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval , 622–631. Zhang, J.; Sun, M.; Mu, C.; Zhang, J.; Guo, Q.; and Tian, L. 2025a. Historically Relevant Event Structuring for Tem-poral Knowledge Graph Reasoning. In Proceedings of the 41st IEEE International Conference on Data Engineering (ICDE) , 3179–3192. Zhang, M.; Xia, Y.; Liu, Q.; Wu, S.; and Wang, L. 2023. Learning Latent Relations for Temporal Knowledge Graph Reasoning. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (ACL) , 12617– 12631. Zhang, Z.; Chen, W.; Lin, Y.; and Wan, H. 2025b. A Gener-ative Adaptive Replay Continual Learning Model for Tem-poral Knowledge Graph Reasoning. In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics , 10964–10977. Zheng, X.; and Cai, Z. 2020. Privacy-preserved data sharing towards multiple parties in industrial IoTs. IEEE Journal on Selected Areas in Communications , 38(5): 968–979. Zhu, J.; Fu, B.; and Duan, G. 2025. DebiasedKGE: To-wards mitigating spurious forgetting in continual knowledge graph embedding. In Proceedings of the 34th ACM Interna-tional Conference on Information and Knowledge Manage-ment (CIKM) .Zhu, L.; Lan, Q.; Tian, Q.; Sun, W.; Yang, L.; Xia, L.; Xie, Y.; Xiao, X.; Duan, T.; and Tao, C. 2025. ETT-CKGE: Effi-cient task-driven tokens for continual knowledge graph em-bedding. In Joint European Conference on Machine Learn-ing and Knowledge Discovery in Databases (ECML-PKDD) ,481–496.

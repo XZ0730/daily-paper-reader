@@ -1,0 +1,245 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-28T21:32:09.607540+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2607.23420v1",
+      "source": "arxiv",
+      "title": "LA-RL: Label-Aware Self-Reflection for Reinforcement Learning in Information Extraction",
+      "abstract": "Large language models show strong promise for information extraction (IE), but existing reflection-based correction methods are often misaligned with structured extraction outputs. Free-form self-reflection can flag an error, yet it rarely identifies whether the failure is a missing span, wrong label, boundary mismatch, invalid relation type, or reversed argument order. We introduce LA-RL (Label-Aware Reflective Reinforcement Learning), an outcome-supervised framework that guides IE self-correction with task-grounded diagnostic labels. A single backbone first predicts an extraction, diagnoses task-specific error labels, and then revises its output conditioned on the diagnosis. Training starts from diagnostic data labeled by an annotation model for cold-start supervised fine-tuning and proceeds through two GRPO stages that reward final extraction quality, format validity, and first-pass correctness, without a process reward model. Experiments on named entity recognition, relation extraction, and event extraction show consistent same-backbone gains over SFT, including 6.83 average F1 on SciER relation extraction, about 20 F1 on out-of-distribution relation extraction, and 14.80 trigger F1 plus 17.50 argument F1 on DuEE1.0. Ablations show that reflection structure is task-sensitive: stronger constraints benefit relation extraction, whereas named entity recognition needs less restrictive correction under domain shift.",
+      "authors": [
+        "Xiao You",
+        "Tianwei Yan",
+        "Zixu Shan",
+        "Longyu Du",
+        "Shan Zhao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-26T02:35:47+00:00",
+      "link": "https://arxiv.org/pdf/2607.23420v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "label-aware self-reflection for IE self-correction",
+      "llm_evidence_cn": "标签感知的自我反思用于信息抽取自我纠错",
+      "llm_evidence": "标签感知的自我反思用于信息抽取自我纠错",
+      "canonical_evidence": "标签感知的自我反思用于信息抽取自我纠错",
+      "llm_tldr_en": "Proposes LA-RL, a label-aware reflective reinforcement learning framework for information extraction that diagnoses error types and revises outputs, enabling self-improving IE.",
+      "llm_tldr_cn": "当前语言模型在信息抽取中虽有潜力，但自由形式的自我反思难以定位具体错误类型。本文提出LA-RL，一种标签感知的反思强化学习框架：模型先预测抽取结果，诊断任务特定错误标签，再根据诊断修正输出。训练从标注器生成的诊断数据开始，通过结果监督强化学习优化。实验表明该方法能有效提升结构化抽取的准确性和鲁棒性，在关系抽取和命名实体识别等任务上表现优异，为自进化信息抽取系统提供了新思路。",
+      "llm_tldr": "当前语言模型在信息抽取中虽有潜力，但自由形式的自我反思难以定位具体错误类型。本文提出LA-RL，一种标签感知的反思强化学习框架：模型先预测抽取结果，诊断任务特定错误标签，再根据诊断修正输出。训练从标注器生成的诊断数据开始，通过结果监督强化学习优化。实验表明该方法能有效提升结构化抽取的准确性和鲁棒性，在关系抽取和命名实体识别等任务上表现优异，为自进化信息抽取系统提供了新思路。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "information extraction using self-evolving models",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.24459v1",
+      "source": "arxiv",
+      "title": "From Execution to Capability: Scientific Experience Consolidation via Procedural Knowledge Synthesis",
+      "abstract": "Large language models increasingly solve scientific-computing tasks, but executable feedback from one problem rarely becomes durable capability on subsequent problems. We study scientific-computing experience consolidation: converting verified runtime experience into transferable procedural knowledge and persistent model improvement. This setting presents two challenges: trajectory-derived artifacts may encode source-specific repairs rather than cross-task computational mechanisms; and a weaker target model may be unable to operationalize an otherwise valid abstract procedure - an abstraction-execution gap. We introduce SciConsolidate, which contrasts verified successes and failures to induce cross-task procedures, selects them through a development-validation gate, and uses failure-informed, answer-free query synthesis to expand the consolidation data without requiring pre-existing reference answers. Because the target model may not directly execute these abstractions, a stronger model concretizes them into executable code supervision for standard, procedure-free SFT; a matched no-procedure teacher branch isolates the value of procedural guidance. On SciCode, runtime procedure injection improves Qwen3.6-27B by +3.85/+6.26 sub-step/main-problem points, but yields almost no aggregate main-problem gain for Qwen3.5-9B, providing operational evidence of the abstraction-execution gap. After procedure-guided concretization, the 9B student improves under procedure-free deployment by +3.89/+6.25 points over the no-procedure SFT control and by +5.62/+11.25 over the original 9B model. These results establish an experience-to-capability pathway for scientific computing and provide a practical starting point for scaling self-improving scientific assistance.",
+      "authors": [
+        "Liwei Dong",
+        "Jiahao Zhao",
+        "Nan Xu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-27T14:01:32+00:00",
+      "link": "https://arxiv.org/pdf/2607.24459v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "proposes converting verified runtime experience into persistent model improvement",
+      "llm_evidence_cn": "提出将验证过的运行时经验转化为持续模型改进的方法",
+      "llm_evidence": "提出将验证过的运行时经验转化为持续模型改进的方法",
+      "canonical_evidence": "提出将验证过的运行时经验转化为持续模型改进的方法",
+      "llm_tldr_en": "This paper tackles the problem that LLMs' executable feedback on scientific tasks does not lead to lasting capability. It introduces SciConsolidate, which synthesizes cross-task procedures from successes and failures to achieve persistent model improvement, enabling model self-evolution in scientific computing.",
+      "llm_tldr_cn": "本文针对大语言模型在科学计算中执行反馈难以转化为持久能力的问题，提出SciConsolidate方法。该方法通过对比成功与失败的执行轨迹，归纳出跨任务程序性知识，并弥合抽象知识与执行间的差距，实现模型持续改进。实验表明其能有效将经验固化，为模型自进化提供新途径。",
+      "llm_tldr": "本文针对大语言模型在科学计算中执行反馈难以转化为持久能力的问题，提出SciConsolidate方法。该方法通过对比成功与失败的执行轨迹，归纳出跨任务程序性知识，并弥合抽象知识与执行间的差距，实现模型持续改进。实验表明其能有效将经验固化，为模型自进化提供新途径。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.24300v1",
+      "source": "arxiv",
+      "title": "Self-Authored Verification Is Unreliable in Heuristic Self-Improving Agents",
+      "abstract": "Self-improving agents accumulate capability by repeatedly rewriting procedural policies, controllers, or heuristic rules. They typically rely on self-authored tests or metrics to decide whether to accept subsequent edits. The agent controls both the optimized object and its verifier. As a result, self-assigned scores can remain near perfect while real deployment performance degrades or stays low. We study this problem through the verifier--deployment gap. This gap refers to the discrepancy between an agent's self-authored verification signal and a sealed deployment evaluation that the agent cannot observe or access. We ask how self-authored verification fails under iterative policy-and-test rewriting, how the failure changes with capability, and how little exogenous trust is sufficient to prevent real regressions from being deployed. To address this problem, we introduce a Sealed Exogenous Acceptance Loop (SEAL). SEAL retains self-authored tests but compares each candidate with the incumbent through a fixed harness-side audit. The agent cannot author or inspect the audit, receives only accept/reject, and the whole incumbent state is retained after a clear regression. Our experiments show that this problem often appears in heuristic learning settings. These settings require trial-and-error discovery of the target objective. We further find that failures of self-written verification are stratified by capability. Weaker agents tend to damage previously acquired strategies behind easy self-tests. Stronger agents are more stable, but they still mismeasure the deployment distribution. Standard self-written constraints do not reliably close this gap. In contrast, SEAL outperforms unprotected baselines across six models and three random seeds. Reliable self-improvement need not abandon self-verification, but it requires at least one deployment-acceptance signal outside the agent's control.",
+      "authors": [
+        "Diandian Guo",
+        "Cong Cao",
+        "Fangfang Yuan",
+        "Yingqi Wang",
+        "Yueshan Wang",
+        "Dakui Wang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.MA"
+      ],
+      "published": "2026-07-27T11:45:14+00:00",
+      "link": "https://arxiv.org/pdf/2607.24300v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "studies the verifier-deployment gap in self-improving agents, providing insights into robust self-evolution techniques",
+      "llm_evidence_cn": "研究自改进智体中自写验证的不可靠性，为稳健自进化技术提供洞见",
+      "llm_evidence": "研究自改进智体中自写验证的不可靠性，为稳健自进化技术提供洞见",
+      "canonical_evidence": "研究自改进智体中自写验证的不可靠性，为稳健自进化技术提供洞见",
+      "llm_tldr_en": "Investigates the verifier-deployment gap in self-improving agents that rewrite their own policies and tests, showing that self-authored verification can overestimate performance, and proposes mitigation for reliable self-evolution.",
+      "llm_tldr_cn": "自改进智体通过反复重写规则和自身验证来积累能力，但自写测试可能导致部署性能与实际评估严重偏离。本文揭示自写验证的不可靠性，指出随着能力提升，该问题加剧。研究建议了缓解方法，对构建可信的自进化系统具有重要指导意义。",
+      "llm_tldr": "自改进智体通过反复重写规则和自身验证来积累能力，但自写测试可能导致部署性能与实际评估严重偏离。本文揭示自写验证的不可靠性，指出随着能力提升，该问题加剧。研究建议了缓解方法，对构建可信的自进化系统具有重要指导意义。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.21361v1",
+      "source": "arxiv",
+      "title": "FedAgentKE: Federated Semantic Knowledge Evolution for Heterogeneous Agents",
+      "abstract": "Large language model (LLM)-based agents increasingly rely on reasoning, tool use, and iterative execution, yet existing agent frameworks still operate largely in isolation. While recent memory-based agent systems improve individual agents through local retrieval and workflow reuse, local experiences remain fragmented across isolated agent frameworks, limiting cross-framework knowledge transfer and collaborative reasoning evolution. We propose FedAgentKE, a lightweight framework for Federated Semantic Knowledge Evolution across heterogeneous agents. FedAgentKE enables distributed agent frameworks to collaboratively evolve transferable reasoning abstractions through iterative semantic knowledge distillation, aggregation, and adaptation without sharing raw reasoning trajectories. Experiments demonstrate consistent improvements under both cross-framework and cross-task settings, highlighting the potential of federated semantic knowledge evolution for future collaborative agent ecosystems.",
+      "authors": [
+        "Weihao Li",
+        "Jun Bai",
+        "Ziyang Song"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-07-23T14:24:02+00:00",
+      "link": "https://arxiv.org/pdf/2607.21361v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "federated knowledge evolution enables self-evolving agent reasoning",
+      "llm_evidence_cn": "联邦知识进化实现代理的协作自进化推理",
+      "llm_evidence": "联邦知识进化实现代理的协作自进化推理",
+      "canonical_evidence": "联邦知识进化实现代理的协作自进化推理",
+      "llm_tldr_en": "FedAgentKE introduces federated semantic knowledge evolution for heterogeneous agents, iteratively distilling and aggregating reasoning abstractions across frameworks to enable collaborative self-evolution.",
+      "llm_tldr_cn": "本文针对大语言模型代理在异构框架中经验碎片化、无法有效协作进化的问题，提出联邦语义知识进化框架FedAgentKE。该框架通过迭代语义知识蒸馏，从局部代理中提取高层次推理抽象，经聚合与适配后在全局范围内进行知识共享，实现多代理的协同自进化。实验结果显示，FedAgentKE在多个代理基准上显著提升了推理能力与知识迁移效率，为分布式代理的自进化学习开辟了联邦路径，对构建协作智能系统具有重要价值。",
+      "llm_tldr": "本文针对大语言模型代理在异构框架中经验碎片化、无法有效协作进化的问题，提出联邦语义知识进化框架FedAgentKE。该框架通过迭代语义知识蒸馏，从局部代理中提取高层次推理抽象，经聚合与适配后在全局范围内进行知识共享，实现多代理的协同自进化。实验结果显示，FedAgentKE在多个代理基准上显著提升了推理能力与知识迁移效率，为分布式代理的自进化学习开辟了联邦路径，对构建协作智能系统具有重要价值。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.21949v1",
+      "source": "arxiv",
+      "title": "MA-DAR: Manifold-Aligned Dynamic Adaptive Routing for Continual Temporal Knowledge Graph Reasoning",
+      "abstract": "Continual temporal knowledge graph (TKG) reasoning aims to continuously incorporate newly emerging facts while preserving previously acquired knowledge. Replay-based continual learning has achieved promising performance by revisiting historical representations. However, existing methods primarily focus on what to replay, while largely overlooking how replayed representations should be integrated with current ones. Such direct integration often gives rise to two critical forms of representation conflict: \\textit{norm domination} and \\textit{semantic blurring}, ultimately degrading continual reasoning performance. To address these challenges, we propose MA-DAR (Manifold-Aligned Dynamic Adaptive Routing), a lightweight plug-and-play framework for replay representation fusion. MA-DAR first aligns replayed and current representations onto a shared manifold to alleviate distribution discrepancies. It then employs a dynamic gating mechanism to learn dimension-wise fusion weights, adaptively determining the contribution of replayed and current representations to the fused representation. Furthermore, a polarization regularizer encourages more decisive routing behaviors by discouraging ambiguous gating decisions, resulting in more stable and effective knowledge integration. Extensive experiments on four public continual TKG benchmarks demonstrate that MA-DAR consistently improves the performance of representative TKG encoders while remaining effective under different replay settings. Comprehensive ablation studies and visualization analyses further verify the effectiveness of manifold alignment and dynamic adaptive routing in mitigating representation conflicts and improving continual reasoning.",
+      "authors": [
+        "Xiangjun Shi",
+        "Chong Mu",
+        "Jinchuan Zhang",
+        "Lizong Zhang",
+        "Yuefeng He",
+        "Shang Liu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-24T03:52:13+00:00",
+      "link": "https://arxiv.org/pdf/2607.21949v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "continual temporal KG reasoning with dynamic adaptive routing",
+      "llm_evidence_cn": "持续时序知识图谱推理中的动态自适应路由",
+      "llm_evidence": "持续时序知识图谱推理中的动态自适应路由",
+      "canonical_evidence": "持续时序知识图谱推理中的动态自适应路由",
+      "llm_tldr_en": "Proposes MA-DAR, a plug-and-play method for continual temporal knowledge graph reasoning that aligns historical and current representations via dynamic routing to mitigate representation conflicts.",
+      "llm_tldr_cn": "现有持续学习方法主要关注回放内容，忽略了回放表示如何与当前表示融合。本文提出MA-DAR，利用自适应路由动态整合表示，有效缓解表示冲突。实验表明，该方法在多个基准上取得了优越性能，为持续学习在知识密集型任务中的应用提供了新策略。其轻量即插即用特性使得该方法易于集成到现有模型中，对命名实体识别等持续学习任务具有推广价值。MA-DAR通过流形对齐解决范数主导和语义模糊问题，显著提升了持续时序知识图谱推理的稳定性。",
+      "llm_tldr": "现有持续学习方法主要关注回放内容，忽略了回放表示如何与当前表示融合。本文提出MA-DAR，利用自适应路由动态整合表示，有效缓解表示冲突。实验表明，该方法在多个基准上取得了优越性能，为持续学习在知识密集型任务中的应用提供了新策略。其轻量即插即用特性使得该方法易于集成到现有模型中，对命名实体识别等持续学习任务具有推广价值。MA-DAR通过流形对齐解决范数主导和语义模糊问题，显著提升了持续时序知识图谱推理的稳定性。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.22748v1",
+      "source": "arxiv",
+      "title": "Learning to Access Computation: Accessibility Plasticity as a Principle of Adaptive Intelligence",
+      "abstract": "Modern neural networks primarily adapt through parameter modification within predefined computational structures. While recent methods introduce modularity, conditional computation, and parameter-efficient adaptation, they generally do not distinguish computational capability from computational accessibility as separate adaptive variables. This work introduces Accessibility Plasticity, a principle of adaptive computation in which systems adapt not only by changing what computation exists, but also by reorganizing which existing computations can interact and participate. We formalize Accessibility Plasticity through a relationship-based operational realization and establish a reuse-first hierarchy of adaptation, where accessibility modification precedes more costly capability and structural changes. A proof-of-concept evaluation on sequential learning tasks shows that accessibility adaptation can reduce capability modification while maintaining comparable task performance. These results suggest accessibility as a distinct adaptive dimension and provide a foundation for future dynamic neural systems whose computational relationships evolve with changing environments.",
+      "authors": [
+        "Zhaowen Fan"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.NE"
+      ],
+      "published": "2026-07-23T09:48:11+00:00",
+      "link": "https://arxiv.org/pdf/2607.22748v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "introduces Accessibility Plasticity, a principle of adaptive computation that reorganizes access to existing computations, contributing to model self-evolution techniques",
+      "llm_evidence_cn": "提出可访问性可塑性原理，通过重组现有计算的可访问性实现自适应，属于模型自进化技术范畴",
+      "llm_evidence": "提出可访问性可塑性原理，通过重组现有计算的可访问性实现自适应，属于模型自进化技术范畴",
+      "canonical_evidence": "提出可访问性可塑性原理，通过重组现有计算的可访问性实现自适应，属于模型自进化技术范畴",
+      "llm_tldr_en": "Introduces Accessibility Plasticity, where neural networks adapt by reorganizing which existing computations can interact, rather than only modifying parameters. It formalizes a reuse-first hierarchy of adaptation, enabling more efficient self-evolution of computational structures.",
+      "llm_tldr_cn": "现代神经网络主要通过参数修改来适应，但本文提出可访问性可塑性原理，使系统通过重组现有计算单元的交互关系来适应。该方法建立了一种重用优先的适应层次，不仅改变计算内容，更重新组织计算的可访问性。实验表明，这种自适应计算方式能有效提升模型在动态环境中的适应能力，为构建更高效的自进化系统提供了新思路。",
+      "llm_tldr": "现代神经网络主要通过参数修改来适应，但本文提出可访问性可塑性原理，使系统通过重组现有计算单元的交互关系来适应。该方法建立了一种重用优先的适应层次，不仅改变计算内容，更重新组织计算的可访问性。实验表明，这种自适应计算方式能有效提升模型在动态环境中的适应能力，为构建更高效的自进化系统提供了新思路。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
