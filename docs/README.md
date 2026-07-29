@@ -6,40 +6,31 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-28
-- 运行时间：2026-07-28 21:38:53 UTC
+- 最新运行日期：2026-07-29
+- 运行时间：2026-07-29 20:48:46 UTC
 - 运行状态：成功
-- 本次总论文数：6
-- 精读区：3
-- 速读区：3
+- 本次总论文数：3
+- 精读区：2
+- 速读区：1
 
 ### 今日简报（AI）
-今日精读两篇9分高质论文，探索强化学习驱动的信息抽取与从执行到能力的知识合成新范式。  
-最值得关注：利用标签感知自反思把强化学习精准嵌入信息抽取，以及将过程记录合成为可复用科学经验。  
-建议在关注前沿框架时，提前思考异构环境下的知识演化与持续推理瓶颈。
-- 详情：[/202607/28/README](/202607/28/README)
+今日精读两篇9分论文，聚焦RLVR到RLSVR的任务转换赋予LLM自我验证奖励，以及通过辅助合成蒸馏出时序推理用于未来预测；速读一篇Latent-LoRA持续学习方案。  
+最值得看的方向：任务转换让大模型获得自验证奖励信号、助力开放式自我改进，以及用高效数据合成蒸馏出LLM的未来预测能力。  
+建议普通读者优先阅读这两篇精读，快速把握LLM自我进化与预测的最新思路，再根据兴趣延伸至轻量级适配器方法。
+- 详情：[/202607/29/README](/202607/29/README)
 
 ### 精读区论文标签
-1. [LA-RL: Label-Aware Self-Reflection for Reinforcement Learning in Information Extraction](/202607/28/2607.23420v1-la-rl-label-aware-self-reflection-for-reinforcement-learning-in-information-extraction)  
+1. [From RLVR to RLSVR: Task Transformation Induces Self-Verifiable Rewards for Open-Ended LLM Self-Improvement](/202607/29/2607.23802v1-from-rlvr-to-rlsvr-task-transformation-induces-self-verifiable-rewards-for-open-ended-llm-self-improvement)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：标签感知的自我反思用于信息抽取自我纠错
-2. [From Execution to Capability: Scientific Experience Consolidation via Procedural Knowledge Synthesis](/202607/28/2607.24459v1-from-execution-to-capability-scientific-experience-consolidation-via-procedural-knowledge-synthesis)  
+   evidence：提出RLSVR，通过自验证奖励实现LLM自我改进
+2. [Distilling Temporal Search and Reasoning: Evolving LLMs for Future Prediction via Harness-Assisted Efficient Data Synthesis](/202607/29/2607.25554v1-distilling-temporal-search-and-reasoning-evolving-llms-for-future-prediction-via-harness-assisted-efficient-data-synthesis)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：提出将验证过的运行时经验转化为持续模型改进的方法
-3. [Self-Authored Verification Is Unreliable in Heuristic Self-Improving Agents](/202607/28/2607.24300v1-self-authored-verification-is-unreliable-in-heuristic-self-improving-agents)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：研究自改进智体中自写验证的不可靠性，为稳健自进化技术提供洞见
+   evidence：通过蒸馏时序推理进化LLM是用于NLP未来预测的自进化方法
 
 ### 速读区论文标签
-1. [FedAgentKE: Federated Semantic Knowledge Evolution for Heterogeneous Agents](/202607/28/2607.21361v1-fedagentke-federated-semantic-knowledge-evolution-for-heterogeneous-agents)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：联邦知识进化实现代理的协作自进化推理
-2. [MA-DAR: Manifold-Aligned Dynamic Adaptive Routing for Continual Temporal Knowledge Graph Reasoning](/202607/28/2607.21949v1-ma-dar-manifold-aligned-dynamic-adaptive-routing-for-continual-temporal-knowledge-graph-reasoning)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：持续时序知识图谱推理中的动态自适应路由
-3. [Learning to Access Computation: Accessibility Plasticity as a Principle of Adaptive Intelligence](/202607/28/2607.22748v1-learning-to-access-computation-accessibility-plasticity-as-a-principle-of-adaptive-intelligence)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：提出可访问性可塑性原理，通过重组现有计算的可访问性实现自适应，属于模型自进化技术范畴
+1. [Latent-LoRA: Compact Latent-Space Adapters with Gradient-Free Routing for Continual Learning](/202607/29/2607.23837v1-latent-lora-compact-latent-space-adapters-with-gradient-free-routing-for-continual-learning)  
+   标签：评分：7.0/10、query:self-evolve
+   evidence：利用LoRA适配器实现LLM的持续学习，避免灾难性遗忘，支持顺序任务学习，类似于模型自进化
 
 
 <div class="dpr-home-promo-card">

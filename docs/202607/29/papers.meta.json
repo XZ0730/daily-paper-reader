@@ -1,0 +1,54 @@
+{
+  "label": "2026-07-29",
+  "date": "2026-07-29",
+  "generated_at": "2026-07-29T20:49:02",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202607/29/2607.23802v1-from-rlvr-to-rlsvr-task-transformation-induces-self-verifiable-rewards-for-open-ended-llm-self-improvement",
+      "section": "deep",
+      "title_en": "From RLVR to RLSVR: Task Transformation Induces Self-Verifiable Rewards for Open-Ended LLM Self-Improvement",
+      "authors": "Qinsi Wang, Jing Shi, Huazheng Wang, Kun Wan, Yiran Wu, Bo Liu, Qingyun Wu, Hai Helen Li, Yiran Chen, Handong Zhao, Wentian Zhao",
+      "date": "2026-07-26",
+      "pdf": "https://arxiv.org/pdf/2607.23802v1",
+      "score": "9.0",
+      "evidence": "提出RLSVR，通过自验证奖励实现LLM自我改进",
+      "tldr": "RLVR虽推动推理型大模型进步，但局限于数学和编程等可验证领域，难以应用于开放任务。本文提出RLSVR范式，通过任务转换将开放任务转化为自验证代理环境，自动产生奖励信号。基于“谁是卧底”游戏构建的SpyRL多智能体环境，智能体通过不对称信息完成任务并投票识别卧底，投票结果即奖励。实验表明，SpyRL在文本摘要、创意写作等非可验证任务上超越现有方法，且在数学推理上也有提升，证明任务转换能拓展RLVR至开放领域。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Reinforcement Learning with Verifiable Rewards (RLVR) has driven recent progress in reasoning-oriented large language models (LLMs) by enabling large-scale optimization. However, its applicability remains largely limited to domains such as mathematics and coding, where correctness can be deterministically verified. Open-ended tasks instead often rely on human preferences, reward models, or LLM-based judges, introducing evaluation bias, judge capability bottlenecks, and additional inference costs.Drawing on the principle of self-supervised learning, which constructs pretext tasks to derive supervision from the data itself, we propose Reinforcement Learning with Self-Verifiable Rewards (RLSVR), a task-transformation-based training paradigm for extending RLVR to open-ended tasks. RLSVR transforms open-ended tasks into verifiable proxy environments whose internal rules and interaction outcomes automatically generate reward signals. We instantiate RLSVR with SpyRL, a multi-agent self-play environment inspired by Who Is the Spy?. Agents receive asymmetric information, complete the same target task, and vote to identify a designated spy. Because the spy identity is predetermined, voting outcomes provide fully verifiable rewards, while successful identification remains closely related to output quality. Experiments on text summarization, creative writing, and mathematical reasoning show that SpyRL outperforms existing self-improvement methods on non-verifiable tasks and yields consistent gains on verifiable reasoning tasks. These results demonstrate that task transformation can extend scalable RLVR-based self-improvement beyond inherently verifiable domains. Models and code have been released at https://github.com/wangqinsi1/SpyRL.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/29/2607.25554v1-distilling-temporal-search-and-reasoning-evolving-llms-for-future-prediction-via-harness-assisted-efficient-data-synthesis",
+      "section": "deep",
+      "title_en": "Distilling Temporal Search and Reasoning: Evolving LLMs for Future Prediction via Harness-Assisted Efficient Data Synthesis",
+      "authors": "Wanxu Cai, Zhengyu Chen, Huaisheng Zhu, Wei Wang, Jingang Wang, Qiang Xu",
+      "date": "2026-07-28",
+      "pdf": "https://arxiv.org/pdf/2607.25554v1",
+      "score": "9.0",
+      "evidence": "通过蒸馏时序推理进化LLM是用于NLP未来预测的自进化方法",
+      "tldr": "未来事件预测具有重大社会影响，然而现有最佳方法采用外部代理框架增强LLM，此类预测能力在移除代理后消失；同时时序搜索推理中的数据合成面临历史查询引发的时序泄露，使预测退化为检索，且传统合成方法丢弃大量数据，效率低下。我们提出一种时间截断辅助手段，在每轮信息收集时严格执行时间截止，从而对历史事件进行类似工具集成推理的采样，有效减少时序泄露并提高采样效率。通过构建大规模语料库和基于过程的度量，我们发现该辅助手段自然带来更广泛的时序搜索广度，大幅提升高质量数据的比例。蒸馏结果表明，使用辅助干预数据训练的学生模型性能达到最优，这表明辅助驱动的模型演进能将高质量的时序搜索推理数据转化为参数层面的进步，为LLM自我进化提供了高效途径。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Future event prediction carries broad social impact yet remains challenging. SOTA approaches augment LLMs with external agent frameworks whose predictive capability vanishes once the harness is removed. While recent Tool-Integrated Reasoning (TIR) internalizes deep search for multi-hop retrieval of facts, forecasting further demands temporal search and reasoning over historical trends and dynamic shifts. The key obstacle is data: historical queries induce temporal leakage that degrades forecasting into retrieval. Prior works either freeze information gathering with static observations, or rely on rejection sampling or unresolved fresh queries that discard vast amounts of data, degrading synthesis efficiency. We propose a time-truncation harness that enforces a temporal cut-off at every turn, enabling TIR-style sampling from historical events, reducing temporal leakage and reliance of rejection sampling or unsolved queries, increasing the sampling efficiency. We further build a large-scale corpus and a process-based metric and show that our harness naturally induces a broader temporal breadth of search and raises the proportion of high-quality data, further increasing the efficiency and reducing the reliance on complex rubrics. Distillation experiments show that students trained on harness-intervened data achieve the best performance, demonstrating harness-assisted model evolving that turns higher quality temporal search and reasoning data into a parametric advancement of the students.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/29/2607.23837v1-latent-lora-compact-latent-space-adapters-with-gradient-free-routing-for-continual-learning",
+      "section": "quick",
+      "title_en": "Latent-LoRA: Compact Latent-Space Adapters with Gradient-Free Routing for Continual Learning",
+      "authors": "Reza Rahimi Azghan, Gautham Krishna Gudur, Giulia Pedrielli, Pavan Turaga, Hassan Ghasemzadeh",
+      "date": "2026-07-26",
+      "pdf": "https://arxiv.org/pdf/2607.23837v1",
+      "score": "7.0",
+      "evidence": "利用LoRA适配器实现LLM的持续学习，避免灾难性遗忘，支持顺序任务学习，类似于模型自进化",
+      "tldr": "针对现有LoRA持续学习需任务ID或盲目求和导致输出失真的问题，我们发现冻结LLM嵌入的池化嵌入已可分离任务，利用高斯混合模型实现无梯度适配器路由；适配器参数约束在预训练权重主子空间并正交正则化。由此构建的Latent-LoRA无需重放和可训练门控，跨五模型规模、两基准取得SOTA，几乎零遗忘，显著提升参数效率与抗遗忘能力。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Large language models generalize well to individual tasks but lack an inherent mechanism for learning them sequentially, leading to catastrophic forgetting. To mitigate this, LoRA-based continual learning methods allocate a separate low-rank adapter per task, yet existing approaches either require task identity at inference or sum all adapters indiscriminately, letting irrelevant branches distort the output. Recent gating-based solutions route inputs to the correct adapter but introduce trainable parameters that themselves need protection against forgetting. In this work, we observe that pooled token embeddings from a frozen LLM embedding layer already separate task distributions throughout the learning sequence. A Gaussian mixture model fitted on these embeddings, without any gradient-based training, is sufficient for task-agnostic adapter selection at test time. This eliminates the need for a learned gating module. On the adapter side, constraining each task's parameters to the principal subspace of the pretrained weights via SVD yields a compact latent-space parameterization. Within this subspace, orthogonal regularization directly controls inter-task interference. The resulting system, Latent-LoRA, is replay-free, requires no trainable routing component, and uses substantially fewer parameters per task. Experiments across five model scales and two established continual learning benchmarks show state-of-the-art performance with near-zero forgetting.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
