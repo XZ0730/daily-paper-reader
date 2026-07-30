@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-30",
+  "date": "2026-07-30",
+  "generated_at": "2026-07-30T21:50:33",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/30/2607.26643v1-rethinking-self-evolution-a-constrained-exploration-exploitation-process-for-mitigating-skill-overfitting",
+      "section": "deep",
+      "title_en": "Rethinking Self-Evolution: A Constrained Exploration-Exploitation Process for Mitigating Skill Overfitting",
+      "authors": "Hongqiang Lin, Chao Liu, Xiaofan Bai, Xuan Jin, Yuhong Li, Nenggan Zheng, Xipeng Cao",
+      "date": "2026-07-29",
+      "pdf": "https://arxiv.org/pdf/2607.26643v1",
+      "score": "9.0",
+      "evidence": "针对LLM智能体的自进化方法，通过约束探索-利用缓解技能过拟合",
+      "tldr": "LLM智能体自我进化中，直接优化技能会导致对已知案例回归或对新情况过拟合。SkillBoost将技能进化建模为受探索-利用权衡约束的搜索过程，通过三阶段框架：结构化利用自动定位技能故障组件，先验引导探索借用LLM生成修复候选，验证接受仅采纳在回归阈值内提升性能的候选。23个配置上的实验表明SkillBoost达到SOTA，过拟合显著减少，且技能可跨任务复用。该研究为智能体持续学习提供了理论驱动的实用方案。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Enabling large language model (LLM) agents to accumulate and reuse experience from past interactions remains a central challenge in real-world applications. A promising solution is to treat skills as trainable states and optimize them in the same way as model parameters in neural network training. However, data-driven skill optimization is prone to overfitting to the limited trajectories collected from real environments. Overexploiting these trajectories overfits the current batch, while unconstrained exploration causes regression on previously solved cases. This tension motivates a constrained search view of skill self-evolution, governed by an exploration--exploitation trade-off. We propose SkillBoost, a three-stage framework that mitigates both risks: structured exploitation localizes observed failures to editable skill components, prior-guided exploration draws on prior knowledge in the LLM to generate diverse repair candidates, and verified acceptance commits a candidate only when it improves performance within a regression bound. Experiments across 23 model--benchmark configurations show that SkillBoost achieves state-of-the-art performance while mitigating overfitting, outperforming both human-crafted and LLM-generated skills. Transfer experiments further show that optimized skills can be reused by other agents on similar tasks.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/30/2607.26873v1-serpo-self-evolving-rubric-policy-optimization-for-open-ended-test-time-reinforcement-learning",
+      "section": "deep",
+      "title_en": "SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning",
+      "authors": "Jianze Wang, Kunwang Zheng, Ying Liu, Yu Cao, Qilong Zhang, Jinlong Chen, Hua Yang, Qianglong Chen",
+      "date": "2026-07-29",
+      "pdf": "https://arxiv.org/pdf/2607.26873v1",
+      "score": "9.0",
+      "evidence": "SERPO通过协同进化响应证据、评分标准和策略实现语言模型推理时自进化",
+      "tldr": "开放生成任务的测试时强化学习因缺乏标准答案而无法使用传统答案投票，亟需从模型自身输出构建可靠奖励。SERPO提出自演化评量准则策略优化，通过响应、评量准则和策略参数的三向闭环，将裁决token似然转换为奖励信号。在多个基准上，SERPO显著提升性能，并支持跨分布泛化，为开放生成测试时适应提供了无需外部奖励的高效方案。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Test-time reinforcement learning (TTRL) enables language models to self-evolve at inference time without labeled feedback. Existing methods rely on answer voting and therefore do not extend naturally to open-ended generation, where valid responses cannot be mapped to a shared canonical answer. Without external reward models or stronger judges, adaptation must instead construct reliable rewards from the model's own outputs. We introduce SERPO (Self-Evolving Rubric Policy Optimization), which replaces answer voting with a closed loop that co-evolves response evidence, query-specific rubrics, and policy parameters. Good-Normal-Bad (G-N-B) response evolution organizes maximally separated rollouts into ordered archives; rubric evolution retains criteria that discriminate these archives; probabilistic criterion scoring converts verdict-token likelihoods into reward signals; and policy evolution optimizes the actor with the resulting signals. New actor rollouts then refresh both the archives and rubrics, closing the three-way evolution loop. Across two model configurations, two in-domain benchmarks, and four OOD benchmarks, SERPO improves HealthBench and ResearchQA by up to 20.63 and 20.31 points over the corresponding base models, raises the six-benchmark macro-average by up to 8.06 points, and supports OOD transfer and continued cross-benchmark evolution.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

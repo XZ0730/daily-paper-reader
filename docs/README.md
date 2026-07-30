@@ -6,31 +6,29 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-29
-- 运行时间：2026-07-29 20:48:46 UTC
+- 最新运行日期：2026-07-30
+- 运行时间：2026-07-30 21:50:23 UTC
 - 运行状态：成功
-- 本次总论文数：3
+- 本次总论文数：2
 - 精读区：2
-- 速读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-今日精读两篇9分论文，聚焦RLVR到RLSVR的任务转换赋予LLM自我验证奖励，以及通过辅助合成蒸馏出时序推理用于未来预测；速读一篇Latent-LoRA持续学习方案。  
-最值得看的方向：任务转换让大模型获得自验证奖励信号、助力开放式自我改进，以及用高效数据合成蒸馏出LLM的未来预测能力。  
-建议普通读者优先阅读这两篇精读，快速把握LLM自我进化与预测的最新思路，再根据兴趣延伸至轻量级适配器方法。
-- 详情：[/202607/29/README](/202607/29/README)
+今日精读两篇高分自我进化论文，聚焦如何让模型在持续学习中不“偏科”。  
+结论指向：通过约束探索-利用过程缓解技能过拟合，或借助自进化评分规则提升开放任务测试时表现。  
+建议关注这两条路径的交汇点——用动态评分标准指导安全的自我进化，普通人也能从中学到“刻意练习”的底层逻辑。
+- 详情：[/202607/30/README](/202607/30/README)
 
 ### 精读区论文标签
-1. [From RLVR to RLSVR: Task Transformation Induces Self-Verifiable Rewards for Open-Ended LLM Self-Improvement](/202607/29/2607.23802v1-from-rlvr-to-rlsvr-task-transformation-induces-self-verifiable-rewards-for-open-ended-llm-self-improvement)  
+1. [Rethinking Self-Evolution: A Constrained Exploration-Exploitation Process for Mitigating Skill Overfitting](/202607/30/2607.26643v1-rethinking-self-evolution-a-constrained-exploration-exploitation-process-for-mitigating-skill-overfitting)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：提出RLSVR，通过自验证奖励实现LLM自我改进
-2. [Distilling Temporal Search and Reasoning: Evolving LLMs for Future Prediction via Harness-Assisted Efficient Data Synthesis](/202607/29/2607.25554v1-distilling-temporal-search-and-reasoning-evolving-llms-for-future-prediction-via-harness-assisted-efficient-data-synthesis)  
+   evidence：针对LLM智能体的自进化方法，通过约束探索-利用缓解技能过拟合
+2. [SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning](/202607/30/2607.26873v1-serpo-self-evolving-rubric-policy-optimization-for-open-ended-test-time-reinforcement-learning)  
    标签：评分：9.0/10、query:self-evolve
-   evidence：通过蒸馏时序推理进化LLM是用于NLP未来预测的自进化方法
+   evidence：SERPO通过协同进化响应证据、评分标准和策略实现语言模型推理时自进化
 
 ### 速读区论文标签
-1. [Latent-LoRA: Compact Latent-Space Adapters with Gradient-Free Routing for Continual Learning](/202607/29/2607.23837v1-latent-lora-compact-latent-space-adapters-with-gradient-free-routing-for-continual-learning)  
-   标签：评分：7.0/10、query:self-evolve
-   evidence：利用LoRA适配器实现LLM的持续学习，避免灾难性遗忘，支持顺序任务学习，类似于模型自进化
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">
