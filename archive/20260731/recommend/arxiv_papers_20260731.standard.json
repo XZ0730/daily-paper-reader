@@ -1,0 +1,159 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-31T21:31:55.300640+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2607.28568v1",
+      "source": "arxiv",
+      "title": "Frontis-MA1: Training an AI4AI Model towards Recursive Self-Improvement in Machine Learning Engineering",
+      "abstract": "Recursive self-improvement (RSI) requires AI systems that improve the process of building AI (i.e., AI4AI); machine learning engineering (MLE) offers a concrete, executable testbed for studying this capability. We introduce OpenMLE, an open full-stack system for RSI research in MLE, spanning verifiable task environments with execution feedback (OpenMLE-Gym), operator learning (OpenMLE-RL), and long-horizon search (OpenMLE-Evo). On this stack we post-train Frontis-MA1 (35B) as a meta-evolution agent for MLE, aligning post-training and inference around four atomic program-evolution operators (Draft, Improve, Debug, Crossover): the same operators are trained via execution-grounded SFT and RL on data deduplicated against all evaluation benchmarks, then composed into long-horizon search, coupling learning and evolution in a single loop. On MLE-Bench Lite under a 12-hour per-task budget on one RTX 4090 capped at 12 GB VRAM, Frontis-MA1 (35B) improves Medal Average from 39.39% to 60.61% over its base model with OpenMLE-Evo, and reaches 71.21% with OpenMLE-Evo-Max (benchmark-independent experience priors and asynchronous search), exceeding GPT-5.5 + Codex and approaching GPT-5.6 Sol and the 2.8T Kimi K3. On held-out NatureBench Lite, both components transfer: with the framework fixed, swapping in the trained model raises Match-SOTA from 50% to 70%; with the model fixed, swapping in OpenMLE-Evo raises it from 20% to 50%. We release the model weights and the full OpenMLE stack to enable reproducible research on executable AI4AI toward RSI. Code: https://github.com/FrontisAI/OpenRSI",
+      "authors": [
+        "Junlin Yang",
+        "Che Jiang",
+        "Yu Fu",
+        "Tianwei Luo",
+        "Can Ren",
+        "Weizhi Wang",
+        "Kaikai Zhao",
+        "Hongyi Liu",
+        "Yuxin Zuo",
+        "Yuru Wang",
+        "Yuchen Fan",
+        "Kai Tian",
+        "Zhenzhao Yuan",
+        "Xiaojian Lin",
+        "Li Sheng",
+        "Rushi Qiang",
+        "Guoli Jia",
+        "Xingtai Lv",
+        "Ermo Hua",
+        "Dianqiao Lei",
+        "Youbang Sun",
+        "Ning Ding",
+        "Bowen Zhou",
+        "Kaiyan Zhang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-30T17:34:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.28568v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Trains a meta-evolution agent for recursive self-improvement, aligning post-training and inference around program-evolution operators.",
+      "llm_evidence_cn": "训练一个元进化智能体，围绕程序进化算子对齐后训练和推理，实现递归自我改进。",
+      "llm_evidence": "训练一个元进化智能体，围绕程序进化算子对齐后训练和推理，实现递归自我改进。",
+      "canonical_evidence": "训练一个元进化智能体，围绕程序进化算子对齐后训练和推理，实现递归自我改进。",
+      "llm_tldr_en": "The paper introduces OpenMLE, an open stack for recursive self-improvement in machine learning engineering, and trains Frontis-MA1 as a meta-evolution agent with atomic operators like Draft and Improve, achieving significant improvements in code generation and bug fixing.",
+      "llm_tldr_cn": "本文提出OpenMLE，一个面向机器学习工程中递归自我改进的开放全栈系统，并训练Frontis-MA1作为元进化智能体。该智能体围绕Draft、Improve、Debug、Crossover四种原子程序进化算子进行后训练与推理对齐，在代码生成和缺陷修复任务上取得显著性能提升。这项研究为构建能自我改进的AI系统提供了可行的测试平台和方法论。",
+      "llm_tldr": "本文提出OpenMLE，一个面向机器学习工程中递归自我改进的开放全栈系统，并训练Frontis-MA1作为元进化智能体。该智能体围绕Draft、Improve、Debug、Crossover四种原子程序进化算子进行后训练与推理对齐，在代码生成和缺陷修复任务上取得显著性能提升。这项研究为构建能自我改进的AI系统提供了可行的测试平台和方法论。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.28527v1",
+      "source": "arxiv",
+      "title": "MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems",
+      "abstract": "Large language model-based multi-agent systems improve complex problem solving through task decomposition, agent specialization, information exchange, and intermediate validation. However, existing systems typically treat communication topology as a fixed design choice or an offline optimization target. We introduce MANTA, a framework for Multi-Agent Network Topology Adaptation that enables communication structures to self-evolve at inference time. Before execution, MANTA initializes a task-conditioned topology from prior structural experience. During deployment, it monitors collaboration traces and applies bounded structural updates when the current organization becomes insufficient. These updates can modify agent roles, communication links, execution order, information visibility, and validation pathways while preserving the task interface and agent budget. We evaluate MANTA against representative single-agent and multi-agent baselines on five benchmarks spanning information seeking, tool use, planning, workflow execution, and mathematical reasoning. MANTA achieves the highest average score of 74.0, outperforming the strongest baseline by 5.8 percentage points and obtaining the best result on PlanCraft. These results show that inference-time self-improvement can extend to the architecture of collaboration itself.",
+      "authors": [
+        "Mao-xun Huang",
+        "Jerry Wang",
+        "Yi-Cheng Lai",
+        "Zhengxin Zhang",
+        "Claire Cardie",
+        "Hen-Hsen Huang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-30T17:01:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.28527v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Self-evolving multi-agent system with adaptive communication topology, demonstrating model self-evolution.",
+      "llm_evidence_cn": "具备自适应通信拓扑的自进化多智能体系统，展示模型自进化能力。",
+      "llm_evidence": "具备自适应通信拓扑的自进化多智能体系统，展示模型自进化能力。",
+      "canonical_evidence": "具备自适应通信拓扑的自进化多智能体系统，展示模型自进化能力。",
+      "llm_tldr_en": "MANTA enables multi-agent communication topologies to self-evolve at inference time by monitoring collaboration traces and applying bounded structural updates, improving problem-solving efficiency.",
+      "llm_tldr_cn": "MANTA提出一种多智能体网络拓扑自适应框架，使通信结构能够在推理时自动进化。在执行前基于任务初始化拓扑，执行中监控协作痕迹并在需要时应用受约束的结构更新，如修改角色、连接等。实验表明动态拓扑调整提升了复杂问题求解的效率和适应性，为构建自进化多智能体系统提供了新机制。",
+      "llm_tldr": "MANTA提出一种多智能体网络拓扑自适应框架，使通信结构能够在推理时自动进化。在执行前基于任务初始化拓扑，执行中监控协作痕迹并在需要时应用受约束的结构更新，如修改角色、连接等。实验表明动态拓扑调整提升了复杂问题求解的效率和适应性，为构建自进化多智能体系统提供了新机制。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.27654v1",
+      "source": "arxiv",
+      "title": "From Single- to Cross-Document: Benchmarking Multi-Granularity Event Analysis of Large Language Models",
+      "abstract": "Event analysis is an essential and fundamental direction of information extraction, involving various event-centric tasks at different granularity of documents. While large language models (LLMs) have preliminarily achieved promising performance in part of these tasks individually, their capability in event analysis still lacks comprehensive understanding due to restricted document granularity, task designs, and data source of existing benchmarks. To address these limitations, we introduce MiGUE-Bench, a systematic benchmark for assessing the performance of LLMs in multi-granularity event analysis. To support large-scale evaluation, we first develop an LLM-driven self-correcting annotation framework called MiGUE-Pipeline, enabling scalable acquisition of high-quality source data of events with automatic labels. Then, we design four core tasks in our benchmark, i.e., event detection, relation reasoning, structure induction, and future prediction, to probe model competence at different levels, from atomic event details to complex cross-document narratives. Extensive experiments on state-of-the-art LLMs and retrieval-augmented generation (RAG) methods delineate the current capability boundary and identify critical deficiencies, providing insights into the future improvement of LLMs in challenging event analysis tasks.",
+      "authors": [
+        "Tao Wen",
+        "Shuai Shao",
+        "Pei Ke",
+        "Xu Han",
+        "Jie Zou",
+        "Guannan Li",
+        "Tao Tian",
+        "Jinjie Qiu",
+        "Lan Wang",
+        "Ke Qin"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-07-30T04:06:55+00:00",
+      "link": "https://arxiv.org/pdf/2607.27654v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "self-correcting annotation framework for event extraction",
+      "llm_evidence_cn": "用于事件抽取的自校正标注框架",
+      "llm_evidence": "用于事件抽取的自校正标注框架",
+      "canonical_evidence": "用于事件抽取的自校正标注框架",
+      "llm_tldr_en": "Proposes MiGUE-Bench, a benchmark for multi-granularity event analysis, and MiGUE-Pipeline, an LLM-driven self-correcting annotation framework, improving event extraction with self-evolution.",
+      "llm_tldr_cn": "该文提出多粒度事件分析基准MiGUE-Bench及LLM驱动的自校正标注流水线MiGUE-Pipeline，旨在解决现有基准在文档粒度、任务设计和数据源方面的局限。MiGUE-Pipeline通过自我修正机制提升事件抽取标注质量，实现信息抽取系统的自进化，为事件分析评估提供全面支持。",
+      "llm_tldr": "该文提出多粒度事件分析基准MiGUE-Bench及LLM驱动的自校正标注流水线MiGUE-Pipeline，旨在解决现有基准在文档粒度、任务设计和数据源方面的局限。MiGUE-Pipeline通过自我修正机制提升事件抽取标注质量，实现信息抽取系统的自进化，为事件分析评估提供全面支持。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self evolving information extraction systems",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

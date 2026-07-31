@@ -1,0 +1,54 @@
+{
+  "label": "2026-07-31",
+  "date": "2026-07-31",
+  "generated_at": "2026-07-31T21:36:58",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202607/31/2607.28568v1-frontis-ma1-training-an-ai4ai-model-towards-recursive-self-improvement-in-machine-learning-engineering",
+      "section": "deep",
+      "title_en": "Frontis-MA1: Training an AI4AI Model towards Recursive Self-Improvement in Machine Learning Engineering",
+      "authors": "Junlin Yang, Che Jiang, Yu Fu, Tianwei Luo, Can Ren, Weizhi Wang, Kaikai Zhao, Hongyi Liu, Yuxin Zuo, Yuru Wang, Yuchen Fan, Kai Tian, Zhenzhao Yuan, Xiaojian Lin, Li Sheng, Rushi Qiang, Guoli Jia, Xingtai Lv, Ermo Hua, Dianqiao Lei, Youbang Sun, Ning Ding, Bowen Zhou, Kaiyan Zhang",
+      "date": "2026-07-30",
+      "pdf": "https://arxiv.org/pdf/2607.28568v1",
+      "score": "9.0",
+      "evidence": "训练一个元进化智能体，围绕程序进化算子对齐后训练和推理，实现递归自我改进。",
+      "tldr": "递归自我改进是AI关键目标，需要在ML工程中实现AI4AI。我们构建OpenMLE：提供可验证的MLE任务环境（Gym），强化学习训练算子（RL），以及进化长程搜索（Evo）。并在其上训练35B的Frontis-MA1，通过四个程序进化算子（Draft, Improve, Debug, Crossover）执行基于执行的微调和强化学习，融合学习与进化。在单卡12小时限制的MLE-Bench Lite上，奖牌平均从39.39%升至60.61%（Evo）和71.21%（Evo-Max），超越GPT-5.5+Codex；在NatureBench Lite上，模型和框架均可迁移，Match-SOTA从20%升至50%。开源模型和代码，助力RSI研究。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Recursive self-improvement (RSI) requires AI systems that improve the process of building AI (i.e., AI4AI); machine learning engineering (MLE) offers a concrete, executable testbed for studying this capability. We introduce OpenMLE, an open full-stack system for RSI research in MLE, spanning verifiable task environments with execution feedback (OpenMLE-Gym), operator learning (OpenMLE-RL), and long-horizon search (OpenMLE-Evo). On this stack we post-train Frontis-MA1 (35B) as a meta-evolution agent for MLE, aligning post-training and inference around four atomic program-evolution operators (Draft, Improve, Debug, Crossover): the same operators are trained via execution-grounded SFT and RL on data deduplicated against all evaluation benchmarks, then composed into long-horizon search, coupling learning and evolution in a single loop. On MLE-Bench Lite under a 12-hour per-task budget on one RTX 4090 capped at 12 GB VRAM, Frontis-MA1 (35B) improves Medal Average from 39.39% to 60.61% over its base model with OpenMLE-Evo, and reaches 71.21% with OpenMLE-Evo-Max (benchmark-independent experience priors and asynchronous search), exceeding GPT-5.5 + Codex and approaching GPT-5.6 Sol and the 2.8T Kimi K3. On held-out NatureBench Lite, both components transfer: with the framework fixed, swapping in the trained model raises Match-SOTA from 50% to 70%; with the model fixed, swapping in OpenMLE-Evo raises it from 20% to 50%. We release the model weights and the full OpenMLE stack to enable reproducible research on executable AI4AI toward RSI. Code: https://github.com/FrontisAI/OpenRSI",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/31/2607.28527v1-manta-multi-agent-network-topology-adaptation-for-self-evolving-multi-agent-systems",
+      "section": "deep",
+      "title_en": "MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems",
+      "authors": "Mao-xun Huang, Jerry Wang, Yi-Cheng Lai, Zhengxin Zhang, Claire Cardie, Hen-Hsen Huang",
+      "date": "2026-07-30",
+      "pdf": "https://arxiv.org/pdf/2607.28527v1",
+      "score": "8.0",
+      "evidence": "具备自适应通信拓扑的自进化多智能体系统，展示模型自进化能力。",
+      "tldr": "当前基于大语言模型的多智能体系统虽能通过任务分解与专业化提升复杂问题解决，但通常将通信拓扑视为固定设计或离线优化目标。MANTA框架创新性地在推理时自适应演化通信结构，通过任务条件初始化与协作监控执行有界拓扑更新，动态调整代理角色、通信链路、执行顺序及信息可见性，同时保持任务接口和代理预算不变。在五个涵盖信息搜索、工具使用、规划、工作流和数学推理的基准上，MANTA平均得分74.0，领先最强基线5.8个百分点，并在PlanCraft上取得最优。这一工作表明，推理时自改进可延伸至协作架构本身，为多智能体系统的自我进化能力提供了新方向。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Large language model-based multi-agent systems improve complex problem solving through task decomposition, agent specialization, information exchange, and intermediate validation. However, existing systems typically treat communication topology as a fixed design choice or an offline optimization target. We introduce MANTA, a framework for Multi-Agent Network Topology Adaptation that enables communication structures to self-evolve at inference time. Before execution, MANTA initializes a task-conditioned topology from prior structural experience. During deployment, it monitors collaboration traces and applies bounded structural updates when the current organization becomes insufficient. These updates can modify agent roles, communication links, execution order, information visibility, and validation pathways while preserving the task interface and agent budget. We evaluate MANTA against representative single-agent and multi-agent baselines on five benchmarks spanning information seeking, tool use, planning, workflow execution, and mathematical reasoning. MANTA achieves the highest average score of 74.0, outperforming the strongest baseline by 5.8 percentage points and obtaining the best result on PlanCraft. These results show that inference-time self-improvement can extend to the architecture of collaboration itself.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/31/2607.27654v1-from-single--to-cross-document-benchmarking-multi-granularity-event-analysis-of-large-language-models",
+      "section": "quick",
+      "title_en": "From Single- to Cross-Document: Benchmarking Multi-Granularity Event Analysis of Large Language Models",
+      "authors": "Tao Wen, Shuai Shao, Pei Ke, Xu Han, Jie Zou, Guannan Li, Tao Tian, Jinjie Qiu, Lan Wang, Ke Qin",
+      "date": "2026-07-30",
+      "pdf": "https://arxiv.org/pdf/2607.27654v1",
+      "score": "7.0",
+      "evidence": "用于事件抽取的自校正标注框架",
+      "tldr": "事件分析是信息抽取的基础，但现有基准在文档粒度、任务设计和数据来源上存在局限，阻碍了对大语言模型事件分析能力的全面评估。本文推出MiGUE-Bench基准，通过LLM驱动的自纠正标注框架自动构建大规模数据，并设计事件检测、关系推理、结构归纳和未来预测四个核心任务，覆盖从单文档到跨文档的细粒度分析。在主流LLM和检索增强方法上的实验揭示了当前能力的边界与关键缺陷，为事件分析研究提供了重要基准。",
+      "tags": "query:self-evolve",
+      "abstract_en": "Event analysis is an essential and fundamental direction of information extraction, involving various event-centric tasks at different granularity of documents. While large language models (LLMs) have preliminarily achieved promising performance in part of these tasks individually, their capability in event analysis still lacks comprehensive understanding due to restricted document granularity, task designs, and data source of existing benchmarks. To address these limitations, we introduce MiGUE-Bench, a systematic benchmark for assessing the performance of LLMs in multi-granularity event analysis. To support large-scale evaluation, we first develop an LLM-driven self-correcting annotation framework called MiGUE-Pipeline, enabling scalable acquisition of high-quality source data of events with automatic labels. Then, we design four core tasks in our benchmark, i.e., event detection, relation reasoning, structure induction, and future prediction, to probe model competence at different levels, from atomic event details to complex cross-document narratives. Extensive experiments on state-of-the-art LLMs and retrieval-augmented generation (RAG) methods delineate the current capability boundary and identify critical deficiencies, providing insights into the future improvement of LLMs in challenging event analysis tasks.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
