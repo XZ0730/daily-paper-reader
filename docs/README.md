@@ -6,22 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-01
-- 运行时间：2026-08-01 20:12:38 UTC
+- 最新运行日期：2026-08-02
+- 运行时间：2026-08-02 20:24:33 UTC
 - 运行状态：成功
-- 本次总论文数：0
+- 本次总论文数：1
 - 精读区：0
-- 速读区：0
+- 速读区：1
 
 ### 今日简报（AI）
-> 今日无新推荐，系统未产出可展示论文。
-- 详情：[/202608/01/README](/202608/01/README)
+今天研读了一篇关于持续检测AI生成图像的新论文《DECODE》，评分7.0。
+该文指出AI图像检测器在面对新模型时会出现表示与决策双重退化，并提出解耦学习策略来缓解这个问题。
+建议关注该领域的读者从多模态数据流与增量学习结合的角度，进一步探索检测器的终身学习能力。
+- 详情：[/202608/02/README](/202608/02/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-- 本次无速读推荐。
+1. [DECODE: Tackling Representation and Decision Degradation in Continual AI-Generated Image Detection](/202608/02/2607.27882v1-decode-tackling-representation-and-decision-degradation-in-continual-ai-generated-image-detection)  
+   标签：评分：7.0/10、query:self-evolve
+   evidence：提出持续学习方法应对AI图像检测中的表征与决策退化
 
 
 <div class="dpr-home-promo-card">

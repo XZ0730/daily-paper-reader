@@ -1,0 +1,57 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-02T20:22:31.030342+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.27882v1",
+      "source": "arxiv",
+      "title": "DECODE: Tackling Representation and Decision Degradation in Continual AI-Generated Image Detection",
+      "abstract": "As generative models continue to evolve, AI-generated image detectors must incrementally adapt to emerging generative domains while preserving knowledge acquired from previous ones. This continual learning setting is particularly challenging because forensic traces are often subtle and generator-specific, making detectors highly vulnerable to catastrophic forgetting. Existing methods primarily address this problem by stabilizing feature representations, implicitly treating forgetting as a representation-level issue. In this paper, we show that this perspective is incomplete. We demonstrate that even when feature representations remain discriminative, the decision boundary can progressively drift as the classification head is continually optimized on new domains. These two effects jointly give rise to a compound failure mode, termed Dual Degradation. To overcome this challenge, we propose DECODE, a decoupled continual detection framework that jointly mitigates representation- and decision-level forgetting. Specifically, we introduce Subspace Diversity Regularization (SDR) to preserve diverse forensic representations and Closed-Form Decision Alignment (CDA) to recalibrate the shared classification head after each adapter merge without manual hyperparameter tuning. Extensive experiments on 19 generative domains show that DECODE achieves an average accuracy of 99.36% with only 0.39% forgetting, while further generalizing to 11 unseen generators with 95.36% accuracy.",
+      "authors": [
+        "Zihao Cai",
+        "Xinghan Li",
+        "Ruiyan Yang",
+        "Xue Song",
+        "Haijun Shan",
+        "Jingjing Chen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-30T08:55:46+00:00",
+      "link": "https://arxiv.org/pdf/2607.27882v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "proposes a continual learning method for AI image detection, tackling representation and decision decay",
+      "llm_evidence_cn": "提出持续学习方法应对AI图像检测中的表征与决策退化",
+      "llm_evidence": "提出持续学习方法应对AI图像检测中的表征与决策退化",
+      "canonical_evidence": "提出持续学习方法应对AI图像检测中的表征与决策退化",
+      "llm_tldr_en": "Shows that decision drift persists in continual image detectors even with stable features, and proposes DECODE to jointly address representation and decision degradation.",
+      "llm_tldr_cn": "针对持续AI图像检测中的灾难性遗忘，现有方法多聚焦于稳定特征表示，本文揭示决策边界漂移是另一关键退化因素，提出DECODE方法联合优化表征与决策边界，在多个生成模型上验证有效，为神经网络的持续学习与自进化提供方法借鉴。",
+      "llm_tldr": "针对持续AI图像检测中的灾难性遗忘，现有方法多聚焦于稳定特征表示，本文揭示决策边界漂移是另一关键退化因素，提出DECODE方法联合优化表征与决策边界，在多个生成模型上验证有效，为神经网络的持续学习与自进化提供方法借鉴。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

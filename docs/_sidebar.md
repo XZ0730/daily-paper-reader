@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-08-02 <!--dpr-date:20260802-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/02/2607.27882v1-decode-tackling-representation-and-decision-degradation-in-continual-ai-generated-image-detection" data-sidebar-item="{&quot;title&quot;: &quot;DECODE: Tackling Representation and Decision Degradation in Continual AI-Generated Image Detection&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.27882v1-decode-tackling-representation-and-decision-degradation-in-continual-ai-generated-image-detection&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;self-evolve&quot;}], &quot;evidence&quot;: &quot;提出持续学习方法应对AI图像检测中的表征与决策退化&quot;}">DECODE: Tackling Representation and Decision Degradation in Continual AI-Generated Image Detection</a>
   * 2026-07-31 <!--dpr-date:20260731-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/31/2607.28568v1-frontis-ma1-training-an-ai4ai-model-towards-recursive-self-improvement-in-machine-learning-engineering" data-sidebar-item="{&quot;title&quot;: &quot;Frontis-MA1: Training an AI4AI Model towards Recursive Self-Improvement in Machine Learning Engineering&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.28568v1-frontis-ma1-training-an-ai4ai-model-towards-recursive-self-improvement-in-machine-learning-engineering&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;self-evolve&quot;}], &quot;evidence&quot;: &quot;训练一个元进化智能体，围绕程序进化算子对齐后训练和推理，实现递归自我改进。&quot;}">Frontis-MA1: Training an AI4AI Model towards Recursive Self-Improvement in Machine Learning Engineering</a>

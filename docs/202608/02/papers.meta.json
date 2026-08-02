@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-02",
+  "date": "2026-08-02",
+  "generated_at": "2026-08-02T20:24:42",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/02/2607.27882v1-decode-tackling-representation-and-decision-degradation-in-continual-ai-generated-image-detection",
+      "section": "quick",
+      "title_en": "DECODE: Tackling Representation and Decision Degradation in Continual AI-Generated Image Detection",
+      "authors": "Zihao Cai, Xinghan Li, Ruiyan Yang, Xue Song, Haijun Shan, Jingjing Chen",
+      "date": "2026-07-30",
+      "pdf": "https://arxiv.org/pdf/2607.27882v1",
+      "score": "7.0",
+      "evidence": "提出持续学习方法应对AI图像检测中的表征与决策退化",
+      "tldr": "随着生成模型演进，AI图像检测器需持续适应新域并规避灾难性遗忘。现有方法仅稳定特征表示，忽视分类头优化导致的决策边界漂移，引发双重退化。本文提出DECODE解耦框架，通过子空间多样性正则化（SDR）保留多样取证特征，闭式决策对齐（CDA）自动校准决策边界。在19个生成域上平均准确率高达99.36%，遗忘率仅0.39%，并泛化至11个未见生成器准确率95.36%，为持续AI取证提供高效通用方案。",
+      "tags": "query:self-evolve",
+      "abstract_en": "As generative models continue to evolve, AI-generated image detectors must incrementally adapt to emerging generative domains while preserving knowledge acquired from previous ones. This continual learning setting is particularly challenging because forensic traces are often subtle and generator-specific, making detectors highly vulnerable to catastrophic forgetting. Existing methods primarily address this problem by stabilizing feature representations, implicitly treating forgetting as a representation-level issue. In this paper, we show that this perspective is incomplete. We demonstrate that even when feature representations remain discriminative, the decision boundary can progressively drift as the classification head is continually optimized on new domains. These two effects jointly give rise to a compound failure mode, termed Dual Degradation. To overcome this challenge, we propose DECODE, a decoupled continual detection framework that jointly mitigates representation- and decision-level forgetting. Specifically, we introduce Subspace Diversity Regularization (SDR) to preserve diverse forensic representations and Closed-Form Decision Alignment (CDA) to recalibrate the shared classification head after each adapter merge without manual hyperparameter tuning. Extensive experiments on 19 generative domains show that DECODE achieves an average accuracy of 99.36% with only 0.39% forgetting, while further generalizing to 11 unseen generators with 95.36% accuracy.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
