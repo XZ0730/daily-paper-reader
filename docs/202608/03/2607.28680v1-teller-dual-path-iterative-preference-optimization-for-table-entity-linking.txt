@@ -1,0 +1,358 @@
+Title: TELLER: Dual-Path Iterative Preference Optimization for Table Entity Linking
+
+URL Source: https://arxiv.org/pdf/2607.28680v1
+
+Published Time: Mon, 03 Aug 2026 00:04:41 GMT
+
+Number of Pages: 16
+
+Markdown Content:
+# TELLER: Dual-Path Iterative Preference Optimization for Table Entity Linking 
+
+Yixin Peng 1,*,†, Kehao Li 1,† and Stefan Decker 1
+
+> 1
+
+RWTH Aachen, Ahornstraße 55, 52074 Aachen, Germany 
+
+Abstract 
+
+Entity linking in tables matches short and ambiguous cell mentions to their corresponding knowledge-base entities. Existing approaches typically rely on data preprocessing pipelines that retain either compact or extensive table content as contextual evidence, and then formulate entity linking as a language generation task for instruction-tuned models; recent systems further incorporate explicit reasoning to disambiguate challenging mentions. However, their training supervision is usually static: fixed preference data cannot adapt to the residual errors of an evolving model, while variations in reasoning length can bias sequence-level preference learning. To address these limitations, we present TELLER: Table Entity Linking through Learning from Errors and Reasoning. We first retrieve and rank Wikidata candidates and retain reduced table evidence in the prompt. The direct-answer path applies iterative direct preference optimization and refreshes its preference data with residual errors from the updated model. The reasoning path uses filtered and compressed chain-of-thought rationales for supervised fine-tuning, followed by our iterative length-normalized regularized preference optimization. On the TableInstruct entity-linking subset, the direct-answer path improves accuracy from 94.35% to 94.50%; on the MammoTab V2 evaluation set, it improves accuracy from 87.59% to 88.20%. The reasoning path improves accuracy from 92.90% to 92.95% on TableInstruct and from 79.09% to 81.85% on MammoTab V2, while maintaining high rates of complete reasoning generation. These results show that iterative preference learning benefits both concise entity prediction and explicit reasoning. 
+
+Keywords 
+
+Entity Linking, Table Understanding, Ontology Matching, Reinforcement Learning, Iterative Preference Opti-mization 
+
+## 1. Introduction 
+
+Tables are a major source of structured knowledge, yet their cell values are often too short and ambiguous to be interpreted in isolation. In cell entity annotation (CEA), each target mention must be linked to its corresponding knowledge-base entity. The decisive evidence may occur in a column header or table caption rather than in the mention itself, while unrelated cells can introduce competing entities and distract the linker [ 1 ]. Effective table entity linking therefore depends on two closely related design choices: which candidate entities are presented to the model and how much table context is retained in the input. Recent work treats entity linking as a language generation task. GENRE directly generates canonical entity names [ 2 ], while INSGENEL [ 3 ] and EntGPT [ 4 ] use instruction-tuned language models for this task. For tables, TableLlama [ 5] shows that one instruction format can support many table-understanding tasks. These studies motivate us to formulate CEA as candidate-conditioned generation. The input contains a target cell, selected table context, and candidate entities described by their names, types, and descriptions. The model selects the candidate that best matches the evidence in the input. Building large datasets in this format, however, requires a consistent way to retrieve candidates and serialize tables. The serialized input should preserve the evidence needed to distinguish among the candidates, exclude unrelated cells that may distract the model, and keep the input length manageable. 
+
+> *
+
+Corresponding author. 
+
+> †
+
+These authors contributed equally. 
+
+$ peng@dbis.rwth-aachen.de (Y. Peng) 
+
+ 0009-0003-9777-0123 (Y. Peng); 0009-0002-7704-1049 (K. Li); 0000-0001-6324-7164 (S. Decker)  
+
+> ©2026 Copyright for this paper by its authors. Use permitted under Creative Commons License Attribution 4.0 International (CC BY 4.0).
+
+Explicit reasoning can improve language-generation models by guiding them how to work through a problem step-by-step. For example, chain-of-thought (CoT) supervision [ 6 ] can make candidate comparisons and reasoning steps visible in the output. This makes a prediction easier to interpret and may help the model select the correct entity. Since collecting human-written rationales is difficult and expensive, large language models can instead be used to generate rationale supervision for smaller models [ 7 , 8 ]. However, teacher-generated rationales may contain unsupported claims or repeated content. They may also be too long for a smaller model to complete within its generation budget. Preference optimization provides another way to improve a model by learning from the entity-linking errors that remain after supervised fine-tuning (SFT). Each training example has a gold entity, so an incorrect model prediction can serve as the rejected response and the gold answer as the chosen response. This procedure requires neither human preference labels nor a large language model (LLM) judge. Direct preference optimization (DPO) [ 9 ] can learn from these pairs, but a fixed set of pairs captures only the errors made by the model that generated them. After the model is updated, its remaining errors are more relevant for the next update [ 10 ]. Applying preference optimization to reasoning outputs introduces two further problems. First, harder entity-linking examples often require longer rationales, and differences in response length can bias sequence-level preference scores [ 11 , 12 ]. Second, increasing only the relative margin between the chosen and rejected responses does not guarantee that the gold-consistent chosen rationale remains likely under the model. To address these limitations, we propose TELLER. Its offline preprocessing pipeline retrieves and ranks plausible Wikidata [ 13 ] candidates. The prompt retains the target cell, the other cells in its row and column, the table headers, and the caption, while removing all remaining table cells. This compact representation preserves useful context while reducing interference from non-target entities. TELLER then improves entity linking through two iterative preference-learning paths. The direct-answer path applies iterative DPO after SFT. At each iteration, the current model generates predictions on the training data. Its incorrect predictions are paired with the corresponding gold answers, and these new pairs are used for the next DPO update. The reasoning path first uses filtered and compressed teacher rationales for CoT-SFT and then applies 
+
+iterative L-RPO . We propose length-normalized regularized preference optimization (L-RPO) to combine length-normalized log-probability scores from the trainable model and a frozen reference model with a regularized preference optimization (RPO) likelihood loss on the chosen response [14]. As in iterative DPO, each new iteration replaces the earlier rejected responses with residual reasoning errors generated by the updated model. Both iterative methods can therefore continue for multiple rounds. In this work, we run two rounds of each method to provide a controlled comparison and demonstrate the effect of refreshing the preference data. The two paths also allow us to study concise entity predictions separately from longer reasoning-and-answer sequences. The two paths are evaluated on both the entity-linking subset of TableInstruct [ 5 ] and the MammoTab V2 evaluation set [ 15 ]. Iterative DPO produces progressive accuracy gains over direct-answer SFT: 94.35% → 94.40% → 94.50% on TableInstruct and 87.59% → 88.16% → 88.20% on MammoTab V2. The final MammoTab score of 0.882 exceeds the best baseline result of 0.86 listed on the public MammoTab V2 evaluation page [ 16 ]. In the reasoning path, iterative L-RPO improves CoT-SFT accuracy from 92.90% to 92.95% on TableInstruct and from 79.09% to 81.85% on MammoTab V2. Complete-rationale rates reach 99.55% and 91.86%, respectively. Direct-answer models remain more accurate, showing that explicit reasoning introduces a measurable cost even when preference optimization recovers part of the gap. The main contributions of this work are: 
+
+• We develop an offline pipeline for retrieving and ranking Wikidata candidates and introduce a compact prompt serialization that retains the table headers, caption, and cells in the target cell’s row and column while removing all remaining table cells. 
+
+• We introduce iterative DPO for direct-answer entity linking. Starting from the best SFT checkpoint, each iteration constructs preference pairs from the current model’s errors and uses them for the next DPO update. 
+
+• We propose L-RPO for reasoning-oriented preference learning by combining completion-length normalization with chosen-response regularization. Its iterative extension can repeatedly refresh reasoning preference pairs with the residual errors of the evolving L-RPO model after CoT-SFT. 
+
+• We evaluate the complete training pipeline on the TableInstruct entity-linking subset and Mam-moTab V2. Iterative DPO reaches 94.50% and 88.20% accuracy, respectively; the latter corresponds to 0.882 CEA and exceeds the best result currently listed on the public benchmark. Our stage-wise analysis also quantifies the benefit of iterative L-RPO for CoT-SFT. 
+
+## 2. Related Work 
+
+2.1. Generative Entity Linking and Table Understanding 
+
+Entity linking has typically been decomposed into candidate retrieval and disambiguation. BLINK, for example, uses a bi-encoder to retrieve entities and a cross-encoder to rerank them [ 17 ]. Generative methods replace or augment this ranking stage with sequence generation: GENRE performs constrained autoregressive generation over canonical entity names [ 2 ], while INSGENEL combines a lightweight retriever with an instruction-tuned generator [ 3 ]. EntGPT further studies prompted and instruction-tuned LLM for entity linking [ 4]. Recent work also considers fine-tuning-free few-shot linking and adaptive routing that reserves explicit reasoning for difficult mentions [ 18 , 19 ]. These approaches show that generation offers a flexible task interface, but they do not remove the need for high-recall candidate construction or informative mention context. Both requirements become more acute for tables, where an isolated cell often contains little lexical evidence. TURL introduces structure-aware pre-training over table metadata, headers, and entities [ 20 ], and RoCEL explicitly models row context as relational evidence and column context as categorical evidence [ 21 ]. Complementary analyses show that headers, captions, and structurally related cells are useful, whereas allowing attention to unrelated cells can dilute the relevant signal [ 1]. At a broader level, TableLlama demonstrates that a single instruction format can support heterogeneous table tasks [ 5 ]. Together, these results motivate selective serialization rather than treating a table as either an isolated cell or an undifferentiated token sequence. TELLER builds on these two strands by using a generator as a candidate-conditioned discriminator. Each retrieved Wikidata candidate is represented by its name, type, and description, while the prompt retains compact metadata and structurally relevant table evidence. The candidate set anchors the output to the target knowledge base, and the instruction format provides a common interface for our training dataset. Our focus is a controlled input and training formulation that makes the same entity-linking instances usable for direct prediction, rationale supervision, and iterative preference learning. 
+
+2.2. Rationale Supervision and Distillation 
+
+Chain-of-thought (CoT) prompting elicits intermediate reasoning from in-context demonstrations [ 6]; rationale distillation instead places teacher-generated reasoning in the student’s training target. Fine-tune-CoT established this teacher–student recipe [ 22 ], and subsequent work showed that rationales can transfer useful supervision to much smaller models or reduce the amount of labeled data required [23 , 24 ]. Multi-path and self-consistent variants seek better targets by aggregating or contrasting alternative rationales [ 25 , 26 ]. Related self-training methods such as STaR retain reasoning traces that lead to correct answers and regenerate unsuccessful traces before another training round [27]. Teacher generation, however, does not guarantee reliable supervision. CoT explanations can be inconsistent with the model’s actual decision process [ 28 ], and even answer-consistent traces may contain unsupported or unhelpful steps. DOCTOR therefore treats the teacher as unreliable and selectively distills rationales that pass consistency and helpfulness filters [ 29 ]. Efficiency is a second concern: long or repetitive traces increase training and decoding costs without necessarily adding useful signal. Keypoint-based distillation emphasizes salient rationale tokens [ 30 ]; controlled studies likewise find that a small subset of key tokens can retain much of the benefit of CoT-augmented distillation [ 31 ]. TokenSkip instead learns to omit less informative reasoning tokens at generation time [32]. Our rationale pipeline follows the same quality-over-quantity principle but specializes it to candidate comparison in table entity linking. We require the final prediction to agree with the gold entity, reject malformed, unsupported, leaked, or repetitive traces, and extractively shorten overlong rationales without changing their conclusions. The retained rationale is an explicit CoT-SFT target grounded in the supplied table and candidate evidence; we do not treat fluency or answer correctness alone as evidence of faithfulness. These filtered targets subsequently serve as chosen responses for reasoning-oriented preference optimization. 
+
+2.3. Preference Optimization and Iterative Alignment 
+
+DPO optimizes a language model directly from chosen–rejected response pairs relative to a frozen reference model, avoiding both a learned reward model and online reinforcement learning [ 9 ]. Its simplicity also exposes two issues that matter for reasoning sequences. First, improving the chosen– rejected margin need not preserve the absolute likelihood of the chosen response. RPO addresses this failure mode by adding a supervised negative-log-likelihood term on the chosen completion [ 14 ]. Second, summed sequence log-probabilities entangle response quality with length and can induce unintended length preferences [ 11 ]. SimPO uses average per-token log-probability as its implicit reward, but removes the reference model altogether [12]. A fixed offline preference set creates a separate limitation: it records the errors of the policy that produced it, even after training has changed that policy. Iterative preference learning instead samples new responses from the updated model and rebuilds the comparison data for the next round [ 10 ]. IRPO extends this idea to reasoning by repeatedly generating reasoning paths, selecting them by answer correctness, and training with a DPO objective [ 33 ]. Thus, iteration, chosen-response regularization, and length control have each proved useful, but they solve distinct problems: stale negatives, likelihood degradation, and sequence-length bias. TELLER addresses these problems for table entity linking. In the direct-answer path, the gold entity and a current model error form each preference pair, and every round replaces resolved errors with the model’s residual errors. In the reasoning path, L-RPO retains a round-specific frozen reference model, normalizes both policy and reference scores by completion length inside the pairwise margin, and regularizes the likelihood of the filtered chosen rationale. Its iterative extension regenerates rejected reasoning responses after each update. 
+
+## 3. Method 
+
+3.1. Task Formulation 
+
+In this work, we focus on relational tables for entity linking. For each target cell mention 𝑚 𝑖 , the model is given the table context 𝑇 𝑖 , optional page and section context 𝑃 𝑖 , and a candidate set 𝒞 𝑖 = {𝑐 𝑖 1, . . . , 𝑐 𝑖𝐾 }.
+
+Each candidate contains an entity name, a description, and a semantic type. We serialize the target cell mention, table context, optional page and section context, and candidate set into an input prompt 𝑥 𝑖 .The goal is to predict the gold entity 𝑒 𝑖 for the target cell mention. In the reasoning-based stages, the model will generate the entity prediction in the required output format with reasoning between the  
+
+> <think>
+
+and </think> tags. During evaluation, we extract the final entity prediction, and a prediction is correct only when it exactly matches the gold entity. We do not use fuzzy matching or semantic correction. 
+
+3.2. Framework Overview 
+
+Our framework consists of two stages: data construction and model training. First, we convert the original MammoTab V2 data into the TableInstruct format. After removing duplicate training examples and ensuring that the training set does not overlap with the validation or test sets, we merge the processed MammoTab V2 data with TableInstruct to construct direct-answer, reasoning, and preference datasets. For model training, we compare two paths: direct-answer SFT and reasoning-enhanced training (CoT-SFT). The direct-answer path performs iterative DPO following SFT. And the reasoning-enhanced path continues training from the same SFT checkpoint using CoT-SFT, followed by iterative L-RPO. 
+
+3.3. Data Construction 
+
+Entity-linking instances. TableInstruct already includes entity-linking examples with a list of candidate entities. For each target cell in MammoTab, we retain only the target cell mention, the other cells in the same row and column, table headers, caption, page title, and section title, while removing all remaining table cells. This shorter representation reduces the input length and limits distraction from unrelated entities in nearby cells, while preserving the more useful header and caption information. An example of the processed entity-linking data is provided in Appendix A.1. To retrieve candidate entities, we build a local Wikidata index from the latest-truthy.nt.bz2 dump [ 13 , 34 ]. We first retrieve candidates through alias matching and BM25 search [ 35 ]. We then rank the retrieved entities using a weighted combination of five signals, as detailed in Algorithm 1: name similarity, mention–entity frequency, type compatibility, BM25 relevance, and context overlap. The top 20 candidates are retained for each target mention. Each candidate is serialized as follows: <entity name [DESCRIPTION] description [TYPE] semantic type> .
+
+Algorithm 1 Candidate Retrieval and Scoring for Entity Linking 
+
+Require: mention 𝑚 , column name 𝑐 , table context ctx (page/section/row text), mention-to-entity prior counts Prior , top-𝑘 (default 20 )
+
+Ensure: top-𝑘 ranked candidate entities  
+
+> 1:
+
+^𝑚 ← Normalize (𝑚 ) 
+
+> 2:
+
+𝐸 ← RetrieveCandidates ( ^ 𝑚 ) {exact alias match ∪ BM25 full-text search over local KB}  
+
+> 3:
+
+for each entity 𝑒 ∈ 𝐸 do  
+
+> 4:
+
+𝑓 lex (𝑒 ) ← lexical match score {exact / substring / string-similarity between ^𝑚 and 𝑒 ’s label}  
+
+> 5:
+
+𝑓 prior (𝑒 ) ← normalized prior Prior[ ^ 𝑚 ][ 𝑒 ] {how often this mention resolves to 𝑒 } 
+
+> 6:
+
+𝑓 type (𝑒 ) ← type-compatibility score between 𝑐 and 𝑒 ’s entity type  
+
+> 7:
+
+𝑓 ctx (𝑒 ) ← context overlap between 𝑒 ’s description and ctx  
+
+> 8:
+
+𝑓 bm25 (𝑒 ) ← normalized BM25 relevance score  
+
+> 9:
+
+score( 𝑒 ) ←∑︀ 𝑖 𝑤 𝑖 · 𝑓 𝑖 (𝑒 ) {fixed heuristic weights, 𝑖 ∈ { lex , prior , type , ctx , bm25 }} 
+
+> 10:
+
+end for  
+
+> 11:
+
+𝐸 sorted ← SortDescending (𝐸, score)  
+
+> 12:
+
+return top-𝑘 entities of 𝐸 sorted 
+
+If the gold entity is not retrieved, we do not manually insert it into the candidate list. But we find that every data in our final dataset included its gold entity among the retrieved candidates. Therefore, no training data has an empty or NIL target in the final dataset. Moreover, to reduce the number of training examples that share nearly identical table contexts, we randomly sample one target cell from each table with random seed 42 . The final SFT dataset contains 105,000 examples: 35,000 from TableInstruct and 70,000 processed examples from MammoTab. 
+
+Reasoning data construction. We add a rationale to each data in the merged dataset and place it between the <think> and </think> tags. DeepSeek-V4-Pro generates rationales for the MammoTab examples [ 36 ], while GPT-5.2 Thinking generates rationales for the TableInstruct examples [ 37 ]. This generation step yields 36,276 outputs. We then apply a task-specific filter. We remove examples with invalid formats, unsupported claims, repeated content, answer leakage, or a final entity prediction that differs from the gold entity. For outputs longer than 500 tokens, we remove copied candidate lists, repeated reasoning, and sentences that do not provide useful evidence. We do not rewrite the remaining sentences or change the final entity prediction. After filtering, the CoT-SFT dataset contains 35,641 examples. The training pipeline performs a final check of sequence length and target correctness, leaving 35,617 examples for training. 
+
+Direct-answer iterative preference supervision. Let 𝜋 0 be the direct-answer model selected on the validation set after SFT. In round 𝑘 , the current model 𝜋 𝑘 −1 is rolled out on the training inputs. For every incorrect prediction, the model response becomes the rejected completion and the gold entity sequence becomes the chosen completion. DPO round 1 is trained on errors from 𝜋 0. The resulting policy 𝜋 1 is then rolled out again, and only its residual errors are used to construct the second-round data. This refresh prevents DPO round 2 from being trained on errors that the updated direct-answer model has already resolved. An example is provided in Appendix A.3. 
+
+Reasoning iterative preference supervision. Let 𝜋 0 be the model after CoT-SFT. In this work, we conduct two rounds of L-RPO, constructing a new preference dataset in each round. In round 𝑘 ∈ { 1, 2},the current model 𝜋 𝑘 −1 generates responses for the training data using greedy decoding. We keep the examples for which the final entity prediction is incorrect. The full generated response, including the reasoning trace and the incorrect final entity, is used as the rejected response 𝑦 −
+
+> 𝑖,𝑘
+
+. For the chosen response 𝑦 +
+
+> 𝑖,𝑘
+
+, we first search the constructed CoT-SFT dataset for a response to the same example whose final entity matches the gold entity. If no valid response is found, DeepSeek-V4-Pro generates a new one. In round 1, we reuse 924 chosen responses and generate 4,052 new responses. In round 2, we reuse 1,040 chosen responses and generate 2,541 new responses. The preference dataset for round 𝑘 is defined as 
+
+𝒟 (𝑘 )pref ={︁(︁ 𝑥 𝑖 , 𝑦 +
+
+> 𝑖,𝑘
+
+, 𝑦 −
+
+> 𝑖,𝑘
+
+)︁}︁  
+
+> 𝑁 𝑘
+> 𝑖 =1
+
+, 𝑘 ∈ { 1, 2}. (1) An example is provided in Appendix A.2. After training on 𝒟 (1) pref , we use the resulting model 𝜋 1 to build the second-round dataset. We do not reuse the incorrect outputs generated by the CoT-SFT model. Therefore, 𝒟 (2) pref focuses on the errors that remain after the first L-RPO round. In both rounds, we keep only valid pairs whose chosen response gives the correct entity. We remove responses with invalid formats, repeated or low-quality reasoning, or leaked answers, without changing the final entity. 
+
+3.4. Progressive Training 
+
+Supervised fine-tuning. We use Llama 3.1 8B as the base model [ 38 ] and apply LoRA adapters [ 39 ]to the query, key, value, and output projection layers in each attention block. Given an input prompt 𝑥 𝑖 
+
+and its gold entity sequence 𝑒 𝑖 , SFT minimizes the following loss: 
+
+ℒSFT = − 1
+
+𝑁 
+
+> 𝑁
+
+∑︁ 
+
+> 𝑖 =1
+> |𝑒 𝑖 |
+
+∑︁ 
+
+> 𝑡 =1
+
+log 𝑝 𝜃 (𝑒 𝑖,𝑡 | 𝑥 𝑖 , 𝑒 𝑖,<𝑡 ) . (2) The loss is computed only on the response tokens, while the prompt tokens are ignored. We remove examples if the full response cannot fit within the maximum sequence length. This stage teaches the model to understand the table content, candidate format and select the correct entity. 
+
+Chain-of-Thought Supervised Fine-Tuning. Starting from the SFT checkpoint with the best validation performance, we continue training the same LoRA adapter on responses that include CoT reasoning. For each example, the target response is 
+
+𝑧 𝑖 = <think> 𝑟 𝑖 </think> 𝑒 𝑖 <eos> , (3) where 𝑟 𝑖 is the filtered and shortened teacher reasoning, and 𝑒 𝑖 is the gold entity output. We use teacher forcing and compute the loss only on the response tokens: 
+
+ℒCoT = − 1
+
+𝑁 
+
+> 𝑁
+
+∑︁ 
+
+> 𝑖 =1
+> |𝑧 𝑖 |
+
+∑︁ 
+
+> 𝑡 =1
+
+log 𝑝 𝜃 (𝑧 𝑖,𝑡 | 𝑥 𝑖 , 𝑧 𝑖,<𝑡 ) . (4) Figure 1: Overview of the two training paths. The direct-answer path starts from the SFT checkpoint with the best validation performance and applies iterative DPO. The reasoning path continues the same SFT checkpoint with CoT-SFT and then applies iterative L-RPO. In both paths, the model obtained after round 𝑘 − 1
+
+is used to collect residual errors and construct fresh preference pairs for round 𝑘 .
+
+This stage teaches the model to produce reasoning steps before giving the final entity, instead of giving only a direct answer. 
+
+DPO and Iterative DPO. The direct-answer branch in Figure 1 starts from the SFT checkpoint with the highest validation performance. In round 𝑘 , the trainable model 𝜋 𝜃,𝑘 is initialized from the model obtained in the previous stage, denoted by 𝜋 𝑘 −1. For this path, 𝜋 0 is the selected SFT checkpoint. At the beginning of each round, we create a frozen copy of 𝜋 𝑘 −1 and use it as the reference model 𝜋 ref ,𝑘 .The reference model remains fixed throughout the round. For a response 𝑦 , its sequence log-probability is the sum of the log-probabilities of all response tokens: 
+
+log 𝜋 (𝑦 | 𝑥 ) = 
+
+> |𝑦 |
+
+∑︁ 
+
+> 𝑡 =1
+
+log 𝜋 (𝑦 𝑡 | 𝑥, 𝑦 <𝑡 ) . (5) Given a prompt 𝑥 , a chosen response 𝑦 +, and a rejected response 𝑦 −, the standard DPO objective [ 9 ]for round 𝑘 is 
+
+ℒ(𝑘 )DPO = −E(𝑥,𝑦 +,𝑦 −)∼𝒟 (𝑘 )pref 
+
+log 𝜎 (︃ 𝛽 [︁ log 𝜋 𝜃,𝑘 (𝑦 + | 𝑥 ) − log 𝜋 ref ,𝑘 (𝑦 + | 𝑥 )
+
+−(︀ log 𝜋 𝜃,𝑘 (𝑦 − | 𝑥 ) − log 𝜋 ref ,𝑘 (𝑦 − | 𝑥 ))︀]︁)︃ .
+
+(6) The chosen response is the gold answer, while the rejected response is an incorrect answer generated by the current model. The DPO objective increases the relative preference for the gold response over the incorrect response. After DPO-k-1, we use the updated model to generate a new set of responses. Its remaining errors are paired with the gold responses to construct fresh preference data for DPO-k. 
+
+L-RPO and Iterative L-RPO. The reasoning branch in Figure 1 starts from the CoT-SFT checkpoint and applies iterative L-RPO. In round 𝑘 , the trainable model 𝜋 𝜃,𝑘 is initialized from the model obtained in the previous stage, 𝜋 𝑘 −1. For this path, 𝜋 0 denotes the CoT-SFT checkpoint. We also create a frozen copy of 𝜋 𝑘 −1 as the reference model 𝜋 ref ,𝑘 . This reference model remains fixed throughout the round. The chosen and rejected responses may have different lengths. To reduce the effect of response length, we replace the total sequence log-probability in Equation 5 with the average log-probability over all response tokens: 
+
+ℓ𝜋 (𝑦 | 𝑥 ) = 1
+
+|𝑦 |
+
+> |𝑦 |
+
+∑︁ 
+
+> 𝑡 =1
+
+log 𝜋 (𝑦 𝑡 | 𝑥, 𝑦 <𝑡 ) . (7) Using this length-normalized score, the DPO component of L-RPO for round 𝑘 is 
+
+ℒ(𝑘 )LDPO = −E(𝑥,𝑦 +,𝑦 −)∼𝒟 (𝑘 )pref 
+
+log 𝜎 (︃ 𝛽 [︁ ℓ𝜋 𝜃,𝑘 (𝑦 + | 𝑥 ) − ℓ𝜋 ref ,𝑘 (𝑦 + | 𝑥 )
+
+−(︀ ℓ𝜋 𝜃,𝑘 (𝑦 − | 𝑥 ) − ℓ𝜋 ref ,𝑘 (𝑦 − | 𝑥 ))︀]︁)︃ .
+
+(8) DPO optimizes the relative preference between the chosen and rejected responses. However, it does not guarantee that the likelihood of the chosen response itself will increase. The chosen response can become relatively more likely simply because the likelihood of the rejected response decreases more. We therefore add a supervised loss that directly increases the likelihood of the chosen response: 
+
+ℒ(𝑘 )chosen = −E(𝑥,𝑦 +,𝑦 −)∼𝒟 (𝑘 )pref 
+
+ℓ𝜋 𝜃,𝑘 (𝑦 + | 𝑥 ). (9) We combine the length-normalized DPO loss and the chosen-response loss to obtain the L-RPO objective: 
+
+ℒ(𝑘 )L-RPO = ℒ(𝑘 )LDPO + 𝛼 ℒ(𝑘 )chosen . (10) For example, we first train L-RPO on 𝒟 (1) pref . We then use the resulting model to generate new responses and collect its remaining errors. These errors are paired with the gold responses to construct 
+
+𝒟 (2) pref , and the first-round model is used to initialize the second L-RPO round. As shown in Figure 1, this policy-dependent data refresh forms iterative L-RPO. Throughout preference optimization, we update only the LoRA adapter of the model. 
+
+## 4. Experimental Setup 
+
+4.1. Datasets and Evaluation Metrics 
+
+The direct-answer SFT dataset includes 35,000 examples from TableInstruct and 70,000 examples created from MammoTab V2. After removing examples with overly long lengths, 104,899 examples remain. The CoT-SFT dataset also combines MammoTab V2 and TableInstruct. After filtering the data, compressing the reasoning traces, and removing examples that exceed the length limit, 35,617 examples remain. For validation, we use a fixed set of 3,750 processed MammoTab tables drawn from the original training set and sample one target mention from each table. These tables are held out and are not used for training. At every training stage, we select the checkpoint with the best performance on this validation set. For final evaluation, we use the full TableInstruct entity-linking test set and MammoTab V2 evaluation set. MammoTab V2 evaluation set contains 9,741 entity mentions from 511 tables. Our main evaluation metric is exact-match accuracy. A prediction is counted as correct only when its final answer exactly matches the gold answer. For reasoning models, we also report the complete-rationale rate. It is the percentage of outputs with a complete <think>...</think> block. Table 1 summarizes the dataset statistics throughout data construction and evaluation. 
+
+4.2. Baselines and Ablations 
+
+We study two training paths. The direct-answer path starts with SFT and then uses two rounds of iterative DPO. The reasoning path adds CoT-SFT and then uses two rounds of iterative L-RPO. In Table 1                                 
+
+> Dataset statistics throughout data construction and evaluation. Stage Data Source Count Original training data TableInstruct entity linking 1,264,217 Sampled training data TableInstruct entity linking 168,764 Original training data MammoTab V2 29,107,433 Sampled training data MammoTab V2 838,182 Direct-answer SFT selection TableInstruct 35,000 Direct-answer SFT selection MammoTab V2 70,000 Direct-answer SFT, merged TableInstruct + MammoTab V2 105,000 Direct-answer SFT, after length check TableInstruct + MammoTab V2 104,899 CoT-SFT, Rationale generation DeepSeek-V4-Pro + GPT-5.2 (Reasoning) 36,276 CoT-SFT, After quality filtering DeepSeek-V4-Pro + GPT-5.2 (Reasoning) 35,641 CoT-SFT, After final length check DeepSeek-V4-Pro + GPT-5.2 (Reasoning) 35,617 L-RPO round 1, generated DeepSeek-V4-Pro 4,052 L-RPO round 2, generated DeepSeek-V4-Pro 2,541 Validation data Held-out subset of the MammoTab V2 training set 3,750 Test data MammoTab V2 9,741
+
+both paths, the second preference-learning round uses new data generated by the model from the first round. For baseline comparison, we use the scores reported on the official MammoTab V2 page: 0.86 for TableLlama [ 5], 0.31 for TURL [ 20 ], and 0.62 for Avogadro 2023 [ 40 ]. Since each target mention receives one prediction, our exact-match accuracy is the CEA score used in this comparison. 
+
+4.3. Implementation Details 
+
+We use Llama-3.1-8B as the backbone. We train it with LoRA using rank 8, a scaling factor of 16, and no LoRA dropout. The embedding and normalization parameters are also trainable. Each stage updates the LoRA adapter from the previous stage. The base model stays frozen. Direct-answer SFT runs for two epochs with a learning rate of 2 × 10 −5 and a maximum sequence length of 2,048. CoT-SFT runs for one epoch with the same learning rate and a maximum sequence length of 3,072. Both stages use bfloat16 and a cosine learning-rate schedule with a 3% warm-up. Each L-RPO round runs for one epoch. We use a learning rate of 1.5 × 10 −6, 𝛽 = 0 .3, and 𝛼 = 0 .5.The maximum sequence length is 2,560. We remove a preference pair if the ratio between its chosen and rejected response lengths is greater than 6. At the start of each round, the trainable adapter and the reference adapter have the same weights. Only the trainable adapter is updated. The direct-answer DPO rounds run for two epochs with a learning rate of 5 × 10 −6. Training uses H100 80GB GPUs. We choose the best checkpoint for each model and ablation on the validation set. For L-RPO, the selection score is the sum of exact-match accuracy and the complete-rationale rate. Direct-answer models can generate up to 128 new tokens. Reasoning models can generate up to 768 new tokens. All ablation studies and model-training experiments use the same data-processing and preprocessing code, as well as the same evaluation pipeline. All reported experimental results are averaged over five repeated evaluation runs. 
+
+## 5. Results and Discussion 
+
+5.1. Main Results 
+
+Table 2 reports results on the TableInstruct entity-linking subset and MammoTab V2. In the direct-answer path, iterative DPO improves accuracy monotonically on both datasets. On TableInstruct, accuracy increases from 94.35% after SFT to 94.40% after DPO-1 and 94.50% after DPO-2. On MammoTab V2, the corresponding progression is 87.59%, 88.16%, and 88.20%. The two DPO rounds therefore provide Table 2                                         
+
+> Results on the TableInstruct entity-linking subset and the MammoTab V2 evaluation set. Reasoning completeness is not applicable to direct-answer models.
+> Training Type Model Stage TableInstruct EL MammoTab V2 Accuracy Reasoning Complete Accuracy Reasoning Complete
+> Pretrained Base Model (Llama-3.1-8B) 58.60% n/a 45.78% n/a Direct-Answer Training Direct-Answer SFT 94.35% n/a 87.59% n/a Iterative DPO Round 1 94.40% n/a 88.16% n/a Iterative DPO Round 2 94.50% n/a 88.20% n/a Reasoning-Based Training CoT-SFT 92.90% 98.50% 79.09% 87.09% L-RPO Round 1 92.90% 99.70% 79.37% 89.63% L-RPO Round 2 92.95% 99.55% 81.85% 91.86% Table 3
+> CEA comparison on the MammoTab V2 evaluation set. Public baseline scores are reported by MammoTab V2. Approach CEA TURL (Deng et al.) [20] 0.31 Avogadro 2023 [40] 0.62 TableLlama (Zhang et al.) [5] 0.86 Iterative DPO round 2 (ours) 0.882
+
+total gains of 0.15 and 0.61 percentage points over SFT, respectively, with the refreshed second round retaining the improvement on both datasets. The reasoning path shows a different pattern. On TableInstruct, CoT-SFT achieves 92.90% accuracy and a 98.50% complete-rationale rate. Iterative L-RPO raises accuracy to 92.95% and rationale completion to 99.55%; the first round reaches the highest rationale-completion rate, 99.70%. On MammoTab V2, L-RPO-2 improves CoT-SFT accuracy from 79.09% to 81.85% and rationale completion from 87.09% to 91.86%, gains of 2.76 and 4.77 percentage points. Although both preference-learning paths improve their respective initializations, direct-answer generation remains more accurate than explicit reasoning on both datasets. Table 3 compares the best model with the public results listed for the same 511-table, 9,741-mention MammoTab V2 evaluation set [ 16 ]. Iterative DPO round 2 reaches 0.882 CEA, surpassing the previous best listed score of 0.86 by 2.2 percentage points. 
+
+5.2. Ablation Study 
+
+Table 4 evaluates the effects of completion-length normalization and the chosen-response loss in both L-RPO rounds. Removing length normalization consistently reduces answer accuracy and rationale completeness. In round 1, accuracy decreases from 79.37% to 69.53%, while rationale completeness drops from 89.63% to 77.06%. Relative to the CoT-SFT initialization on identical prompts, this variant corrects 583 previously incorrect predictions but regresses 1,514 previously correct ones. The same pattern persists in round 2, where removing length normalization reduces accuracy from 81.85% to 79.42% and rationale completeness from 91.86% to 87.54%. Restoring length normalization at this stage corrects 714 predictions while regressing 477. These consistent degradations support normalizing the policy and reference log-probabilities when the chosen and rejected responses differ in length. The chosen-response loss is similarly important. Removing it in round 1 reduces accuracy from 79.37% to 68.52% and rationale completeness from 89.63% to 74.30%. Compared with the CoT-SFT initialization on identical prompts, this update corrects 532 errors but regresses 1,561 correct predictions. In round 2, removing the chosen-response loss lowers accuracy from 81.85% to 78.13% and rationale completeness Table 4                                                                     
+
+> Ablation of the L-RPO loss components on the complete evaluation set. LN denotes completion-length normal-ization, and the chosen loss denotes the likelihood regularization applied to the chosen response.
+> Round Variant LN Chosen Loss Accuracy Reasoning Complete
+> 2Full Yes Yes 81.85% 91.86%
+> Without LN No Yes 79.42% 87.54% Without chosen loss Yes No 78.13% 84.11% 1Full Yes Yes 79.37% 89.63% Without LN No Yes 69.53% 77.06% Without chosen loss Yes No 68.52% 74.30%
+> Table 5
+> Paired correctness analysis on the same 9,741 test prompts. Corrected and regressed denote wrong-to-correct and correct-to-wrong transitions, respectively. Net gain is computed as corrected minus regressed.
+> Comparison Type Transition Paired Outcome Net Gain Both Correct Corrected Regressed Both Wrong
+> Full training CoT-SFT →L-RPO-2 7,156 817 548 1,220 +269
+> Component effect L-RPO-2 w/o LN →full 7,259 714 477 1,291 +237
+> Ablated training CoT-SFT →L-RPO-1 w/o LN 6,190 583 1,514 1,454 −931
+> CoT-SFT →L-RPO-1 w/o RPO 6,143 532 1,561 1,505 −1,029
+
+from 91.86% to 84.11%. The degradation across both rounds is consistent with the chosen-response loss anchoring the model to high-likelihood responses with valid reasoning and well-formed output structure. The effects of both components are substantially larger in round 1 than in round 2, suggesting that they are particularly important for stabilizing the initial preference-optimization update. Nevertheless, these ablations use different effective batch sizes from the full runs, and the full L-RPO-1 evaluation uses the alternative serialization described above. The results should therefore be interpreted as strong diagnostic evidence rather than as fully controlled estimates of the causal contribution of each loss component. 
+
+5.3. Discussion and Limitations 
+
+Table 5 shows that the aggregate gains arise from a combination of corrected and regressed predictions. Relative to CoT-SFT, the full two-round L-RPO model corrects 817 previously incorrect predictions while causing 548 previously correct predictions to fail, yielding a net gain of 269 correct predictions. Compared with L-RPO-2 without length normalization, the full model similarly achieves a net gain of 237 predictions. Rationale completeness exhibits the same trend. From CoT-SFT to full L-RPO-2, 869 outputs gain a complete reasoning block, whereas 404 lose one. Adding length normalization to L-RPO-2 produces 955 gains and 534 losses relative to the no-LN variant. By contrast, the first-round update without length normalization yields only 693 gains but 1,670 losses in rationale completeness relative to CoT-SFT, indicating that length normalization is important for stabilizing the reasoning format. Several limitations remain. First, every training instance in the final dataset contains the gold entity among its retrieved candidates; consequently, the dataset contains no empty or NIL targets. The current model is therefore not trained to handle cases in which candidate retrieval fails to return the correct entity. Extending the model to generate an explicit NIL prediction when none of the retrieved candidates is appropriate would broaden its coverage of real-world table entity-linking scenarios and could further improve its robustness and overall performance. Second, the training rationales are generated by teacher models, which makes the rationale-generation process difficult to reproduce exactly. To mitigate this limitation, we release all training data and code in our repository, including the complete set of rationales used in this work. These resources enable other researchers to reproduce our training setup and results without regenerating the rationale supervision, and provide a foundation for further research. Third, our iterative DPO and L-RPO pipelines are evaluated for only two rounds. Although both rounds consistently improve upon the single-round baseline, it remains unclear whether additional iterations would yield further gains or eventually lead to performance saturation. Exploring longer iteration horizons and identifying the potential saturation point are left for future work. 
+
+## 6. Conclusion 
+
+We introduced TELLER, a dual-path framework for candidate-conditioned table entity linking that learns iteratively from model errors and reasoning. Its offline pipeline retrieves and ranks Wikidata candidates, while a compact prompt preserves the target cell, relevant row and column context, table headers, and the caption and removes the remaining table cells. In the direct-answer path, each DPO round refreshes its preference data with the residual errors of the updated model. Across two rounds, accuracy improves from 94.35% to 94.50% on TableInstruct and from 87.59% to 88.20% on MammoTab V2. The latter result corresponds to a CEA score of 0.882, surpassing the highest score currently listed on the public MammoTab V2 evaluation page. In the reasoning path, filtered and compressed rationales provide supervision for CoT-SFT, followed by iterative L-RPO. L-RPO combines length-normalized preference scores with a chosen-response likelihood loss, and its second round replaces earlier rejected outputs with the residual reasoning errors of first round. The final model improves CoT-SFT accuracy from 92.90% to 92.95% on TableInstruct and from 79.09% to 81.85% on MammoTab V2, while increasing the complete-rationale rate on MammoTab V2 from 87.09% to 91.86%. Paired error analysis shows significantly more corrected than regressed pre-dictions, and the ablations provide further evidence that both length normalization and chosen-response regularization are important for maintaining answer accuracy and complete reasoning. Nevertheless, the direct-answer models remain more accurate on both datasets, indicating a persistent trade-off between explicit reasoning and entity-selection accuracy. Future work should expand and diversify the rationale data, integrate table data from additional domains to improve cross-domain generalization, and extend the model with a NIL option for cases in which none of the retrieved candidates is correct. 
+
+## Declaration on Generative AI 
+
+DeepSeek-V4-Pro and GPT-5.2 (Reasoning) were used as teacher models to generate training rationales, as described in the methodology. No generative AI tools were used for writing, editing, or creating figures, texts and other content in this work. 
+
+## References 
+
+[1] M. M. Katsakioris, Y. Zhou, D. Masato, Entity linking in tabular data needs the right attention, arXiv preprint arXiv:2207.01937 (2022). [2] N. De Cao, G. Izacard, S. Riedel, F. Petroni, Autoregressive entity retrieval, in: Proceedings of the 38th International Conference on Machine Learning, volume 139 of Proceedings of Machine Learning Research , PMLR, 2021, pp. 1931–1942. URL: https://proceedings.mlr.press/v139/de-cao21a.html. [3] Z. Xiao, M. Gong, J. Wu, X. Zhang, L. Shou, D. Jiang, Instructed language models with retrievers are powerful entity linkers, in: Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 2023, pp. 2267–2282. [4] Y. Ding, A. Poudel, Q. Zeng, T. Weninger, B. Veeramani, S. Bhattacharya, Entgpt: Entity linking with generative large language models, arXiv preprint arXiv:2402.06738 (2024). [5] T. Zhang, X. Yue, Y. Li, H. Sun, Tablellama: Towards open large generalist models for tables, in: Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers), 2024, pp. 6024–6044. [6] J. Wei, X. Wang, D. Schuurmans, M. Bosma, F. Xia, E. Chi, Q. V. Le, D. Zhou, et al., Chain-of-thought prompting elicits reasoning in large language models, Advances in neural information processing systems 35 (2022) 24824–24837. [7] S. Wiegreffe, J. Hessel, S. Swayamdipta, M. Riedl, Y. Choi, Reframing human-ai collaboration for generating free-text explanations, in: Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 2022, pp. 632–658. [8] L. H. Li, J. Hessel, Y. Yu, X. Ren, K.-W. Chang, Y. Choi, Symbolic chain-of-thought distillation: Small models can also “think” step-by-step, in: Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 2023, pp. 2665–2679. [9] R. Rafailov, A. Sharma, E. Mitchell, C. D. Manning, S. Ermon, C. Finn, Direct preference optimiza-tion: Your language model is secretly a reward model, Advances in neural information processing systems 36 (2023) 53728–53741. [10] W. Xiong, H. Dong, C. Ye, Z. Wang, H. Zhong, H. Ji, N. Jiang, T. Zhang, Iterative preference learning from human feedback: Bridging theory and practice for RLHF under KL-constraint, in: Proceedings of the 41st International Conference on Machine Learning, volume 235 of Proceedings of Machine Learning Research , PMLR, 2024, pp. 54715–54754. URL: https://proceedings.mlr.press/ v235/xiong24a.html. [11] R. Park, R. Rafailov, S. Ermon, C. Finn, Disentangling length from quality in direct preference optimization, in: Findings of the Association for Computational Linguistics: ACL 2024, 2024, pp. 4998–5017. [12] Y. Meng, M. Xia, D. Chen, Simpo: Simple preference optimization with a reference-free reward, Advances in Neural Information Processing Systems 37 (2024) 124198–124235. [13] D. Vrandečić, M. Krötzsch, Wikidata: a free collaborative knowledgebase, Communications of the ACM 57 (2014) 78–85. [14] Z. Liu, M. Lu, S. Zhang, B. Liu, H. Guo, Y. Yang, J. Blanchet, Z. Wang, Provably mitigating overoptimization in rlhf: Your sft loss is implicitly an adversarial regularizer, Advances in Neural Information Processing Systems 37 (2024) 138663–138697. [15] M. Cremaschi, F. Belotti, J. D’Souza, M. Palmonari, Mammotab 25: A large-scale dataset for semantic table interpretation-training, testing, and detecting weaknesses, in: International Semantic Web Conference, Springer, 2025, pp. 131–148. [16] MammoTab Team, MammoTab V2: Evaluation Dataset and Results, MammoTab Documentation, 2026. URL: https://unimib-datai.github.io/mammotab-docs/, accessed: 2026-07-23. [17] L. Wu, F. Petroni, M. Josifoski, S. Riedel, L. Zettlemoyer, Scalable zero-shot entity linking with dense entity retrieval, in: Proceedings of the 2020 conference on empirical methods in natural language processing (EMNLP), 2020, pp. 6397–6407. [18] X. Liu, Y. Liu, K. Zhang, K. Wang, Q. Liu, E. Chen, Onenet: A fine-tuning free framework for few-shot entity linking via large language model prompting, in: Proceedings of the 2024 conference on empirical methods in natural language processing, 2024, pp. 13634–13651. [19] Y. Li, A. Galimov, M. D. Ganapaneni, P. Thejaswi, D. Meng, P. Kumar, S. Potdar, Leveraging the power of large language models in entity linking via adaptive routing and targeted reasoning, in: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: Industry Track, 2025, pp. 871–882. [20] X. Deng, H. Sun, A. Lees, Y. Wu, C. Yu, TURL: Table understanding through representation learning, Proceedings of the VLDB Endowment 14 (2020) 307–319. URL: https://www.vldb.org/ pvldb/vol14/p307-deng.pdf. [21] Y. Wang, Y. Fan, J. Guo, R. Zhang, X. Cheng, Rocel: Advancing table entity linking through distinctive row and column contexts, in: Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing, 2024, pp. 15284–15298. [22] N. Ho, L. Schmid, S.-Y. Yun, Large language models are reasoning teachers, in: Proceedings of the 61st annual meeting of the association for computational linguistics (volume 1: long papers), 2023, pp. 14852–14882. [23] L. C. Magister, J. Mallinson, J. Adamek, E. Malmi, A. Severyn, Teaching small language models to reason, in: Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers), 2023, pp. 1773–1781. [24] C.-Y. Hsieh, C.-L. Li, C.-K. Yeh, H. Nakhost, Y. Fujii, A. Ratner, R. Krishna, C.-Y. Lee, T. Pfister, Distilling step-by-step! outperforming larger language models with less training data and smaller model sizes, in: Findings of the Association for Computational Linguistics: ACL 2023, 2023, pp. 8003–8017. [25] H. Chen, S. Wu, X. Quan, R. Wang, M. Yan, J. Zhang, Mcc-kd: Multi-cot consistent knowledge distillation, in: Findings of the Association for Computational Linguistics: EMNLP 2023, 2023, pp. 6805–6820. [26] P. Wang, Z. Wang, Z. Li, Y. Gao, B. Yin, X. Ren, Scott: Self-consistent chain-of-thought distillation, in: Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 2023, pp. 5546–5558. [27] E. Zelikman, Y. Wu, J. Mu, N. Goodman, Star: Bootstrapping reasoning with reasoning, Advances in Neural Information Processing Systems 35 (2022) 15476–15488. [28] M. Turpin, J. Michael, E. Perez, S. Bowman, Language models don’t always say what they think: Unfaithful explanations in chain-of-thought prompting, Advances in Neural Information Processing Systems 36 (2023) 74952–74965. [29] H. Chae, Y. Song, K. Ong, T. Kwon, M. Kim, Y. Yu, D. Lee, D. Kang, J. Yeo, Dialogue chain-of-thought distillation for commonsense-aware conversational agents, in: Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 2023, pp. 5606–5632. [30] K. Feng, C. Li, X. Zhang, J. Zhou, Y. Yuan, G. Wang, Keypoint-based progressive chain-of-thought distillation for LLMs, in: Proceedings of the 41st International Conference on Machine Learning, volume 235 of Proceedings of Machine Learning Research , PMLR, 2024, pp. 13241–13255. URL: https://proceedings.mlr.press/v235/feng24k.html. [31] S. Wadhwa, S. Amir, B. C. Wallace, Investigating mysteries of cot-augmented distillation, in: Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing, 2024, pp. 6071–6086. [32] H. Xia, C. T. Leong, W. Wang, Y. Li, W. Li, TokenSkip: Controllable chain-of-thought compression in LLMs, in: C. Christodoulopoulos, T. Chakraborty, C. Rose, V. Peng (Eds.), Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing, Association for Computational Linguistics, Suzhou, China, 2025, pp. 3351–3363. URL: https://aclanthology.org/2025.emnlp-main. 165/. doi: 10.18653/v1/2025.emnlp-main.165 .[33] R. Y. Pang, W. Yuan, K. Cho, H. He, S. Sukhbaatar, J. Weston, Iterative reasoning preference optimization, Advances in Neural Information Processing Systems 37 (2024) 116617–116637. [34] Wikidata, Wikidata: Database download, https://www.wikidata.org/wiki/Wikidata:Database_ download, 2026. Accessed: 2026-07-24. [35] S. Robertson, H. Zaragoza, The probabilistic relevance framework: BM25 and beyond, volume 4, Now Publishers Inc, 2009. [36] A. Xu, B. Lin, B. Xue, B. Wang, B. Xu, B. Wu, B. Zhang, C. Lin, C. Dong, C. Ling, et al., Deepseek-v4: Towards highly efficient million-token context intelligence, arXiv preprint arXiv:2606.19348 (2026). [37] OpenAI, Update to the GPT-5 System Card: GPT-5.2, Technical Report, OpenAI, 2025. URL: https://cdn.openai.com/pdf/3a4153c8-c748-4b71-8e31-aecbde944f8d/oai_5_2_system-card.pdf. [38] A. Grattafiori, A. Dubey, A. Jauhri, A. Pandey, A. Kadian, A. Al-Dahle, A. Letman, A. Mathur, A. Schelten, A. Vaughan, et al., The llama 3 herd of models, arXiv preprint arXiv:2407.21783 (2024). [39] E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, W. Chen, et al., Lora: Low-rank adaptation of large language models., Iclr 1 (2022) 3. [40] R. Avogadro, M. Ciavotta, F. De Paoli, M. Palmonari, D. Roman, Estimating link confidence for human-in-the-loop table annotation, in: 2023 IEEE/WIC International Conference on Web Intelligence and Intelligent Agent Technology (WI-IAT), IEEE, 2023, pp. 142–149. 
+
+## A. Data Examples 
+
+This appendix presents representative serialized records from the datasets used in the two training paths. Line wrapping is added only for readability. 
+
+A.1. TableInstruct-Style Entity-Linking Instance 
+
+The following record illustrates the common instruction format used for a TableInstruct example and a processed MammoTab example. 
+
+{’instruction’: ’This is an entity linking task. The goal for this task is to link the selected entity mention in the table cells to the entity in the knowledge base. You will be given a list of referent entities, with each one composed of an entity name, its description and its type. Please choose the correct one from the referent entity candidates. Note that the Wikipedia page, Wikipedia section and table caption (if any) provide important information for choosing the correct referent entity.’, ’input_seg’: ’[TLE] The Wikipedia page is about Gay Left. The Wikipedia section is about The Collective . [TAB] col: | issue/name | issue 1 autumn 1975 | issue 2 spring 1976 | issue 4 summer 1977 | issue 5 winter 1977/8 | issue 6 summer 1978 | issue 7 winter 1978/9 | issue 8 summer 1979 | issue 9winter 1979/80 | row 1: Keith Birch [SEP] row 2: Gregg Blachford [SEP] row 3: Bob Cant [SEP] row 4: | Emmanuel Cooper | • | • | • | • | • | • | • | • | [SEP] row 5: Ross Irwin [SEP] row 6: Randall Kincaid [SEP] row 7: Angus Suttie [SEP] row 8: Jeffrey Weeks [SEP] row 9: Nigel Young [SEP] row 10: Derek Cohen’, ’question’: ’The selected entity mention in the table cell is: Emmanuel Cooper. The column name for \’ Emmanuel Cooper\’ is issue/name. The referent entity candidates are: <Richard Dyer [DESCRIPTION] researcher ORCID ID = 0000-0002-0090-7580 [TYPE] None>, <Richard Dyer-Bennet [DESCRIPTION] American musician [TYPE] owl#Thing>, <Richard Dyer Mudd. [DESCRIPTION] scientific article [TYPE] None>, <Emmanuel Cooper OBE, 1938-2012 [DESCRIPTION] edition; published in 2013 [TYPE] None>, <Richard Dyer [DESCRIPTION] fencer [TYPE] Athlete>, <Emmanuel Cooper [DESCRIPTION] book (work) [TYPE] None>, <Jeffrey Weeks [DESCRIPTION] American mathematician [TYPE] owl#Thing>, <Angus Suttie [DESCRIPTION] book (work) [TYPE] None>, <Angus Suttie [DESCRIPTION] edition; published in 2018 [TYPE] None>, <Jeffrey Weeks [DESCRIPTION] British historian and sociologist [TYPE] owl#Thing>, <Richard Dyer [DESCRIPTION] born 1634 [TYPE] None>, <Emmanuel Cooper [DESCRIPTION] Studio potter, writer [TYPE] owl#Thing>, <Richard Dyer [DESCRIPTION] British academic [TYPE] owl#Thing>, <Emmanuel Cooper OBE, 1938-2012 [DESCRIPTION] book (work) [TYPE] None>, <Angus Suttie [DESCRIPTION] British artist (1946-1993) [TYPE] owl#Thing>, <Jeffrey Weeks and the History of Sexuality [DESCRIPTION] None [TYPE ] None>, <Emmanuel Cooper [DESCRIPTION] edition; published in 1992 [TYPE] None>, <Richard Dyer [DESCRIPTION] None [TYPE] None>, <Richard Dyer [DESCRIPTION] Montserratian footballer [TYPE] None>, <Jeffrey Weeks [DESCRIPTION] Wikimedia disambiguation page [TYPE] None> What is the correct referent entity for the entity mention \’Emmanuel Cooper\’?’, ’output’: ’<Emmanuel Cooper [DESCRIPTION] Studio potter, writer [TYPE] owl#Thing>’ }
+
+A.2. Preference Instance after CoT-SFT 
+
+This example contains the prompt, the chosen and rejected reasoning-based responses, the gold entity, and the model prediction used to construct the pair. The candidate list is abbreviated in the displayed record. 
+
+{’idx’: 35, ’prompt’: ’### Instruction:\nentity linking task. choose only the correct one from the referent entity candidates. In the Input below, the table content only contains the caption (if any), all column headers, and the cells from the same row and same column as the selected entity mention.\n\n### Input:\n[TLE] The Wikipedia page is about Energy density. The Wikipedia section is about List of material energy densities. The table caption is about Energy released by electrochemical reactions or other means. [TAB] col: | Material | Specific energy (MJ/kg) | Energy density (MJ/L) | Specific energy (W ·h/kg) | Energy density (W ·h/L) | Comment | row 1: Battery, zinc-air [SEP] row 2: Silicon (phase change) [SEP] row 3: | Strontium bromide hydrate | 0.814 A. Fopah-Lele, J. G. Tamba A review on the use of as a potential material for low temperature energy storage systems and building applications, Solar Energy Materials and Solar Cells 164 175-84 (2017). | 1.93 | | 628 | Thermal energy of phase change at | [SEP] row 4: Liquid nitrogen [SEP] row 5: Compressed air at 30 MPa [SEP ] row 6: Latent heat of fusion of ice (thermal) [SEP] row 7: Lithium metal battery [SEP] row 8: Lithium-ion battery [SEP] row 9: Lithium-ion battery with silicon nanowire anodes [SEP] row 10: Flywheel\n\n### Question:\nThe selected entity mention in the table cell is: Strontium bromide hydrate. The column name for \’Strontium bromide hydrate\’ is Material. The referent entity candidates are: ...(20 candidates) What is the correct referent entity for the entity mention \’ Strontium bromide hydrate\’?\n\nReasoning requirements:\n1) Use context evidence only (page/section /caption + row/column + candidate [DESCRIPTION]/[TYPE]).\n2) Keep reasoning concise; do NOT restate the full table/question/candidate list.\n3) Do NOT copy/paste candidate lists from the input; only cite minimal distinguishing evidence.\n4) The reasoning should support the same final entity you output after </think>.\n5) Reasoning is mandatory: include non-empty reasoning content before the final entity; do not output answer-only.\n\nAfter reasoning, output exactly one referent entity in candidate format (e.g. <EntityName [DESCRIPTION] ... [TYPE] ...>).\n\n### Response:’, ’accept’: ’<think>...</think>\n<strontium bromide [DESCRIPTION] chemical compound [TYPE] type of chemical entity>’, ’reject’: ’<think>...</think>\n<strontium bromide hexahydrate [DESCRIPTION] chemical compound [TYPE] type of chemical entity>’, ’gold’: ’<strontium bromide [DESCRIPTION] chemical compound [TYPE] type of chemical entity>’, ’model_prediction’: ’<strontium bromide hexahydrate [DESC] chemical compound [TYPE] type of chemical entity>’ }
+
+A.3. Preference Instance after Direct-Answer SFT 
+
+The following record illustrates a direct-answer preference pair constructed from an incorrect SFT-model prediction. 
+
+{’idx’: 82, ’prompt’: ’### Instruction:\nentity linking task. choose only the correct one from the referent entity candidates. In the Input below, the table content only contains the caption (if any), all column headers, and the cells from the same row and same column as the selected entity mention.\n\n### Input:\n[TLE] The Wikipedia page is about List of Clyde F.C. seasons. The Wikipedia section is about Seasons. [TAB] col: | Season | League | League | Scottish Cup | League Cup | Other | Top league scorer | Top league scorer | row 8: Division A [SEP] row 9: Division A [SEP] row 10: Division A [SEP] row 11: Division One [SEP] row 12: | 1956-57 | Division Two | 1st | Quarter-final | Semi-final | Glasgow Cup runners-up | Basil Keogh | 36 | [SEP] row 13: Division One [SEP] row 14: Division One [SEP] row 15: Division One [SEP] row 16: Division One [SEP] row 17: Division Two\n\n ### Question:\nThe selected entity mention in the table cell is: Division Two. The column name for \’Division Two\’ is League. The referent entity candidates are: <Division Two [DESCRIPTION] Wikimedia disambiguation page [TYPE] Wikimedia disambiguation page>, <BAFA NL Division Two 2016 [DESCRIPTION] None [TYPE] sports season>, <South Division Two [DESCRIPTION] Wikimedia disambiguation page [TYPE] Wikimedia disambiguation page>, <BAFA NL Division Two 2015 [DESCRIPTION] None [TYPE] sports season>, <NCL Division Two [DESCRIPTION] None [TYPE] None>, <1911–12 Scottish Division Two [DESCRIPTION] football league season [TYPE] sports season>, <Sapphire Series Division Two 2017 [DESCRIPTION] None [TYPE] sports season>, <1956–57 Scottish Division Two [DESCRIPTION] football league season [TYPE] sports season>, <1972–73 Scottish Second Division [DESCRIPTION] football league season [TYPE] sports season>, <2000–01 National Division Two [DESCRIPTION] sports season [TYPE] sports competition>, <North Division Two [DESCRIPTION] football league [TYPE] None>, <2006–07 WRU Division Two West [DESCRIPTION] None [TYPE] sports season>, <1966–67 Scottish Division Two [DESCRIPTION] football league season [TYPE] sports season>, <Barbados Division Two [DESCRIPTION] football league [TYPE] sports league>, <2024 National Division Two [DESCRIPTION] None [TYPE] sports season>, <South Division Two [DESCRIPTION] football league [TYPE] None>, <Leinster League Division Two [DESCRIPTION] None [TYPE] None>, <Division Two League, Ghana [DESCRIPTION] None [TYPE] association football league>, <1928–29 Scottish Division Two [DESCRIPTION] football league season [TYPE] sports season>, <2006–07 WRU Division Two East [DESCRIPTION] None [TYPE] sports season>, <WRU Division Two North [DESCRIPTION] None [TYPE] sports division> What is the correct referent entity for the entity mention \’Division Two\’?\n\n### Response:’, ’accept’: ’<1972–73 Scottish Second Division [DESCRIPTION] football league season [TYPE] sports season >’, ’reject’: ’<1956–57 Scottish Division Two [DESCRIPTION] football league season [TYPE] sports season>’, ’gold’: ’<1972–73 Scottish Second Division [DESCRIPTION] football league season [TYPE] sports season>’, ’model_prediction’: ’<1956–57 Scottish Division Two [DESC] football league season [TYPE] sports season >’ }

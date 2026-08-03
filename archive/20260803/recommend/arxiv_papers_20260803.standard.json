@@ -1,0 +1,222 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-03T20:53:20.701092+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.28680v1",
+      "source": "arxiv",
+      "title": "TELLER: Dual-Path Iterative Preference Optimization for Table Entity Linking",
+      "abstract": "Entity linking in tables matches short and ambiguous cell mentions to their corresponding knowledge-base entities. Existing approaches typically rely on data preprocessing pipelines that retain either compact or extensive table content as contextual evidence, and then formulate entity linking as a language generation task for instruction-tuned models; recent systems further incorporate explicit reasoning to disambiguate challenging mentions. However, their training supervision is usually static: fixed preference data cannot adapt to the residual errors of an evolving model, while variations in reasoning length can bias sequence-level preference learning. To address these limitations, we present TELLER: Table Entity Linking through Learning from Errors and Reasoning. We first retrieve and rank Wikidata candidates and retain reduced table evidence in the prompt. The direct-answer path applies iterative direct preference optimization and refreshes its preference data with residual errors from the updated model. The reasoning path uses filtered and compressed chain-of-thought rationales for supervised fine-tuning, followed by our iterative length-normalized regularized preference optimization. On the TableInstruct entity-linking subset, the direct-answer path improves accuracy from 94.35\\% to 94.50\\%; on the MammoTab V2 evaluation set, it improves accuracy from 87.59\\% to 88.20\\%. The reasoning path improves accuracy from 92.90\\% to 92.95\\% on TableInstruct and from 79.09\\% to 81.85\\% on MammoTab V2, while maintaining high rates of complete reasoning generation. These results show that iterative preference learning benefits both concise entity prediction and explicit reasoning.",
+      "authors": [
+        "Yixin Peng",
+        "Kehao Li",
+        "Stefan Decker"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-07-29T18:08:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.28680v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Iterative preference optimization adapts to evolving model for table entity linking, a self-evolving IE system.",
+      "llm_evidence_cn": "通过迭代偏好优化适应模型进化，实现自演化的表格实体链接信息抽取系统。",
+      "llm_evidence": "通过迭代偏好优化适应模型进化，实现自演化的表格实体链接信息抽取系统。",
+      "canonical_evidence": "通过迭代偏好优化适应模型进化，实现自演化的表格实体链接信息抽取系统。",
+      "llm_tldr_en": "TELLER proposes dual-path iterative preference optimization to adapt to residual errors of an evolving model for table entity linking, outperforming static training methods.",
+      "llm_tldr_cn": "在表格实体链接任务中，模型进化导致静态偏好数据难以适应残差错误，本文提出TELLER框架，采用双路径迭代偏好优化，动态适应模型演化，在多个数据集上取得优于固定训练方法的性能，证明了自演化系统在信息抽取中的有效性。",
+      "llm_tldr": "在表格实体链接任务中，模型进化导致静态偏好数据难以适应残差错误，本文提出TELLER框架，采用双路径迭代偏好优化，动态适应模型演化，在多个数据集上取得优于固定训练方法的性能，证明了自演化系统在信息抽取中的有效性。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self evolving information extraction systems",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.28692v1",
+      "source": "arxiv",
+      "title": "SciToolAgent-Evo: An Ontology-Aware Self-Evolving Agent for Open-World Scientific Tool Acquisition",
+      "abstract": "Large language model (LLM) agents have been increasingly adopted in scientific research for organizing and invoking specialized computational tools. However, their reliance on predefined tool spaces with static semantics limits their applicability to open-world scientific workflows, where tool requirements, capabilities, and boundaries evolve dynamically. To this end, we propose SciToolAgent-Evo, an ontology-aware self-evolving agent for open-world scientific tool acquisition. Driven by an evolving memory of skills, experiences, and an ontologized tool graph, it distills generalizable knowledge from contrastive trajectories during accumulation, whereas during inference, it formulates active requests and utilizes a LinUCB-based bandit gate to dynamically balance exploration and exploitation. Once a novel tool is acquired, its scientific ontology is completed online for seamless integration into the known graph. Moreover, we introduce OpenSciToolBench, a benchmark containing 900 realistic tasks across four difficulty levels. Extensive evaluations show that SciToolAgent-Evo achieves state-of-the-art performance, validating its robustness and generalization.",
+      "authors": [
+        "Yuqi Tang",
+        "Chenyi Zhou",
+        "Libin Wang",
+        "Keyan Ding",
+        "Qiang Zhang",
+        "Huajun Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-07-30T08:47:11+00:00",
+      "link": "https://arxiv.org/pdf/2607.28692v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-evolving agent with evolving memory and ontologized tool graph",
+      "llm_evidence_cn": "具有演化记忆和本体化工具图的自进化代理",
+      "llm_evidence": "具有演化记忆和本体化工具图的自进化代理",
+      "canonical_evidence": "具有演化记忆和本体化工具图的自进化代理",
+      "llm_tldr_en": "Proposes a self-evolving scientific tool agent that acquires tools dynamically using an evolving memory and ontologized tool graph, enabling adaptation to open-world workflows.",
+      "llm_tldr_cn": "针对科学工作流中工具需求动态变化的问题，提出SciToolAgent-Evo，利用演化记忆、技能经验和本体化工具图，通过对比轨迹提炼通用知识，在积累阶段学习，推理时主动请求工具并借助LinUCB决策，实现开放世界环境下的自演化工具获取。实验证明该方法能有效适应变化的工具空间，为开放科学自动化提供了新范式。",
+      "llm_tldr": "针对科学工作流中工具需求动态变化的问题，提出SciToolAgent-Evo，利用演化记忆、技能经验和本体化工具图，通过对比轨迹提炼通用知识，在积累阶段学习，推理时主动请求工具并借助LinUCB决策，实现开放世界环境下的自演化工具获取。实验证明该方法能有效适应变化的工具空间，为开放科学自动化提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.29241v1",
+      "source": "arxiv",
+      "title": "RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems",
+      "abstract": "Optimizing modern recommender models still depends heavily on engineers manually iterating over architectural, objective, and training-strategy changes. While LLM-based agents can automate this trial-and-error process, allowing the LLM to both select modification directions and generate concrete hypotheses often leads to unstable search under limited experiment budgets. Inspired by the above challenge, we propose RecHarness, a Bandit-Routed Agentic Harness for automated recommender model optimization. RecHarness separates the optimization process into two steps: a bandit router selects the next modification direction according to historical validation feedback, while the LLM generates a concrete optimization hypothesis and executable code edit within the selected direction. To sustain long-horizon exploration, RecHarness uses a jump-basin mechanism to activate a structural-jump arm when local edits stagnate. Across multiple recommendation tasks, datasets, and model backbones, RecHarness achieves more stable performance improvements and uses limited trial budgets more effectively than LLM-reasoning search. During a 7-day online A/B test on a large-scale short-video advertising platform, the selected candidate improves ADVV by 2.084%, Revenue by 0.534%, and Exposure by 0.559%. Code is available at https://github.com/6lyc/RecHarness.",
+      "authors": [
+        "Haoran Ling",
+        "Yuecheng Li",
+        "Zeyu Song",
+        "Jing Yao",
+        "Shuwen Kang",
+        "Chi Lu",
+        "Wenjin Wu",
+        "Peng Jiang"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-07-31T10:15:38+00:00",
+      "link": "https://arxiv.org/pdf/2607.29241v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "bandit-routed agentic harness for automated recommender model optimization, enabling self-evolution",
+      "llm_evidence_cn": "赌博机路由代理框架实现推荐模型自动优化与自演化",
+      "llm_evidence": "赌博机路由代理框架实现推荐模型自动优化与自演化",
+      "canonical_evidence": "赌博机路由代理框架实现推荐模型自动优化与自演化",
+      "llm_tldr_en": "Proposes RecHarness, which automates recommender model optimization by using a bandit router to select modification directions and an LLM to generate code edits, enabling self-evolving recommender systems.",
+      "llm_tldr_cn": "解决推荐模型人工迭代效率低的问题，提出RecHarness框架，将优化过程分为两步：赌博机路由器根据历史验证反馈选择修改方向，大语言模型生成具体优化假设和可执行代码编辑，实现推荐模型的自动架构和目标函数演化。实验显示该方法在有限实验预算下稳定搜索并提升性能，为自我优化的推荐系统开辟了新路径。",
+      "llm_tldr": "解决推荐模型人工迭代效率低的问题，提出RecHarness框架，将优化过程分为两步：赌博机路由器根据历史验证反馈选择修改方向，大语言模型生成具体优化假设和可执行代码编辑，实现推荐模型的自动架构和目标函数演化。实验显示该方法在有限实验预算下稳定搜索并提升性能，为自我优化的推荐系统开辟了新路径。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self-improving models with automated architecture search",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.29010v1",
+      "source": "arxiv",
+      "title": "EvoReason: Self-Evolving Reasoning Primitive-Guided On-Policy Distillation for Latent Reasoning in Generative Recommendation",
+      "abstract": "Generative recommendation benefits from reasoning-enhanced inference, and latent reasoning offers an efficient paradigm by encoding intermediate reasoning processes into compact continuous representations for latency-sensitive deployment. Despite its efficiency, existing latent reasoning approaches typically rely on directly distilling raw chain-of-thought (CoT) trajectories into latent representations, assuming that textual reasoning traces provide sufficient supervision. However, recommendation reasoning trajectories contain diverse reasoning processes with redundant expressions and unstable reasoning paths, making raw CoT supervision suboptimal for learning transferable latent reasoning representations. To address this challenge, we propose EvoReason, a self-evolving latent reasoning framework that adaptively aligns explicit reasoning supervision with the student's latent reasoning space through primitive-guided on-policy distillation. First, EvoReason extracts reusable reasoning primitives from high-quality agentic recommendation trajectories, where each primitive captures an essential reasoning behavior and serves as a pseudo-tool for structured teacher reasoning. Then, based on these primitives, we equip the teacher with primitive-aware reasoning capabilities, enabling it to generate structured CoT supervision with reduced redundancy and improved consistency. Finally, during latent reasoning optimization, EvoReason introduces a self-evolving on-policy distillation mechanism, where the primitive-guided reasoning process evolves according to the student's latent reasoning outcomes. Through this closed-loop co-evolution, policy updates continuously improve latent reasoning behaviors is refined according to the resulting latent reasoning outcomes, enabling progressively better-aligned CoT supervision and more effective reasoning transfer.",
+      "authors": [
+        "Zhuang Zhuang",
+        "Zhipeng Wei",
+        "Rongfeng Guo",
+        "Shijie Li",
+        "Peng Zhao",
+        "Jie Chen",
+        "Fei Pan"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-07-31T04:24:16+00:00",
+      "link": "https://arxiv.org/pdf/2607.29010v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Proposes a self-evolving reasoning primitive-guided distillation method for neural networks.",
+      "llm_evidence_cn": "提出一种自进化推理原语引导的蒸馏方法用于神经网络。",
+      "llm_evidence": "提出一种自进化推理原语引导的蒸馏方法用于神经网络。",
+      "canonical_evidence": "提出一种自进化推理原语引导的蒸馏方法用于神经网络。",
+      "llm_tldr_en": "EvoReason proposes a self-evolving reasoning primitive-guided on-policy distillation for efficient latent reasoning in generative recommendation, showing improved recommendation performance.",
+      "llm_tldr_cn": "针对生成式推荐中隐含推理依赖原始思维链监督存在的冗余与不稳定问题，本文提出EvoReason，通过自进化推理原语引导的同策略蒸馏，学习紧凑的隐含推理表征，提升生成式推荐的效率与性能。",
+      "llm_tldr": "针对生成式推荐中隐含推理依赖原始思维链监督存在的冗余与不稳定问题，本文提出EvoReason，通过自进化推理原语引导的同策略蒸馏，学习紧凑的隐含推理表征，提升生成式推荐的效率与性能。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.29468v1",
+      "source": "arxiv",
+      "title": "Self-Play Meets Skill Evolution: Self-Evolving Search Agents that Pose, Solve, and Remember",
+      "abstract": "Self-play agents can generate training problems without questions from target benchmarks, but their curricula lack persistent state: failures affect gradients yet do not explicitly shape future practice. External skill memories preserve procedural experience but are typically learned from fixed task distributions. We introduce \\textbf{SESA} (Self-Evolving Skill-Augmented Agent), which makes procedural memory an evolving state of tool-augmented search self-play. A challenger poses problems, while a separately parameterized solver alone retrieves skills. Informative failures are distilled into reusable skills and written back to memory. The updated memory changes solver behavior and success, which changes the challenger's reward and the distribution of future problems; the resulting frontier produces new failures that rewrite memory. This bidirectional loop makes task generation and skill memory co-evolve. Because retrieved skills shape on-policy training trajectories, their benefits can enter the model parameters as well as remain in the external bank, enabling memory-free deployment and optional inference-time retrieval. Across seven open-domain and multi-hop question-answering benchmarks, SESA improves average accuracy over SSP by 1.2--3.2 points across multiple backbones and surpasses the skill-augmented SkillRL baseline by 0.9 points under a unified evaluation protocol. On Qwen3 models, SESA-Off retains 1.8--2.2 points of improvement over SSP, while the final skill bank adds a further 0.5--1.0 points. These results show that evolving skill memory is not merely an inference-time plug-in: it changes policy learning and the future training distribution while retaining value as optional external memory. Our code is available at https://github.com/Zenghuang-Fu/SESA-Self-Evolving-Search-Agents.",
+      "authors": [
+        "Zenghuang Fu",
+        "Zhaoyang Li",
+        "Qiuyuan Ai",
+        "Haoyu Wu",
+        "Minghui Wu",
+        "Chenxu Zhao",
+        "Ante Wang",
+        "Guannan He",
+        "Changwei Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-31T14:32:52+00:00",
+      "link": "https://arxiv.org/pdf/2607.29468v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes self-evolving agents that improve via skill memory and self-play",
+      "llm_evidence_cn": "提出通过技能记忆和自博弈实现自进化的代理",
+      "llm_evidence": "提出通过技能记忆和自博弈实现自进化的代理",
+      "canonical_evidence": "提出通过技能记忆和自博弈实现自进化的代理",
+      "llm_tldr_en": "Presents SESA, a self-improving framework where agents learn to pose, solve, and remember tasks via self-play and skill evolution, enabling autonomous curriculum generation. The method's self-evolution technique is transferable to NLP tasks like information extraction.",
+      "llm_tldr_cn": "针对自博弈代理缺乏持久状态、无法显式利用失败经验的问题，本文提出SESA框架，通过技能记忆与自博弈使代理能够提出、解决并记忆任务，将信息性失败提炼为可复用技能并写入记忆，从而持续改进代理行为。实验表明，该方法能自主生成课程并提升搜索代理能力，其自进化机制可迁移至信息抽取等场景，为构建持续自我改进的智能系统提供了新思路。",
+      "llm_tldr": "针对自博弈代理缺乏持久状态、无法显式利用失败经验的问题，本文提出SESA框架，通过技能记忆与自博弈使代理能够提出、解决并记忆任务，将信息性失败提炼为可复用技能并写入记忆，从而持续改进代理行为。实验表明，该方法能自主生成课程并提升搜索代理能力，其自进化机制可迁移至信息抽取等场景，为构建持续自我改进的智能系统提供了新思路。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
