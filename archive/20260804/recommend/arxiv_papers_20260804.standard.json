@@ -1,0 +1,501 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-04T21:40:48.038428+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 8,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 6,
+    "quick_skim_target": 11,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2608.00303v1",
+      "source": "arxiv",
+      "title": "CrystalMem: Elastic Memory for Self-Evolving LLM Agents via Knowledge Crystallization",
+      "abstract": "Memory for self-evolving large language model (LLM) agents is often provisioned as if its byte budget only grows. Cloud platforms, however, adjust quotas with load and cost, and we show that capability does not follow the budget back up: after a squeeze-and-recover cycle, the agent settles below its pre-squeeze level, a gap we call memory hysteresis. The cause is structural. Deletion and one-way compression discard the material needed for later rebuilding, and we prove that any policy that only keeps or drops entries carries a residual-deficit floor. We propose CrystalMem (Crystallized Memory), an elastic memory sidecar that demotes entries across four fidelity states under a crystallization-energy schedule, orders demotions by advantage-weighted influence with dependency coupling, and recovers capability through verified recrystallization under explicit compute and byte caps. Across seven environments, seventeen methods, and six backbones, with multi-tenant serving and a physical edge-cloud deployment, CrystalMem achieves the highest restored capability in every setting and closes the loop left open by every baseline. From a 50% byte budget, CrystalMem matches the strongest budgeted baseline at full provision on every environment; at equal budgets, it leads by +4.6 pp on average.",
+      "authors": [
+        "Beining Wu",
+        "Jun Huang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-31T21:35:46+00:00",
+      "link": "https://arxiv.org/pdf/2608.00303v1",
+      "tags": [
+        "keyword:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Memory management for self-evolving LLM agents",
+      "llm_evidence_cn": "面向自进化LLM智能体的弹性记忆管理",
+      "llm_evidence": "面向自进化LLM智能体的弹性记忆管理",
+      "canonical_evidence": "面向自进化LLM智能体的弹性记忆管理",
+      "llm_tldr_en": "Addresses memory hysteresis in self-evolving LLM agents: after resource squeeze, capability drops and doesn't recover. Proposes CrystalMem, an elastic memory that demotes entries across four fidelity states using crystallization-energy schedules to maintain capability.",
+      "llm_tldr_cn": "针对自进化LLM智能体中内存配额变化导致能力无法恢复的记忆滞后问题，提出CrystalMem（结晶记忆），一种弹性内存旁路，根据结晶能量调度将条目在四个保真度状态间降级，并依据优势排序降级。实验证明该方法缓解了记忆滞后，使智能体在资源波动后保持能力。",
+      "llm_tldr": "针对自进化LLM智能体中内存配额变化导致能力无法恢复的记忆滞后问题，提出CrystalMem（结晶记忆），一种弹性内存旁路，根据结晶能量调度将条目在四个保真度状态间降级，并依据优势排序降级。实验证明该方法缓解了记忆滞后，使智能体在资源波动后保持能力。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.01234v1",
+      "source": "arxiv",
+      "title": "Learning What to Remember and What to Internalize in LLM Self-Evolution via Adaptive Memory-Parameter Coordination",
+      "abstract": "Large language model agents increasingly operate in dynamic environments where tool interfaces, APIs, and user requirements change after deployment. Existing self-evolution methods mainly follow two paradigms: harness-based approaches, which externalize feedback into editable memories or skills for rapid adaptation, and parameter-based approaches, which internalize experience into model parameters for deeper capability improvement. However, using either mechanism alone creates a trade-off between flexibility and performance. This paper asks how an agent can coordinate both channels to achieve robust self-evolution. We present COVE, a unified agent self-evolution framework that combines harness-based and parameter-based learning through task-aware routing, stage-aware scheduling, and knowledge optimization. Through this design, COVE treats self-evolution not as indiscriminate accumulation of experience, but as a coordinated process that matches tasks and knowledge types to appropriate learning mechanisms. Experiments across multiple task categories show that COVE outperforms single-channel evolution strategies, demonstrating more robust and efficient improvement under changing environments.",
+      "authors": [
+        "Tianyun Ji",
+        "Zhenya Huang",
+        "Jiayu Liu",
+        "Zirui Liu",
+        "Yu Su",
+        "Hongbin Pei"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-02T13:39:01+00:00",
+      "link": "https://arxiv.org/pdf/2608.01234v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM self-evolution via adaptive memory-parameter coordination",
+      "llm_evidence_cn": "通过自适应记忆-参数协调实现LLM自进化",
+      "llm_evidence": "通过自适应记忆-参数协调实现LLM自进化",
+      "canonical_evidence": "通过自适应记忆-参数协调实现LLM自进化",
+      "llm_tldr_en": "Proposes COVE, a framework that coordinates external memory and parameter updates for robust self-evolution of LLM agents, applicable to NLP tasks.",
+      "llm_tldr_cn": "针对LLM代理在动态环境中的自进化问题，本文提出COVE框架，通过协调外部记忆与参数更新两种进化通道，实现鲁棒自进化。方法根据遗忘与泛化权衡自适应分配知识，实验表明在多种任务中提升性能与灵活性。该框架为LLM代理的自进化提供了统一方案，可广泛应用于NLP任务。",
+      "llm_tldr": "针对LLM代理在动态环境中的自进化问题，本文提出COVE框架，通过协调外部记忆与参数更新两种进化通道，实现鲁棒自进化。方法根据遗忘与泛化权衡自适应分配知识，实验表明在多种任务中提升性能与灵活性。该框架为LLM代理的自进化提供了统一方案，可广泛应用于NLP任务。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.01633v1",
+      "source": "arxiv",
+      "title": "GraphIR: Architecture-Level Search States for LLM-Guided Neural Architecture Evolution",
+      "abstract": "Large language models (LLMs) enable neural architecture search (NAS) directly over executable neural network programs. However, code-level flexibility does not provide the architecture state needed for effective mutation: LLMs must infer tensor dependencies, editable components, and compatibility constraints from implementation details. To address this representation mismatch, we propose GraphIR, an architecture-aware intermediate representation that supplements executable programs with a mutation-aligned candidate state. GraphIR organizes each candidate through three complementary views: a computation skeleton describing tensor flow, a mutation surface exposing editable modules and operations, and a validity envelope capturing interface contracts, propagated shapes, and downstream dependencies. To evaluate our method, we construct NAS-Dependency, a 120-question benchmark covering six complementary dependency-reasoning dimensions. The diagnostic shows that GraphIR is particularly effective at identifying exact producer occurrences, tracing dependency propagation, and diagnosing interface and failure risks. Across six downstream benchmarks including CLRS, GraphIR achieves the best overall search performance while maintaining comparable model size and favorable end-to-end NAS efficiency when integrated into OpenEvolve. These results show that a mutation-oriented architecture state provides an effective interface between executable neural programs and LLM-guided architecture evolution.",
+      "authors": [
+        "Zhen Liu",
+        "Wanqi Zhou",
+        "Shuanghao Bai",
+        "Yuhan Liu",
+        "Jinjun Wang",
+        "Jingwen Fu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-03T03:06:58+00:00",
+      "link": "https://arxiv.org/pdf/2608.01633v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM-guided neural architecture evolution with mutation-aligned state",
+      "llm_evidence_cn": "LLM引导的神经架构进化与突变对齐状态",
+      "llm_evidence": "LLM引导的神经架构进化与突变对齐状态",
+      "canonical_evidence": "LLM引导的神经架构进化与突变对齐状态",
+      "llm_tldr_en": "Proposes GraphIR, an architecture-aware intermediate representation that enables LLMs to effectively mutate neural architectures by exposing computation skeletons, mutation surfaces, and validity constraints, advancing automated architecture search.",
+      "llm_tldr_cn": "针对现有LLM引导的神经架构搜索中代码级表示缺乏有效突变状态的局限，提出架构感知中间表示GraphIR，通过计算骨架、突变表面和合法性包络三种视图组织候选架构，为LLM突变提供结构化状态信息。实验表明GraphIR能显著提升架构演化的有效性和效率，推动了自动化架构搜索在复杂神经网络设计中的应用。",
+      "llm_tldr": "针对现有LLM引导的神经架构搜索中代码级表示缺乏有效突变状态的局限，提出架构感知中间表示GraphIR，通过计算骨架、突变表面和合法性包络三种视图组织候选架构，为LLM突变提供结构化状态信息。实验表明GraphIR能显著提升架构演化的有效性和效率，推动了自动化架构搜索在复杂神经网络设计中的应用。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self-improving models with automated architecture search",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.00155v1",
+      "source": "arxiv",
+      "title": "AgentStream: How Well Do Self-Evolving LLM Agents Perform Under Streaming Tasks?",
+      "abstract": "Large language model (LLM) agents can self-evolve by continually improving from their own accumulated experience. However, existing studies predominantly adopt independent evaluation. Consequently, the behavior of self-evolving agents in realistic streaming settings, where agents adapt to diverse and complex task streams, remains poorly understood. To address this gap, we introduce AgentStream, a unified framework that evaluates self-evolving agents spanning diverse evolution components by organizing agentic benchmarks into a configurable task stream and instantiating the \\texttt{Isolated}, \\texttt{Sequential}, and \\texttt{Interleaved} streaming scenarios at test time, which progressively vary the scope and domain composition of the stream. Over these scenarios, we combinatorially evaluate five representative self-evolving methods across three frontier foundation models, disentangling how model capability, method architecture, and streaming scenario jointly shape self-evolution. Our results show that self-evolution reliability varies across streaming scenarios, the benefit of self-evolution is gated by model capability and non-monotonic in model strength, and no single method dominates across models and scenarios. These findings offer concrete guidance for selecting self-evolving methods across models and streaming scenarios. Overall, we advocate that self-evolving agents should be evaluated under realistic task streams rather than isolated single-task settings.",
+      "authors": [
+        "Dong Yan",
+        "Jian Liang",
+        "Dapeng Hu",
+        "Ran He",
+        "Nicholas Jing Yuan",
+        "Qi Zhang",
+        "Tieniu Tan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-31T17:50:08+00:00",
+      "link": "https://arxiv.org/pdf/2608.00155v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "evaluating self-evolving LLM agents under streaming tasks",
+      "llm_evidence_cn": "在流任务下评估自进化LLM代理",
+      "llm_evidence": "在流任务下评估自进化LLM代理",
+      "canonical_evidence": "在流任务下评估自进化LLM代理",
+      "llm_tldr_en": "Introduces AgentStream, a framework for evaluating self-evolving LLM agents in configurable task streams, revealing challenges like catastrophic forgetting.",
+      "llm_tldr_cn": "现有自进化LLM代理评估多采用独立测试，忽视流式场景。本文提出AgentStream框架，通过构造可配置任务流并实例化隔离、顺序、交错三种流式场景，系统评估自进化代理在持续变化环境中的行为。发现流式设置下自进化代理面临灾难性遗忘等挑战，为后续研究提供基准。",
+      "llm_tldr": "现有自进化LLM代理评估多采用独立测试，忽视流式场景。本文提出AgentStream框架，通过构造可配置任务流并实例化隔离、顺序、交错三种流式场景，系统评估自进化代理在持续变化环境中的行为。发现流式设置下自进化代理面临灾难性遗忘等挑战，为后续研究提供基准。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.00540v1",
+      "source": "arxiv",
+      "title": "DiffuseAgent-MI: Distributionally-Grounded,Tool-Integrated Self-Evolving Agents for Faithful Visual Reasoning",
+      "abstract": "Tool-integrated vision-language agents have made remarkable progress on compositional and multi-step visual reasoning. Yet their outputs frequently exhibit unfaithfulness: the stated reasoning path diverges from the computation that actually produced the answer, undermining reliability in safety-critical applications. We present DiffuseAgent-MI, a self-evolving agent whose perceptual grounding is governed by a KL-minimal energy model over feature units, providing a distributional view of visual mechanistic interpretability. The agent learns an energy landscape that softly constrains generated samples to lie near the native prior conditioned on the chosen interpretable unit, closing the gap between the explanation and the internal representation. A verifier then supplies trajectory-level faithfulness rewards, and a repair branch re-conditions the energy when the verifier flags an unfaithful step. On GeoQA, SciVis, VQA-v2 and an in-house multimodal reasoning set, DiffuseAgent-MI improves accuracy by up to 5.1 points over prior self-evolving agents while more than doubling mutual-information faithfulness and human-interpretability agreement. Our analysis shows the energy term and the verifier are complementary: the former guarantees distributional faithfulness, the latter trajectory-level faithfulness, and only their combination closes both gaps.",
+      "authors": [
+        "An Lanji",
+        "Dawei Liu",
+        "Jin Li",
+        "Haoran Xu",
+        "Mei Chen",
+        "Yu Tian"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-01T08:54:44+00:00",
+      "link": "https://arxiv.org/pdf/2608.00540v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Self-evolving agent for visual reasoning",
+      "llm_evidence_cn": "用于视觉推理的自进化智能体",
+      "llm_evidence": "用于视觉推理的自进化智能体",
+      "canonical_evidence": "用于视觉推理的自进化智能体",
+      "llm_tldr_en": "Proposes a self-evolving agent with distributional grounding for faithful visual reasoning, addressing unfaithfulness of reasoning paths in vision-language agents.",
+      "llm_tldr_cn": "针对工具集成的视觉-语言智能体在组合式和多步视觉推理中推理路径与计算不一致的问题，提出DiffuseAgent-MI，一种自进化智能体，其感知接地由特征单元上的KL最小能量模型控制，从而提供可解释性的分布视图。该方法通过学习能量景观软约束生成样本，缩小解释与计算之间的差距。实验表明，该自进化框架提升了视觉推理的忠实度，对安全关键应用具有价值。",
+      "llm_tldr": "针对工具集成的视觉-语言智能体在组合式和多步视觉推理中推理路径与计算不一致的问题，提出DiffuseAgent-MI，一种自进化智能体，其感知接地由特征单元上的KL最小能量模型控制，从而提供可解释性的分布视图。该方法通过学习能量景观软约束生成样本，缩小解释与计算之间的差距。实验表明，该自进化框架提升了视觉推理的忠实度，对安全关键应用具有价值。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.01739v1",
+      "source": "arxiv",
+      "title": "CoEvo-Mem: Co-Evolving Retrieval Policy and Memory Bank for LLM Agents",
+      "abstract": "As memories accumulate across tasks and sessions, the performance of long-term LLM agents depends jointly on query-specific retrieval and continual memory refinement. However, existing methods typically optimize either memory access, through iterative query refinement or adaptive retrieval policies, or memory evolution such as structural update. This separation overlooks a fundamental feedback loop: retrieval determines which memories receive usage signals, while updated memory bank reshape future retrieval. We propose \\textbf{CoEvo-Mem}, a closed-loop framework for co-evolving the retrieval policy and memory bank. For each query, a frozen LLM generates route-specific query rewrites and a routing prior, which a lightweight residual router corrects online. The retrieved context serves as the coupling interface between the two learning processes: task outcomes assign credit to routing decisions, while trajectory-conditioned feedback updates memory values and graph relations. These updates alter how memories are ranked and selected for subsequent queries, thereby closing the feedback loop. To mitigate coupling induced non-stationarity, CoEvo-Mem alternates between updating the router with the memory bank fixed and evolving the memory bank with the retrieval policy fixed. Across seven diverse benchmarks, \\textbf{CoEvo-Mem} achieves state-of-the-art performance, demonstrating the importance of retrieval-memory coevolution.",
+      "authors": [
+        "Bowen Ye",
+        "Yongchao Xu",
+        "Zhijian Li",
+        "Xiang Yin",
+        "Junkai Ma",
+        "Wenzhao Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-03T06:04:51+00:00",
+      "link": "https://arxiv.org/pdf/2608.01739v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Co-evolving retrieval policy and memory bank in a closed-loop framework for long-term agents",
+      "llm_evidence_cn": "闭环框架中协同演化检索策略与记忆库用于长期智能体",
+      "llm_evidence": "闭环框架中协同演化检索策略与记忆库用于长期智能体",
+      "canonical_evidence": "闭环框架中协同演化检索策略与记忆库用于长期智能体",
+      "llm_tldr_en": "CoEvo-Mem co-evolves the retrieval policy and memory bank for LLM agents, capturing the feedback loop between memory access and evolution to improve long-term performance.",
+      "llm_tldr_cn": "长期LLM智能体的性能同时依赖于检索和记忆更新，但现有方法分别优化这两者，忽略了它们之间的反馈循环。本文提出CoEvo-Mem闭环框架，联合演化检索策略与记忆库，通过残差路由和记忆更新利用查询信号。实验表明协同演化能提升多任务长期记忆效率，为智能体自进化提供了新机制。",
+      "llm_tldr": "长期LLM智能体的性能同时依赖于检索和记忆更新，但现有方法分别优化这两者，忽略了它们之间的反馈循环。本文提出CoEvo-Mem闭环框架，联合演化检索策略与记忆库，通过残差路由和记忆更新利用查询信号。实验表明协同演化能提升多任务长期记忆效率，为智能体自进化提供了新机制。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.01904v1",
+      "source": "arxiv",
+      "title": "CoEvoKG: Co-Evolving Knowledge Graphs with Self-Evolving Search Agents",
+      "abstract": "Large language models can improve with reinforcement learning for search agents, yet existing self play agents repeatedly generate tasks while discarding the knowledge gained during successful searches. We introduce CoEvoKG, a framework that turns a   knowledge graph into both a source of verifiable training tasks and a persistent evidence memory for agent evolution. CoEvoKG jointly trains a task generator and a search agent: the generator creates multihop questions from entity chains sampled   from the knowledge graph, while the agent learns from rewards for answer correctness and search trajectories whose entity paths are supported by graph evidence. When a search succeeds, CoEvoKG verifies and deduplicates the retrieved evidence, then   writes it back to the corresponding graph nodes and edges. Future rounds reuse this enriched graph for task generation and reward computation, closing the loop between model self evolution and knowledge accumulation. Experiments on six QA benchmarks   (NQ, TriviaQA, PopQA, HotpotQA, 2WikiMultiHopQA, and Bamboogle) with three backbone models show that CoEvoKG improves macro average accuracy over the corresponding base models by +11.2, +10.1, and +11.6 points on Qwen2.5-3B-Instruct,   Qwen2.5-7B-Instruct, and Llama-3.1-8B-Instruct, respectively. Under matched training budgets, CoEvoKG further improves over competitive self play baselines and RL baselines for search agents by +2.6 to +3.7 macro average points across the three   backbones. Code is available at https://github.com/lazzy1225/CoEvoKG.",
+      "authors": [
+        "Zhaoyang Li",
+        "Zenghuang Fu",
+        "Qiuyuan Ai",
+        "Ping Jiang",
+        "Haoyu Wu",
+        "Minghui Wu",
+        "Chenxu Zhao",
+        "Jie Song",
+        "Guannan He"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-03T08:39:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.01904v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Co-evolving search agent and knowledge graph, evidence extraction and integration drives self-improvement",
+      "llm_evidence_cn": "共同进化的搜索代理和知识图谱，证据抽取和整合驱动自我提升",
+      "llm_evidence": "共同进化的搜索代理和知识图谱，证据抽取和整合驱动自我提升",
+      "canonical_evidence": "共同进化的搜索代理和知识图谱，证据抽取和整合驱动自我提升",
+      "llm_tldr_en": "CoEvoKG trains a knowledge graph and search agent to co-evolve: the KG generates tasks, the agent learns from rewards, and successful search results are extracted and fed back to the KG, creating a self-improving cycle for information extraction.",
+      "llm_tldr_cn": "针对现有自博弈代理丢弃搜索中获取的知识的问题，CoEvoKG提出知识图谱与搜索代理共同进化框架：利用图谱生成多跳问题作为训练任务，代理通过答案正确性和图证据奖励学习，成功搜索的信息被抽取并写回图谱，形成自我进化的信息抽取循环。实验表明该机制持续提升代理搜索能力与图谱完备性，为自我进化的信息检索系统提供了新范式。",
+      "llm_tldr": "针对现有自博弈代理丢弃搜索中获取的知识的问题，CoEvoKG提出知识图谱与搜索代理共同进化框架：利用图谱生成多跳问题作为训练任务，代理通过答案正确性和图证据奖励学习，成功搜索的信息被抽取并写回图谱，形成自我进化的信息抽取循环。实验表明该机制持续提升代理搜索能力与图谱完备性，为自我进化的信息检索系统提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self evolving information extraction systems",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.26473v1",
+      "source": "arxiv",
+      "title": "Learning Dynamic User Personas from Implicit Interaction Streams via Iterative Refinement",
+      "abstract": "Personalizing large language models (LLMs) to individual users is essential for improving user experience, yet existing approaches typically rely on explicit preference supervision such as pairwise comparisons or demographic attributes, limiting their applicability in natural interaction settings. We propose IRIS, a framework that learns dynamic user personas directly from implicit interaction streams by extracting behavioral signals from everyday conversations and iteratively refining persona representations through a prediction-driven closed loop without requiring explicit feedback. We introduce an evaluation protocol based on behavior prediction, persona stability, and decision prediction. A proof-of-concept study on a synthetic interaction stream derived from public-domain autobiographical text shows that IRIS produces stable personas and distinguishes individual users while revealing limitations of memory-only approaches on recall-oriented metrics. We then validate IRIS on anonymized real-world Reddit r/AmItheAsshole (AITA) data, with personas built solely from each author's historical interactions. Across 100 authors, IRIS achieves the highest decision prediction accuracy among all evaluated methods (61.0%), outperforming static personas, memory-only retrieval, and no-personalization baselines. These results suggest that implicit behavioral modeling provides a scalable alternative to explicit preference learning for personalized LLMs and offers a practical foundation for adaptive conversational systems and embodied agents that require continuously evolving models of their users.",
+      "authors": [
+        "Haifeng Wu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-07-29T04:56:14+00:00",
+      "link": "https://arxiv.org/pdf/2607.26473v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Iterative refinement of user persona representations through a prediction-driven closed loop",
+      "llm_evidence_cn": "通过预测驱动的闭环迭代优化用户画像表征",
+      "llm_evidence": "通过预测驱动的闭环迭代优化用户画像表征",
+      "canonical_evidence": "通过预测驱动的闭环迭代优化用户画像表征",
+      "llm_tldr_en": "IRIS learns dynamic user personas from implicit interactions by iteratively refining persona representations without explicit feedback, enabling personalized LLMs.",
+      "llm_tldr_cn": "现有LLM个性化依赖显式反馈，限制了自然场景下的应用。本文提出IRIS框架，从日常对话隐式交互中提取行为信号，并通过预测驱动的闭环迭代优化用户画像。实验在合成数据上验证了行为预测和决策预测的有效性，展示了自进化用户建模的潜力。",
+      "llm_tldr": "现有LLM个性化依赖显式反馈，限制了自然场景下的应用。本文提出IRIS框架，从日常对话隐式交互中提取行为信号，并通过预测驱动的闭环迭代优化用户画像。实验在合成数据上验证了行为预测和决策预测的有效性，展示了自进化用户建模的潜力。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.26661v2",
+      "source": "arxiv",
+      "title": "AgenticCANN: Automated Ascend C Operator Generation via Knowledge-Augmented Agentic Evolution",
+      "abstract": "Ascend C operator optimization is critical for NPU (Neural Processing Unit) inference performance but requires deep hardware expertise. While large language models (LLMs) have shown promise in automated CUDA kernel generation, the fundamentally different programming model of Ascend C introduces unique challenges that remain unexplored. In this paper, we propose AgenticCANN, a knowledge-augmented agentic evolution framework specifically tailored for automated Ascend C operator synthesis in low-corpus NPU environments. To overcome the severe platform knowledge deficit on unfamiliar hardware, AgenticCANN incorporates a knowledge-orchestrated generation system that delivers structured, multi-level domain insights across the development lifecycle to resolve the upstream feasibility bottleneck. Building on this foundation, it features a stage-adaptive agentic evolution strategy that dynamically aligns LLM interaction modes with specific generation and evolution phases, balancing high-exploration candidate discovery with high-convergence performance tuning. Extensive experiments on Huawei Ascend 910B across six operators spanning five pattern categories demonstrate that our method achieves 90 to 100 percent feasibility on elementwise and normalization operators, 56% on fusion operators, and up to 6.65$\\times$ speedup on 1B Pangu model inference kernels. Further analysis reveals that knowledge injection monotonically improves feasibility from 57% to 86% on elementwise operators, demonstrating its general rather than operator-specific benefit.",
+      "authors": [
+        "Junhao Qiu",
+        "Zidong Wang",
+        "Yansong Sun",
+        "Zhitong Ma",
+        "Ping Guo",
+        "Qingfu Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-29T09:19:17+00:00",
+      "link": "https://arxiv.org/pdf/2607.26661v2",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Knowledge-augmented agentic evolution for operator generation",
+      "llm_evidence_cn": "知识增强的主体演化用于算子生成",
+      "llm_evidence": "知识增强的主体演化用于算子生成",
+      "canonical_evidence": "知识增强的主体演化用于算子生成",
+      "llm_tldr_en": "Proposes an agentic evolution framework with knowledge orchestration for automated Ascend C operator synthesis, demonstrating self-improving code generation under low-corpus constraints.",
+      "llm_tldr_cn": "当前NPU算子优化依赖领域专家，提出知识增强的主体演化框架AgenticCANN，通过结构化的多层次领域知识指导大语言模型生成Ascend C算子。该框架在低语料环境中实现了自动化算子合成，展示了自进化方法在硬件代码生成中的有效性，为自进化技术拓展到非NLP领域提供了案例。",
+      "llm_tldr": "当前NPU算子优化依赖领域专家，提出知识增强的主体演化框架AgenticCANN，通过结构化的多层次领域知识指导大语言模型生成Ascend C算子。该框架在低语料环境中实现了自动化算子合成，展示了自进化方法在硬件代码生成中的有效性，为自进化技术拓展到非NLP领域提供了案例。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.01918v1",
+      "source": "arxiv",
+      "title": "HarnessCompass: Guiding Automatic Harness Evolution toward Generalizable and Effective Agent Harnesses",
+      "abstract": "Harness design plays a critical role in agent performance by shaping how large language models (LLMs) perceive, reason over, and act within executable environments. Recent work has proposed automatic harness evolution, which iteratively improves the harness from agent--environment interactions. However, existing methods often overfit to the evolution tasks, rely exclusively on trajectory-derived signals, and optimize harness components jointly, causing interference across components. We propose HarnessCompass, a novel automatic harness evolution framework built around constrained evolution, proactive feedback, and component-wise optimization. HarnessCompass first enforces global constraints on evolution, restricting modifications to task-agnostic harness changes that generalize beyond the evolution tasks. It then augments trajectory-derived evidence with proactive first-person feedback from the agent about harness usage, yielding richer signals for evolution. Finally, it decouples the optimization of different harness components before consolidating them into a unified harness, reducing cross-component interference while preserving component synergy. On SWE-bench Verified with GPT-5.4, HarnessCompass improves Pass@1 from 54\\% to 66\\% in only 5 evolution iterations, outperforming AHE in both effectiveness and evolution efficiency. In addition, the evolved harness transfers effectively to held-out tasks and other models, demonstrating substantially stronger generalization than prior automatic harness evolution methods.",
+      "authors": [
+        "Luan Zhang",
+        "Ruochen Zhou",
+        "Dandan Song",
+        "Zhengyu Chen",
+        "Yuhang Tian",
+        "Jun Yang",
+        "Huipeng Ma",
+        "Chenhao Li",
+        "Guangyuan Feng",
+        "Xudong Li",
+        "Yizhou Jin",
+        "Yan Xu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-08-03T08:51:50+00:00",
+      "link": "https://arxiv.org/pdf/2608.01918v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Automatic harness evolution with constrained evolution, proactive feedback, and component-wise optimization",
+      "llm_evidence_cn": "带约束演化、主动反馈和组件优化的自动框架演化",
+      "llm_evidence": "带约束演化、主动反馈和组件优化的自动框架演化",
+      "canonical_evidence": "带约束演化、主动反馈和组件优化的自动框架演化",
+      "llm_tldr_en": "HarnessCompass proposes a constrained automatic harness evolution framework for agents, using proactive feedback and component-wise optimization to avoid overfitting and interference.",
+      "llm_tldr_cn": "现有自动框架演化方法在演化任务上易过拟合，且组件联合优化引起相互干扰。本文提出HarnessCompass，通过全局约束、主动反馈和组件独立优化，确保演化后框架的泛化性。实验表明该方法能自动演化出更有效的智能体框架，为自进化系统设计提供了新思路。",
+      "llm_tldr": "现有自动框架演化方法在演化任务上易过拟合，且组件联合优化引起相互干扰。本文提出HarnessCompass，通过全局约束、主动反馈和组件独立优化，确保演化后框架的泛化性。实验表明该方法能自动演化出更有效的智能体框架，为自进化系统设计提供了新思路。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.00419v1",
+      "source": "arxiv",
+      "title": "Unleashing the Potential of Large Language Models: A Blueprint for Real-Time, Enterprise-Ready Deployments",
+      "abstract": "Large language models deployed in real-time, regulated settings face knowledge staleness, catastrophic forgetting, hallucination, and weak feedback loops. We present a unified, pattern-driven LLMOps architecture integrating real-time data ingestion, continual learning, retrieval-augmented generation (RAG), and human-in-the-loop feedback into a single operational pipeline. Four contributions map to established software design patterns: an adaptive ingestion pattern orchestrator (AIPO) evaluated with FreshStreamBench; STAR+FAR continual learning with sparse temporal adapter routing and freshness-aware replay; SAGE, an SLO-aware adaptive retrieval policy predicting a per-query passage budget to meet tail-latency targets; and an automated feedback-driven convergence stage with RLHF triggers. The result reduces latency-cost-accuracy trade-offs while supporting auditability and rollback for high-risk sectors such as health care and finance.",
+      "authors": [
+        "Muhammad Faizan Raza",
+        "Shuo",
+        "Yang",
+        "Satish Mahadevan Srinivasan",
+        "Joanna F. DeFranco"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "published": "2026-08-01T03:40:22+00:00",
+      "link": "https://arxiv.org/pdf/2608.00419v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "continual learning pipeline combats forgetting, enabling self-improvement",
+      "llm_evidence_cn": "持续学习管道对抗遗忘，实现模型自我改进",
+      "llm_evidence": "持续学习管道对抗遗忘，实现模型自我改进",
+      "canonical_evidence": "持续学习管道对抗遗忘，实现模型自我改进",
+      "llm_tldr_en": "Presents an LLMOps architecture with continual learning via sparse adapter routing and human-in-the-loop feedback, enabling real-time model updates to prevent knowledge staleness and forgetting.",
+      "llm_tldr_cn": "针对大模型在实时部署中的知识陈旧与灾难性遗忘问题，提出统一LLMOps架构，集成自适应数据摄入、STAR+FAR持续学习（稀疏适配器路由与时效感知重放）、SLO感知检索策略及人在回路反馈。该持续学习方法通过少量参数调整和选择性记忆回放实现模型自我改进，在FreshStreamBench上验证了新鲜度保持能力，为生产环境中的自进化模型提供了工程蓝图。",
+      "llm_tldr": "针对大模型在实时部署中的知识陈旧与灾难性遗忘问题，提出统一LLMOps架构，集成自适应数据摄入、STAR+FAR持续学习（稀疏适配器路由与时效感知重放）、SLO感知检索策略及人在回路反馈。该持续学习方法通过少量参数调整和选择性记忆回放实现模型自我改进，在FreshStreamBench上验证了新鲜度保持能力，为生产环境中的自进化模型提供了工程蓝图。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.01630v1",
+      "source": "arxiv",
+      "title": "RING: Retrieval-Internalized Generation for Continual Large-Scale Knowledge Injection",
+      "abstract": "Retrieval-augmented generation (RAG) improves factuality but adds latency and engineering overhead at serving time. We propose RING (Retrieval-Internalized Generation), a holistic paradigm spanning both architecture and training that injects large-scale external knowledge into a \\textit{Mixture-of-Memory Experts} and learns parametric search over this internal memory via reinforcement learning, removing the external retriever entirely. Training proceeds in three stages: continued pre-training injects new corpora into a Knowledge Expert via our novel \\textit{Dual Causal Attention}; supervised fine-tuning teaches a ``search-then-answer'' pattern; and reinforcement learning with hierarchical rewards optimizes the routing-and-search policy over the parametric memory. Unlike prior parametric injection methods that pair internal memory with a fixed or rule-based retriever, RING {learns} its retrieval policy directly from task signals. We further frame RING theoretically as a search-free approximation to the classical RAG objective. To evaluate large-scale injection of genuinely {new} knowledge without test-time leakage, we further construct News-2025, a benchmark built from news strictly post-dating the base LLM's pretraining cutoff. RING matches or surpasses both search-based RAG and parametric injection baselines in accuracy and efficiency.",
+      "authors": [
+        "Shicheng Xu",
+        "Liang Pang",
+        "Liyi Chen",
+        "Zihao Wei",
+        "Jingcheng Deng",
+        "Yan Gao",
+        "Yi Wu",
+        "Yao Hu",
+        "Huawei Shen",
+        "Xueqi Cheng"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-08-03T03:00:43+00:00",
+      "link": "https://arxiv.org/pdf/2608.01630v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Continual knowledge injection via internalized retrieval and RL, enabling self-improving model",
+      "llm_evidence_cn": "通过内部化检索和强化学习实现持续知识注入，使模型自我改进",
+      "llm_evidence": "通过内部化检索和强化学习实现持续知识注入，使模型自我改进",
+      "canonical_evidence": "通过内部化检索和强化学习实现持续知识注入，使模型自我改进",
+      "llm_tldr_en": "RING injects new knowledge into a Mixture-of-Memory Experts via staged training and RL, internalizing retrieval to create a self-improving generative model without external retriever.",
+      "llm_tldr_cn": "为解决检索增强生成延迟高和工程开销问题，RING提出检索内化生成范式，通过记忆专家混合架构分阶段注入新语料：持续预训练使用双因果注意力，监督微调学习搜索-回答模式，强化学习优化路由搜索策略，实现无需外部检索器的自我进化知识注入。实验表明该模型能持续吸收知识并自我提升生成准确性。",
+      "llm_tldr": "为解决检索增强生成延迟高和工程开销问题，RING提出检索内化生成范式，通过记忆专家混合架构分阶段注入新语料：持续预训练使用双因果注意力，监督微调学习搜索-回答模式，强化学习优化路由搜索策略，实现无需外部检索器的自我进化知识注入。实验表明该模型能持续吸收知识并自我提升生成准确性。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
