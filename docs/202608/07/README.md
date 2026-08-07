@@ -1,22 +1,20 @@
 # 日报 · 2026-08-07
 
-- 生成时间：2026-08-07 02:09:16 UTC
-- 当次推荐总数：4
-- 精读区：2
-- 速读区：2
+- 生成时间：2026-08-07 20:36:53 UTC
+- 当次推荐总数：1
+- 精读区：1
+- 速读区：0
 
 ## 今日简报（AI）
-今日聚焦自进化智能体框架，两篇精读论文双双获评9分，揭示了利用层次化协作与协作进化推动LLM自我改进的新路径。
-最值得关注A-SR和EvolveNet，它们分别通过层级协调和群体协作演化，让智能体实现持续的符号推理与自提升能力。
-推荐跟随这两条思路，尝试将演化机制引入你手头的自动化任务，从小规模实验验证其对长期推理的增益。
+1) 今日精读一篇高分行文，专注让AI编码智能体学习“一学就会，处处能用”的全局可复用技能。  
+2) 核心方向是让模型摆脱对单一任务的死记硬背，提炼出跨项目迁移的通用编码能力，提升部署效率。  
+3) 如果你正在构建或使用AI编码助手，可以关注这类技能抽象方法，下一步不妨尝试用少量示例测试其泛化效果。
 
 ## 精读区
-1. [A-SR: Self-Evolving Agentic LLMs for Symbolic Regression via Hierarchical Coordination](/202608/07/2608.04872v1-a-sr-self-evolving-agentic-llms-for-symbolic-regression-via-hierarchical-coordination) （9.0/10）
-2. [EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement](/202608/07/2608.04968v1-evolvenet-collaborative-harness-evolution-for-agent-self-improvement) （9.0/10）
+1. [Learning Globally Reusable Skills for Coding Agents](/202608/07/2608.06153v1-learning-globally-reusable-skills-for-coding-agents) （8.0/10）
 
 ## 速读区
-1. [Hierarchical Graph Memory for LLM Agents with Path-level Localization and Rewrite](/202608/07/2608.05095v1-hierarchical-graph-memory-for-llm-agents-with-path-level-localization-and-rewrite) （7.0/10）
-2. [Argus: A General-Purpose Agentic Runtime for Long-Horizon Reasoning](/202608/07/2608.05144v1-argus-a-general-purpose-agentic-runtime-for-long-horizon-reasoning) （6.0/10）
+- 本次无速读推荐。
 
 ---
 使用键盘方向键可在日报/论文之间快速切换。

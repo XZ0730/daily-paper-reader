@@ -1,95 +1,49 @@
 {
   "mode": "standard",
-  "generated_at": "2026-08-07T02:03:43.996690+00:00",
+  "generated_at": "2026-08-07T20:34:30.943410+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
-    "deep_divecandidates": 2,
+    "deep_divecandidates": 1,
     "deep_cap": 6,
-    "deep_selected": 2,
-    "quick_candidates": 2,
+    "deep_selected": 1,
+    "quick_candidates": 0,
     "quick_skim_target": 11,
-    "quick_selected": 2
+    "quick_selected": 0
   },
   "deep_dive": [
     {
-      "id": "2608.04872v1",
+      "id": "2608.06153v1",
       "source": "arxiv",
-      "title": "A-SR: Self-Evolving Agentic LLMs for Symbolic Regression via Hierarchical Coordination",
-      "abstract": "Symbolic regression aims to discover closed-form equations from data, but existing LLM-guided methods often rely on a unified proposal loop that compresses heterogeneous search failures into a scalar score and a single prompt. We propose A-SR, a self-evolving agentic framework that shifts the control unit from expression edits to role-conditioned evidence views. A-SR coordinates formula discovery through routing among coordination protocols, an online evaluator-reward role policy, and state-routed process memory. During search, evaluator feedback characterizes reliability and productivity, updates role-level utilities, and routes elite motifs, failure traces, and validity diagnostics to different agents. The framework self-evolves at two timescales: within a run, it adapts the search process without updating LLM parameters; across runs, recorded trajectories can be distilled into open-source LLMs as role-conditioned proposal priors. Averaged over the four LSR-Synth scientific domains in LLM-SRBench, A-SR improves Acc@0.01 over baselines from 25.79% to 48.30% with Llama3.1-8B, while A-SR-LoRA improves the corresponding Qwen3-4B result from 24.58% to 38.29%. On four real-world scientific discovery tasks, A-SR obtains the best in-distribution or out-of-distribution normalized mean squared error on 7 of 8 reported metrics.",
+      "title": "Learning Globally Reusable Skills for Coding Agents",
+      "abstract": "Automated skill evolution enables Large Language Model (LLM) agents to continuously improve without expensive retraining. However, existing approaches typically treat skill evolution as a sequence of local updates, overlooking relationships among skills and often producing overfitted skill updates that fail to generalize across tasks. We propose GSE, a globalized skill evolution framework that jointly optimizes skill compatibility and skill generalization. To preserve consistency across the skill bank, GSE maintains a Skill Relation Graph (SRG) that explicitly models and co-evolves inter-skill relationships. To improve generalization, GSE performs cluster-based skill consolidation to abstract reusable capabilities from local updates and employs replay-driven verification to prevent overfitting and behavioral regressions. We evaluate GSE on two representative software engineering tasks: bug-revealing test generation and false-positive bug report filtering. Across two state-of-the-art coding agents, OpenHands and mini-SWE-agent, GSE consistently achieves the best precision, recall, and F1-score. Compared with existing evolution techniques, GSE improves precision and recall by 6.1%~34.1% and 31.8%~180.0% for test generation, and by 15.4%~96.4% and 13.1%~19.8% for false-positive filtering. Deployment on an internal industrial agent further yields a 61.4% improvement in F1-score, demonstrating the effectiveness and generalizability of GSE for evolving effective skills.",
       "authors": [
-        "Wenxiao Zhao",
-        "Dong Liu",
-        "Kaiyi Xu",
-        "Feng Liu",
-        "Zhen Zhao",
-        "Fei Ben",
-        "Shu Wang",
-        "Wenhao Li",
-        "Yingnian Wu",
-        "Fenghua Ling",
-        "Haobo Li",
-        "Lei Bai"
+        "Chen Yang",
+        "Jiashuo Tian",
+        "Ziqi Wang",
+        "Xinyin Liu",
+        "Meiru Ye",
+        "Junjie Chen"
       ],
-      "primary_category": "cs.CL",
+      "primary_category": "cs.SE",
       "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
+        "cs.SE",
+        "cs.AI"
       ],
-      "published": "2026-08-05T14:01:10+00:00",
-      "link": "https://arxiv.org/pdf/2608.04872v1",
+      "published": "2026-08-06T15:19:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.06153v1",
       "tags": [
         "keyword:self-evolve",
         "query:self-evolve"
       ],
-      "llm_score": 9.0,
-      "llm_evidence_en": "self-evolving agentic LLMs for symbolic regression",
-      "llm_evidence_cn": "用于符号回归的自我进化代理大语言模型",
-      "llm_evidence": "用于符号回归的自我进化代理大语言模型",
-      "canonical_evidence": "用于符号回归的自我进化代理大语言模型",
-      "llm_tldr_en": "Proposes A-SR, a self-evolving agentic framework that uses role-conditioned evidence views and feedback-driven role-level updates to discover equations from data.",
-      "llm_tldr_cn": "针对现有LLM引导符号回归方法将异构搜索失败压缩为单一信号的问题,提出A-SR自进化代理框架,通过角色条件证据视图和在线评估者反馈,分层协调多个代理进行公式发现,在两个层面实现自进化,显著提升了符号回归的性能和适应性。",
-      "llm_tldr": "针对现有LLM引导符号回归方法将异构搜索失败压缩为单一信号的问题,提出A-SR自进化代理框架,通过角色条件证据视图和在线评估者反馈,分层协调多个代理进行公式发现,在两个层面实现自进化,显著提升了符号回归的性能和适应性。",
-      "llm_tags": [
-        "query:self-evolve"
-      ],
-      "matched_query_tag": "query:self-evolve",
-      "matched_query_text": "model self-evolution techniques for neural networks",
-      "matched_requirement_id": "req-4",
-      "selection_source": "fresh_fetch"
-    },
-    {
-      "id": "2608.04968v1",
-      "source": "arxiv",
-      "title": "EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement",
-      "abstract": "The capabilities of an LLM agent depend not only on its model but on the harness: the executable program that constructs context, invokes tools, verifies results, and recovers from failure. Recent work shows that evolving the harness yields persistent improvements without updating model weights. Existing approaches, however, assume that all execution experience can be routed to a single optimizer, which evolves one harness along a sequential trajectory. Real agent ecosystems violate that assumption: users, organizations, and environments generate isolated streams of experience that cannot be pooled, so the experience most worth learning from is exactly the experience that cannot be directly centralized. We introduce EvolveNet, a paradigm of collaborative harness evolution that moves experience extraction to the data. A shared harness is broadcast to data-local agent deployments, each of which evolves it on its own workload. Only the resulting program adaptations are composed into an updated shared harness and redistributed, so that every participating agent inherits operational experience discovered by the others. By shifting the aggregation boundary from raw workloads to learned adaptations, EvolveNet keeps workloads local and allows multiple evolutionary searches to proceed concurrently with reduced serial depth. Because independently modified programs cannot be averaged like model parameters and may conflict when composed, EvolveNet introduces scope-typed, evidence-guided program aggregation. Across five settings spanning text-to-SQL, data-science coding, competitive programming, software engineering, and agentic workflows, EvolveNet improves the shared harness in all five, with the largest gains under heterogeneous workloads, and ablations attribute the improvement to composition of adaptations from different agents rather than to selecting among them.",
-      "authors": [
-        "Jun Nie",
-        "Yonggang Zhang",
-        "Qianshu Cai",
-        "Yiu-ming Cheung",
-        "Xinmei Tian",
-        "Bo Han"
-      ],
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "published": "2026-08-05T15:37:18+00:00",
-      "link": "https://arxiv.org/pdf/2608.04968v1",
-      "tags": [
-        "keyword:self-evolve",
-        "query:self-evolve"
-      ],
-      "llm_score": 9.0,
-      "llm_evidence_en": "collaborative harness evolution for agent self-improvement",
-      "llm_evidence_cn": "智能体自我提升的协作工具进化",
-      "llm_evidence": "智能体自我提升的协作工具进化",
-      "canonical_evidence": "智能体自我提升的协作工具进化",
-      "llm_tldr_en": "Proposes EvolveNet, a collaborative harness evolution paradigm that enables distributed LLM agents to improve by sharing isolated experience streams without centralization.",
-      "llm_tldr_cn": "针对现实智能体生态中经验流无法集中化的瓶颈，提出EvolveNet协作进化范式，允许去中心化智能体通过交换学习信号集体提升工具性能，为分布式自进化系统奠定了基础。",
-      "llm_tldr": "针对现实智能体生态中经验流无法集中化的瓶颈，提出EvolveNet协作进化范式，允许去中心化智能体通过交换学习信号集体提升工具性能，为分布式自进化系统奠定了基础。",
+      "llm_score": 8.0,
+      "llm_evidence_en": "Automated skill evolution for self-improving agents; globalized framework co-evolves skills",
+      "llm_evidence_cn": "自动化技能进化使智能体自改进；全局化框架共同进化技能",
+      "llm_evidence": "自动化技能进化使智能体自改进；全局化框架共同进化技能",
+      "canonical_evidence": "自动化技能进化使智能体自改进；全局化框架共同进化技能",
+      "llm_tldr_en": "Proposes GSE, a globalized skill evolution framework that co-evolves inter-skill relationships and consolidates reusable skills, enabling coding agents to continuously improve and generalize across tasks.",
+      "llm_tldr_cn": "该论文提出全局技能进化框架GSE，通过维护技能关系图来建模和共同进化技能间关系，并基于聚类进行技能整合，使编码智能体能够在无重新训练的情况下持续改进并泛化任务。实验表明GSE有效提升了技能的兼容性和泛化性能，在多个基准上取得了最优结果，为自进化模型在代码生成领域的应用提供了方法论。",
+      "llm_tldr": "该论文提出全局技能进化框架GSE，通过维护技能关系图来建模和共同进化技能间关系，并基于聚类进行技能整合，使编码智能体能够在无重新训练的情况下持续改进并泛化任务。实验表明GSE有效提升了技能的兼容性和泛化性能，在多个基准上取得了最优结果，为自进化模型在代码生成领域的应用提供了方法论。",
       "llm_tags": [
         "query:self-evolve"
       ],
@@ -99,104 +53,5 @@
       "selection_source": "fresh_fetch"
     }
   ],
-  "quick_skim": [
-    {
-      "id": "2608.05095v1",
-      "source": "arxiv",
-      "title": "Hierarchical Graph Memory for LLM Agents with Path-level Localization and Rewrite",
-      "abstract": "Agents for long term reasoning require a memory that can be efficiently and effectively updated over time, as new facts and external feedback continue to arrive. Recently, graph memory has been adopted to offer structural organization for multi-hop retrieval and reasoning. However, existing methods store all memories in a flat graph, and accumulated historical memories can introduce irrelevant contexts and increase the cost of evidence selection during retrieval. Moreover, they typically update memory units independently, requiring repeated unit-wise rewrite to cover related changes. To address these issues, we propose HiGram, an evolving hierarchical graph memory framework with path-level localization and rewriting. Specifically, we first propose a hierarchical graph memory, which organizes the memory into coarse-to-fine architecture composed of upper-level nodes and MemoryUnits, thereby reducing the amount of irrelevant information during retrieval. We further propose MicroGraph-based path-level localization, which leverages query and update conditioned MicroGraphs to identify support subgraph and evidence path before rewrite. Finally, we propose a coordinated rewriting method that jointly revises intra-unit memory and inter-unit dependencies, enable valid dependency structures updating in the localized evidence path. Experiments on benchmarks for long-term conversational question answering and conflict-aware memory evaluation demonstrate that our method demonstrate substantial improvements over baselines in answer quality and token efficiency. Besides, our method improves answer accuracy and query-valid evidence selection under dynamic, static, and conditional conflicts.",
-      "authors": [
-        "Xiawei Yue",
-        "Boran Wang",
-        "Xiaoqing Zhang",
-        "Shuxin Zheng",
-        "Ziwei Zhang"
-      ],
-      "primary_category": "cs.AI",
-      "categories": [
-        "cs.AI"
-      ],
-      "published": "2026-08-05T17:32:43+00:00",
-      "link": "https://arxiv.org/pdf/2608.05095v1",
-      "tags": [
-        "keyword:self-evolve",
-        "query:self-evolve"
-      ],
-      "llm_score": 7.0,
-      "llm_evidence_en": "proposes an evolving hierarchical graph memory for LLM agents",
-      "llm_evidence_cn": "为LLM智能体提出一种演化的层次化图记忆",
-      "llm_evidence": "为LLM智能体提出一种演化的层次化图记忆",
-      "canonical_evidence": "为LLM智能体提出一种演化的层次化图记忆",
-      "llm_tldr_en": "HiGram introduces an evolving hierarchical graph memory that localizes and rewrites paths to support long-term reasoning agents, embodying self-evolution principles.",
-      "llm_tldr_cn": "HiGram提出一种演化的层次化图记忆框架，通过路径级定位与重写，使LLM智能体能够高效更新记忆，支持长期推理。该方法克服了扁平图记忆的上下文无关和重复更新缺陷，在下游任务中显著提升推理性能。",
-      "llm_tldr": "HiGram提出一种演化的层次化图记忆框架，通过路径级定位与重写，使LLM智能体能够高效更新记忆，支持长期推理。该方法克服了扁平图记忆的上下文无关和重复更新缺陷，在下游任务中显著提升推理性能。",
-      "llm_tags": [
-        "query:self-evolve"
-      ],
-      "matched_query_tag": "query:self-evolve",
-      "matched_query_text": "model self evolution methods for natural language processing tasks",
-      "matched_requirement_id": "req-7",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "7"
-    },
-    {
-      "id": "2608.05144v1",
-      "source": "arxiv",
-      "title": "Argus: A General-Purpose Agentic Runtime for Long-Horizon Reasoning",
-      "abstract": "Long-horizon reasoning requires an agentic runtime that can persist when evidence supports its current approach and pivot when measurements reveal failure, hidden constraints, or a misspecified objective. We present Argus, a persistent, self-evolving runtime in which Manager, Planner, Engineer, and Reviewer execute bounded missions over durable project state. Argus separates stable user intent from operational objectives, constraints, and verification criteria, and admits memories, skills, procedures, verifiers, routing decisions, and rejected routes only after role-owned review and, when available, task-native verification. Model weights remain fixed; self-evolution occurs through persistent runtime state and control policy, with autonomous execution between operator-owned escalation points. Across seven GPT-5.5 benchmark arenas, Argus achieves about 78% on SWE-Bench Pro versus 59% for Direct Copilot while using 1.41 times the aggregate tokens. After verification-gated self-evolution, mature SWE-Bench waves use 21% fewer solve-input tokens and 15% less active workflow time per task than startup waves, while recording 34 verifier recoveries and 22 strict review-loop rescues. Argus also reaches 76.8% on AARRI-Bench and a 28.0-point gap on mathematical data synthesis, with competitive GPU-kernel and language-model-training results. Beyond benchmarks, an optimized RWKV6 kernel was merged upstream; a multi-day mathematics campaign retained falsified routes and proof-backed frontier updates; and six paper pipelines completed 254 missions with 16 stage rollbacks. These results show that a fixed-weight, self-evolving harness can revise, recover, and accumulate verified approaches while producing structured trajectories for future supervised and reinforcement learning.",
-      "authors": [
-        "Boxiu Li",
-        "Zimo Wen",
-        "Yijia Fan",
-        "Junxiang Lei",
-        "Sufeng Guo",
-        "Jiaao Wu",
-        "Ruize Tang",
-        "Mukai Li",
-        "Yifei Shen",
-        "Xiaoyu Chen",
-        "Wanbo Zhang",
-        "Runjing Gu",
-        "Yifei Gao",
-        "Yuheng Wu",
-        "Xuyao Huang",
-        "Zelong Zhao",
-        "Jiachen Zhang",
-        "Shibo Hu",
-        "Hangxi Guo",
-        "Yilin Chen",
-        "Yuzhe Zhang",
-        "Fan Yang",
-        "Chuan Wen",
-        "Xian Zhang",
-        "Xuanhe Zhou",
-        "Zhijie Deng"
-      ],
-      "primary_category": "cs.AI",
-      "categories": [
-        "cs.AI"
-      ],
-      "published": "2026-08-05T17:58:58+00:00",
-      "link": "https://arxiv.org/pdf/2608.05144v1",
-      "tags": [
-        "keyword:self-evolve"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "self-evolving runtime via persistent state and control policy",
-      "llm_evidence_cn": "通过持久状态和控制策略实现自进化运行时",
-      "llm_evidence": "通过持久状态和控制策略实现自进化运行时",
-      "canonical_evidence": "通过持久状态和控制策略实现自进化运行时",
-      "llm_tldr_en": "Proposes Argus, a persistent, self-evolving agentic runtime that evolves its state and control policy without weight updates, achieving autonomous improvement for long-horizon reasoning tasks.",
-      "llm_tldr_cn": "提出Argus，一个持久的自进化代理运行时，通过运行时状态和控制策略实现自进化，无需更新模型权重，为长期推理任务提供自主改进能力。",
-      "llm_tldr": "提出Argus，一个持久的自进化代理运行时，通过运行时状态和控制策略实现自进化，无需更新模型权重，为长期推理任务提供自主改进能力。",
-      "llm_tags": [
-        "query:self-evolve"
-      ],
-      "matched_query_tag": "query:self-evolve",
-      "matched_query_text": "model self-evolution techniques for neural networks",
-      "matched_requirement_id": "req-4",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    }
-  ]
+  "quick_skim": []
 }
