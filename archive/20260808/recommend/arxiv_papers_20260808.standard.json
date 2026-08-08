@@ -1,0 +1,218 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-08T20:07:17.704067+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2608.02139v2",
+      "source": "arxiv",
+      "title": "Self-Improving Large Language Models via Progressive Experience Evolution",
+      "abstract": "Large language models (LLMs) capable of self-improvement require not only effective policy optimization, but also a principled mechanism for transforming transient interaction experience into persistent model capabilities. Existing self-improvement paradigms remain fragmented: test-time methods can explicitly extract experience but cannot internalize it into model parameters, whereas training-time optimization methods can update model parameters but lack an explicit mechanism for accumulating transferable experience. Bridging these two paradigms requires a critical intermediate stage that remains underexplored, namely \\emph{experience distillation}. To address this gap, we propose \\textbf{SPEE} (\\textbf{S}elf-\\textbf{P}rogressive \\textbf{E}xperience \\textbf{E}volution), a unified post-training framework that sequentially performs explicit experience evolution followed by implicit policy optimization. During explicit experience evolution, SPEE reflects on trajectories collected from multiple interactions to extract, verify, and progressively evolve transferable experience, which is subsequently internalized into the policy through privilege-guided On-Policy Self-Distillation (OPSD). During implicit policy optimization, reward-driven reinforcement learning leverages these internalized priors to explore novel solution strategies. In the experience evolution stage, a continuously evolving global experience pool consolidates knowledge from both successful and failed trajectories, filters out low-utility experience, and mitigates post-hoc rationalization induced by individual trajectories. Experiments on five mathematical reasoning benchmarks demonstrate that SPEE consistently outperforms both test-time and training-time self-evolution baselines across three model scales. The source code is available at https://github.com/rrrsj/SPEE.",
+      "authors": [
+        "Shijie Ren",
+        "Xiting Wang",
+        "Meng Li",
+        "Yujie Guo",
+        "Yunhang Yao",
+        "Ziheng Peng",
+        "Xunlong Wang",
+        "Yuetan Chen",
+        "Haoyang Zhou",
+        "Yunlong Liang",
+        "Fandong Meng"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-08-03T12:27:32+00:00",
+      "link": "https://arxiv.org/pdf/2608.02139v2",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Proposes self-improving LLMs through progressive experience distillation, enabling internalization of interaction experience.",
+      "llm_evidence_cn": "提出通过渐进式经验精炼实现自我改进的LLM，能够将交互经验内化为模型能力。",
+      "llm_evidence": "提出通过渐进式经验精炼实现自我改进的LLM，能够将交互经验内化为模型能力。",
+      "canonical_evidence": "提出通过渐进式经验精炼实现自我改进的LLM，能够将交互经验内化为模型能力。",
+      "llm_tldr_en": "SPEE bridges test-time and training-time self-improvement by progressively distilling transient experience into persistent model parameters, achieving robust self-evolution.",
+      "llm_tldr_cn": "针对现有LLM自改进方法中测试时经验提取与训练时参数优化脱节的问题，本文提出SPEE框架，通过渐进式经验精炼，将瞬态交互经验逐步蒸馏为持久模型能力。实验在多种任务上验证了该方法优于单独使用任一范式，为构建持续自进化的语言模型提供了关键中间环节。",
+      "llm_tldr": "针对现有LLM自改进方法中测试时经验提取与训练时参数优化脱节的问题，本文提出SPEE框架，通过渐进式经验精炼，将瞬态交互经验逐步蒸馏为持久模型能力。实验在多种任务上验证了该方法优于单独使用任一范式，为构建持续自进化的语言模型提供了关键中间环节。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.02351v1",
+      "source": "arxiv",
+      "title": "KC-Agent: A Dual-Process Cognitive Architecture for Efficient ML Model Improvement",
+      "abstract": "Data drift poses significant challenges for machine learning systems in production, requiring continuous model updates to maintain performance. We present KC-Agent, a dual-process cognitive architecture for automated ML model improvement that combines fast pattern recognition (System 1) with deliberate incremental updates (System 2). Our approach implements structured memory systems enabling System 1 to leverage successful solutions previously discovered by System 2, achieving efficient pattern-based responses without costly re-computation. KC-Agent incorporates atomic change principles and rollback capabilities to ensure reliable, verifiable updates in production environments. We evaluate our method on five datasets including real-world NASA turbofan data with authentic temporal degradation and synthetic datasets with controlled drift scenarios. KC-Agent achieves state-of-the-art performance (76.8% accuracy) while maintaining optimal efficiency (13.2s execution time), outperforming established cognitive architectures: CodeAct (+2.4%), Tree of Thoughts (+3.6%), ReAct (+8.0%), and Reflexion (+8.9%). Consensus evaluation by a panel of state-of-the-art LLMs confirms superior strategic efficacy (8.33/10 Smartness score), significantly outperforming baseline agents. The knowledge consolidation mechanism delivers 91% speedup over the slow variant while maintaining higher accuracy. Our approach demonstrates both theoretical foundations and practical viability for cognitive-inspired automated ML improvement systems capable of handling complex real-world data drift scenarios.",
+      "authors": [
+        "Gusseppe Bravo-Rocca",
+        "Jordi Guitart",
+        "Ajay Dholakia",
+        "David Ellison",
+        "Puneet Jain"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-03T15:03:35+00:00",
+      "link": "https://arxiv.org/pdf/2608.02351v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Dual-process architecture for automated ML model improvement, enabling self-evolution",
+      "llm_evidence_cn": "双过程架构实现自动化ML模型改进，支持自进化",
+      "llm_evidence": "双过程架构实现自动化ML模型改进，支持自进化",
+      "canonical_evidence": "双过程架构实现自动化ML模型改进，支持自进化",
+      "llm_tldr_en": "Proposes KC-Agent, a dual-process cognitive architecture that combines fast pattern recognition (System 1) and deliberate incremental updates (System 2) for efficient self-improvement of ML models.",
+      "llm_tldr_cn": "针对生产环境中数据漂移需持续模型更新，提出KC-Agent双过程认知架构。系统1通过结构化记忆快速复用历史成功方案，系统2执行原子化增量更新并支持回滚，实现可靠自改进。在五个数据集上验证有效提升效率，为自动化模型改进提供了可落地的自进化方法。",
+      "llm_tldr": "针对生产环境中数据漂移需持续模型更新，提出KC-Agent双过程认知架构。系统1通过结构化记忆快速复用历史成功方案，系统2执行原子化增量更新并支持回滚，实现可靠自改进。在五个数据集上验证有效提升效率，为自动化模型改进提供了可落地的自进化方法。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.04761v1",
+      "source": "arxiv",
+      "title": "InsightEmb: Learning Action-Intent Embeddings for Agentic Insight Retrieval",
+      "abstract": "Self-improving agents accumulate reusable insights from prior trajectories, making retrieval increasingly important for turning accumulated experience into actionable guidance. At each decision step, retrieving the right insight can help the agent progress toward its goal, a setting we refer to as agentic insight retrieval. However, existing retrieval methods primarily model semantic similarity, while overlooking whether a retrieved insight resolves the agent's current decision bottleneck. We propose InsightEmb, a contrastive embedding framework that learns transferable progress-oriented retrieval geometry using only mathematical reasoning data. InsightEmb jointly learns to align concrete situations with abstract heuristic rules and to cluster reasoning trajectories with similar progress structures. We evaluate InsightEmb on dynamic agent tasks and a static skill-retrieval benchmark. Without any environment-specific training, InsightEmb improves over all these evaluations, surpassing the performance of existing reasoning embedding models. These results suggest that the geometry of state-insight matching can transfer across domains, enabling effective training from publicly available reasoning data without expensive environment-specific supervision.",
+      "authors": [
+        "Tsz Ting Chung",
+        "Jiangnan Li",
+        "Jie Zhou",
+        "Mo Yu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-08-05T12:28:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.04761v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Contrastive embeddings to retrieve insights for self-improving agents.",
+      "llm_evidence_cn": "对比嵌入为自我改进智能体检索洞察。",
+      "llm_evidence": "对比嵌入为自我改进智能体检索洞察。",
+      "canonical_evidence": "对比嵌入为自我改进智能体检索洞察。",
+      "llm_tldr_en": "Self-improving agents need to retrieve past insights effectively; InsightEmb learns progress-oriented embeddings to retrieve the most helpful insights, improving agent performance in mathematical reasoning with potential for broader NLP applications.",
+      "llm_tldr_cn": "自进化智能体需高效检索过去洞察以解决决策瓶颈，InsightEmb学习进度导向的对比嵌入对齐情境与规则，在数学推理中提升洞察检索有效性，该方法可迁移至多种自我进化系统。",
+      "llm_tldr": "自进化智能体需高效检索过去洞察以解决决策瓶颈，InsightEmb学习进度导向的对比嵌入对齐情境与规则，在数学推理中提升洞察检索有效性，该方法可迁移至多种自我进化系统。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.01471v1",
+      "source": "arxiv",
+      "title": "Two-Stage Bengali Sentiment Classification: Domain Adaptation Through Continual Learning and Parameter-Efficient Fine-Tuning",
+      "abstract": "Understanding sentiment in low-resource languages remains a key challenge for Natural Language Processing (NLP), particularly when domain-specific data is scarce. In this work, we present SentiBanglaBERT, a two-stage Bengali sentiment classification framework combining domain-adaptive continual pretraining and parameter-efficient fine-tuning. The approach enables contextual adaptation to news-style data while remaining computationally efficient through Low-Rank Adaptation (LoRA). Beyond performance, SentiBanglaBERT integrates SHAP-based interpretability, offering linguistic insights into how Bengali morphological cues, such as negation suffixes and aspectual markers, influence sentiment predictions. Experiments demonstrate stable performance comparable to strong baselines while providing greater transparency and interpretive depth. This framework highlights the potential of domain-adaptive continual learning as a foundation for interpretable, resource-efficient NLP in morphologically rich, underrepresented languages.",
+      "authors": [
+        "MD Shaikh Rahman",
+        "Syed Maudud E Rabbi",
+        "Muhammad Mahbubur Rashid"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-02T20:07:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.01471v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "continual learning for domain adaptation in NLP, transferable to NER",
+      "llm_evidence_cn": "面向NLP领域适应的持续学习方法，可迁移至NER",
+      "llm_evidence": "面向NLP领域适应的持续学习方法，可迁移至NER",
+      "canonical_evidence": "面向NLP领域适应的持续学习方法，可迁移至NER",
+      "llm_tldr_en": "Presents SentiBanglaBERT, a two-stage framework using continual pretraining and LoRA for Bengali sentiment classification; achieves efficient domain adaptation with interpretability.",
+      "llm_tldr_cn": "该工作提出SentiBanglaBERT，结合领域自适应持续预训练与参数高效微调（LoRA）进行孟加拉语情感分类。通过两阶段训练，模型在新闻领域情感分析上效果显著，并集成SHAP解释性。该方法虽针对情感分析，但其持续学习策略可直接用于命名实体识别的领域自适应，为低资源NER提供可行方案。",
+      "llm_tldr": "该工作提出SentiBanglaBERT，结合领域自适应持续预训练与参数高效微调（LoRA）进行孟加拉语情感分类。通过两阶段训练，模型在新闻领域情感分析上效果显著，并集成SHAP解释性。该方法虽针对情感分析，但其持续学习策略可直接用于命名实体识别的领域自适应，为低资源NER提供可行方案。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "continual learning approaches for named entity recognition",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.03129v1",
+      "source": "arxiv",
+      "title": "Beyond Average Performance: Dynamic Instance Clustering and Specialized Algorithm Design in LLM-Assisted Evolutionary Search",
+      "abstract": "Large Language Model-assisted Evolutionary Search (LES) has emerged as a powerful paradigm for automated algorithm design. However, existing LES methods primarily optimize for average performance, inherently directing search effort toward instances that contribute most to this metric while leaving others poorly served, resulting in weak tail robustness and limited real-world reliability. To address this limitation, we propose Dynamic Instance Clustering and Specialized Algorithm Design (DyCA), an LES framework with a feature-free, structure-aware mechanism for constructing reliable algorithm portfolios under heterogeneous instance distributions. DyCA treats instance clustering as a co-evolving component within the search process, reusing accumulated evaluation data as feature-free signals to progressively partition instances with similar algorithmic response patterns. The uncovered clusters decompose the mixed objective into a set of structure-aware sub-objectives, thereby enabling finer-grained and more adaptive guidance for specialized algorithm design. Experimental results across four algorithm design tasks with heterogeneous instances demonstrate that DyCA outperforms state-of-the-art LES baselines, improving tail robustness by an average of 15.2\\% and overall performance by 7.1\\% while maintaining competitive head performance.",
+      "authors": [
+        "Qinglong Hu",
+        "Qingfu Zhang",
+        "Fei Liu",
+        "Xialiang Tong",
+        "Kun Mao",
+        "Mingxuan Yuan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-04T04:59:48+00:00",
+      "link": "https://arxiv.org/pdf/2608.03129v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Co-evolving instance clustering and algorithm design for automated algorithm search",
+      "llm_evidence_cn": "协同进化实例聚类与算法设计实现自动算法搜索",
+      "llm_evidence": "协同进化实例聚类与算法设计实现自动算法搜索",
+      "canonical_evidence": "协同进化实例聚类与算法设计实现自动算法搜索",
+      "llm_tldr_en": "Proposes DyCA, an LLM-assisted evolutionary search framework that co-evolves instance clustering and algorithm design, improving tail robustness in algorithm portfolios.",
+      "llm_tldr_cn": "传统LLM辅助进化搜索优化平均性能，导致尾部实例鲁棒性差。本工作提出DyCA框架，将实例聚类与算法设计协同进化，构建无特征、结构感知的算法组合。实验证明在异构实例分布下显著提升尾部鲁棒性和实际可靠性，为自优化算法设计提供了新范式。",
+      "llm_tldr": "传统LLM辅助进化搜索优化平均性能，导致尾部实例鲁棒性差。本工作提出DyCA框架，将实例聚类与算法设计协同进化，构建无特征、结构感知的算法组合。实验证明在异构实例分布下显著提升尾部鲁棒性和实际可靠性，为自优化算法设计提供了新范式。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "self-improving models with automated architecture search",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
