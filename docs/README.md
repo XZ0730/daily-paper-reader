@@ -6,37 +6,29 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-08
-- 运行时间：2026-08-08 20:12:03 UTC
+- 最新运行日期：2026-08-09
+- 运行时间：2026-08-09 20:44:12 UTC
 - 运行状态：成功
-- 本次总论文数：5
-- 精读区：2
-- 速读区：3
+- 本次总论文数：2
+- 精读区：0
+- 速读区：2
 
 ### 今日简报（AI）
-今日精读了大模型自我进化与智能体双过程架构两篇高分论文，速读覆盖动作意图嵌入与进化搜索等方向。  
-《Self-Improving LLMs via Progressive Experience Evolution》给出了一种让模型通过渐进经验演化持续提升的全新范式，KC-Agent则用快慢思考双过程设计大幅提高ML模型改进效率。  
-想落地大模型自进化能力的话，可以先从构建持续反馈体验池入手，并关注双过程架构在具体算法优化中的适配性。
-- 详情：[/202608/08/README](/202608/08/README)
+AI速读两篇Agent方向论文：一篇用证据蒸馏让搜索智能体更可靠，一篇用基准测LLM智能体持续学习天花板。  
+最值得关注：用证据链自我进化提升搜索质量，以及构建标准化环境量化智能体的能力增长曲线。  
+建议普通读者先刷《EviSD》看看如何教Agent“查后反思”，再跟踪持续学习基准的动向。
+- 详情：[/202608/09/README](/202608/09/README)
 
 ### 精读区论文标签
-1. [Self-Improving Large Language Models via Progressive Experience Evolution](/202608/08/2608.02139v2-self-improving-large-language-models-via-progressive-experience-evolution)  
-   标签：评分：10.0/10、query:self-evolve
-   evidence：提出通过渐进式经验精炼实现自我改进的LLM，能够将交互经验内化为模型能力。
-2. [KC-Agent: A Dual-Process Cognitive Architecture for Efficient ML Model Improvement](/202608/08/2608.02351v1-kc-agent-a-dual-process-cognitive-architecture-for-efficient-ml-model-improvement)  
-   标签：评分：8.0/10、query:self-evolve
-   evidence：双过程架构实现自动化ML模型改进，支持自进化
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [InsightEmb: Learning Action-Intent Embeddings for Agentic Insight Retrieval](/202608/08/2608.04761v1-insightemb-learning-action-intent-embeddings-for-agentic-insight-retrieval)  
+1. [EviSD: Evidence-Conditioned Self-Distillation for Search-Augmented Agents](/202608/09/2608.01359v1-evisd-evidence-conditioned-self-distillation-for-search-augmented-agents)  
    标签：评分：7.0/10、query:self-evolve
-   evidence：对比嵌入为自我改进智能体检索洞察。
-2. [Two-Stage Bengali Sentiment Classification: Domain Adaptation Through Continual Learning and Parameter-Efficient Fine-Tuning](/202608/08/2608.01471v1-two-stage-bengali-sentiment-classification-domain-adaptation-through-continual-learning-and-parameter-efficient-fine-tuning)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：面向NLP领域适应的持续学习方法，可迁移至NER
-3. [Beyond Average Performance: Dynamic Instance Clustering and Specialized Algorithm Design in LLM-Assisted Evolutionary Search](/202608/08/2608.03129v1-beyond-average-performance-dynamic-instance-clustering-and-specialized-algorithm-design-in-llm-assisted-evolutionary-search)  
-   标签：评分：6.0/10、query:self-evolve
-   evidence：协同进化实例聚类与算法设计实现自动算法搜索
+   evidence：面向搜索增强代理的自蒸馏框架，利用模型自身作为教师来改进动作选择。
+2. [ContinualSkillBench: Can LLM Agents Truly Evolve Their Capabilities?](/202608/09/2608.03874v1-continualskillbench-can-llm-agents-truly-evolve-their-capabilities)  
+   标签：评分：7.0/10、query:self-evolve
+   evidence：为LLM代理的持续技能学习提供基准，直接评估能力的自进化。
 
 
 <div class="dpr-home-promo-card">

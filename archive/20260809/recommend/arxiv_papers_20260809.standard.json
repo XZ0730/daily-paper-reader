@@ -1,0 +1,102 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-09T20:42:16.205068+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.01359v1",
+      "source": "arxiv",
+      "title": "EviSD: Evidence-Conditioned Self-Distillation for Search-Augmented Agents",
+      "abstract": "Outcome-based reinforcement learning enables search-augmented language agents to learn from verifiable final answers, but its trajectory-level credit cannot distinguish the contributions of individual actions in a multi-turn search process. We propose EviSD, an evidence-conditioned self-distillation framework that uses instance-level supporting evidence as privileged information for search actions and golden answers as complementary privilege for answer actions. During training, the student samples actions from the original context, while the same model re-scores them as a privileged teacher under an action-aligned context. EviSD converts the detached teacher--student gap into a bounded correction to the outcome-derived GRPO advantage and applies it only to generated action spans. This design localizes privileged guidance while preserving the update direction determined by the outcome reward, without an auxiliary distillation objective or any change at inference time. Across seven question-answering benchmarks and three backbones spanning model scales and generations, EviSD achieves the highest macro-average Exact Match in all evaluated settings, outperforming the strongest compared methods by 1.3--2.3 points while modulating only 6.7%--15.1% of response tokens. Code is available at https://github.com/JiananXie/EviSD.",
+      "authors": [
+        "Jianan Xie",
+        "Xin Sun",
+        "Zhongqi Chen",
+        "Xing Zheng",
+        "Shu Wu",
+        "Bowen Song",
+        "Liang Wang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-02T16:22:27+00:00",
+      "link": "https://arxiv.org/pdf/2608.01359v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Self-distillation framework for search-augmented agents, using the model as its own teacher to improve action selection.",
+      "llm_evidence_cn": "面向搜索增强代理的自蒸馏框架，利用模型自身作为教师来改进动作选择。",
+      "llm_evidence": "面向搜索增强代理的自蒸馏框架，利用模型自身作为教师来改进动作选择。",
+      "canonical_evidence": "面向搜索增强代理的自蒸馏框架，利用模型自身作为教师来改进动作选择。",
+      "llm_tldr_en": "Proposes EviSD, a self-distillation method where a language agent learns from its own privileged information to improve multi-turn search and answering.",
+      "llm_tldr_cn": "针对搜索增强代理基于结果的强化学习无法区分多轮搜索中单个动作贡献的问题，提出证据条件自蒸馏框架EviSD，以实例级支持证据作为特权信息指导搜索动作，将师生差距转化为对优势值的修正。实验表明该方法有效提升了搜索和回答性能，为语言代理的自改进提供了一种通用训练策略。",
+      "llm_tldr": "针对搜索增强代理基于结果的强化学习无法区分多轮搜索中单个动作贡献的问题，提出证据条件自蒸馏框架EviSD，以实例级支持证据作为特权信息指导搜索动作，将师生差距转化为对优势值的修正。实验表明该方法有效提升了搜索和回答性能，为语言代理的自改进提供了一种通用训练策略。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.03874v1",
+      "source": "arxiv",
+      "title": "ContinualSkillBench: Can LLM Agents Truly Evolve Their Capabilities?",
+      "abstract": "Modern agent frameworks equip large language models with external skill libraries to solve complex tasks. However, it remains unclear whether these systems can effectively evolve their skills and whether the resulting skills improve task-solving capabilities. To bridge this gap, we introduce ContinualSkillBench, a dynamic evaluation framework for in-context continual skill learning. It covers five representative domains, each containing 100 interconnected subtasks ordered by increasing difficulty and opportunities for cross-task skill reuse. Our experiments show that sequential execution generally improves performance, but the gains vary substantially across models and domains. Moreover, in-context learning performs comparably to explicit skill maintenance on average, suggesting that much of the improvement arises from adaptation to prior context and feedback rather than reusable skill abstraction alone. Explicit skills nevertheless provide selective benefits for tasks requiring reusable procedures or precise outputs. We further find that less capable models tend to accumulate larger, more fragmented collections of task-specific skills. These findings show that current in-context skill evolution mechanisms can support continual adaptation, but still struggle to consistently consolidate experience into robust and transferable skills.",
+      "authors": [
+        "Tianyi Guan",
+        "Yiding Wang",
+        "Haotong Yang",
+        "Siyuan Cao",
+        "Shirui Liu",
+        "Yi Hu",
+        "Jiaqi Li",
+        "Muhan Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-08-04T16:15:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.03874v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Benchmark for continual skill learning in LLM agents, directly evaluating self-evolution of capabilities.",
+      "llm_evidence_cn": "为LLM代理的持续技能学习提供基准，直接评估能力的自进化。",
+      "llm_evidence": "为LLM代理的持续技能学习提供基准，直接评估能力的自进化。",
+      "canonical_evidence": "为LLM代理的持续技能学习提供基准，直接评估能力的自进化。",
+      "llm_tldr_en": "Introduces ContinualSkillBench, a dynamic evaluation framework for in-context continual skill learning across five domains with interconnected subtasks, revealing that LLM agents can improve through sequential execution but gains vary widely, and in-context learning rivals explicit skill maintenance.",
+      "llm_tldr_cn": "现代代理框架利用外部技能库解决复杂任务，但尚不清楚这些系统能否有效进化技能并提升任务解决能力。本文提出ContinualSkillBench，一个动态的上下文持续技能学习评估基准，涵盖五个代表性领域，每个领域包含100个按难度递增的关联子任务。实验表明，顺序执行通常能提升性能，但不同模型和领域的增益差异显著，上下文学习与显式技能维护效果相当。该基准为评估大语言模型代理的能力进化提供了标准测试平台，揭示了持续技能学习的潜力与挑战。",
+      "llm_tldr": "现代代理框架利用外部技能库解决复杂任务，但尚不清楚这些系统能否有效进化技能并提升任务解决能力。本文提出ContinualSkillBench，一个动态的上下文持续技能学习评估基准，涵盖五个代表性领域，每个领域包含100个按难度递增的关联子任务。实验表明，顺序执行通常能提升性能，但不同模型和领域的增益差异显著，上下文学习与显式技能维护效果相当。该基准为评估大语言模型代理的能力进化提供了标准测试平台，揭示了持续技能学习的潜力与挑战。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
