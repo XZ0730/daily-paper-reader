@@ -6,29 +6,34 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-09
-- 运行时间：2026-08-09 20:44:12 UTC
+- 最新运行日期：2026-08-10
+- 运行时间：2026-08-10 20:39:35 UTC
 - 运行状态：成功
-- 本次总论文数：2
-- 精读区：0
+- 本次总论文数：4
+- 精读区：2
 - 速读区：2
 
 ### 今日简报（AI）
-AI速读两篇Agent方向论文：一篇用证据蒸馏让搜索智能体更可靠，一篇用基准测LLM智能体持续学习天花板。  
-最值得关注：用证据链自我进化提升搜索质量，以及构建标准化环境量化智能体的能力增长曲线。  
-建议普通读者先刷《EviSD》看看如何教Agent“查后反思”，再跟踪持续学习基准的动向。
-- 详情：[/202608/09/README](/202608/09/README)
+今日精读聚焦智能体自我进化与修复：A-SR 用分层协调让 LLM 自主完成符号回归，因果情景记忆则使智能体能从反馈中自动修复推理缺陷。  
+最有看点的方向是让智能体像人一样从经验中进化，以及把优化算法本身变成会搜索推理路径的“智能体”。  
+建议读者先从 A-SR 入手，尝试把自进化分层机制移植到你的代码生成或数据分析流程中，低成本获取更好结果。
+- 详情：[/202608/10/README](/202608/10/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [A-SR: Self-Evolving Agentic LLMs for Symbolic Regression via Hierarchical Coordination](/202608/10/2608.04872v1-a-sr-self-evolving-agentic-llms-for-symbolic-regression-via-hierarchical-coordination)  
+   标签：评分：9.0/10、query:self-evolve
+   evidence：提出一种自进化的智能体LLM框架，具有分层协调和角色条件化进化
+2. [Causal Episodic Memory for Feedback-Driven Agent Repair](/202608/10/2608.05906v1-causal-episodic-memory-for-feedback-driven-agent-repair)  
+   标签：评分：8.0/10、query:self-evolve
+   evidence：免训练的代理，利用情景记忆在Text-to-SQL任务中自我修复，是一种NLP自进化方法
 
 ### 速读区论文标签
-1. [EviSD: Evidence-Conditioned Self-Distillation for Search-Augmented Agents](/202608/09/2608.01359v1-evisd-evidence-conditioned-self-distillation-for-search-augmented-agents)  
+1. [Hyper-ES: Effective Evolution Strategies for LLM Reasoning via Descent Direction Merging](/202608/10/2608.05541v1-hyper-es-effective-evolution-strategies-for-llm-reasoning-via-descent-direction-merging)  
    标签：评分：7.0/10、query:self-evolve
-   evidence：面向搜索增强代理的自蒸馏框架，利用模型自身作为教师来改进动作选择。
-2. [ContinualSkillBench: Can LLM Agents Truly Evolve Their Capabilities?](/202608/09/2608.03874v1-continualskillbench-can-llm-agents-truly-evolve-their-capabilities)  
+   evidence：用进化策略微调LLM进行推理
+2. [The Optimizer Is the Agent: Reasoning-Driven Search across Prompts, Programs, and ML Workflows](/202608/10/2608.06714v1-the-optimizer-is-the-agent-reasoning-driven-search-across-prompts-programs-and-ml-workflows)  
    标签：评分：7.0/10、query:self-evolve
-   evidence：为LLM代理的持续技能学习提供基准，直接评估能力的自进化。
+   evidence：基于代理的推理驱动优化框架，自主进化提示、程序和ML工作流
 
 
 <div class="dpr-home-promo-card">

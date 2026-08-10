@@ -1,0 +1,185 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-10T20:35:00.491029+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2608.04872v1",
+      "source": "arxiv",
+      "title": "A-SR: Self-Evolving Agentic LLMs for Symbolic Regression via Hierarchical Coordination",
+      "abstract": "Symbolic regression aims to discover closed-form equations from data, but existing LLM-guided methods often rely on a unified proposal loop that compresses heterogeneous search failures into a scalar score and a single prompt. We propose A-SR, a self-evolving agentic framework that shifts the control unit from expression edits to role-conditioned evidence views. A-SR coordinates formula discovery through routing among coordination protocols, an online evaluator-reward role policy, and state-routed process memory. During search, evaluator feedback characterizes reliability and productivity, updates role-level utilities, and routes elite motifs, failure traces, and validity diagnostics to different agents. The framework self-evolves at two timescales: within a run, it adapts the search process without updating LLM parameters; across runs, recorded trajectories can be distilled into open-source LLMs as role-conditioned proposal priors. Averaged over the four LSR-Synth scientific domains in LLM-SRBench, A-SR improves Acc@0.01 over baselines from 25.79% to 48.30% with Llama3.1-8B, while A-SR-LoRA improves the corresponding Qwen3-4B result from 24.58% to 38.29%. On four real-world scientific discovery tasks, A-SR obtains the best in-distribution or out-of-distribution normalized mean squared error on 7 of 8 reported metrics.",
+      "authors": [
+        "Wenxiao Zhao",
+        "Dong Liu",
+        "Kaiyi Xu",
+        "Feng Liu",
+        "Zhen Zhao",
+        "Fei Ben",
+        "Shu Wang",
+        "Wenhao Li",
+        "Yingnian Wu",
+        "Fenghua Ling",
+        "Haobo Li",
+        "Lei Bai"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-08-05T14:01:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.04872v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "proposes a self-evolving agentic framework for LLMs with hierarchical coordination and role-conditioned evolution",
+      "llm_evidence_cn": "提出一种自进化的智能体LLM框架，具有分层协调和角色条件化进化",
+      "llm_evidence": "提出一种自进化的智能体LLM框架，具有分层协调和角色条件化进化",
+      "canonical_evidence": "提出一种自进化的智能体LLM框架，具有分层协调和角色条件化进化",
+      "llm_tldr_en": "Proposes A-SR, a self-evolving agentic framework that shifts control from expression edits to role-conditioned evidence views, coordinating formula discovery via hierarchical routing and online policy updates, demonstrating effective closed-form equation discovery.",
+      "llm_tldr_cn": "针对现有LLM引导符号回归方法统一提示循环导致搜索失败信息压缩的问题，提出A-SR自进化智能体框架，通过角色条件化证据视图、分层协调协议和在线评估-奖励策略实现自进化，实验表明在多个基准上提升了公式发现效果，为神经网络模型自进化提供了通用方法。",
+      "llm_tldr": "针对现有LLM引导符号回归方法统一提示循环导致搜索失败信息压缩的问题，提出A-SR自进化智能体框架，通过角色条件化证据视图、分层协调协议和在线评估-奖励策略实现自进化，实验表明在多个基准上提升了公式发现效果，为神经网络模型自进化提供了通用方法。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.05906v1",
+      "source": "arxiv",
+      "title": "Causal Episodic Memory for Feedback-Driven Agent Repair",
+      "abstract": "LLM agents that repair failures often discard successful corrections, forcing later episodes to rediscover similar solutions. We study whether finalized repair outcomes can improve subsequent Text-to-SQL episodes without parameter updates. We introduce MERIT, a training-free agent that maintains an online dual-polarity memory of oracle-verified corrections and observed unsuccessful directions. Under oracle-assisted benchmark feedback, only memories from earlier finalized episodes are eligible for retrieval. A deterministic classifier assigns a coarse failure type, which conditions a hybrid lexical-dense retriever before the frozen model generates each revision. Using Qwen2.5-7B-Instruct with identical initial predictions and repair budgets, MERIT improves execution accuracy over stateless iterative repair from \\(66.34\\%\\) to \\(69.79\\%\\) on Spider and from \\(47.35\\%\\) to \\(48.44\\%\\) on BIRD. Paired analyses provide clear evidence for the Spider gain but weaker evidence on BIRD. MERIT is not reliably separated from untyped dynamic retrieval on either benchmark, while Reflexion-style memory reaches \\(51.24\\%\\) on BIRD at substantially higher inference cost. Ablations show that negative memory contributes modestly, the value of type conditioning and lexical--dense ranking is dataset dependent, and schema-local experience provides the most consistent benefit. These results clarify when causal cross-query memory improves repair and when broader memory representations remain preferable.",
+      "authors": [
+        "Khang Nhat Hoang Vo",
+        "Tam Minh Chu",
+        "Anh Trac Duc Dinh",
+        "Thuyen Vinh Ha Bui",
+        "Tho Quan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-06T11:34:03+00:00",
+      "link": "https://arxiv.org/pdf/2608.05906v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "training-free agent with episodic memory for self-repair in Text-to-SQL, a self-evolution method for NLP",
+      "llm_evidence_cn": "免训练的代理，利用情景记忆在Text-to-SQL任务中自我修复，是一种NLP自进化方法",
+      "llm_evidence": "免训练的代理，利用情景记忆在Text-to-SQL任务中自我修复，是一种NLP自进化方法",
+      "canonical_evidence": "免训练的代理，利用情景记忆在Text-to-SQL任务中自我修复，是一种NLP自进化方法",
+      "llm_tldr_en": "Proposes MERIT, a training-free agent that uses causal episodic memory to store past repairs and failures, improving Text-to-SQL performance over episodes without parameter updates, demonstrating a self-evolution approach for NLP.",
+      "llm_tldr_cn": "现有LLM代理在修复失败后丢弃成功的纠正经验，导致后续遇到类似问题时需重新探索。MERIT提出一种免训练的代理，维护一个双极性记忆库，存储已验证的修复和失败方向；在后续修复中，通过分类故障类型并结合混合检索，利用历史记忆引导代码生成，从而在不更新参数的情况下逐步提升Text-to-SQL任务的执行准确率，实现了一种NLP任务上的自进化。",
+      "llm_tldr": "现有LLM代理在修复失败后丢弃成功的纠正经验，导致后续遇到类似问题时需重新探索。MERIT提出一种免训练的代理，维护一个双极性记忆库，存储已验证的修复和失败方向；在后续修复中，通过分类故障类型并结合混合检索，利用历史记忆引导代码生成，从而在不更新参数的情况下逐步提升Text-to-SQL任务的执行准确率，实现了一种NLP任务上的自进化。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self evolution methods for natural language processing tasks",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.05541v1",
+      "source": "arxiv",
+      "title": "Hyper-ES: Effective Evolution Strategies for LLM Reasoning via Descent Direction Merging",
+      "abstract": "Evolution Strategy (ES) is a promising alternative to gradient-based fine-tuning for resource-constrained Large Language Model (LLM) reasoning. However, directly applying ES to billion-parameter LLMs is highly ineffective. In such high-dimensional parameter spaces, most random perturbations are nearly orthogonal to useful update directions, leading to unstable optimization. We propose Hyper-ES, a subspace-based ES framework that avoids the weakness of ES in full-parameter search while exploiting its strength in low-dimensional optimization. Instead of asking ES to discover useful directions from random perturbations in the LLM parameter space, Hyper-ES first performs a small number of inexpensive gradient-based fine-tuning runs to obtain descent directions. Although each direction may provide only a limited improvement on its own, their span forms a compact adaptation subspace that captures useful reasoning updates. Hyper-ES then applies CMA-ES to optimize layer-wise DARE-TIES merging coefficients within this subspace, allowing ES to search over combinations of meaningful descent directions rather than over arbitrary full-model perturbations. We evaluate Hyper-ES on three Qwen2.5-Instruct and DeepSeek-R1-Distill backbones across six mathematical reasoning datasets. Results show that Hyper-ES consistently outperforms GRPO-LoRA by 1% while requiring 10% fewer space-consuming gradient updates. Code at https://github.com/kuangrepi/Hyper-ES.",
+      "authors": [
+        "Yu Gu",
+        "Zhi Zheng",
+        "Yunpeng Ba",
+        "Xialiang Tong",
+        "Mingxuan Yuan",
+        "Zhenkun Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-06T02:39:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.05541v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Evolution strategies to fine-tune LLMs for reasoning",
+      "llm_evidence_cn": "用进化策略微调LLM进行推理",
+      "llm_evidence": "用进化策略微调LLM进行推理",
+      "canonical_evidence": "用进化策略微调LLM进行推理",
+      "llm_tldr_en": "Hyper-ES uses a subspace-based evolution strategy with descent direction merging to effectively fine-tune LLMs for reasoning, addressing instability in high-dimensional parameter spaces.",
+      "llm_tldr_cn": "针对直接应用进化策略到十亿参数LLM推理时优化不稳定的问题，提出Hyper-ES，通过低维梯度方向引导进化搜索，有效合并下降方向。实验表明该方法在LLM推理任务上实现稳定优化，为模型自进化提供了高效的进化策略。",
+      "llm_tldr": "针对直接应用进化策略到十亿参数LLM推理时优化不稳定的问题，提出Hyper-ES，通过低维梯度方向引导进化搜索，有效合并下降方向。实验表明该方法在LLM推理任务上实现稳定优化，为模型自进化提供了高效的进化策略。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.06714v1",
+      "source": "arxiv",
+      "title": "The Optimizer Is the Agent: Reasoning-Driven Search across Prompts, Programs, and ML Workflows",
+      "abstract": "Recent systems for optimizing prompts, programs, and ML workflows typically rely on explicit outer-loop controllers such as evolutionary search, bandits, or textual-gradient methods. We ask a fundamentally different question: how much of this search policy can be internalized by a single tool-using agent? We present ReASearch, a unified framework for reasoning-driven optimization in which the agent autonomously decides what to evaluate, how to diagnose failures, which edits to make, and when to verify or restart. Rather than serving only as a proposal generator guided by hand-designed heuristics, the agent actively analyzes outcomes, allocates budget, and refines its strategy over long horizons through persistent memory. With a shared agent loop and domain-specific tools, ReASearch instantiates the exact same scaffold to optimize prompts, programs, and ML workflows. Across 14 diverse tasks, it is competitive with and mostly better than specialized optimization systems, achieving gains of 2% to 40% over strong domain-specific baselines, and in some cases discovering solutions that improve on prior human best-known results. Crucially, we observe that complex search behaviors, which are typically implemented by explicit controllers, emerge naturally from the agent's reasoning process.",
+      "authors": [
+        "Junbo Li",
+        "Boyi Liu",
+        "Canwen Xu",
+        "Yite Wang",
+        "Yuxiong He",
+        "Zhangyang Wang",
+        "Qiang Liu",
+        "Zhewei Yao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-07T02:15:39+00:00",
+      "link": "https://arxiv.org/pdf/2608.06714v1",
+      "tags": [
+        "keyword:self-evolve",
+        "query:self-evolve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "agent-based reasoning-driven optimization framework that evolves prompts, programs, and ML workflows autonomously",
+      "llm_evidence_cn": "基于代理的推理驱动优化框架，自主进化提示、程序和ML工作流",
+      "llm_evidence": "基于代理的推理驱动优化框架，自主进化提示、程序和ML工作流",
+      "canonical_evidence": "基于代理的推理驱动优化框架，自主进化提示、程序和ML工作流",
+      "llm_tldr_en": "Proposes ReASearch, a framework where a tool-using agent autonomously conducts reasoning-driven search across prompts, programs, and ML workflows, effectively serving as an optimizer that self-improves through persistent memory and strategy refinement.",
+      "llm_tldr_cn": "现有优化系统依赖外部循环控制器，如进化搜索或文本梯度方法。ReASearch提出将优化策略内化为一个工具使用代理，该代理自主决定评估对象、诊断失败、编辑方案并管理预算，通过持久记忆在长周期中细化搜索策略，从而跨提示、程序和ML工作流实现推理驱动的自进化优化，展示了单一代理内化元搜索策略的潜力。",
+      "llm_tldr": "现有优化系统依赖外部循环控制器，如进化搜索或文本梯度方法。ReASearch提出将优化策略内化为一个工具使用代理，该代理自主决定评估对象、诊断失败、编辑方案并管理预算，通过持久记忆在长周期中细化搜索策略，从而跨提示、程序和ML工作流实现推理驱动的自进化优化，展示了单一代理内化元搜索策略的潜力。",
+      "llm_tags": [
+        "query:self-evolve"
+      ],
+      "matched_query_tag": "query:self-evolve",
+      "matched_query_text": "model self-evolution techniques for neural networks",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
