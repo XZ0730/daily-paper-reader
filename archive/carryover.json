@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-19T20:53:16.654953+00:00",
-  "updated_date": "20260819",
+  "generated_at": "2026-08-20T19:49:06.458646+00:00",
+  "updated_date": "20260820",
   "carryover_days": 9,
   "tag_states": {
     "self-evolve": {
-      "updated_date": "20260819",
+      "updated_date": "20260820",
       "carryover_days": 9,
       "items": []
     }
